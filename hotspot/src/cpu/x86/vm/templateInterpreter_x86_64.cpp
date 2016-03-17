@@ -22,6 +22,7 @@
  *
  */
 
+#include <iostream>
 #include "precompiled.hpp"
 #include "asm/macroAssembler.hpp"
 #include "interpreter/bytecodeHistogram.hpp"
@@ -382,6 +383,7 @@ void InterpreterGenerator::generate_counter_overflow(Label* do_continue) {
   // of the verified entry point for the method or NULL if the
   // compilation did not complete (either went background or bailed
   // out).
+std::cout<<"templateInterpreterGenerator::generate_counter_overflow" << std::endl;
   __ movl(c_rarg1, 0);
   __ call_VM(noreg,
              CAST_FROM_FN_PTR(address,
@@ -1403,7 +1405,7 @@ address InterpreterGenerator::generate_native_entry(bool synchronized) {
 address InterpreterGenerator::generate_normal_entry(bool synchronized) {
   // determine code generation flags
   bool inc_counter  = UseCompiler || CountCompiledCalls;
-
+ std::cout<< " InterpreterGenerator::generate_normal_entry template " << std::endl;
   // ebx: Method*
   // r13: sender sp
   address entry_point = __ pc();

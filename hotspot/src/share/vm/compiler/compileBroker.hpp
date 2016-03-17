@@ -29,6 +29,8 @@
 #include "compiler/abstractCompiler.hpp"
 #include "runtime/perfData.hpp"
 
+#include <string>
+
 class nmethod;
 class nmethodLocker;
 
@@ -39,7 +41,7 @@ class nmethodLocker;
 class CompileTask : public CHeapObj<mtCompiler> {
   friend class VMStructs;
 
- private:
+ public:
   Monitor*     _lock;
   uint         _compile_id;
   Method*      _method;
@@ -231,6 +233,36 @@ public:
   ~CompileTaskWrapper();
 };
 
+class MongoCompileTask 
+{
+  public:
+    Method* meth;
+    int optLevel;
+    int counts;
+    std::string name;
+    
+    MongoCompileTask (Method* _meth, int _optLevel, int _counts, std::string _name)
+    {
+      meth = _meth;
+      optLevel = _optLevel;
+      counts = _counts;
+      name = _name;
+    }
+    
+    bool operator< (MongoCompileTask m) const;
+};
+
+class MongoCompileQueue
+{
+  public:
+    MongoCompileTask** queue;
+    int capacity;
+    int start;
+    int end;
+    MongoCompileQueue (int _start, int _end);
+    void add (MongoCompileTask* task);
+    MongoCompileTask* get ();
+};
 
 // Compilation
 //
@@ -247,7 +279,7 @@ class CompileBroker: AllStatic {
   // Compile type Information for print_last_compile() and CompilerCounters
   enum { no_compile, normal_compile, osr_compile, native_compile };
 
- private:
+ public:
   static bool _initialized;
   static volatile bool _should_block;
 
@@ -268,6 +300,9 @@ class CompileBroker: AllStatic {
 
   static CompileQueue* _c2_method_queue;
   static CompileQueue* _c1_method_queue;
+  static CompileQueue* _c2_mongo_queue;
+  static CompileQueue* _c1_mongo_queue;
+  static MongoCompilationThread* mongo_compilation_thread;
   static CompileTask* _task_free_list;
 
   static GrowableArray<CompilerThread*>* _compiler_threads;
@@ -357,6 +392,13 @@ class CompileBroker: AllStatic {
     if (is_c1_compile(comp_level)) return _c1_method_queue;
     return NULL;
   }
+
+  static CompileQueue* compile_mongo_queue (int comp_level){
+    if (is_c2_compile(comp_level)) return _c2_mongo_queue;
+    if (is_c1_compile(comp_level)) return _c1_mongo_queue;
+    return NULL;
+  }
+  
   static bool init_compiler_runtime();
   static void shutdown_compiler_runtime(AbstractCompiler* comp, CompilerThread* thread);
 

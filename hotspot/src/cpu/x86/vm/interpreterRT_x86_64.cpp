@@ -274,11 +274,10 @@ void InterpreterRuntime::SignatureHandlerGenerator::pass_object() {
   }
 #endif
 }
-
+#include <iostream>
 void InterpreterRuntime::SignatureHandlerGenerator::generate(uint64_t fingerprint) {
   // generate code to handle arguments
   iterate(fingerprint);
-
   // return result handler
   __ lea(rax, ExternalAddress(Interpreter::result_handler(method()->result_type())));
   __ ret(0);

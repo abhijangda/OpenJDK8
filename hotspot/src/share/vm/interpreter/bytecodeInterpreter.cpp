@@ -636,6 +636,12 @@ BytecodeInterpreter::run(interpreterState istate) {
     }
     break;
     case method_entry: {
+      if (UseAOSDBOptCompile)
+      {
+        
+        MongoCompilationThread::enqueue (istate->callee());
+      }
+      
       THREAD->set_do_not_unlock();
       // count invocations
       assert(initialized, "Interpreter not initialized");
@@ -2209,7 +2215,7 @@ run:
         UPDATE_PC_AND_TOS_AND_CONTINUE(incr, 1);
       }
 
-      CASE(_invokedynamic): {
+      CASE(_invokedynamic): {abort();
 
         if (!EnableInvokeDynamic) {
           // We should not encounter this bytecode if !EnableInvokeDynamic.
@@ -2249,7 +2255,7 @@ run:
         UPDATE_PC_AND_RETURN(0); // I'll be back...
       }
 
-      CASE(_invokehandle): {
+      CASE(_invokehandle): {abort();
 
         if (!EnableInvokeDynamic) {
           ShouldNotReachHere();
@@ -2281,7 +2287,7 @@ run:
         UPDATE_PC_AND_RETURN(0); // I'll be back...
       }
 
-      CASE(_invokeinterface): {
+      CASE(_invokeinterface): {abort();
         u2 index = Bytes::get_native_u2(pc+1);
 
         // QQQ Need to make this as inlined as possible. Probably need to split all the bytecode cases
@@ -2365,7 +2371,7 @@ run:
 
       CASE(_invokevirtual):
       CASE(_invokespecial):
-      CASE(_invokestatic): {
+      CASE(_invokestatic): { abort();
         u2 index = Bytes::get_native_u2(pc+1);
 
         ConstantPoolCacheEntry* cache = cp->entry_at(index);

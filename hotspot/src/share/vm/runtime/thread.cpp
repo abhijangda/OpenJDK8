@@ -1936,8 +1936,8 @@ void JavaThread::flush_barrier_queues() {
 }
 
 void JavaThread::initialize_queues() {
-  assert(!SafepointSynchronize::is_at_safepoint(),
-         "we should not be at a safepoint");
+  //assert(!SafepointSynchronize::is_at_safepoint(),
+  //       "we should not be at a safepoint");
 
   ObjPtrQueue& satb_queue = satb_mark_queue();
   SATBMarkQueueSet& satb_queue_set = satb_mark_queue_set();
@@ -3224,43 +3224,150 @@ Klass* JavaThread::security_get_caller_class(int depth) {
 
 static void compiler_thread_entry(JavaThread* thread, TRAPS) {
   assert(thread->is_Compiler_thread(), "must be compiler thread");
-  CompileBroker::compiler_thread_loop();
+  if (thread->is_Mongo_Compilation_thread())
+  {
+    MongoCompilationThread::mongo_compilation_func (thread, thread);
+  }
+  else
+    CompileBroker::compiler_thread_loop();
 }
 
 #include <iostream>
+#include <unistd.h>
+
+#include "mongo/MongoMethodDatabaseAPI.h"
+#include "compiler/compileBroker.hpp"
+
+static pthread_mutex_t mongo_mutex = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t mongo_mutex2 = PTHREAD_MUTEX_INITIALIZER;
+static bool mongo_exit = false;
+static pthread_t mongo_thread;
+  
+bool MongoCompilationThread::setExit ()
+{
+  mongo_exit = true;
+  return mongo_exit;
+}
+
+Method** MongoCompilationThread::queue = NULL;
+unsigned int MongoCompilationThread::start = 0;
+unsigned int MongoCompilationThread::end = 0;
+unsigned int MongoCompilationThread::capacity = 5000;
+static bool isMongoInitialized = false;
+
+char* getMethodName (Method* meth, char* buf, int size)
+{
+  int i = 0;
+  char* _buf = buf;
+  _buf[0] = 'L';
+  _buf = _buf + 1;
+  InstanceKlass* ik = meth->method_holder();
+  Symbol* name = ik->name ();
+
+  name->as_C_string(_buf, size);
+  
+  i = strlen (_buf);
+  _buf[i] = ';';
+  name = meth->name ();
+  name->as_C_string (_buf+i+1, size - i - 1);
+  name = meth->signature();
+  i = strlen (_buf);
+  name->as_C_string (_buf + i, size - i);
+  
+  return buf;
+}
+
 //MongoCompilationThread
 void MongoCompilationThread::initialize ()
 {
-  capacity = 5000;
+  if (isMongoInitialized)
+    return;
+
+  if (!mongo_aosdb_isinitialized ())
+    mongo_aosdb_initialize ();
+
+  capacity = 10000;
   start = 0;
   end = 0;
   queue = new Method*[capacity];
   
-  if (pthread_create (&thread, NULL, MongoCompilationThread::mongo_compilation_func, NULL))
+  for (unsigned int i = 0; i < capacity; i++)
+  {
+    queue[i] = NULL;
+  }
+  
+  //if (pthread_create (&mongo_thread, NULL, MongoCompilationThread::mongo_compilation_func, NULL))
   {
     if (UseAOSDBVerbose)
     {
       std::cout<<"Error: Creating MongoCompilationThread"<<std::endl;
     }
   }
-  
-  
-}
-  
-void* MongoCompilationThread::mongo_compilation_func (void* data)
-{
-  
+    
+  isMongoInitialized = true;
 }
 
 void MongoCompilationThread::enqueue (Method* meth)
 {
-  __sync_fetch_and_add (&end, 1);
+  if (meth->is_native())
+    return;
+
+  meth->set_in_mongo_thread (true);
+
+  if (!isMongoInitialized)
+  {
+    pthread_mutex_lock (&mongo_mutex2);
+    if (!isMongoInitialized)
+      MongoCompilationThread::initialize ();
+    pthread_mutex_unlock (&mongo_mutex2);
+  }
+  
+  if (end == capacity)
+  {
+    pthread_mutex_lock (&mongo_mutex);
+    if (end == capacity)
+    {
+      unsigned int newCapacity = capacity*2;
+      Method** newQueue = new Method*[newCapacity];
+    
+      for (unsigned int i = 0; i < capacity; i++)
+      {
+        newQueue[i] = queue[i];
+      }
+      
+      for (unsigned int i = capacity; i < newCapacity; i++)
+      {
+        newQueue[i] = NULL;
+      }
+      
+      delete queue;
+      
+      queue = newQueue;
+      capacity = newCapacity;
+    }
+    
+    pthread_mutex_unlock (&mongo_mutex);
+  }
+  
+  if (UseAOSDBVerbose)
+  {
+    char buf[2048];
+    
+    getMethodName (meth, &buf[0], 2048);
+
+    std::cout<<"Enqueue: " << buf << std::endl;
+  }
+  
+  unsigned int p = __sync_fetch_and_add (&end, 1);
+  //std::cout<<"enqueue " << p<<std::endl;
+  queue[p] = meth;
 }
 
-Method* MongoCompilationThread::dequeue ()
+
+MongoCompilationThread::MongoCompilationThread (CompileQueue* queue, CompilerCounters* counters) : CompilerThread (queue, counters)
 {
+  std::cout<<"Creating mongo"<<std::endl;
 }
-
 
 // Create a CompilerThread
 CompilerThread::CompilerThread(CompileQueue* queue, CompilerCounters* counters)
@@ -3470,6 +3577,7 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
   HandleMark hm;
 
   { MutexLocker mu(Threads_lock);
+
     Threads::add(main_thread);
   }
 
@@ -3736,6 +3844,7 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
 #ifdef ASSERT
   _vm_complete = true;
 #endif
+  std::cout<<"Booted VM"<<std::endl;
   return JNI_OK;
 }
 
@@ -4097,10 +4206,9 @@ jboolean Threads::is_supported_jni_version(jint version) {
   return JNI_FALSE;
 }
 
-
 void Threads::add(JavaThread* p, bool force_daemon) {
   // The threads lock must be owned at this point
-  assert_locked_or_safepoint(Threads_lock);
+  //assert_locked_or_safepoint(Threads_lock);
 
   // See the comment for this method in thread.hpp for its purpose and
   // why it is called here.

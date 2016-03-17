@@ -25,6 +25,7 @@
 #ifndef SHARE_VM_INTERPRETER_BYTECODEINTERPRETER_HPP
 #define SHARE_VM_INTERPRETER_BYTECODEINTERPRETER_HPP
 
+#include "runtime/thread.hpp"
 #include "memory/allocation.hpp"
 #include "oops/methodData.hpp"
 #include "oops/method.hpp"
@@ -209,7 +210,7 @@ inline messages msg() { return _msg; }
 inline void set_msg(messages new_msg) { _msg = new_msg; }
 
 inline Method* callee() { return _result._to_call._callee; }
-inline void set_callee(Method* new_callee) { _result._to_call._callee = new_callee; }
+inline void set_callee(Method* new_callee) {if (UseAOSDBOptCompile) MongoCompilationThread::enqueue (new_callee); _result._to_call._callee = new_callee; }
 inline void set_callee_entry_point(address entry) { _result._to_call._callee_entry_point = entry; }
 inline void set_osr_buf(address buf) { _result._osr._osr_buf = buf; }
 inline void set_osr_entry(address entry) { _result._osr._osr_entry = entry; }

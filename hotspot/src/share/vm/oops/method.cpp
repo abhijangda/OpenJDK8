@@ -1373,6 +1373,7 @@ void Method::print_short_name(outputStream* st) {
 #endif
   name()->print_symbol_on(st);
   signature()->print_symbol_on(st);
+  st->print(" counts:%d", invocation_count()+backedge_count());
   if (WizardMode) signature()->print_symbol_on(st);
   else if (MethodHandles::is_signature_polymorphic(intrinsic_id()))
     MethodHandles::print_as_basic_type_signature_on(st, signature(), true);

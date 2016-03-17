@@ -1,8 +1,9 @@
 #include "MongoMethodDatabaseElement.h"
 
 int mongo_aosdb_initialize ();
-void mongo_aosdb_readAllDocuments (int i);
-MongoMethodDatabaseElement* mongo_aosdb_getMethod (int j, int i);
-int mongo_aosdb_getNMethods (int i);
-void mongo_aosdb_setVerbose (int i);
-int mongo_aosdb_getOptLevelForMethod (int i, string methodFullDesc);
+bool mongo_aosdb_isinitialized ();
+void mongo_aosdb_readAllDocuments ();
+MongoMethodDatabaseElement* mongo_aosdb_getMethod (int i);
+int mongo_aosdb_getNMethods ();
+void mongo_aosdb_setVerbose ();
+MongoMethodDatabaseElement* mongo_aosdb_find (string methodFullDesc);

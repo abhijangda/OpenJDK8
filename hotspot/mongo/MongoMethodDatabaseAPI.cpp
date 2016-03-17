@@ -1,43 +1,60 @@
 #include "MongoMethodDatabaseAPI.h"
 #include "aosDB.h"
+
 #include <iostream>
-static vector<MongoMethodDatabase*> aosDBs;
+#include <vector>
+
+static MongoMethodDatabase* aosDB;
+static bool initialized = false;
 
 int mongo_aosdb_initialize ()
 {
-    aosDBs.push_back (new MongoMethodDatabase ());
+  if (initialized)
+    return 0;
     
-    return aosDBs.size () - 1;
+  aosDB = new MongoMethodDatabase ();
+  initialized = true;
+
+  return 1;
 }
 
-void mongo_aosdb_readAllDocuments (int i)
+bool mongo_aosdb_isinitialized ()
 {
-    aosDBs[i]->readAllDocuments ();
+  return initialized;
 }
 
-MongoMethodDatabaseElement* mongo_aosdb_getMethod (int j, int i)
+void mongo_aosdb_readAllDocuments ()
 {
-    return aosDBs[j]->getMethod (i);
+    aosDB->readAllDocuments ();
 }
 
-int mongo_aosdb_getNMethods (int i)
+MongoMethodDatabaseElement* mongo_aosdb_getMethod (int i)
 {
-    return aosDBs[i]->getNMethods ();
+    return aosDB->getMethod (i);
 }
 
-void mongo_aosdb_setVerbose (int i)
+int mongo_aosdb_getNMethods ()
 {
-    aosDBs[i]->setVerbose ();
+    return aosDB->getNMethods ();
 }
 
-int mongo_aosdb_getOptLevelForMethod (int i, string methodFullDesc)
+void mongo_aosdb_setVerbose ()
 {
-    return aosDBs[i]->getOptLevelMethodForDesc (methodFullDesc);
+    aosDB->setVerbose ();
 }
 
-
-int main ()
+MongoMethodDatabaseElement* mongo_aosdb_find (string methodFullDesc)
 {
-mongo_aosdb_initialize ();mongo_aosdb_initialize ();
-    //std::cout<<aosDB.getOptLevelMethodForDesc ("java.lang.String::lastIndexOf(II)I");
+    return aosDB->find (methodFullDesc);
 }
+
+
+/*int main ()
+{
+mongo_aosdb_initialize ();
+    MongoMethodDatabaseElement* elem = mongo_aosdb_find ("Ljava/lang/Object;registerNatives()V");
+if (elem == NULL)
+	std::cout<<"elem null" << std::endl;
+else
+	std::cout<<elem->getOptLevel()<<std::endl;
+}*/

@@ -89,7 +89,6 @@ BUILD_USER    = -DHOTSPOT_BUILD_USER="\"$(HOTSPOT_BUILD_USER)\""
 VM_DISTRO     = -DHOTSPOT_VM_DISTRO="\"$(HOTSPOT_VM_DISTRO)\""
 
 CXXFLAGS =           \
-  /media/sda13/OpenJDK/openjdk_orig/openjdk/hotspot/mongo.o \
   ${SYSDEFS}         \
   ${INCLUDES}        \
   ${BUILD_VERSION}   \

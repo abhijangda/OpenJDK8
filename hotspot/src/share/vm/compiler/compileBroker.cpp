@@ -21,6 +21,11 @@
  * questions.
  *
  */
+#include "mongo/MongoMethodDatabaseAPI.h"
+#include <iostream>
+#include <string>
+
+
 #include "precompiled.hpp"
 #include "classfile/systemDictionary.hpp"
 #include "classfile/vmSymbols.hpp"
@@ -56,6 +61,8 @@
 #endif
 
 #ifdef DTRACE_ENABLED
+
+char* getMethodName (Method* meth, char* buf, int size);
 
 // Only bother with this argument setup if dtrace is available
 
@@ -422,7 +429,9 @@ void CompileTask::print_compilation_impl(outputStream* st, Method* method, int c
       st->print(" (%d bytes)", method->code_size());
   }
 
-  if (msg != NULL) {
+  if (msg != NULL) { std::cout<<"msg" << msg<<std::endl;
+   if (strcmp (msg, "made not entrant") == 0)
+	abort();
     st->print("   %s", msg);
   }
   if (!short_form) {
@@ -633,6 +642,41 @@ void CompileQueue::delete_all() {
   }
 }
 
+Method* MongoCompilationThread::dequeue ()
+{
+  CompilerThread* thread = CompilerThread::current();
+  MutexLocker locker(thread->queue()->lock());
+
+  while (start == end || queue[start] == NULL) {
+    if (CompileBroker::is_compilation_disabled_forever()) {
+      return NULL;
+    }
+  
+    bool timeout = thread->queue()->lock()->wait(!Mutex::_no_safepoint_check_flag, 2);
+    if (timeout) {
+      MutexUnlocker ul(thread->queue()->lock());
+      NMethodSweeper::possibly_sweep();
+    }
+  }
+  
+  if (CompileBroker::is_compilation_disabled_forever()) {
+    return NULL;
+  }
+      
+  Method* toReturn = queue[start];
+  start += 1;
+  
+  if (UseAOSDBVerbose)
+  {
+    char buf[2048];
+    ::getMethodName (toReturn, &buf[0], 2048);
+    std::cout<<"Dequeue " << buf << std::endl;
+  }
+  
+  return toReturn;
+}
+
+
 // ------------------------------------------------------------------
 // CompileQueue::get
 //
@@ -773,6 +817,77 @@ CompilerCounters::CompilerCounters(const char* thread_name, int instance, TRAPS)
   }
 }
 
+bool MongoCompileTask::operator< (MongoCompileTask m) const
+{
+  return optLevel < m.optLevel;
+}
+
+MongoCompileQueue::MongoCompileQueue (int _start, int _end)
+{
+  queue = new MongoCompileTask*[5000];
+  start = 0;
+  end = 0;
+  capacity = 0;
+}
+
+void MongoCompileQueue::add (MongoCompileTask* task)
+{
+   if (end == capacity)
+    {
+      int newCapacity = capacity*2;
+      MongoCompileTask** newQueue = new MongoCompileTask*[newCapacity];
+    
+      for (int i = 0; i < capacity; i++)
+      {
+        newQueue[i] = queue[i];
+      }
+      
+      for (int i = capacity; i < newCapacity; i++)
+      {
+        newQueue[i] = NULL;
+      }
+      
+      delete queue;
+      
+      queue = newQueue;
+      capacity = newCapacity;
+    }
+  
+  if (UseAOSDBVerbose)
+  {
+    char buf[2048];
+    
+    ::getMethodName (task->meth, &buf[0], 2048);
+
+    std::cout<<"MongoCompileTaskQueue Enqueue: " << buf << std::endl;
+  }
+  
+  int p = __sync_fetch_and_add (&end, 1);
+  //std::cout<<"enqueue " << p<<std::endl;
+  queue[p] = task;
+}
+
+MongoCompileTask* MongoCompileQueue::get ()
+{
+  if (start == end)
+    return NULL;
+    
+  MongoCompileTask* toReturn = queue[start];
+  start += 1;
+  
+  if (UseAOSDBVerbose)
+  {
+    char buf[2048];
+    ::getMethodName (toReturn->meth, &buf[0], 2048);
+    std::cout<<"MongoCompileTaskQueue Dequeue " << buf << std::endl;
+  }
+  
+  return toReturn;
+}
+
+CompileQueue* CompileBroker::_c2_mongo_queue = NULL;
+CompileQueue* CompileBroker::_c1_mongo_queue = NULL;
+MongoCompilationThread* CompileBroker::mongo_compilation_thread = NULL;
 // ------------------------------------------------------------------
 // CompileBroker::compilation_init
 //
@@ -784,6 +899,7 @@ void CompileBroker::compilation_init() {
   if (!UseCompiler) {
     return;
   }
+  
 #ifndef SHARK
   // Set the interface to the current compiler(s).
   int c1_count = CompilationPolicy::policy()->compiler_count(CompLevel_simple);
@@ -913,7 +1029,7 @@ void CompileBroker::compilation_init() {
 
   _initialized = true;
 }
-
+#include "services/threadService.hpp"
 
 CompilerThread* CompileBroker::make_compiler_thread(const char* name, CompileQueue* queue, CompilerCounters* counters,
                                                     AbstractCompiler* comp, TRAPS) {
@@ -939,7 +1055,10 @@ CompilerThread* CompileBroker::make_compiler_thread(const char* name, CompileQue
 
   {
     MutexLocker mu(Threads_lock, THREAD);
-    compiler_thread = new CompilerThread(queue, counters);
+    if (strcmp("Mongo Compilation Thread", name) == 0)
+      compiler_thread = new MongoCompilationThread(queue, counters);
+    else
+      compiler_thread = new CompilerThread(queue, counters);
     // At this point the new CompilerThread data-races with this startup
     // thread (which I believe is the primoridal thread and NOT the VM
     // thread).  This means Java bytecodes being executed at startup can
@@ -1009,11 +1128,17 @@ void CompileBroker::init_compiler_threads(int c1_compiler_count, int c2_compiler
     _c1_method_queue  = new CompileQueue("C1MethodQueue",  MethodCompileQueue_lock);
     _compilers[0]->set_num_compiler_threads(c1_compiler_count);
   }
-
+  
+  if (UseAOSDBOptCompile)
+  {
+    _c1_mongo_queue = new CompileQueue("C1MongoQueue",  MethodCompileQueue_lock);
+    _c2_mongo_queue = new CompileQueue("C2MongoQueue",  MethodCompileQueue_lock);
+  }
+  
   int compiler_count = c1_compiler_count + c2_compiler_count;
 
   _compiler_threads =
-    new (ResourceObj::C_HEAP, mtCompiler) GrowableArray<CompilerThread*>(compiler_count, true);
+    new (ResourceObj::C_HEAP, mtCompiler) GrowableArray<CompilerThread*>(compiler_count+3, true);
 
   char name_buffer[256];
   for (int i = 0; i < c2_compiler_count; i++) {
@@ -1033,7 +1158,23 @@ void CompileBroker::init_compiler_threads(int c1_compiler_count, int c2_compiler
     CompilerThread* new_thread = make_compiler_thread(name_buffer, _c1_method_queue, counters, _compilers[0], CHECK);
     _compiler_threads->append(new_thread);
   }
-
+  
+  if (UseAOSDBOptCompile)
+  {
+    CompilerCounters* counters = new CompilerCounters("MongoCompilerThread", compiler_count, CHECK);
+    sprintf (name_buffer, "Mongo Compilation Thread");
+    mongo_compilation_thread = (MongoCompilationThread*)make_compiler_thread (name_buffer, _c2_method_queue, counters, _compilers[1], CHECK);
+    _compiler_threads->append(mongo_compilation_thread);
+    
+    sprintf (name_buffer, "C1 MongoCompilerThread");
+    CompilerThread* new_thread = make_compiler_thread(name_buffer, _c1_mongo_queue, counters, _compilers[0], CHECK);
+    _compiler_threads->append(new_thread);
+    
+    sprintf (name_buffer, "C2 MongoCompilerThread");
+    new_thread = make_compiler_thread(name_buffer, _c2_mongo_queue, counters, _compilers[1], CHECK);
+    _compiler_threads->append(new_thread);
+  }
+  
   if (UsePerfData) {
     PerfDataManager::create_constant(SUN_CI, "threads", PerfData::U_Bytes, compiler_count, CHECK);
   }
@@ -1063,6 +1204,7 @@ void CompileBroker::compile_method_base(methodHandle method,
                                         const char* comment,
                                         Thread* thread) {
   // do nothing if compiler thread(s) is not available
+  if (UseAOSDBBulkCompile) abort ();
   if (!_initialized ) {
     return;
   }
@@ -1092,6 +1234,30 @@ void CompileBroker::compile_method_base(methodHandle method,
     tty->cr();
   }
 
+  CompileQueue* queue;
+  
+  if (strcmp (comment, "omni") == 0)
+  {
+    queue = compile_mongo_queue (comp_level);
+    if (UseAOSDBVerbose)
+    {
+      char buf[2048];
+      ::getMethodName (method(), &buf[0], 2048);
+      std::cout<<"omni enqueue to mongo queue "<< buf << " optLevel "<< comp_level << std::endl;
+    }
+  }
+  else
+  {
+    queue = compile_queue(comp_level);
+    
+    if (UseAOSDBVerbose)
+    {
+      char buf[2048];
+      ::getMethodName (method(), &buf[0], 2048);
+      std::cout<<"Not omni enqueue to normal queue "<< buf << std::endl;
+    }
+  }
+  
   // A request has been made for compilation.  Before we do any
   // real work, check to see if the method has been compiled
   // in the meantime with a definitive result.
@@ -1107,7 +1273,7 @@ void CompileBroker::compile_method_base(methodHandle method,
     }
   }
 #endif
-
+  
   // If this method is already in the compile queue, then
   // we do not block the current thread.
   if (compilation_is_in_queue(method, osr_bci)) {
@@ -1134,7 +1300,6 @@ void CompileBroker::compile_method_base(methodHandle method,
   // Outputs from the following MutexLocker block:
   CompileTask* task     = NULL;
   bool         blocking = false;
-  CompileQueue* queue  = compile_queue(comp_level);
 
   // Acquire our lock.
   {
@@ -1237,7 +1402,7 @@ nmethod* CompileBroker::compile_method(methodHandle method, int osr_bci,
       compilation_is_prohibited(method, osr_bci, comp_level)) {
     return NULL;
   }
-abort();
+
   if (osr_bci == InvocationEntryBci) {
     // standard compilation
     nmethod* method_code = method->code();
@@ -1651,10 +1816,91 @@ void CompileBroker::shutdown_compiler_runtime(AbstractCompiler* comp, CompilerTh
     // fail. This can be done later if necessary.
   }
 }
-#include "mongo/MongoMethodDatabaseAPI.h"
-#include <iostream>
-#include <string>
-//void __mongo_xxxx_xxxx ();
+
+void MongoCompilationThread::mongo_compilation_func (JavaThread* _thread, TRAPS)
+{
+  CompilerThread* thread = CompilerThread::current();
+  CompileQueue* queue = thread->queue();
+  // For the thread that initializes the ciObjectFactory
+  // this resource mark holds all the shared objects
+  ResourceMark rm;
+
+  // First thread to get here will initialize the compiler interface
+
+  if (!ciObjectFactory::is_initialized()) {
+    ASSERT_IN_VM;
+    MutexLocker only_one (CompileThread_lock, thread);
+    if (!ciObjectFactory::is_initialized()) {
+      ciObjectFactory::initialize();
+    }
+  }
+
+  // If compiler thread/runtime initialization fails, exit the compiler thread
+  if (!CompileBroker::init_compiler_runtime()) {
+    return;
+  }
+  
+  while (!CompileBroker::is_compilation_disabled_forever()) {
+    // We need this HandleMark to avoid leaking VM handles.
+    HandleMark hm(thread);
+    //std::cout<<"sdsdsdsddsds  " << std::endl;
+    //__mongo_xxxx_xxxx ();
+    if (CodeCache::unallocated_capacity() < CodeCacheMinimumFreeSpace) {
+      // the code cache is really full
+      CompileBroker::handle_full_code_cache();
+    }
+    
+    char buf[2048];
+    Method* meth;
+    MongoMethodDatabaseElement* elem;
+
+    meth = dequeue();
+    ::getMethodName (meth, &buf[0], 2048); 
+    if (UseAOSDBVerbose)
+    {
+      std::cout<<"Searching for " << buf<< std::endl;
+    }
+    
+    elem = mongo_aosdb_find (buf);
+
+    if (elem == NULL)
+    {
+      if (UseAOSDBVerbose)
+      {
+        std::cout<<"Cannot find " << buf << " in mongodb" <<std::endl;
+      }
+      
+      continue;
+    }
+    
+    if (UseAOSDBVerbose)
+    {
+      std::cout<<"Adding to CompileQueue "<< buf << " with optLevel " << elem->getOptLevel () << " counts " << elem->getCounts () << std::endl;
+    }
+    
+    //CompileBroker::_c1_priority_queue->add(new MongoCompileTask(meth, elem->getOptLevel (), elem->getCounts (), std::string(buf)));
+
+    CompileBroker::compile_method(methodHandle(meth),
+                                  InvocationEntryBci,
+                                  elem->getOptLevel (),
+                                  methodHandle(meth),
+                                  elem->getCounts (),
+                                  "omni",
+                                  thread);
+    if (UseAOSDBVerbose)
+    {
+      std::cout<<"Added to CompileQueue "<< buf << " with optLevel " << elem->getOptLevel () << " counts " << elem->getCounts () << std::endl;
+    }
+    
+    delete elem;
+  }
+
+  if (UseAOSDBVerbose)
+  {
+    std::cout<<"Exiting Mongo Thread"<<std::endl;
+  }
+}
+
 // ------------------------------------------------------------------
 // CompileBroker::compiler_thread_loop
 //
@@ -1696,8 +1942,7 @@ void CompileBroker::compiler_thread_loop() {
   }
   
   int mongo_index = -1;
-  if (UseAOSDBOptCompile)
-    mongo_index = mongo_aosdb_initialize ();
+
   // Poll for new compilation tasks as long as the JVM runs. Compilation
   // should only be disabled if something went wrong while initializing the
   // compiler runtimes. This, in turn, should not happen. The only known case
@@ -1718,6 +1963,19 @@ void CompileBroker::compiler_thread_loop() {
       continue;
     }
     
+    if (UseAOSDBOptCompile && task->method()->in_mongo_thread() && task->_osr_bci == InvocationEntryBci)
+    {
+      if (task->method()->code () != NULL && task->method()->code()->comp_level() >= task->comp_level () && !task->method()->code()->is_marked_for_deoptimization())
+      {
+        if (UseAOSDBVerbose)
+        {
+          char buf[2048];
+          ::getMethodName (task->method(), &buf[0], 2048);
+          std::cout<<"Cannot Compile Method already compiled by Mongo: "<< buf << " at optLevel " << task->method()->code()->comp_level() << " with new optLevel " << task->comp_level ()<< std::endl;
+        }
+        continue;
+      }
+    }
     /*if (UseAOSDBOptCompile && mongo_index != -1)
     {
       std::string name = std::string (task->method()->method_holder()->external_name()) + std::string("::") + std::string(task->method()->name()->as_C_string ());
@@ -1873,6 +2131,17 @@ void CompileBroker::invoke_compiler_on_method(CompileTask* task) {
     ResourceMark rm;
     task->print_line();
   }
+  
+  if (UseAOSDBVerbose)
+  {
+    if (strcmp (task->_comment, "omni") == 0)
+    {
+      char buf[2048];
+      getMethodName (task->method(), buf, 2048);
+      std::cout<< "Recompiling: "<< buf << " optLevel " << task->comp_level() << std::endl;
+    }
+  }
+  
   elapsedTimer time;
 
   CompilerThread* thread = CompilerThread::current();

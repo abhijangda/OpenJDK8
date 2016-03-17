@@ -58,17 +58,19 @@ void MongoMethodDatabase::readAllDocuments()
     }
 }
 
-int MongoMethodDatabase::getOptLevelMethodForDesc (std::string methodFullDesc)
+MongoMethodDatabaseElement* MongoMethodDatabase::find (std::string methodFullDesc)
 {
     try
     {
         auto cursor = aosCollection.find({document{} << "methodFullDesc" << methodFullDesc << finalize});
         
         for (auto&& doc : cursor) {
-            return doc["optLevel"].get_int32();
+            int optLevel = doc["optLevel"].get_int32();
+            double counts = doc["count"].get_double();
+            return new MongoMethodDatabaseElement(methodFullDesc, optLevel, counts);
         }
         
-        return 0;
+        return NULL;
     }
     catch(...)
     {

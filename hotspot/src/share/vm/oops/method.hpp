@@ -115,7 +115,8 @@ class Method : public Metadata {
                     _force_inline     : 1,
                     _hidden           : 1,
                     _dont_inline      : 1,
-                                      : 3;
+                    _in_mongo_thread  : 1,
+                                      : 2;
 
 #ifndef PRODUCT
   int               _compiled_invocation_count;  // Number of nmethod invocations so far (for perf. debugging)
@@ -764,6 +765,8 @@ class Method : public Metadata {
   void set_force_inline(bool x)     {        _force_inline = x;     }
   bool     dont_inline()            { return _dont_inline;          }
   void set_dont_inline(bool x)      {        _dont_inline = x;      }
+  bool     in_mongo_thread()        { return _in_mongo_thread;      }
+  void set_in_mongo_thread(bool x)  {        _in_mongo_thread = x;  }
   bool  is_hidden()                 { return _hidden;               }
   void set_hidden(bool x)           {        _hidden = x;           }
   ConstMethod::MethodType method_type() const {

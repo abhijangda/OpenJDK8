@@ -21,7 +21,7 @@
  * questions.
  *
  */
-
+#include <iostream>
 #include "precompiled.hpp"
 #include "classfile/systemDictionary.hpp"
 #include "classfile/vmSymbols.hpp"
@@ -681,7 +681,8 @@ IRT_ENTRY(void, InterpreterRuntime::resolve_invoke(JavaThread* thread, Bytecodes
       }
     }
   } // end JvmtiHideSingleStepping
-
+    if (UseAOSDBOptCompile && !info.resolved_method()()->in_mongo_thread())
+      MongoCompilationThread::enqueue (info.resolved_method()());
   // check if link resolution caused cpCache to be updated
   if (already_resolved(thread)) return;
 
@@ -691,6 +692,7 @@ IRT_ENTRY(void, InterpreterRuntime::resolve_invoke(JavaThread* thread, Bytecodes
       tty->print_cr("Resolving: klass: %s to method: %s", info.resolved_klass()->name()->as_C_string(), info.resolved_method()->name()->as_C_string());
     }
   }
+
 #ifdef ASSERT
   if (bytecode == Bytecodes::_invokeinterface) {
     if (info.resolved_method()->method_holder() ==
@@ -742,6 +744,7 @@ IRT_END
 
 // First time execution:  Resolve symbols, create a permanent MethodType object.
 IRT_ENTRY(void, InterpreterRuntime::resolve_invokehandle(JavaThread* thread)) {
+    std::cout<<"InterpreterRuntime::resolve_invokehandle"<<std::endl;
   assert(EnableInvokeDynamic, "");
   const Bytecodes::Code bytecode = Bytecodes::_invokehandle;
 
@@ -762,6 +765,7 @@ IRT_END
 
 // First time execution:  Resolve symbols, create a permanent CallSite object.
 IRT_ENTRY(void, InterpreterRuntime::resolve_invokedynamic(JavaThread* thread)) {
+    std::cout<<"InterpreterRuntime::resolve_invokedynamic"<<std::endl;
   assert(EnableInvokeDynamic, "");
   const Bytecodes::Code bytecode = Bytecodes::_invokedynamic;
 

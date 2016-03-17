@@ -5168,7 +5168,15 @@ _JNI_IMPORT_OR_EXPORT_ jint JNICALL JNI_CreateJavaVM(JavaVM **vm, void **penv, v
    * JNI_CreateJavaVM will immediately fail using the above logic.
    */
   bool can_try_again = true;
-
+  if (UseAOSDBOptCompile)
+  {
+      mongo_aosdb_initialize ();
+      MongoCompilationThread::initialize ();
+  
+      if (UseAOSDBVerbose)
+          std::cout<<"Mongo Initialized"<<std::endl;
+  }
+    
   result = Threads::create_vm((JavaVMInitArgs*) args, &can_try_again);
   if (result == JNI_OK) {
     JavaThread *thread = JavaThread::current();
@@ -5223,14 +5231,6 @@ _JNI_IMPORT_OR_EXPORT_ jint JNICALL JNI_CreateJavaVM(JavaVM **vm, void **penv, v
   //std::cout<<"JNI_createVM"<<std::endl;
 
   //std::cout <<"Booting VM in prims/jni.cpp"<<std::endl;
-  
-  if (UseAOSDBBulkCompile)
-  {
-    mongo_aosdb_initialize ();
-    
-    if (UseAOSDBVerbose)
-        std::cout<<"Mongo Initialized"<<std::endl;
-  }
   
   //abort ();
   return result;

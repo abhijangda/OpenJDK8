@@ -43,5 +43,5 @@ public:
         return methods[i];
     }
 
-    int getOptLevelMethodForDesc (std::string methodFullDesc);
+    MongoMethodDatabaseElement* find (string methodFullDesc);
 };
