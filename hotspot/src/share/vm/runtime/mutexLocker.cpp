@@ -84,6 +84,7 @@ Mutex*   EvacFailureStack_lock        = NULL;
 Mutex*   DerivedPointerTableGC_lock   = NULL;
 Mutex*   Compile_lock                 = NULL;
 Monitor* MethodCompileQueue_lock      = NULL;
+Monitor* MongoMethodCompileQueue_lock = NULL;
 Monitor* CompileThread_lock           = NULL;
 Mutex*   CompileTaskAlloc_lock        = NULL;
 Mutex*   CompileStatistics_lock       = NULL;
@@ -267,6 +268,7 @@ void mutex_init() {
   def(MethodData_lock              , Mutex  , nonleaf+3,   false);
 
   def(MethodCompileQueue_lock      , Monitor, nonleaf+4,   true );
+  def(MongoMethodCompileQueue_lock , Monitor, nonleaf+4,   true );
   def(Debug2_lock                  , Mutex  , nonleaf+4,   true );
   def(Debug3_lock                  , Mutex  , nonleaf+4,   true );
   def(ProfileVM_lock               , Monitor, special,   false); // used for profiling of the VMThread

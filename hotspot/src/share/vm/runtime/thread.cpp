@@ -3261,19 +3261,25 @@ char* getMethodName (Method* meth, char* buf, int size)
   char* _buf = buf;
   _buf[0] = 'L';
   _buf = _buf + 1;
+  //std::cout<<"ESSSS"<<std::endl;
   InstanceKlass* ik = meth->method_holder();
+  //std::cout<<"sdfsdfsdf" << std::endl;
   Symbol* name = ik->name ();
-
+  //std::cout<<"sdfsdfsdf" << std::endl;
   name->as_C_string(_buf, size);
-  
+  //std::cout<<"AAAAAAAA" << std::endl;
   i = strlen (_buf);
   _buf[i] = ';';
   name = meth->name ();
+  //std::cout<<"BBBBBBBBB" << std::endl;
   name->as_C_string (_buf+i+1, size - i - 1);
+  //std::cout<<"CCCCCCCCC" << std::endl;
   name = meth->signature();
+  //std::cout<<"DDDDDDDDDD" << std::endl;
   i = strlen (_buf);
+  //std::cout<<"EEEEEEEEE" << std::endl;
   name->as_C_string (_buf + i, size - i);
-  
+  //std::cout<<"FFFFFFFFFFFF" << std::endl;
   return buf;
 }
 

@@ -183,7 +183,7 @@ class CompilerCounters : public CHeapObj<mtCompiler> {
 //
 // A list of CompileTasks.
 class CompileQueue : public CHeapObj<mtCompiler> {
- private:
+ public:
   const char* _name;
   Monitor*    _lock;
 
@@ -203,14 +203,14 @@ class CompileQueue : public CHeapObj<mtCompiler> {
   const char*  name() const                      { return _name; }
   Monitor*     lock() const                      { return _lock; }
 
-  void         add(CompileTask* task);
-  void         remove(CompileTask* task);
+  virtual void         add(CompileTask* task);
+  virtual void         remove(CompileTask* task);
   CompileTask* first()                           { return _first; }
   CompileTask* last()                            { return _last;  }
 
-  CompileTask* get();
+  virtual CompileTask* get();
 
-  bool         is_empty() const                  { return _first == NULL; }
+  virtual bool         is_empty() const                  { return _first == NULL; }
   int          size()     const                  { return _size;          }
 
   // Redefine Classes support
@@ -221,6 +221,33 @@ class CompileQueue : public CHeapObj<mtCompiler> {
   ~CompileQueue() {
     assert (is_empty(), " Compile Queue must be empty");
   }
+};
+
+class MongoPriorityCompileQueue : public CompileQueue
+{
+private:
+  CompileTask** array;
+  int start;
+  int end;
+  int count;
+public:
+  MongoPriorityCompileQueue(const char* name, Monitor* lock) : CompileQueue(name, lock) {
+    _size = 10000;
+    array = new CompileTask*[_size];
+    start = 0;
+    end = 0;
+    count = 0;
+  }
+  
+  virtual bool is_empty () const {return count == 0;}
+  
+  virtual void         add(CompileTask* task);
+
+  virtual CompileTask* get();
+  CompileTask* deleteMin();
+  
+  void print ();
+  void reheapify (int startingElement);
 };
 
 // CompileTaskWrapper

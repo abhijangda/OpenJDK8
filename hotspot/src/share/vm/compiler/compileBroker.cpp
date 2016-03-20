@@ -430,8 +430,6 @@ void CompileTask::print_compilation_impl(outputStream* st, Method* method, int c
   }
 
   if (msg != NULL) { std::cout<<"msg" << msg<<std::endl;
-   if (strcmp (msg, "made not entrant") == 0)
-	abort();
     st->print("   %s", msg);
   }
   if (!short_form) {
@@ -664,6 +662,7 @@ Method* MongoCompilationThread::dequeue ()
   }
       
   Method* toReturn = queue[start];
+  
   start += 1;
   
   if (UseAOSDBVerbose)
@@ -832,6 +831,7 @@ MongoCompileQueue::MongoCompileQueue (int _start, int _end)
 
 void MongoCompileQueue::add (MongoCompileTask* task)
 {
+   
    if (end == capacity)
     {
       int newCapacity = capacity*2;
@@ -1131,8 +1131,8 @@ void CompileBroker::init_compiler_threads(int c1_compiler_count, int c2_compiler
   
   if (UseAOSDBOptCompile)
   {
-    _c1_mongo_queue = new CompileQueue("C1MongoQueue",  MethodCompileQueue_lock);
-    _c2_mongo_queue = new CompileQueue("C2MongoQueue",  MethodCompileQueue_lock);
+    _c1_mongo_queue = new MongoPriorityCompileQueue("C1MongoQueue",  MongoMethodCompileQueue_lock);
+    _c2_mongo_queue = new MongoPriorityCompileQueue("C2MongoQueue",  MongoMethodCompileQueue_lock);
   }
   
   int compiler_count = c1_compiler_count + c2_compiler_count;
@@ -1204,7 +1204,6 @@ void CompileBroker::compile_method_base(methodHandle method,
                                         const char* comment,
                                         Thread* thread) {
   // do nothing if compiler thread(s) is not available
-  if (UseAOSDBBulkCompile) abort ();
   if (!_initialized ) {
     return;
   }
@@ -1817,6 +1816,190 @@ void CompileBroker::shutdown_compiler_runtime(AbstractCompiler* comp, CompilerTh
   }
 }
 
+void MongoPriorityCompileQueue::print ()
+{
+  for (int i = 1; i < count; i++)
+  {
+    std::cout <<"[" << array[i]->_comp_level << ", " << array[i]->_hot_count<< "]; " ;
+  }
+}
+
+void MongoPriorityCompileQueue::reheapify (int startingElement)
+{
+  int current = startingElement;
+    int parent = count / 2;
+    // keep checking parents that violate the magic condition
+    while (parent > 0 && ((array[parent]->_hot_count < array[current]->_hot_count) || 
+    		(array[parent]->_hot_count == array[current]->_hot_count && array[parent]->_comp_level < array[current]->_comp_level))){
+      //        System.out.println("Parent: "+ parent +", Current: "+ current);
+      //        System.out.println("Contents before: "+ this);
+      // exchange parrent and current values
+      CompileTask* tmp = array[parent];
+      array[parent] = array[current];
+      array[current] = tmp;
+
+      //        System.out.println("Contents after: "+ this);
+      // go up 1 level
+      current = parent;
+      parent = parent / 2;
+    }
+}
+  
+void MongoPriorityCompileQueue::add(CompileTask* task)
+{ 
+  if (UseAOSDBBulkCompile)
+  {
+    std::cout<<"Adding to PriorityQueue: "<< "["<<task->_comp_level << ", " << task->_hot_count << "]"<< std::endl;
+    std::cout<<"Beforing adding ";
+    print ();
+    std::cout<<std::endl;
+  }
+  
+  count++;
+  if (count == _size) {
+    	CompileTask** tmp = new CompileTask*[_size*2];
+      
+      for (int i = _size; i < _size*2; i++) {
+        tmp[i] = new CompileTask();
+      }
+      array = tmp;
+  }
+
+    array[count] = task;
+
+    // re-heapify
+    reheapify(count);
+    
+  if (UseAOSDBBulkCompile)
+  {
+    std::cout<<"After adding ";
+    print ();
+    std::cout<<std::endl;
+  }
+  
+  task->method()->set_queued_for_compilation();
+  
+  lock()->notify_all();
+}
+
+CompileTask* MongoPriorityCompileQueue::deleteMin()
+{
+  if (UseAOSDBBulkCompile)
+  {
+    std::cout<<"Beforing deleting ";
+    print ();
+    std::cout<<std::endl;
+  }
+  if (is_empty ()) return NULL;
+    
+    /*if (VM.useAOSDBVerbose)
+    {
+    	//VM.sysWriteln("MongoPriorityQueue.deleteMin() Deleting" + queue[1].toString());
+    	//VM.sysWriteln ("Current Elements: " + toString ());
+    }*/
+    
+    CompileTask* returnValue = array[1];
+    // move the "last" element to the root and reheapify by pushing it down
+    array[1] = array[count];
+    count--;
+    
+    // reheapify!!!
+    int current = 1;
+
+    // The children live at 2*current and  2*current+1
+    int child1 = 2 * current;
+    while (child1 <= count) {
+      int child2 = 2 * current + 1;
+
+      // find the smaller of the two children
+      int smaller;
+      if (child2 <= count && ((array[child2]->_hot_count > array[child1]->_hot_count)  ||
+    		  (array[child2]->_hot_count == array[child1]->_hot_count && array[child2]->_comp_level > array[child1]->_comp_level))){
+        smaller = child2;
+      } else {
+        smaller = child1;
+      }
+
+      if ((array[smaller]->_hot_count > array[current]->_hot_count)  ||
+    		  (array[smaller]->_hot_count == array[current]->_hot_count && array[smaller]->_comp_level > array[current]->_comp_level)) {
+    	// exchange parrent and current values
+        CompileTask* tmp = array[smaller];
+        array[smaller] = array[current];
+        array[current] = tmp;
+
+          // go down 1 level
+        current = smaller;
+        child1 = 2 * current;
+      } else {
+    	break;
+      }
+    }
+    
+    /*if (VM.useAOSDBVerbose)
+    {
+    	VM.sysWriteln ("After deletion current elements: " + toString ());
+    }*/
+    
+  if (UseAOSDBBulkCompile)
+  {
+    std::cout<<"After deleting ";
+    print ();
+    std::cout<<std::endl;
+  }
+  
+    return returnValue;
+}
+
+CompileTask* MongoPriorityCompileQueue::get()
+{
+  NMethodSweeper::possibly_sweep();
+
+  MutexLocker locker(lock());
+  // If _first is NULL we have no more compile jobs. There are two reasons for
+  // having no compile jobs: First, we compiled everything we wanted. Second,
+  // we ran out of code cache so compilation has been disabled. In the latter
+  // case we perform code cache sweeps to free memory such that we can re-enable
+  // compilation.
+  while (count == 0) {
+    // Exit loop if compilation is disabled forever
+    if (CompileBroker::is_compilation_disabled_forever()) {
+      return NULL;
+    }
+
+    if (UseCodeCacheFlushing && !CompileBroker::should_compile_new_jobs()) {
+      // Wait a certain amount of time to possibly do another sweep.
+      // We must wait until stack scanning has happened so that we can
+      // transition a method's state from 'not_entrant' to 'zombie'.
+      long wait_time = NmethodSweepCheckInterval * 1000;
+      if (FLAG_IS_DEFAULT(NmethodSweepCheckInterval)) {
+        // Only one thread at a time can do sweeping. Scale the
+        // wait time according to the number of compiler threads.
+        // As a result, the next sweep is likely to happen every 100ms
+        // with an arbitrary number of threads that do sweeping.
+        wait_time = 100 * CICompilerCount;
+      }
+      bool timeout = lock()->wait(!Mutex::_no_safepoint_check_flag, wait_time);
+      if (timeout) {
+        MutexUnlocker ul(lock());
+        NMethodSweeper::possibly_sweep();
+      }
+    } else {
+      // If there are no compilation tasks and we can compile new jobs
+      // (i.e., there is enough free space in the code cache) there is
+      // no need to invoke the sweeper. As a result, the hotness of methods
+      // remains unchanged. This behavior is desired, since we want to keep
+      // the stable state, i.e., we do not want to evict methods from the
+      // code cache if it is unnecessary.
+      // We need a timed wait here, since compiler threads can exit if compilation
+      // is disabled forever. We use 5 seconds wait time; the exiting of compiler threads
+      // is not critical and we do not want idle compiler threads to wake up too often.
+      lock()->wait(!Mutex::_no_safepoint_check_flag, 5*1000);
+    }
+  }
+  
+  return deleteMin ();
+}
+
 void MongoCompilationThread::mongo_compilation_func (JavaThread* _thread, TRAPS)
 {
   CompilerThread* thread = CompilerThread::current();
@@ -1855,7 +2038,11 @@ void MongoCompilationThread::mongo_compilation_func (JavaThread* _thread, TRAPS)
     MongoMethodDatabaseElement* elem;
 
     meth = dequeue();
+    if (meth == NULL)
+      continue;
+      
     ::getMethodName (meth, &buf[0], 2048); 
+    
     if (UseAOSDBVerbose)
     {
       std::cout<<"Searching for " << buf<< std::endl;
