@@ -452,7 +452,7 @@ $(eval $(call SetupNativeCompilation,BUILD_UNPACKEXE, \
     LANG := $(UNPACKEXE_LANG), \
     OPTIMIZATION := LOW, \
     CFLAGS := $(UNPACKEXE_CFLAGS) $(CXXFLAGS_JDKEXE) \
-        -DFULL, \
+        -DFULL --std=c++98, \
     CFLAGS_release := -DPRODUCT, \
     CFLAGS_linux := -fPIC, \
     CFLAGS_solaris := -KPIC, \

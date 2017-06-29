@@ -290,7 +290,7 @@ $(eval $(call SetupNativeCompilation,BUILD_LIBUNPACK, \
     LANG := C++, \
     OPTIMIZATION := LOW, \
     CFLAGS := $(CXXFLAGS_JDKLIB) \
-        -DNO_ZLIB -DUNPACK_JNI -DFULL, \
+        -DNO_ZLIB -DUNPACK_JNI -DFULL --std=c++98, \
     CFLAGS_release := -DPRODUCT, \
     MAPFILE := $(JDK_TOPDIR)/make/mapfiles/libunpack/mapfile-vers, \
     LDFLAGS := $(LDFLAGS_JDKLIB) $(LDFLAGS_CXX_JDK) \

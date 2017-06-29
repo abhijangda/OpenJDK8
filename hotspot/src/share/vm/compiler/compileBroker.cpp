@@ -62,8 +62,6 @@
 
 #ifdef DTRACE_ENABLED
 
-char* getMethodName (Method* meth, char* buf, int size);
-
 // Only bother with this argument setup if dtrace is available
 
 #ifndef USDT2
@@ -129,6 +127,8 @@ HS_DTRACE_PROBE_DECL9(hotspot, method__compile__end,
 #define DTRACE_METHOD_COMPILE_END_PROBE(method, comp_name, success)
 
 #endif // ndef DTRACE_ENABLED
+
+char* getMethodName (Method* meth, char* buf, int size);
 
 bool CompileBroker::_initialized = false;
 volatile bool CompileBroker::_should_block = false;

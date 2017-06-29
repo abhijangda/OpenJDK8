@@ -30,8 +30,11 @@ Simple Build Instructions:
      http://java.sun.com/javase/downloads/index.jsp
      Add the /bin directory of this installation to your PATH environment
      variable.
-
+  
   2. Configure the build:
+       cd hotspot/mongo/
+       g++ *.cpp -I/usr/include/bsoncxx/v_noabi/ -I/usr/include/mongocxx/v_noabi/ -lmongocxx -lbsoncxx -c
+       cd ../../
        bash ./configure
   
   3. Build the OpenJDK:

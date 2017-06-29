@@ -95,7 +95,7 @@ CXXFLAGS =           \
   ${BUILD_TARGET}    \
   ${BUILD_USER}      \
   ${HS_LIB_ARCH}     \
-  ${VM_DISTRO}
+  ${VM_DISTRO} --std=c++98
 
 # This is VERY important! The version define must only be supplied to vm_version.o
 # If not, ccache will not re-use the cache at all, since the version string might contain
@@ -293,7 +293,7 @@ LINK_VM = $(LINK_LIB.CC)
 $(PRECOMPILED_HEADER):
 	$(QUIETLY) echo Generating precompiled header $@
 	$(QUIETLY) mkdir -p $(PRECOMPILED_HEADER_DIR)
-	$(QUIETLY) $(COMPILE.CXX) $(DEPFLAGS) -x c++-header $(PRECOMPILED_HEADER_SRC) -o $@ $(COMPILE_DONE)
+	$(QUIETLY) $(COMPILE.CXX) $(DEPFLAGS) -x c++-header $(PRECOMPILED_HEADER_SRC) --std=c++98 -o $@ $(COMPILE_DONE)
 
 # making the library:
 
