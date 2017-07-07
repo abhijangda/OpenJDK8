@@ -69,6 +69,8 @@ private:
     bool verbose;
     
 public:
+    bool is_verbose () {return verbose;}
+    
     class iterator
     {
         private:
@@ -98,6 +100,10 @@ public:
     
     AOSDatabase (std::string _dbFile, bool _verbose = false) : dbFilePath(_dbFile), verbose (_verbose)
     {
+        if (verbose)
+        {
+            std::cout << "methToElement initialized with " << methToElement.size () << " elements" << std::endl;
+        }
     }
     
     AOSDatabase (std::unordered_map <std::string, AOSDatabaseElement> _methToElement, 
@@ -108,6 +114,7 @@ public:
     
     void readDB ();
     void writeDB ();
+    void clearDB () {methToElement.clear ();}
     void printDB ();
     
     int getNMethods ()
@@ -138,7 +145,16 @@ public:
                            int counts)
     {
         AOSDatabaseElement elem (methodFullDesc, optLevel, counts);
+        if (verbose)
+        {
+            std::cout << "AOSDatabaseElement created " << elem << std::endl;
+        }
+        
         methToElement.emplace (methodFullDesc, elem);
+        if (verbose)
+        {
+            std::cout << "AOSDatabaseElement added " << std::endl;
+        }
     }
 };
 #endif 

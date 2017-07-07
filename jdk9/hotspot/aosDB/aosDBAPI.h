@@ -1,5 +1,4 @@
 #include <string>
-#include <assert.h>
 
 #ifndef __AOSDBAPI_H__
 #define __AOSDBAPI_H__
@@ -12,7 +11,8 @@ public:
     AOSDBException (std::string _msg) : msg(_msg) {}
 }*/
 
-int aosDBInit ();
+extern "C"{
+int aosDBInit (bool verbose);
 bool aosDBIsInit ();
 void aosDBRead ();
 bool aosDBVisitNextMethod ();
@@ -21,5 +21,8 @@ int aosDBGetNumberOfMethods ();
 //mongo_aosdb_setVerbose ();
 bool aosDBGetMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts);
 void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts);
-void aosPrintDB ();
+void aosDBPrint ();
+void aosDBWriteDB ();
+void aosDBClearDB ();
+}
 #endif

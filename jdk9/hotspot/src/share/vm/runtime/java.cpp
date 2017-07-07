@@ -22,6 +22,9 @@
  *
  */
 
+#include <iostream>
+#include "aosdb/aosDBAPI.h"
+
 #include "precompiled.hpp"
 #include "aot/aotLoader.hpp"
 #include "classfile/classLoader.hpp"
@@ -533,6 +536,25 @@ void before_exit(JavaThread* thread) {
 }
 
 void vm_exit(int code) {
+  std::cout << "vm_exit "<< std::endl;
+  if (aosDBIsInit ())
+  {
+    if (UseAOSDBVerbose)
+    {
+      std::cout << "Writing database " << std::endl;
+    }
+      
+    if (UseAOSDBOptCompile || UseAOSDBBulkCompile || UseAOSDB)
+    {
+      aosDBWriteDB ();
+    }
+      
+    if (UseAOSDBVerbose)
+    {
+      std::cout << "Database Written " << std::endl;
+    }
+  }
+  
   Thread* thread =
       ThreadLocalStorage::is_initialized() ? Thread::current_or_null() : NULL;
   if (thread == NULL) {

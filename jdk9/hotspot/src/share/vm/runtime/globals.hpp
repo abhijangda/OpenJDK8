@@ -954,6 +954,19 @@ public:
           "error log in case of a crash.")                                  \
           range(0, (uint64_t)max_jlong/1000)                                \
                                                                             \
+  product(bool, UseAOSDB, false,                                            \
+          "Enable AOS Database")                                            \
+  product(bool, UseAOSDBVerbose, false,                                     \
+          "Enable AOSDB Verbose mode")                                      \
+  product(bool, UseAOSDBBulkCompile, false,                                 \
+          "Read AOS Database and compile all methods before                 \
+           running main thread")                                            \
+  product(bool, UseAOSDBOptCompile, false,                                  \
+          "Use AOS Database to compile methods AOT at the                   \
+          required opt level")                                              \
+  product(bool, UseAOSDBRead, false,                                        \
+          "Read AOS Database")                                              \
+                                                                            \
   product_pd(bool, UseOSErrorReporting,                                     \
           "Let VM fatal error propagate to the OS (ie. WER on Windows)")    \
                                                                             \

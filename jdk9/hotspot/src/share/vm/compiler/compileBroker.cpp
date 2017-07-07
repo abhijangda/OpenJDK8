@@ -69,6 +69,10 @@
 #include "shark/sharkCompiler.hpp"
 #endif
 
+#include "aosdb/aosDBAPI.h"
+#include <iostream>
+#include <string>
+
 #ifdef DTRACE_ENABLED
 
 // Only bother with this argument setup if dtrace is available
@@ -209,6 +213,37 @@ class CompilationLog : public StringEventLog {
 };
 
 static CompilationLog* _compilation_log = NULL;
+
+std::string getMethodName (const methodHandle& meth)
+{
+  int i = 0;
+  char buf[2048];
+  int size = 2048;
+  char* _buf = buf;
+  _buf[0] = 'L';
+  _buf = _buf + 1;
+  //std::cout<<"ESSSS"<<std::endl;
+  InstanceKlass* ik = meth->method_holder();
+  //std::cout<<"sdfsdfsdf" << std::endl;
+  Symbol* name = ik->name ();
+  //std::cout<<"sdfsdfsdf" << std::endl;
+  name->as_C_string(_buf, size);
+  //std::cout<<"AAAAAAAA" << std::endl;
+  i = strlen (_buf);
+  _buf[i] = ';';
+  name = meth->name ();
+  //std::cout<<"BBBBBBBBB" << std::endl;
+  name->as_C_string (_buf+i+1, size - i - 1);
+  //std::cout<<"CCCCCCCCC" << std::endl;
+  name = meth->signature();
+  //std::cout<<"DDDDDDDDDD" << std::endl;
+  i = strlen (_buf);
+  //std::cout<<"EEEEEEEEE" << std::endl;
+  name->as_C_string (_buf + i, size - i);
+  //std::cout<<"FFFFFFFFFFFF" << std::endl;
+  return std::string (buf);
+}
+
 
 bool compileBroker_init() {
   if (LogEvents) {
@@ -835,7 +870,7 @@ void CompileBroker::compile_method_base(const methodHandle& method,
                                         const methodHandle& hot_method,
                                         int hot_count,
                                         CompileTask::CompileReason compile_reason,
-                                        bool blocking,
+                                        bool blocking   ,
                                         Thread* thread) {
   guarantee(!method->is_abstract(), "cannot compile abstract methods");
   assert(method->method_holder()->is_instance_klass(),
@@ -1002,6 +1037,28 @@ void CompileBroker::compile_method_base(const methodHandle& method,
     // and in that case it's best to protect both the testing (here) of
     // these bits, and their updating (here and elsewhere) under a
     // common lock.
+    
+    if (aosDBIsInit ())
+    {
+        std::string methodFullDesc = getMethodName (method);
+        if (UseAOSDBVerbose)
+        {
+            std::cout << "Adding method: " << methodFullDesc << " opt level: "<< 
+                comp_level << "count " << hot_count << std::endl;
+        }
+        
+        if (UseAOSDBOptCompile)
+        {    
+            aosDBAddMethodInfo (methodFullDesc, comp_level, hot_count);
+        }
+        
+        if (UseAOSDBVerbose)
+        {
+            std::cout << "Added method: " << methodFullDesc << " opt level: "<< 
+                comp_level << "count " << hot_count << std::endl;
+        }
+    }
+    
     task = create_compile_task(queue,
                                compile_id, method,
                                osr_bci, comp_level,

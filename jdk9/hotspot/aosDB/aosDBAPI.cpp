@@ -1,15 +1,17 @@
 #include "aosDB.h"
 #include "aosDBAPI.h"
 
+#include <assert.h>
+
 static AOSDatabase* aosdb = nullptr;
 static AOSDatabase::iterator* currentIter = nullptr;
 
-int aosDBInit ()
+int aosDBInit (bool verbose)
 {
     if (aosdb != nullptr)
         return 1;
     
-    aosdb = new AOSDatabase ("dbFile");
+    aosdb = new AOSDatabase ("dbFile", verbose);
     
     if (aosdb == nullptr)
         return 0;
@@ -19,16 +21,19 @@ int aosDBInit ()
 
 bool aosDBIsInit ()
 {
-    return aosDBInit != nullptr;
+    return aosdb != nullptr;
 }
 
-void aosPrintDB ()
+void aosDBPrint ()
 {
+    assert (aosdb != nullptr);
+    
     aosdb->printDB ();
 }
 
 void aosDBRead ()
 {
+    assert (aosdb != nullptr);
     aosdb->readDB ();
 }
 
@@ -47,6 +52,7 @@ bool aosDBVisitNextMethod ()
 
 int aosDBGetNumberOfMethods ()
 {
+    assert (aosdb != nullptr);
     return aosdb->getNMethods();
 }
 
@@ -66,7 +72,13 @@ bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& optLevel, int& co
 
 void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts)
 {
-    assert (currentIter != nullptr && *currentIter == aosdb->end ());
+    //assert (currentIter != nullptr && *currentIter == aosdb->end ());
+    
+    if (aosdb->is_verbose ())
+    {
+        std::cout << "aosDBAddMethodInfo "<< methodFullDesc << " " << optLevel
+                << " " << counts << std::endl;
+    }
     
     aosdb->insertMethodInfo (methodFullDesc, optLevel, counts);
 }
@@ -74,6 +86,20 @@ void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts)
 void aosDBVisitBegin ()
 {
     currentIter = new AOSDatabase::iterator (aosdb->begin());
+}
+
+void aosDBWriteDB ()
+{
+    assert (aosdb != nullptr);
+    
+    aosdb->writeDB ();
+}
+
+void aosDBClearDB ()
+{
+    assert (aosdb != nullptr);
+    
+    aosdb->clearDB ();
 }
 
 //TEST

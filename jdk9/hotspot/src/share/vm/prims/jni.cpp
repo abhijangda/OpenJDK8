@@ -84,6 +84,10 @@
 #include "utilities/histogram.hpp"
 #include "utilities/internalVMTests.hpp"
 #include "utilities/macros.hpp"
+
+#include "aosdb/aosDBAPI.h"
+#include <iostream>
+
 #if INCLUDE_ALL_GCS
 #include "gc/g1/g1SATBCardTableModRefBS.hpp"
 #endif // INCLUDE_ALL_GCS
@@ -3881,7 +3885,8 @@ DT_RETURN_MARK_DECL(CreateJavaVM, jint
                     , HOTSPOT_JNI_CREATEJAVAVM_RETURN(_ret_ref));
 
 static jint JNI_CreateJavaVM_inner(JavaVM **vm, void **penv, void *args) {
-  HOTSPOT_JNI_CREATEJAVAVM_ENTRY((void **) vm, penv, args);
+    HOTSPOT_JNI_CREATEJAVAVM_ENTRY((void **) vm, penv, args);
+    std::cout << "JNI_CreateJavaVM_inner "<<std::endl;
 
   jint result = JNI_ERR;
   DT_RETURN_MARK(CreateJavaVM, jint, (const jint&)result);
@@ -3935,6 +3940,8 @@ static jint JNI_CreateJavaVM_inner(JavaVM **vm, void **penv, void *args) {
   bool can_try_again = true;
 
   result = Threads::create_vm((JavaVMInitArgs*) args, &can_try_again);
+  std::cout << "JavaVM created result " << result << std::endl;
+  
   if (result == JNI_OK) {
     JavaThread *thread = JavaThread::current();
     assert(!thread->has_pending_exception(), "should have returned not OK");
@@ -3958,7 +3965,13 @@ static jint JNI_CreateJavaVM_inner(JavaVM **vm, void **penv, void *args) {
       }
     }
 #endif
-
+    if (UseAOSDBOptCompile || UseAOSDBBulkCompile)
+    {
+        aosDBInit (UseAOSDBVerbose);
+        std::cout << "aosDBInitialized " << std::endl;
+        aosDBRead ();
+        std::cout << "aosDBRead Entries in DB " << aosDBGetNumberOfMethods () << std::endl;
+    }
     // Tracks the time application was running before GC
     RuntimeService::record_application_start();
 
@@ -4060,10 +4073,29 @@ DT_RETURN_MARK_DECL(DestroyJavaVM, jint
                     , HOTSPOT_JNI_DESTROYJAVAVM_RETURN(_ret_ref));
 
 jint JNICALL jni_DestroyJavaVM(JavaVM *vm) {
+  std::cout << "Destroy Java VM " << std::endl;
+  if (aosDBIsInit ())
+  {
+      if (UseAOSDBVerbose)
+      {
+          std::cout << "Writing database " << std::endl;
+      }
+      
+      if (UseAOSDBOptCompile || UseAOSDBBulkCompile || UseAOSDB)
+      {
+          aosDBWriteDB ();
+      }
+      
+      if (UseAOSDBVerbose)
+      {
+          std::cout << "Database Written " << std::endl;
+      }
+  }
+  
   HOTSPOT_JNI_DESTROYJAVAVM_ENTRY(vm);
   jint res = JNI_ERR;
   DT_RETURN_MARK(DestroyJavaVM, jint, (const jint&)res);
-
+  
   if (!vm_created) {
     res = JNI_ERR;
     return res;
