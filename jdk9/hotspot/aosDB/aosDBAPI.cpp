@@ -102,6 +102,11 @@ void aosDBClearDB ()
     aosdb->clearDB ();
 }
 
+bool aosDBFindMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts)
+{
+    return aosdb->findMethodInfo (methodFullDesc, optLevel, counts);
+}
+
 //TEST
 
 #ifdef __TEST_API__

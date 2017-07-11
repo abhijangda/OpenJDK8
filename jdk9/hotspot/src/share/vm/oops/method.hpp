@@ -83,7 +83,8 @@ class Method : public Metadata {
     _running_emcp          = 1 << 5,
     _intrinsic_candidate   = 1 << 6,
     _reserved_stack_access = 1 << 7,
-    _in_aosdb_thread       = 1 << 8
+    _in_aosdb_thread       = 1 << 8,
+    _aosdb_data_retrieved  = 1 << 9,
   };
   mutable u2 _flags;
 
@@ -109,20 +110,7 @@ class Method : public Metadata {
   CompiledMethod* _aot_code;
 #endif
 
-    bool is_in_aosdb_thread () const {
-    // EMCP methods are old but not obsolete or deleted. Equivalent
-    // Modulo Constant Pool means the method is equivalent except
-    // the constant pool and instructions that access the constant
-    // pool might be different.
-    // If a breakpoint is set in a redefined method, its EMCP methods that are
-    // still running must have a breakpoint also.
-    return (_flags & _in_aosdb_thread) != 0;
-  }
-
-  void set_in_aosdb_thread (bool x) {
-    _flags = x ? (_flags | _in_aosdb_thread) : (_flags & ~_in_aosdb_thread);
-  }
-  
+ 
   // Constructor
   Method(ConstMethod* xconst, AccessFlags access_flags);
  public:
@@ -901,6 +889,34 @@ class Method : public Metadata {
     _flags = x ? (_flags | _reserved_stack_access) : (_flags & ~_reserved_stack_access);
   }
 
+   bool is_in_aosdb_thread () const {
+    // EMCP methods are old but not obsolete or deleted. Equivalent
+    // Modulo Constant Pool means the method is equivalent except
+    // the constant pool and instructions that access the constant
+    // pool might be different.
+    // If a breakpoint is set in a redefined method, its EMCP methods that are
+    // still running must have a breakpoint also.
+    return (_flags & _in_aosdb_thread) != 0;
+  }
+
+  void set_in_aosdb_thread (bool x) {
+    _flags = x ? (_flags | _in_aosdb_thread) : (_flags & ~_in_aosdb_thread);
+  }
+  
+  bool is_aosdb_data_retrieved () const {
+    // EMCP methods are old but not obsolete or deleted. Equivalent
+    // Modulo Constant Pool means the method is equivalent except
+    // the constant pool and instructions that access the constant
+    // pool might be different.
+    // If a breakpoint is set in a redefined method, its EMCP methods that are
+    // still running must have a breakpoint also.
+    return (_flags & _aosdb_data_retrieved) != 0;
+  }
+
+  void set_aosdb_data_retrieved (bool x) {
+    _flags = x ? (_flags | _aosdb_data_retrieved) : (_flags & ~_aosdb_data_retrieved);
+  }
+  
   TRACE_DEFINE_FLAG_ACCESSOR;
 
   ConstMethod::MethodType method_type() const {

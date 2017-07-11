@@ -24,5 +24,6 @@ void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts);
 void aosDBPrint ();
 void aosDBWriteDB ();
 void aosDBClearDB ();
+bool aosDBFindMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts);
 }
 #endif

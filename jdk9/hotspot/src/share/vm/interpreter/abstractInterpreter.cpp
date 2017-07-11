@@ -26,6 +26,7 @@
 #include "asm/macroAssembler.hpp"
 #include "asm/macroAssembler.inline.hpp"
 #include "compiler/disassembler.hpp"
+#include "compiler/compilerDefinitions.hpp"
 #include "interpreter/bytecodeHistogram.hpp"
 #include "interpreter/bytecodeInterpreter.hpp"
 #include "interpreter/interpreter.hpp"
@@ -46,6 +47,14 @@
 #include "runtime/sharedRuntime.hpp"
 #include "runtime/stubRoutines.hpp"
 #include "runtime/timer.hpp"
+#include "compiler/compileBroker.hpp"
+#include "aosdb/aosDBAPI.h"
+#include "aosdb/helperFunctions.h"
+#include "runtime/simpleThresholdPolicy.hpp"
+#include "runtime/thread.hpp"
+
+#include <iostream>
+#include <set>
 
 # define __ _masm->
 
@@ -110,6 +119,60 @@ AbstractInterpreterGenerator::AbstractInterpreterGenerator(StubQueue* _code) {
 // Entry points
 
 AbstractInterpreter::MethodKind AbstractInterpreter::method_kind(methodHandle m) {
+    //
+    /*if (UseAOSDBOptCompile and aosDBIsInit ())
+    {
+        if (!m->is_aosdb_data_retrieved ())
+        {
+            m->set_aosdb_data_retrieved (true);
+            {
+                std::cout << "AbstractInterpreter::method_kind for method " << getMethodName (m) << std::endl;
+                std::string methodFullDesc = getMethodName (m);
+                if (methodFullDesc != "Ljava/nio/charset/Charset;lookup(Ljava/lang/String;)Ljava/nio/charset/Charset;")
+                {
+                    int hot_count, opt_level;
+                    aosDBFindMethodInfo (methodFullDesc, opt_level, hot_count);
+                    if (aosDBFindMethodInfo (methodFullDesc, opt_level, hot_count))
+                    {
+                        if (UseAOSDBVerbose)
+                        {     
+                            std::cout << "Submit Method: "<< " methodFullDesc " << 
+                                methodFullDesc << " hot_count " << hot_count << " opt_level " <<
+                                opt_level << std::endl;
+                        }
+                        
+                        SimpleThresholdPolicy* policy = (SimpleThresholdPolicy*)CompilationPolicy::policy ();
+                        if (opt_level == 1)
+                            ;//policy->submit_compile_with_hot_count (m, -1, CompLevel_simple, hot_count);
+                            
+                        if (opt_level == 2)
+                            ;//policy->submit_compile_with_hot_count (m, -1, CompLevel_limited_profile, hot_count);
+                            
+                        if (opt_level == 3)
+                            ;//policy->submit_compile_with_hot_count (m, -1, CompLevel_full_profile, hot_count);
+                        
+                        if (opt_level == 4)
+                            ;//policy->submit_compile_with_hot_count (m, -1, CompLevel_full_optimization, hot_count);                    
+                    }
+                    else
+                    {
+                        if (UseAOSDBVerbose)
+                        {
+                            std::cout << "Cannot find method: " << methodFullDesc << " in AOSDB" << std::endl;
+                        }
+                    }
+                }
+                else
+                {
+                    if (UseAOSDBVerbose)
+                    {
+                        std::cout << "Cannot submit method: " << methodFullDesc << " in AOSDB" << std::endl;
+                    }
+                }
+            }
+        }
+    }*/
+    
   // Abstract method?
   if (m->is_abstract()) return abstract;
 

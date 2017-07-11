@@ -48,10 +48,15 @@
 #include "runtime/sharedRuntime.hpp"
 #include "runtime/threadCritical.hpp"
 #include "utilities/exceptions.hpp"
+#include "compiler/compileBroker.hpp"
+#include "runtime/simpleThresholdPolicy.hpp"
+#include "aosdb/aosDBAPI.h"
+#include "aosdb/helperFunctions.h"
+
+#include <iostream>
 
 // no precompiled headers
 #ifdef CC_INTERP
-
 /*
  * USELABELS - If using GCC, then use labels for the opcode dispatching
  * rather -then a switch statement. This improves performance because it
@@ -455,7 +460,6 @@ BytecodeInterpreter::runWithChecks(interpreterState istate) {
 void
 BytecodeInterpreter::run(interpreterState istate) {
 #endif
-
   // In order to simplify some tests based on switches set at runtime
   // we invoke the interpreter a single time after switches are enabled
   // and set simpler to to test variables rather than method calls or complex
@@ -627,6 +631,21 @@ BytecodeInterpreter::run(interpreterState istate) {
     }
     break;
     case method_entry: {
+      /*if (UseAOSDBOptCompile)
+      {
+          std::string methodFullDesc = getMethodName (METHOD);
+          int hot_count, opt_level;
+          aosDBFindMethodInfo (methodFullDesc, optLevel, hot_count);
+          
+          if (UseAOSDBVerbose)
+          {     
+              std::cout << "Submit Method: "<< " methodFullDesc " << 
+                methodFullDesc << " hot_count " << hot_count << " opt_level " <<
+                opt_level << std::endl;
+          }
+          
+        //SimpleThresholdPolicy::submit_compile_with_hot_count (, -1, , THREAD, );
+      }*/
       THREAD->set_do_not_unlock();
       // count invocations
       assert(initialized, "Interpreter not initialized");
@@ -973,6 +992,8 @@ run:
   opcode = *pc;  /* prefetch first opcode */
 #endif
 
+std::cout <<           "ByteCodeInterpreter::runWithChecks" << std::endl;
+
 #ifndef USELABELS
   while (1)
 #endif
@@ -1061,6 +1082,7 @@ run:
           UPDATE_PC_AND_TOS_AND_CONTINUE(2, 1);
 
       CASE(_lload):
+          std::cout<<"lload"<<std::endl;
           SET_STACK_LONG_FROM_ADDR(LOCALS_LONG_AT(pc[1]), 1);
           UPDATE_PC_AND_TOS_AND_CONTINUE(2, 2);
 

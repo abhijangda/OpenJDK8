@@ -32,9 +32,14 @@
 #include "runtime/perfData.hpp"
 #include "trace/tracing.hpp"
 #include "utilities/stack.hpp"
+#include <string>
+
 #if INCLUDE_JVMCI
 #include "jvmci/jvmciCompiler.hpp"
 #endif
+
+std::string getMethodName (const methodHandle& meth);
+std::string getMethodName (const Method* meth);
 
 class nmethod;
 class nmethodLocker;

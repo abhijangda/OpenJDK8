@@ -227,7 +227,6 @@ public:
   virtual CompileTask* select_task(CompileQueue* compile_queue);
   virtual void initialize();
   virtual bool should_not_inline(ciEnv* env, ciMethod* callee);
-
 };
 
 #endif // TIERED

@@ -156,5 +156,15 @@ public:
             std::cout << "AOSDatabaseElement added " << std::endl;
         }
     }
+    
+    bool findMethodInfo (const std::string& methodFullDesc, int& optLevel, int& counts)
+    {
+        auto it = methToElement.find (methodFullDesc);
+        if (it == methToElement.end ())
+            return false;
+        optLevel = it->second.getOptLevel ();
+        counts = it->second.getCounts ();
+        return true;
+    }
 };
 #endif 

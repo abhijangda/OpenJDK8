@@ -45,6 +45,7 @@
 #include "runtime/vm_operations.hpp"
 #include "utilities/events.hpp"
 #include "utilities/globalDefinitions.hpp"
+#include <iostream>
 
 CompilationPolicy* CompilationPolicy::_policy;
 elapsedTimer       CompilationPolicy::_accumulated_time;
@@ -52,6 +53,7 @@ bool               CompilationPolicy::_in_vm_startup;
 
 // Determine compilation policy based on command line argument
 void compilationPolicy_init() {
+    std::cout << "Compilation Policy is " << CompilationPolicyChoice << std::endl;
   CompilationPolicy::set_in_vm_startup(DelayCompilationDuringStartup);
 
   switch(CompilationPolicyChoice) {

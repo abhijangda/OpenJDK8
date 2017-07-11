@@ -26,6 +26,11 @@
 #include "code/codeCache.hpp"
 #include "runtime/advancedThresholdPolicy.hpp"
 #include "runtime/simpleThresholdPolicy.inline.hpp"
+#include "compiler/compileBroker.hpp"
+#include "aosdb/aosDBAPI.h"
+#include "aosdb/helperFunctions.h"
+#include <iostream>
+
 #if INCLUDE_JVMCI
 #include "jvmci/jvmciRuntime.hpp"
 #endif
@@ -542,8 +547,62 @@ CompLevel AdvancedThresholdPolicy::loop_event(Method* method, CompLevel cur_leve
 void AdvancedThresholdPolicy::submit_compile(const methodHandle& mh, int bci, CompLevel level, JavaThread* thread) {
   int hot_count = (bci == InvocationEntryBci) ? mh->invocation_count() : mh->backedge_count();
   update_rate(os::javaTimeMillis(), mh());
+  //std::cout << "Compiling Method " << getMethodName (mh) << " at level " << (int)level << " count " << hot_count << std::endl; 
+if (UseAOSDBOptCompile and aosDBIsInit ())
+{
+    if (!mh->is_aosdb_data_retrieved ())
+    {
+        mh->set_aosdb_data_retrieved (true);
+        {
+            std::string methodFullDesc = getMethodName (mh);
+            //if (methodFullDesc != "Ljava/nio/charset/Charset;lookup(Ljava/lang/String;)Ljava/nio/charset/Charset;")
+            {
+                int opt_level, _hot_count;
+                
+                if (aosDBFindMethodInfo (methodFullDesc, opt_level, _hot_count))
+                {
+                    if (UseAOSDBVerbose)
+                    {     
+                        std::cout << "Submit Method: "<< " methodFullDesc " << 
+                            methodFullDesc << " hot_count " << _hot_count << " opt_level " <<
+                            opt_level << " from orig hot_count " << hot_count << " opt_level " << opt_level << std::endl;
+                            if (opt_level != (int)level)
+                                std::cout << "different opt level " << std::endl;
+                            
+                    }
+                    hot_count = _hot_count;
+                    
+                    if (opt_level == 1)
+                        level = CompLevel_simple;
+                        
+                    if (opt_level == 2)
+                        level =  CompLevel_limited_profile;
+                        
+                    if (opt_level == 3)
+                        level = CompLevel_full_profile;
+                    
+                    if (opt_level == 4)
+                        level = CompLevel_full_optimization;
+                }
+                else
+                {
+                    if (UseAOSDBVerbose)
+                    {
+                        std::cout << "Cannot find method: " << methodFullDesc << " in AOSDB" << std::endl;
+                    }
+                }
+            }
+        }
+    }
+}
   CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
 }
+
+/*void AdvancedThresholdPolicy::submit_compile_with_hot_count(const methodHandle& mh, int bci, CompLevel level) {
+  int hot_count = (bci == InvocationEntryBci) ? mh->invocation_count() : mh->backedge_count();
+  update_rate(os::javaTimeMillis(), mh());
+  CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
+}*/
 
 bool AdvancedThresholdPolicy::maybe_switch_to_aot(methodHandle mh, CompLevel cur_level, CompLevel next_level, JavaThread* thread) {
   if (UseAOT && !delay_compilation_during_startup()) {

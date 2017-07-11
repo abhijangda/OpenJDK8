@@ -70,6 +70,7 @@
 #endif
 
 #include "aosdb/aosDBAPI.h"
+#include "aosdb/helperFunctions.h"
 #include <iostream>
 #include <string>
 
@@ -244,6 +245,35 @@ std::string getMethodName (const methodHandle& meth)
   return std::string (buf);
 }
 
+std::string getMethodName (const Method* meth)
+{
+  int i = 0;
+  char buf[2048];
+  int size = 2048;
+  char* _buf = buf;
+  _buf[0] = 'L';
+  _buf = _buf + 1;
+  //std::cout<<"ESSSS"<<std::endl;
+  InstanceKlass* ik = meth->method_holder();
+  //std::cout<<"sdfsdfsdf" << std::endl;
+  Symbol* name = ik->name ();
+  //std::cout<<"sdfsdfsdf" << std::endl;
+  name->as_C_string(_buf, size);
+  //std::cout<<"AAAAAAAA" << std::endl;
+  i = strlen (_buf);
+  _buf[i] = ';';
+  name = meth->name ();
+  //std::cout<<"BBBBBBBBB" << std::endl;
+  name->as_C_string (_buf+i+1, size - i - 1);
+  //std::cout<<"CCCCCCCCC" << std::endl;
+  name = meth->signature();
+  //std::cout<<"DDDDDDDDDD" << std::endl;
+  i = strlen (_buf);
+  //std::cout<<"EEEEEEEEE" << std::endl;
+  name->as_C_string (_buf + i, size - i);
+  //std::cout<<"FFFFFFFFFFFF" << std::endl;
+  return std::string (buf);
+}
 
 bool compileBroker_init() {
   if (LogEvents) {
@@ -1041,10 +1071,16 @@ void CompileBroker::compile_method_base(const methodHandle& method,
     if (aosDBIsInit ())
     {
         std::string methodFullDesc = getMethodName (method);
+        std::string hotMethodFullDesc = getMethodName (hot_method);
+        assert (osr_bci == -1, "OSR BCI != -1 Implement this part ");
+        //TODO: Add hot_method, osr_bci, and reason to the database
         if (UseAOSDBVerbose)
         {
             std::cout << "Adding method: " << methodFullDesc << " opt level: "<< 
-                comp_level << "count " << hot_count << std::endl;
+                comp_level << "count " << hot_count << " hotmethod " << hotMethodFullDesc << 
+                " method desc == hot method desc " << (methodFullDesc == hotMethodFullDesc) << 
+                " ptr equal " << ((hot_method()) == (method())) << " reason " << CompileTask::reason_name(compile_reason) << 
+                "osr_bci " << osr_bci << std::endl;
         }
         
         if (UseAOSDBOptCompile)
@@ -1055,7 +1091,7 @@ void CompileBroker::compile_method_base(const methodHandle& method,
         if (UseAOSDBVerbose)
         {
             std::cout << "Added method: " << methodFullDesc << " opt level: "<< 
-                comp_level << "count " << hot_count << std::endl;
+                comp_level << "count " << hot_count << " hotmethod " << hotMethodFullDesc << std::endl;
         }
     }
     
@@ -1064,12 +1100,16 @@ void CompileBroker::compile_method_base(const methodHandle& method,
                                osr_bci, comp_level,
                                hot_method, hot_count, compile_reason,
                                blocking);
+   
   }
 
+    
   if (blocking) {
     wait_for_completion(task);
   }
 }
+
+//#include <execinfo.h>
 
 nmethod* CompileBroker::compile_method(const methodHandle& method, int osr_bci,
                                        int comp_level,
@@ -1080,7 +1120,9 @@ nmethod* CompileBroker::compile_method(const methodHandle& method, int osr_bci,
   if (!_initialized || comp_level == CompLevel_none) {
     return NULL;
   }
-
+  
+  //if (UseAOSDBOptCompile)
+    //abort ();
   AbstractCompiler *comp = CompileBroker::compiler(comp_level);
   assert(comp != NULL, "Ensure we have a compiler");
 
@@ -1486,7 +1528,6 @@ void CompileBroker::wait_for_completion(CompileTask* task) {
       task->lock()->wait();
     }
   }
-
   thread->set_blocked_on_compilation(false);
   if (free_task) {
     if (is_compilation_disabled_forever()) {
@@ -1678,6 +1719,13 @@ void CompileBroker::compiler_thread_loop() {
         method->clear_queued_for_compilation();
         task->set_failure_reason("compilation is disabled");
       }
+    }
+    
+    //if (UseAOSDBOptCompile)
+    {
+      //  std::cout << "Notify task->lock () for task: " << (uint64_t) task << std::endl;
+       // if (!BackgroundCompilation)
+       //     task->lock()->notify_all ();
     }
   }
 

@@ -118,6 +118,10 @@ public:
             env->comp_level() == CompLevel_full_profile) &&
             callee->has_loops();
   }
+  
+  void submit_compile_with_hot_count (const methodHandle& mh, int bci, 
+                                      CompLevel level,
+                                      int hot_count);
 };
 
 #endif // TIERED

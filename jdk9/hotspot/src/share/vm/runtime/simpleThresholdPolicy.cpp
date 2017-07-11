@@ -288,6 +288,11 @@ void SimpleThresholdPolicy::submit_compile(const methodHandle& mh, int bci, Comp
   CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
 }
 
+// Tell the broker to compile the method
+void SimpleThresholdPolicy::submit_compile_with_hot_count (const methodHandle& mh, int bci, CompLevel level, int hot_count) {
+  CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, Thread::current());
+}
+
 // Call and loop predicates determine whether a transition to a higher
 // compilation level should be performed (pointers to predicate functions
 // are passed to common() transition function).
