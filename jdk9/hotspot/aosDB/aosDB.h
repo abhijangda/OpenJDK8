@@ -1,9 +1,12 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include <vector>
 
 #ifndef __AOSDB_H__
 #define __AOSDB_H__
+
+#define NUM_OPT_LEVELS 5
 
 class AOSDatabase;
 
@@ -13,6 +16,7 @@ private:
     std::string methodFullDesc;
     int optLevel;
     int counts;
+    int bci;
     bool empty;
     
     AOSDatabaseElement ()
@@ -24,6 +28,7 @@ public:
     std::string& getMethodFullDesc () {return methodFullDesc;}
     int getOptLevel () {return optLevel;}
     int getCounts () {return counts;}
+    int getBci () {return bci;}
     
     std::string getClassName ()
     {
@@ -38,8 +43,8 @@ public:
         return methodFullDesc.substr (pos, size);  
     }
     
-    AOSDatabaseElement (std::string _methodDesc, int _optLevel, int _counts):
-        methodFullDesc (_methodDesc), optLevel (_optLevel), counts (_counts)
+    AOSDatabaseElement (std::string _methodDesc, int _optLevel, int _counts, int _bci):
+        methodFullDesc (_methodDesc), optLevel (_optLevel), counts (_counts), bci (_bci)
     {
     }
     
@@ -48,15 +53,16 @@ public:
         methodFullDesc = a.methodFullDesc;
         optLevel = a.optLevel;
         counts = a.counts;
+        bci = a.bci;
     }
     
      friend std::ostream &operator<< (std::ostream &os, const AOSDatabaseElement& e) { 
-         os << e.methodFullDesc << " " << e.optLevel << " " << e.counts << "\n";
+         os << e.methodFullDesc << " " << e.optLevel << " " << e.counts << " " << e.bci << "\n";
          return os;            
       }
 
       friend std::istream &operator>>(std::istream &is, AOSDatabaseElement& e) { 
-         is >> e.methodFullDesc >> e.optLevel >> e.counts;
+         is >> e.methodFullDesc >> e.optLevel >> e.counts >> e.bci;
          return is;            
       }
 };
@@ -67,6 +73,12 @@ private:
     std::string dbFilePath;
     std::unordered_map <std::string, AOSDatabaseElement> methToElement;
     bool verbose;
+    bool recordStats;
+    int methodsAdded;
+    int methodsInDB;
+    int methodsFoundInDB;
+    int methodsNotFoundInDB;
+    std::vector<int> methodsFoundAtOptLevelInDB;
     
 public:
     bool is_verbose () {return verbose;}
@@ -98,7 +110,8 @@ public:
             }
     };
     
-    AOSDatabase (std::string _dbFile, bool _verbose = false) : dbFilePath(_dbFile), verbose (_verbose)
+    AOSDatabase (std::string _dbFile, bool _verbose, bool _recordStats) : dbFilePath(_dbFile), verbose (_verbose),
+    recordStats (_recordStats), methodsFoundAtOptLevelInDB (std::vector <int> (NUM_OPT_LEVELS, 0))
     {
         if (verbose)
         {
@@ -107,8 +120,9 @@ public:
     }
     
     AOSDatabase (std::unordered_map <std::string, AOSDatabaseElement> _methToElement, 
-                 bool _verbose = false):
-        methToElement (_methToElement), verbose (_verbose)
+                 bool _verbose, bool _recordStats):
+        methToElement (_methToElement), verbose (_verbose), 
+        recordStats (_recordStats), methodsFoundAtOptLevelInDB (std::vector <int> (NUM_OPT_LEVELS, 0))
     {
     }
     
@@ -116,6 +130,10 @@ public:
     void writeDB ();
     void clearDB () {methToElement.clear ();}
     void printDB ();
+    int getMethodsFoundInDB () {return methodsFoundInDB;}
+    int getMethodsNotFoundInDB () {return methodsNotFoundInDB;}
+    bool getRecordStats () {return recordStats;}
+    int getMethodsFoundAtOptLevelInDB (int l) {return methodsFoundAtOptLevelInDB[l];}
     
     int getNMethods ()
     {
@@ -142,9 +160,9 @@ public:
     }
     
     void insertMethodInfo (std::string methodFullDesc, int optLevel,
-                           int counts)
+                           int counts, int bci)
     {
-        AOSDatabaseElement elem (methodFullDesc, optLevel, counts);
+        AOSDatabaseElement elem (methodFullDesc, optLevel, counts, bci);
         if (verbose)
         {
             std::cout << "AOSDatabaseElement created " << elem << std::endl;
@@ -157,13 +175,24 @@ public:
         }
     }
     
-    bool findMethodInfo (const std::string& methodFullDesc, int& optLevel, int& counts)
+    bool findMethodInfo (const std::string& methodFullDesc, int& optLevel, int& counts, int& bci)
     {
         auto it = methToElement.find (methodFullDesc);
         if (it == methToElement.end ())
+        {
+            if (recordStats)
+                methodsNotFoundInDB++;
             return false;
+        }
         optLevel = it->second.getOptLevel ();
         counts = it->second.getCounts ();
+        bci = it->second.getBci ();
+        if (recordStats)
+        {
+            methodsFoundInDB++;
+            methodsFoundAtOptLevelInDB[optLevel]++;
+        }
+        
         return true;
     }
 };

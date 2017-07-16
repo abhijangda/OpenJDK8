@@ -954,8 +954,10 @@ public:
           "error log in case of a crash.")                                  \
           range(0, (uint64_t)max_jlong/1000)                                \
                                                                             \
-  product(bool, UseAOSDB, false,                                            \
-          "Enable AOS Database")                                            \
+  product(bool, UseAOSDBRecord, false,                                      \
+          "Record compilation levels in AOS Databse")                       \
+  product(bool, UseAOSDBRead, false,                                        \
+          "Initialize AOS Databse")                                         \
   product(bool, UseAOSDBVerbose, false,                                     \
           "Enable AOSDB Verbose mode")                                      \
   product(bool, UseAOSDBBulkCompile, false,                                 \
@@ -964,8 +966,10 @@ public:
   product(bool, UseAOSDBOptCompile, false,                                  \
           "Use AOS Database to compile methods AOT at the                   \
           required opt level")                                              \
-  product(bool, UseAOSDBRead, false,                                        \
-          "Read AOS Database")                                              \
+  product(bool, UseAOSDBStatistics, false,                                  \
+          "Print Statistics about AOS Database")                            \
+  product(bool, NotCompileInPolicy, false,                                  \
+          "Do not compile in advanced threshold policy")                    \
                                                                             \
   product_pd(bool, UseOSErrorReporting,                                     \
           "Let VM fatal error propagate to the OS (ie. WER on Windows)")    \
@@ -1011,6 +1015,8 @@ public:
                                                                             \
   product(bool, PrintCompilation, false,                                    \
           "Print compilations")                                             \
+  product(bool, PrintCompilationAfterAOSDBInit, false,                      \
+          "Print compilations After AOSDB Initialization")                  \
                                                                             \
   diagnostic(bool, TraceNMethodInstalls, false,                             \
           "Trace nmethod installation")                                     \

@@ -46,6 +46,7 @@
 #include "runtime/vframeArray.hpp"
 #include "utilities/debug.hpp"
 #include "utilities/macros.hpp"
+#include <iostream>
 
 #define __ _masm->
 
@@ -1503,9 +1504,19 @@ address TemplateInterpreterGenerator::generate_normal_entry(bool synchronized) {
 
   // jvmti support
   __ notify_method_entry();
-
+  if (UseAOSDBOptCompile)
+    {
+      __ call_VM(noreg, CAST_FROM_FN_PTR(address, InterpreterRuntime::aosdb_find_method));
+      //__ set_method_data_pointer_for_bcp();
+      //__ get_method(rbx);
+      //__ jmp(aosdb_find_method);
+    }
   __ dispatch_next(vtos);
-
+  
+    Label aosdb_find_method;
+// We have decided to profile this method in the interpreter
+      //__ bind(aosdb_find_method);
+    
   // invocation counter overflow
   if (inc_counter) {
     if (ProfileInterpreter) {

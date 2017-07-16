@@ -117,6 +117,7 @@ class CompileTask : public CHeapObj<mtCompiler> {
   static CompileTask* allocate();
   static void         free(CompileTask* task);
 
+  int          hot_count() const                 { return _hot_count; }
   int          compile_id() const                { return _compile_id; }
   Method*      method() const                    { return _method; }
   Method*      hot_method() const                { return _hot_method; }

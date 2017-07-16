@@ -3965,9 +3965,9 @@ static jint JNI_CreateJavaVM_inner(JavaVM **vm, void **penv, void *args) {
       }
     }
 #endif
-    if (UseAOSDBOptCompile || UseAOSDBBulkCompile)
+    if (UseAOSDBOptCompile || UseAOSDBBulkCompile || UseAOSDBRecord || UseAOSDBRead)
     {
-        aosDBInit (UseAOSDBVerbose);
+        aosDBInit (UseAOSDBVerbose, UseAOSDBStatistics);
         std::cout << "aosDBInitialized " << std::endl;
         aosDBRead ();
         std::cout << "aosDBRead Entries in DB " << aosDBGetNumberOfMethods () << std::endl;
@@ -4074,17 +4074,14 @@ DT_RETURN_MARK_DECL(DestroyJavaVM, jint
 
 jint JNICALL jni_DestroyJavaVM(JavaVM *vm) {
   std::cout << "Destroy Java VM " << std::endl;
-  if (aosDBIsInit ())
+  if (aosDBIsInit () && UseAOSDBRecord)
   {
       if (UseAOSDBVerbose)
       {
           std::cout << "Writing database " << std::endl;
       }
-      
-      if (UseAOSDBOptCompile || UseAOSDBBulkCompile || UseAOSDB)
-      {
-          aosDBWriteDB ();
-      }
+
+      aosDBWriteDB ();      
       
       if (UseAOSDBVerbose)
       {

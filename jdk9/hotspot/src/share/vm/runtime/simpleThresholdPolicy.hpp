@@ -121,7 +121,7 @@ public:
   
   void submit_compile_with_hot_count (const methodHandle& mh, int bci, 
                                       CompLevel level,
-                                      int hot_count);
+                                      int hot_count, JavaThread* thread);
 };
 
 #endif // TIERED

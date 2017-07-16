@@ -6,12 +6,12 @@
 static AOSDatabase* aosdb = nullptr;
 static AOSDatabase::iterator* currentIter = nullptr;
 
-int aosDBInit (bool verbose)
+int aosDBInit (bool verbose, bool recordStats)
 {
     if (aosdb != nullptr)
         return 1;
     
-    aosdb = new AOSDatabase ("dbFile", verbose);
+    aosdb = new AOSDatabase ("dbFile", verbose, recordStats);
     
     if (aosdb == nullptr)
         return 0;
@@ -56,7 +56,7 @@ int aosDBGetNumberOfMethods ()
     return aosdb->getNMethods();
 }
 
-bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts)
+bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts, int& bci)
 {
     assert (currentIter != nullptr);
     
@@ -66,11 +66,12 @@ bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& optLevel, int& co
     methodFullDesc = (**currentIter).getMethodFullDesc ();
     optLevel = (**currentIter).getOptLevel ();
     counts = (**currentIter).getCounts ();
+    bci = (**currentIter).getBci ();
     
     return true;
 }
 
-void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts)
+void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts, int bci)
 {
     //assert (currentIter != nullptr && *currentIter == aosdb->end ());
     
@@ -80,7 +81,7 @@ void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts)
                 << " " << counts << std::endl;
     }
     
-    aosdb->insertMethodInfo (methodFullDesc, optLevel, counts);
+    aosdb->insertMethodInfo (methodFullDesc, optLevel, counts, bci);
 }
 
 void aosDBVisitBegin ()
@@ -102,9 +103,27 @@ void aosDBClearDB ()
     aosdb->clearDB ();
 }
 
-bool aosDBFindMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts)
+bool aosDBFindMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts, int& bci)
 {
-    return aosdb->findMethodInfo (methodFullDesc, optLevel, counts);
+    return aosdb->findMethodInfo (methodFullDesc, optLevel, counts, bci);
+}
+
+int aosDBGetMethodsFoundInDB ()
+{
+    assert (aosdb->getRecordStats ());
+    return aosdb->getMethodsFoundInDB();
+}
+
+int aosDBGetMethodsNotFoundInDB ()
+{
+    assert (aosdb->getRecordStats ());
+    return aosdb->getMethodsNotFoundInDB();
+}
+
+int aosDBGetMethodsFoundAtOptLevelInDB (int l)
+{
+    assert (0 <= l && l <= NUM_OPT_LEVELS);
+    return aosdb->getMethodsFoundAtOptLevelInDB (l);
 }
 
 //TEST

@@ -38,6 +38,8 @@
 #include "runtime/synchronizer.hpp"
 #include "utilities/macros.hpp"
 
+#include <stdio.h>
+
 #define __ _masm->
 
 // Global Register Names
@@ -3532,12 +3534,12 @@ void TemplateTable::prepare_invoke(int byte_no,
   assert(save_flags    == (is_invokeinterface || is_invokevirtual), "need flags for vfinal");
   assert(flags == noreg || flags == rdx, "");
   assert(recv  == noreg || recv  == rcx, "");
-
+//printf ("prepare_invoke\n");
   // setup registers & access constant pool cache
   if (recv  == noreg)  recv  = rcx;
   if (flags == noreg)  flags = rdx;
   assert_different_registers(method, index, recv, flags);
-
+  
   // save 'interpreter return address'
   __ save_bcp();
 

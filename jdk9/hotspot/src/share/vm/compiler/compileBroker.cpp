@@ -215,38 +215,34 @@ class CompilationLog : public StringEventLog {
 
 static CompilationLog* _compilation_log = NULL;
 
-std::string getMethodName (const methodHandle& meth)
+std::string stripString (std::string s)
 {
-  int i = 0;
-  char buf[2048];
-  int size = 2048;
-  char* _buf = buf;
-  _buf[0] = 'L';
-  _buf = _buf + 1;
-  //std::cout<<"ESSSS"<<std::endl;
-  InstanceKlass* ik = meth->method_holder();
-  //std::cout<<"sdfsdfsdf" << std::endl;
-  Symbol* name = ik->name ();
-  //std::cout<<"sdfsdfsdf" << std::endl;
-  name->as_C_string(_buf, size);
-  //std::cout<<"AAAAAAAA" << std::endl;
-  i = strlen (_buf);
-  _buf[i] = ';';
-  name = meth->name ();
-  //std::cout<<"BBBBBBBBB" << std::endl;
-  name->as_C_string (_buf+i+1, size - i - 1);
-  //std::cout<<"CCCCCCCCC" << std::endl;
-  name = meth->signature();
-  //std::cout<<"DDDDDDDDDD" << std::endl;
-  i = strlen (_buf);
-  //std::cout<<"EEEEEEEEE" << std::endl;
-  name->as_C_string (_buf + i, size - i);
-  //std::cout<<"FFFFFFFFFFFF" << std::endl;
-  return std::string (buf);
+    std::string::iterator last = s.end();
+    last--;
+    
+    std::string::iterator first = s.begin ();
+    
+    while ((*first) == ' ')
+        first++;
+    
+    while ((*last) == ' ')
+        last--;
+    
+    return s.substr (first-s.begin(), (last - first) + 1);
 }
 
-std::string getMethodName (const Method* meth)
+std::string getMethodName (methodHandle& meth)
 {
+  return getMethodName (meth ());
+}
+
+std::string getMethodName (Method* meth)
+{
+#if 1
+  stringStream _strStream;
+  meth->print_short_name (&_strStream);
+  return stripString (std::string (_strStream.as_string ()));
+#else
   int i = 0;
   char buf[2048];
   int size = 2048;
@@ -273,6 +269,7 @@ std::string getMethodName (const Method* meth)
   name->as_C_string (_buf + i, size - i);
   //std::cout<<"FFFFFFFFFFFF" << std::endl;
   return std::string (buf);
+#endif
 }
 
 bool compileBroker_init() {
@@ -1068,10 +1065,10 @@ void CompileBroker::compile_method_base(const methodHandle& method,
     // these bits, and their updating (here and elsewhere) under a
     // common lock.
     
-    if (aosDBIsInit ())
+    /*if (UseAOSDBRecord && aosDBIsInit ())
     {
-        std::string methodFullDesc = getMethodName (method);
-        std::string hotMethodFullDesc = getMethodName (hot_method);
+        std::string methodFullDesc = getMethodName ((methodHandle&)method);
+        std::string hotMethodFullDesc = getMethodName ((methodHandle&)hot_method);
         assert (osr_bci == -1, "OSR BCI != -1 Implement this part ");
         //TODO: Add hot_method, osr_bci, and reason to the database
         if (UseAOSDBVerbose)
@@ -1083,17 +1080,14 @@ void CompileBroker::compile_method_base(const methodHandle& method,
                 "osr_bci " << osr_bci << std::endl;
         }
         
-        if (UseAOSDBOptCompile)
-        {    
-            aosDBAddMethodInfo (methodFullDesc, comp_level, hot_count);
-        }
+        aosDBAddMethodInfo (methodFullDesc, comp_level, hot_count);
         
         if (UseAOSDBVerbose)
         {
             std::cout << "Added method: " << methodFullDesc << " opt level: "<< 
                 comp_level << "count " << hot_count << " hotmethod " << hotMethodFullDesc << std::endl;
         }
-    }
+    }*/
     
     task = create_compile_task(queue,
                                compile_id, method,
@@ -1874,6 +1868,48 @@ void CompileBroker::invoke_compiler_on_method(CompileTask* task) {
     ResourceMark rm;
     task->print_tty();
   }
+  
+  if (PrintCompilationAfterAOSDBInit && aosDBIsInit () && UseAOSDBRead)
+{
+    ResourceMark rm;
+    task->print_tty();
+}
+
+if (UseAOSDBRecord && aosDBIsInit () && task->method () != NULL)
+    {
+        Method* hot_method = task->hot_method ();
+        if (hot_method == NULL)
+            hot_method = task->method ();
+        std::string methodFullDesc = getMethodName (task->method());
+        std::string hotMethodFullDesc = getMethodName (hot_method);
+        //assert (task->osr_bci() == -1, "OSR BCI != -1 Implement this part ");
+        //TODO: Add hot_method, osr_bci, and reason to the database
+        if (UseAOSDBVerbose)
+        {
+            std::cout << "Adding method: " << methodFullDesc << " opt level: "<< 
+                task->comp_level () << "count " << task->hot_count () << " hotmethod " << hotMethodFullDesc << 
+                " method desc == hot method desc " << (methodFullDesc == hotMethodFullDesc) << 
+                " ptr equal " << (hot_method == (task->method())) <<
+                " osr_bci " << task->osr_bci () << std::endl;
+        }
+        
+        aosDBAddMethodInfo (methodFullDesc, task->comp_level(), task->hot_count (), task->osr_bci ());
+        
+        if (UseAOSDBVerbose)
+        {
+            std::cout << "Added method: " << methodFullDesc << " opt level: "<< 
+                task->comp_level() << "count " << task->hot_count() << " hotmethod " << hotMethodFullDesc << std::endl;
+        }
+    }
+    else
+    {
+        if (UseAOSDBVerbose)
+        {
+            std::cout << "UseAOSDBRecord " << UseAOSDBRecord << "aosDBIsInit () " << aosDBIsInit () << 
+            "task->method " << (uint64_t)task->method () << " task->hot_method () " << 
+    (uint64_t)task->hot_method () << std::endl;
+        }
+    }
   elapsedTimer time;
 
   CompilerThread* thread = CompilerThread::current();

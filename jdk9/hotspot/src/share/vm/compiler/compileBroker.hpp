@@ -38,8 +38,8 @@
 #include "jvmci/jvmciCompiler.hpp"
 #endif
 
-std::string getMethodName (const methodHandle& meth);
-std::string getMethodName (const Method* meth);
+std::string getMethodName (methodHandle& meth);
+std::string getMethodName (Method* meth);
 
 class nmethod;
 class nmethodLocker;

@@ -63,6 +63,13 @@
 #include "runtime/synchronizer.hpp"
 #include "runtime/threadCritical.hpp"
 #include "utilities/events.hpp"
+#include <iostream>
+#include "aosdb/aosDBAPI.h"
+#include "compiler/compileBroker.hpp"
+#include "runtime/compilationPolicy.hpp"
+#include "runtime/advancedThresholdPolicy.hpp"
+#include "compiler/compilerDefinitions.hpp"
+
 #ifdef COMPILER2
 #include "opto/runtime.hpp"
 #endif
@@ -978,6 +985,62 @@ IRT_ENTRY(void, InterpreterRuntime::profile_method(JavaThread* thread))
   assert(fr.is_interpreted_frame(), "must come from interpreter");
   methodHandle method(thread, fr.interpreter_frame_method());
   Method::build_interpreter_method_data(method, THREAD);
+  if (HAS_PENDING_EXCEPTION) {
+    assert((PENDING_EXCEPTION->is_a(SystemDictionary::OutOfMemoryError_klass())), "we expect only an OOM error here");
+    CLEAR_PENDING_EXCEPTION;
+    // and fall through...
+  }
+IRT_END
+
+IRT_ENTRY(void, InterpreterRuntime::aosdb_find_method(JavaThread* thread))
+  // use UnlockFlagSaver to clear and restore the _do_not_unlock_if_synchronized
+  // flag, in case this method triggers classloading which will call into Java.
+  UnlockFlagSaver fs(thread);
+
+  frame fr = thread->last_frame();
+  assert(fr.is_interpreted_frame(), "must come from interpreter");
+  methodHandle method(thread, fr.interpreter_frame_method());
+  
+  if (!method->is_aosdb_data_retrieved () && aosDBIsInit ())
+{
+    {
+        method->set_aosdb_data_retrieved (true);
+        {
+            std::string methodFullDesc = getMethodName (method);
+            {
+                int opt_level, _hot_count, bci;
+                CompLevel level;
+                
+                if (aosDBFindMethodInfo (methodFullDesc, opt_level, _hot_count, bci))
+                {
+                    if (UseAOSDBVerbose)
+                    {     
+                        if (bci == -1)
+                            std::cout << "Submit Method: "<< " methodFullDesc " << 
+                                methodFullDesc << " hot_count " << _hot_count << " opt_level " <<
+                                opt_level << " bci " << bci << std::endl;
+                        else
+                            std::cout << "CannotSubmit Method: " << " methodFullDesc " << 
+                                methodFullDesc << " hot_count " << _hot_count << " opt_level " <<
+                                opt_level << " bci " << bci << std::endl;
+                    }
+                    
+                    level = (CompLevel)opt_level;
+                    AdvancedThresholdPolicy* policy = (AdvancedThresholdPolicy*) CompilationPolicy::policy ();
+                    if (bci == -1)
+                        policy->submit_compile_with_hot_count (method, bci, level, _hot_count, thread);
+                }
+                else
+                {
+                    if (UseAOSDBVerbose)
+                    {
+                        std::cout << "Cannot find method: " << methodFullDesc << " in AOSDB" << std::endl;
+                    }
+                }
+            }
+        }
+    }
+}
   if (HAS_PENDING_EXCEPTION) {
     assert((PENDING_EXCEPTION->is_a(SystemDictionary::OutOfMemoryError_klass())), "we expect only an OOM error here");
     CLEAR_PENDING_EXCEPTION;

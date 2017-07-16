@@ -539,20 +539,42 @@ void vm_exit(int code) {
   std::cout << "vm_exit "<< std::endl;
   if (aosDBIsInit ())
   {
-    if (UseAOSDBVerbose)
+      if (UseAOSDBStatistics)
+      {
+          std::cout << "=== AOS DB Statistics === " << std::endl;
+          int n_found = aosDBGetMethodsFoundInDB ();
+          int n_not_found = aosDBGetMethodsNotFoundInDB ();
+          std::cout << "Total Methods Searched in AOS DB " << n_found + n_not_found << std::endl;
+          std::cout << "Methods Found in AOS DB " << n_found << std::endl;
+          for (int i = 0; i < NUM_OPT_LEVELS; i++)
+          {
+              std::cout << "Methods Found at Opt Level " << i << " are: " << aosDBGetMethodsFoundAtOptLevelInDB (i) << std::endl;
+          }
+
+          std::cout << "Methods Not Found in AOS DB " << n_not_found  << std::endl;
+      }
+    
+    if (UseAOSDBRecord)
     {
-      std::cout << "Writing database " << std::endl;
+        if (UseAOSDBVerbose)
+        {
+        std::cout << "Writing database " << std::endl;
+        }
+        
+        aosDBWriteDB ();
+        
+        if (UseAOSDBVerbose)
+        {
+        std::cout << "Database Written " << std::endl;
+        }
     }
-      
-    if (UseAOSDBOptCompile || UseAOSDBBulkCompile || UseAOSDB)
-    {
-      aosDBWriteDB ();
-    }
-      
-    if (UseAOSDBVerbose)
-    {
-      std::cout << "Database Written " << std::endl;
-    }
+  }
+  else
+  {
+      if (UseAOSDBVerbose || UseAOSDBOptCompile || UseAOSDBBulkCompile || UseAOSDBRecord)
+      {
+          std::cout << "Cannot initialize aosDB" << std::endl;
+      }
   }
   
   Thread* thread =

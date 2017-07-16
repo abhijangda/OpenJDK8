@@ -1,971 +1,829 @@
-Ljava/util/LinkedHashMap$Entry;<init>(ILjava/lang/Object;Ljava/lang/Object;Ljava/util/HashMap$Node;)V 3 256
-Lavrora/sim/radio/Medium$Receiver;waitForNeighbors(J)V 3 640
-Lavrora/sim/radio/Medium$Receiver;access$000(Lavrora/sim/radio/Medium$Receiver;J)V 3 640
-Lavrora/sim/clock/DeltaQueue;insertAfter(Lavrora/sim/clock/DeltaQueue$Link;Lavrora/sim/Simulator$Event;JLavrora/sim/clock/DeltaQueue$Link;)V 3 512
-Lavrora/sim/radio/CC1000Radio$DummyRegister;<init>(Lavrora/sim/radio/CC1000Radio;I)V 3 256
-Ljdk/internal/loader/URLClassPath$JarLoader$2;getCodeSourceURL()Ljava/net/URL; 3 512
-Ljava/lang/ClassLoader;defineClassSourceLocation(Ljava/security/ProtectionDomain;)Ljava/lang/String; 3 512
-Ljava/net/URL;toExternalForm()Ljava/lang/String; 3 512
-Ljava/net/URL;toString()Ljava/lang/String; 3 512
-Ljava/net/URLClassLoader;access$100(Ljava/net/URLClassLoader;Ljava/lang/String;Ljdk/internal/loader/Resource;)Ljava/lang/Class; 3 384
-Ljava/util/zip/ZipFile$ZipFileInflaterInputStream;<init>(Ljava/util/zip/ZipFile;Ljava/util/zip/ZipFile$ZipFileInputStream;Ljava/util/zip/Inflater;I)V 3 384
-Lcck/util/Arithmetic;signExtend(II)I 3 432
-Lavrora/arch/legacy/LegacyInstr;DADDR(II)I 3 384
-Ljava/net/URL;getDefaultPort()I 3 256
-Ljava/util/jar/JarFile;getJarEntry(Ljava/lang/String;)Ljava/util/jar/JarEntry; 3 256
-Ljava/lang/String;access$200(Ljava/lang/String;)Z 3 256
-Ljdk/internal/math/FDBigInteger;mult(I)Ljdk/internal/math/FDBigInteger; 3 256
-Ljava/util/concurrent/ConcurrentHashMap;casTabAt([Ljava/util/concurrent/ConcurrentHashMap$Node;ILjava/util/concurrent/ConcurrentHashMap$Node;Ljava/util/concurrent/ConcurrentHashMap$Node;)Z 4 1408
-Ljava/util/zip/ZipCoder;decoder()Ljava/nio/charset/CharsetDecoder; 3 384
-Ljava/util/Optional;orElse(Ljava/lang/Object;)Ljava/lang/Object; 3 384
-Ljdk/internal/misc/Unsafe;checkSize(J)V 3 384
-Ljava/lang/StringCoding$Result;with([BB)Ljava/lang/StringCoding$Result; 3 256
-Ljava/lang/String;startsWith(Ljava/lang/String;I)Z 4 5380
-Ljava/lang/AbstractStringBuilder;isLatin1()Z 4 10539
-Lsun/invoke/util/Wrapper;forBasicType(Ljava/lang/Class;)Lsun/invoke/util/Wrapper; 3 384
-Ljava/lang/invoke/MethodType;equals(Ljava/lang/Object;)Z 3 384
-Ljava/nio/Buffer;hasRemaining()Z 3 635
-Ljava/io/BufferedWriter;min(II)I 3 256
-Ljava/io/BufferedWriter;flushBuffer()V 3 256
-Ljava/io/Writer;write(Ljava/lang/String;)V 3 256
-Lavrora/arch/legacy/LegacyInstr$LPMD;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lavrora/sim/radio/Medium$Transmission;getByteAtTime(J)B 3 384
-Lavrora/monitors/PacketMonitor$Mon;fireBeforeTransmit(Lavrora/sim/radio/Medium$Transmitter;B)V 3 384
-Ljava/lang/Integer;hashCode(I)I 3 640
-Ljava/lang/Long;getChars(JI[B)I 3 256
-Ljava/lang/ref/Finalizer;hasBeenFinalized()Z 3 512
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$ANDI;)V 3 256
-Lavrora/arch/legacy/LegacyInstr$ANDI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 257
-Ljava/lang/CharacterDataLatin1;toUpperCaseEx(I)I 3 256
-Ljava/util/zip/ZipFile$Source;getEntryPos(I)I 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$ADIW;)V 3 512
-Ljava/lang/String;checkBoundsOffCount(III)V 4 5364
-Lavrora/sim/radio/Medium$Probe$List;fireBeforeTransmit(Lavrora/sim/radio/Medium$Transmitter;B)V 3 256
-Lavrora/sim/radio/Medium$Transmitter$Ticker;fire()V 3 256
-Ljava/io/BufferedOutputStream;flush()V 3 256
-Ljava/io/PrintStream;ensureOpen()V 3 384
-Ljava/nio/ByteBuffer;wrap([BII)Ljava/nio/ByteBuffer; 3 353
-Lavrora/sim/mcu/ADC$ControlRegister;unpostADCInterrupt()V 3 387
-Ljava/nio/CharBuffer;limit(I)Ljava/nio/CharBuffer; 3 512
-Lavrora/arch/legacy/LegacyInstr$LDD;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lavrora/sim/mcu/SPI$SPDReg$TransmitRegister;write(B)V 3 640
-Lavrora/arch/legacy/LegacyInstr$SBRC;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SBRC;)V 3 256
-Ljava/nio/ByteBuffer;flip()Ljava/nio/ByteBuffer; 3 256
-Lavrora/arch/legacy/LegacyInstr$DEC;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 512
-Lavrora/arch/legacy/LegacyInstr$ROR;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Ljdk/internal/misc/Unsafe;checkNativeAddress(J)V 3 515
-Lsun/nio/cs/UTF_8$Decoder;decode([BII[C)I 3 162
-Lavrora/arch/legacy/LegacyInstr$BRPL;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lavrora/sim/clock/DeltaQueue$Link;remove(Lavrora/sim/Simulator$Event;)V 3 256
-Lavrora/sim/mcu/ATMegaFamily$PortRegister;write(B)V 3 1281
-Lavrora/sim/radio/Medium$Probe$List;fireAfterReceive(Lavrora/sim/radio/Medium$Receiver;C)V 3 392
-Ljava/lang/ClassLoader;checkName(Ljava/lang/String;)Z 3 256
-Lavrora/monitors/PacketMonitor$Mon;fireAfterReceive(Lavrora/sim/radio/Medium$Receiver;C)V 3 384
-Ljava/lang/CharacterDataLatin1;toLowerCase(I)I 3 384
-Lorg/dacapo/parser/SimpleCharStream;UpdateLineColumn(C)V 3 256
-Ljava/util/zip/InflaterInputStream;ensureOpen()V 3 256
-Lavrora/sim/mcu/ATMegaFamily$DirectionRegister;write(B)V 3 256
-Lavrora/sim/radio/CC1000Radio$Receiver;setRSSI(D)V 3 384
-Ljava/lang/StringBuffer;toString()Ljava/lang/String; 3 425
-Ljava/util/zip/ZipInputStream;readLOC()Ljava/util/zip/ZipEntry; 3 412
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SBIW;)V 3 1282
-Lavrora/monitors/PacketMonitor$Mon;renderByte(Ljava/lang/StringBuffer;IC)V 3 445
-Lcck/text/StringUtil;toHex(JI)Ljava/lang/String; 3 395
-Lcck/util/Arithmetic;high(I)B 3 642
-Lavrora/sim/Segment;read(I)B 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SLEEP;)V 3 640
-Lavrora/sim/Segment;checked_read(I)B 3 385
-Lavrora/sim/radio/Medium$Receiver;access$200(Lavrora/sim/radio/Medium$Receiver;J)Ljava/util/List; 3 257
-Lavrora/sim/AtmelInterpreter;getInstr(I)Lavrora/arch/legacy/LegacyInstr; 3 1793
-Lcck/text/StringUtil;convertToHex(JII[C[C)Ljava/lang/String; 3 268
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$BRCS;)V 3 384
-Lavrora/sim/AtmelInterpreter$IORegBehavior;write(II)I 3 1152
-Ljava/util/LinkedList;<init>()V 3 256
-Ljava/util/LinkedList$Node;<init>(Ljava/util/LinkedList$Node;Ljava/lang/Object;Ljava/util/LinkedList$Node;)V 3 384
-Lavrora/sim/AtmelInterpreter;setEnabled(IZ)V 3 512
-Lavrora/monitors/PacketMonitor$Mon;append(C)V 3 256
-Lavrora/sim/util/TransactionalList;endTransaction()V 3 256
-Lavrora/sim/util/TransactionalList;beginTransaction()V 3 256
-Ljava/util/LinkedList;add(Ljava/lang/Object;)Z 3 256
-Lcck/text/Terminal;append(ILjava/lang/StringBuffer;Ljava/lang/String;)V 3 256
-Lavrora/sim/radio/Medium;isCorruptedByte(C)Z 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$CLI;)V 3 256
-Lavrora/arch/legacy/LegacyInstr;<init>(Lavrora/arch/legacy/LegacyInstrProperties;)V 3 384
-Lavrora/arch/legacy/LegacyInstr$CLI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Lavrora/arch/legacy/LegacyInstr$POP;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1152
-Lavrora/sim/clock/RippleSynchronizer$NotifyEvent;fire()V 3 256
-Lavrora/sim/FiniteStateMachine;getCurrentState()I 1 128
-Lavrora/sim/clock/RippleSynchronizer;access$000(Lavrora/sim/clock/RippleSynchronizer;JLavrora/sim/clock/RippleSynchronizer$WaitLink;)Lavrora/sim/clock/RippleSynchronizer$WaitLink; 3 256
-Lavrora/arch/legacy/LegacyInstr$PUSH;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 896
-Ljava/io/FilterOutputStream;write([BII)V 3 129
-Ljava/util/jar/JarFile;access$400(Ljava/util/jar/JarFile;)Ljava/util/jar/JarVerifier; 1 128
-Ljava/lang/StringBuffer;append(Ljava/lang/String;)Ljava/lang/StringBuffer; 3 512
-Lavrora/arch/legacy/LegacyInstr$SBCI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Ljava/util/LinkedList;node(I)Ljava/util/LinkedList$Node; 3 640
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$STD;)V 3 256
-Ljava/nio/HeapCharBuffer;<init>([CII)V 3 458
-Ljava/util/HashSet;add(Ljava/lang/Object;)Z 4 7636
-Ljava/nio/CharBuffer;wrap([CII)Ljava/nio/CharBuffer; 3 458
-Ljava/io/BufferedWriter;ensureOpen()V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$STS;)V 3 896
-Lavrora/sim/FiniteStateMachine;getTransitionTime(II)I 3 768
-Ljava/util/zip/ZipFile;getInflater()Ljava/util/zip/Inflater; 3 389
-Lavrora/sim/mcu/AtmelMicrocontroller;wakeup()I 3 768
-Lavrora/sim/radio/CC1000Radio$Receiver;nextByte(ZB)B 3 384
-Lavrora/sim/AtmelInterpreter;enableInterrupts()V 3 671
-Lavrora/arch/legacy/LegacyInstr$RETI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 640
-Lavrora/sim/InterruptTable;enableAll()V 3 671
-Lcck/util/Arithmetic;getBitField(I[I)I 3 640
-Lavrora/sim/mcu/AtmelMicrocontroller;sleep()V 3 640
-Lavrora/arch/legacy/LegacyInterpreter;enterSleepMode()V 3 640
-Lavrora/arch/legacy/LegacyInstr$COM;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 640
-Lavrora/arch/legacy/LegacyInstr$SLEEP;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 640
-Lavrora/sim/mcu/SPI$TransferEvent;enableTransfer()V 3 640
-Lavrora/sim/CodeSegment;load(Lavrora/core/Program;)V 3 60416
-Ljava/util/ArrayList;add(Ljava/lang/Object;)Z 3 390
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$RETI;)V 3 640
-Lavrora/sim/AtmelInterpreter;getInterruptVectorAddress(I)I 3 512
-Lavrora/sim/InterruptTable;beforeInvoke(I)V 3 512
-Lavrora/sim/mcu/ADC$MUXRegister;getSingleIndex()I 3 256
-Ljava/lang/String;toString()Ljava/lang/String; 3 306
-Lavrora/arch/legacy/LegacyInterpreter;leaveSleepMode()V 3 384
-Ljava/util/ArrayList;iterator()Ljava/util/Iterator; 3 256
-Lavrora/sim/mcu/Timer8Bit$Mode_CTC;fire()V 3 256
-Ljava/lang/AbstractStringBuilder;append(Ljava/lang/String;)Ljava/lang/AbstractStringBuilder; 4 6315
-Lavrora/arch/legacy/LegacyInstr$MOVW;<init>(ILavrora/arch/legacy/LegacyRegister;Lavrora/arch/legacy/LegacyRegister;)V 3 256
-Lavrora/sim/InterruptTable;post(I)V 3 460
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$ADD;)V 3 2049
-Lavrora/arch/legacy/LegacyInterpreter;sleepLoop()V 3 665
-Ljava/lang/ref/ReferenceQueue;reallyPoll()Ljava/lang/ref/Reference; 3 258
-Ljava/io/UnixFileSystem;getBooleanAttributes(Ljava/io/File;)I 3 384
-Lavrora/sim/mcu/Timer8Bit;access$000(Lavrora/sim/mcu/Timer8Bit;I)V 3 256
-Ljava/lang/ClassLoader;definePackage(Ljava/lang/String;Ljava/lang/Module;)Ljava/lang/Package; 3 256
-Lsun/nio/fs/UnixPath;<init>(Lsun/nio/fs/UnixFileSystem;[B)V 3 384
-Ljava/lang/String;toCharArray()[C 3 256
-Lavrora/monitors/LEDMonitor$Mon;fireAfterTransition(II)V 3 256
-Ljava/lang/StringLatin1;inflate([BI[CII)V 4 955
-Ljava/util/HashMap;clear()V 3 256
-Lorg/dacapo/harness/Benchmark;fileFromInputStream(Ljava/io/InputStream;Ljava/io/File;)V 3 512
-Ljava/nio/CharBuffer;hasArray()Z 3 512
-Ljava/nio/ByteBuffer;position(I)Ljava/nio/Buffer; 3 256
-Ljava/nio/DirectLongBufferU;put(IJ)Ljava/nio/LongBuffer; 3 384
-Lavrora/arch/legacy/LegacyInstr;checkImm(IIII)I 3 256
-Lavrora/arch/legacy/LegacyInstr$IN;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 640
-Ljava/lang/String;getBytes(Ljava/lang/String;)[B 3 384
-Ljava/util/concurrent/ConcurrentHashMap$Traverser;advance()Ljava/util/concurrent/ConcurrentHashMap$Node; 3 256
-Lavrora/sim/clock/RippleSynchronizer;insertLink(JLavrora/sim/clock/RippleSynchronizer$WaitLink;Lavrora/sim/clock/RippleSynchronizer$WaitLink;)Lavrora/sim/clock/RippleSynchronizer$WaitLink; 3 264
-Ljava/lang/ClassLoader;preDefineClass(Ljava/lang/String;Ljava/security/ProtectionDomain;)Ljava/security/ProtectionDomain; 3 512
-Ljava/util/zip/ZipCoder;toString([BI)Ljava/lang/String; 3 384
-Ljava/lang/StringLatin1;lastIndexOf([BII)I 4 1194
-Ljdk/internal/math/FDBigInteger;<init>([II)V 3 256
-Lavrora/arch/legacy/LegacyInstr;IMM8(II)I 3 384
-Ljava/util/zip/ZipUtils;CENNAM([BI)I 3 256
-Ljava/util/zip/ZipFile;access$300(Ljava/util/zip/ZipFile;)Ljava/util/Map; 1 128
-Lavrora/sim/radio/Medium$Probe$List;fireAfterReceiveEnd(Lavrora/sim/radio/Medium$Receiver;)V 3 267
-Ljdk/internal/loader/URLClassPath$JarLoader;access$700(Ljdk/internal/loader/URLClassPath$JarLoader;)Ljava/util/jar/JarFile; 1 128
-Lavrora/sim/mcu/SPI$Frame;<init>(B)V 3 256
-Ljava/io/BufferedOutputStream;write([BII)V 3 256
-Ljava/nio/ByteBuffer;limit(I)Ljava/nio/ByteBuffer; 3 384
-Ljava/lang/String;equalsIgnoreCase(Ljava/lang/String;)Z 3 256
-Ljava/util/StringTokenizer;scanToken(I)I 3 213
-Ljava/lang/StringBuffer;append(J)Ljava/lang/StringBuffer; 3 256
-Ljava/util/zip/ZipFile$ZipFileInputStream;close()V 3 334
-Lavrora/sim/state/RegisterUtil$BoolView;getValue()Z 3 640
-Ljava/io/UnixFileSystem;resolve(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; 3 384
-Ljava/util/zip/ZipFile$Source;hashN([BII)I 3 108
-Ljava/lang/Character;toUpperCase(C)C 3 256
-Ljava/lang/StringLatin1;canEncode(I)Z 4 18777
-Lavrora/sim/radio/Medium$BasicArbitrator;mergeTransmissions(Lavrora/sim/radio/Medium$Receiver;Ljava/util/List;JI)C 3 401
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SBCI;)V 3 385
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$LPM;)V 3 256
-Lsun/nio/cs/StreamEncoder;isOpen()Z 3 384
-Ljava/lang/StringLatin1;regionMatchesCI([BI[BII)Z 3 256
-Ljava/util/zip/ZipUtils;CENTIM([BI)J 3 256
-Ljava/lang/ClassLoader;postDefineClass(Ljava/lang/Class;Ljava/security/ProtectionDomain;)V 3 512
-Ljava/util/zip/ZipUtils;CENEXT([BI)I 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$POP;)V 3 1152
-Lavrora/arch/legacy/LegacyInstr$BRGE;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 512
-Ljava/lang/String;endsWith(Ljava/lang/String;)Z 3 384
-Lcck/util/Arithmetic;uword(BB)C 3 640
-Lavrora/arch/legacy/LegacyInstr$MOVW;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Lavrora/arch/legacy/LegacyDisassembler;disassemble(II[B)Lavrora/arch/AbstractInstr; 3 256
-Lcck/elf/ELFDataInputStream;read_Elf32_uchar()I 3 640
-Lavrora/arch/legacy/LegacyInstr$STS;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 896
-Ljava/nio/Buffer;remaining()I 3 256
-Ljava/lang/Character;isLetterOrDigit(C)Z 3 256
-Ljdk/internal/misc/Unsafe;putObjectRelease(Ljava/lang/Object;JLjava/lang/Object;)V 3 384
-Ljava/util/zip/ZipCoder;getBytes(Ljava/lang/String;)[B 3 434
-Lsun/nio/fs/UnixPath;getFileSystem()Ljava/nio/file/FileSystem; 3 384
-Ljava/lang/NamedPackage;module()Ljava/lang/Module; 1 128
-Lavrora/sim/clock/MainClock;advance(J)V 3 385
-Ljava/util/WeakHashMap;getTable()[Ljava/util/WeakHashMap$Entry; 3 384
-Ljava/util/WeakHashMap$Entry;<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/ref/ReferenceQueue;ILjava/util/WeakHashMap$Entry;)V 3 256
-Ljava/util/zip/ZipFile$Source;isMetaName([BII)Z 3 384
-Ljava/lang/ref/Finalizer;register(Ljava/lang/Object;)V 3 256
-Ljava/util/zip/ZipUtils;get16([BI)I 3 256
-Lcck/text/StringUtil;toFixedFloat(FI)Ljava/lang/String; 3 373
-Lavrora/sim/AtmelInterpreter;getInstrSize(I)I 3 1792
-Ljava/lang/ref/SoftReference;get()Ljava/lang/Object; 3 256
-Ljava/util/zip/Inflater;ensureOpen()V 3 256
-Ljava/lang/String;valueOf(Ljava/lang/Object;)Ljava/lang/String; 3 303
-Ljava/util/HashMap;getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; 4 6205
-Ljava/lang/StringCoding;encode(Ljava/lang/String;B[B)[B 3 384
-Ljava/util/zip/ZipUtils;get32([BI)J 3 256
-Ljava/lang/StringLatin1;indexOf([BII)I 4 4211
-Ljava/lang/Character;toUpperCaseEx(I)I 3 256
-Lavrora/arch/legacy/LegacyInterpreter;uword(BB)I 3 640
-Ljava/io/File;isDirectory()Z 3 384
-Ljava/io/FilterInputStream;read([BII)I 3 256
-Ljava/util/LinkedList;unlink(Ljava/util/LinkedList$Node;)Ljava/lang/Object; 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$CALL;)V 3 640
-Lavrora/arch/legacy/LegacyInstr$INC;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Ljava/util/LinkedList;checkPositionIndex(I)V 3 640
-Lsun/nio/fs/UnixPath;toUnixPath(Ljava/nio/file/Path;)Lsun/nio/fs/UnixPath; 3 384
-Ljava/io/File;getName()Ljava/lang/String; 3 384
-Ljava/util/jar/JarFile$JarFileEntry;<init>(Ljava/util/jar/JarFile;Ljava/util/zip/ZipEntry;)V 3 256
-Lcck/text/StringUtil;space(Ljava/lang/StringBuffer;I)V 3 247
-Ljava/nio/CharBuffer;limit(I)Ljava/nio/Buffer; 3 512
-Lavrora/sim/mcu/DefaultMCU$Pin;setOutputDir(Z)V 3 1161
-Ljdk/internal/util/Preconditions;checkIndex(IILjava/util/function/BiFunction;)I 3 256
-Ljava/lang/String;charAt(I)C 3 73728
-Ljava/util/zip/ZipCoder;isUTF8()Z 1 128
-Lavrora/sim/radio/Medium$Transmission;end()V 3 369
-Ljdk/internal/perf/PerfCounter;get()J 3 256
-Ljava/util/jar/JarFile;isMultiRelease()Z 3 256
-Ljava/util/zip/ZipCoder;encoder()Ljava/nio/charset/CharsetEncoder; 3 384
-Ljava/lang/Package;isSealed()Z 3 256
-Ljava/io/File;isInvalid()Z 3 384
-Ljava/lang/ref/Finalizer;remove()V 3 512
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$LDI;)V 3 1792
-Ljava/util/zip/ZStreamRef;address()J 1 128
-Lavrora/sim/radio/CC1000Radio$SerialConfigurationInterface;inputWriteBit()V 3 1792
-Ljava/io/FileOutputStream;open(Ljava/lang/String;Z)V 3 384
-Ljava/util/LinkedList;linkLast(Ljava/lang/Object;)V 3 468
-Ljava/io/File;delete()Z 3 512
-Ljava/lang/Character;toUpperCase(I)I 3 256
-Ljava/lang/StringDecoderUTF8;decode([BIILjava/lang/StringCoding$Result;)Ljava/lang/StringCoding$Result; 4 707
-Ljava/util/zip/ZipFile$ZipFileInputStream;<init>(Ljava/util/zip/ZipFile;[BI)V 3 389
-Ljava/util/zip/ZipInputStream;readEnd(Ljava/util/zip/ZipEntry;)V 3 204
-Lcck/text/StringUtil;justify(ZLjava/lang/StringBuffer;JI)V 3 256
-Ljava/util/zip/InflaterInputStream;fill()V 3 256
-Ljava/io/RandomAccessFile;seek(J)V 3 256
-Ljdk/internal/misc/Unsafe;copyMemory(Ljava/lang/Object;JLjava/lang/Object;JJ)V 3 384
-Ljava/util/HashMap;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 3 10496
-Lavrora/sim/radio/CC1000Radio$Transmitter;nextByte()B 3 256
-Ljava/io/FileDescriptor;<init>()V 3 256
-Ljava/util/ArrayDeque;inc(II)I 3 256
-Lavrora/sim/AtmelInterpreter;fireAfterRead(ZIB)V 3 1152
-Ljava/lang/Integer;<init>(I)V 3 512
-Lavrora/arch/legacy/LegacyInstr;access$1200(ILavrora/arch/legacy/LegacyRegister;)Lavrora/arch/legacy/LegacyRegister; 3 256
-Lavrora/arch/legacy/LegacyDisassembler;decode_20(I)Lavrora/arch/legacy/LegacyInstr; 3 454
-Lavrora/arch/legacy/LegacyInstr$SBRS;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1408
-Ljava/lang/Character;toLowerCase(I)I 3 384
-Lavrora/arch/legacy/LegacyInstr$CPSE;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 640
-Ljava/util/zip/ZipUtils;CENFLG([BI)I 3 384
-Ljava/util/ArrayList;add(Ljava/lang/Object;[Ljava/lang/Object;I)V 3 390
-Lcck/elf/ELFDataInputStream;asInt(IIII)I 3 512
-Lavrora/sim/util/MulticastFSMProbe;fireAfterTransition(II)V 3 362
-Ljava/util/Arrays;copyOf([BI)[B 3 722
-Ljava/util/zip/ZipFile$Source;addEntry(IIII)I 3 384
-Lavrora/arch/legacy/LegacyInstr$LD;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 257
-Ljava/lang/Throwable;fillInStackTrace()Ljava/lang/Throwable; 3 256
-Ljava/io/RandomAccessFile;read()I 3 256
-Ljava/lang/System$2;invokeFinalize(Ljava/lang/Object;)V 3 640
-Ljava/security/CodeSource;getLocationNoFragString()Ljava/lang/String; 1 128
-Ljava/lang/ref/ReferenceQueue;enqueue(Ljava/lang/ref/Reference;)Z 3 256
-Ljava/util/zip/Inflater;inflate([BII)I 3 256
-Lavrora/sim/SimulatorThread;getSimulator()Lavrora/sim/Simulator; 3 640
-Ljava/lang/String;toLowerCase(Ljava/util/Locale;)Ljava/lang/String; 3 256
-Ljava/lang/ref/Finalizer;access$000()Ljava/lang/ref/ReferenceQueue; 3 384
-Lsun/net/util/URLUtil;urlNoFragString(Ljava/net/URL;)Ljava/lang/String; 3 328
-Lavrora/sim/mcu/Timer8Bit;compareMatch()V 3 256
-Ljava/lang/ref/Finalizer;access$100(Ljava/lang/ref/Finalizer;Ljdk/internal/misc/JavaLangAccess;)V 3 512
-Ljava/nio/charset/Charset;forName(Ljava/lang/String;)Ljava/nio/charset/Charset; 3 256
-Ljava/lang/String;indexOf(Ljava/lang/String;)I 3 256
-Ljava/lang/ref/Finalizer;runFinalizer(Ljdk/internal/misc/JavaLangAccess;)V 3 512
-Lavrora/arch/legacy/LegacyInstr$REG_class;<init>(Lavrora/arch/legacy/LegacyInstrProperties;Lavrora/arch/legacy/LegacyRegister;)V 3 537
-Ljava/io/UnixFileSystem;delete(Ljava/io/File;)Z 3 512
-Lsun/nio/cs/StreamEncoder;write([CII)V 3 515
-Lavrora/sim/AtmelInterpreter;writeSRAM(ZIB)V 3 525
-Ljava/net/URL;getRef()Ljava/lang/String; 1 128
-Ljava/io/FileOutputStream;finalize()V 3 512
-Ljava/util/zip/ZipInputStream;createZipEntry(Ljava/lang/String;)Ljava/util/zip/ZipEntry; 3 384
-Lavrora/sim/FiniteStateMachine;transition(I)V 3 687
-Ljdk/internal/misc/Unsafe;checkOffset(Ljava/lang/Object;J)V 3 386
-Ljava/util/zip/Inflater;ended()Z 3 256
-Ljava/util/concurrent/ConcurrentHashMap;setTabAt([Ljava/util/concurrent/ConcurrentHashMap$Node;ILjava/util/concurrent/ConcurrentHashMap$Node;)V 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SEI;)V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$ICALL;)V 3 256
-Lavrora/sim/mcu/DefaultMCU;access$000(Lavrora/sim/mcu/DefaultMCU;)Z 1 129
-Lavrora/arch/legacy/LegacyInstr$SBC;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class; 3 256
-Lavrora/arch/legacy/LegacyInstr$REGIMM_class;<init>(Lavrora/arch/legacy/LegacyInstrProperties;Lavrora/arch/legacy/LegacyRegister;I)V 3 384
-Ljdk/internal/loader/URLClassPath;getResource(Ljava/lang/String;Z)Ljdk/internal/loader/Resource; 3 256
-Ljava/util/zip/ZipUtils;CENHOW([BI)I 3 256
-Lavrora/arch/legacy/LegacyInstr$REGREG_class;<init>(Lavrora/arch/legacy/LegacyInstrProperties;Lavrora/arch/legacy/LegacyRegister;Lavrora/arch/legacy/LegacyRegister;)V 3 384
-Lavrora/arch/legacy/LegacyDisassembler;getWord(I)I 3 291
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SBI;)V 3 1537
-Lavrora/arch/legacy/LegacyDisassembler;decode_24(I)Lavrora/arch/legacy/LegacyInstr; 3 393
-Lavrora/arch/legacy/LegacyInstr;getSize()I 3 384
-Lavrora/arch/legacy/LegacyDisassembler;decode_30(I)Lavrora/arch/legacy/LegacyInstr; 3 382
-Lavrora/arch/legacy/LegacyInstr$CPI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1154
-Lavrora/sim/mcu/ADC$ControlRegister;insertConversion()V 3 321
-Ljava/lang/AbstractStringBuilder;<init>(I)V 4 5242
-Ljava/io/BufferedWriter;write(Ljava/lang/String;II)V 3 256
-Lavrora/arch/legacy/LegacyInstr$SEI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Lavrora/arch/legacy/LegacyDisassembler;decode_22(I)Lavrora/arch/legacy/LegacyInstr; 3 364
-Lsun/util/locale/LocaleUtils;isUpper(C)Z 3 256
-Lavrora/core/Program;readProgramByte(I)B 3 256
-Ljava/lang/Integer;hashCode()I 3 512
-Ljava/util/zip/CRC32;reset()V 3 256
-Ljava/lang/StringBuffer;append(C)Ljava/lang/StringBuffer; 3 512
-Lavrora/sim/radio/Medium$BasicArbitrator;lockTransmission(Lavrora/sim/radio/Medium$Receiver;Lavrora/sim/radio/Medium$Transmission;I)Z 1 128
-Ljava/net/URL;getPort()I 1 128
-Lavrora/sim/mcu/SPI;invoke(I)V 3 512
-Ljava/lang/StringLatin1;indexOf([BI[BII)I 3 136
-Lavrora/sim/radio/Medium$Receiver;intersect(JLavrora/sim/radio/Medium$Transmission;)Z 3 384
-Ljava/lang/StringBuilder;<init>(I)V 3 384
-Ljava/io/RandomAccessFile;read([BII)I 3 256
-Lavrora/sim/radio/Medium$Receiver;beginReceive(D)V 3 375
-Lavrora/sim/mcu/SPI$SPCRReg;write(B)V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$RET;)V 3 640
-Ljava/util/zip/CRC32;getValue()J 3 202
-Lavrora/arch/legacy/LegacyDisassembler;decode_MULS_0(I)Lavrora/arch/legacy/LegacyInstr; 3 408
-Lcck/util/Arithmetic;clearBit(BI)B 3 1792
-Lavrora/sim/clock/RippleSynchronizer$NotifyEvent;access$100(Lavrora/sim/clock/RippleSynchronizer$NotifyEvent;)Lavrora/sim/clock/RippleSynchronizer$WaitLink; 3 768
-Ljava/io/FileOutputStream;<init>(Ljava/io/File;)V 3 384
-Lcck/elf/ELFStringTable;getString(I)Ljava/lang/String; 3 492
-Lavrora/sim/output/SimPrinter;printBuffer(Ljava/lang/StringBuffer;)V 3 337
-Lorg/dacapo/parser/ConfigFileTokenManager;jjCheckNAddStates(II)V 3 256
-Lsun/nio/cs/StreamEncoder;implFlushBuffer()V 3 384
-Lavrora/sim/mcu/ADC$ControlRegister;write(B)V 3 256
-Ljava/lang/String;getChars(II[CI)V 3 384
-Ljava/util/ArrayList;get(I)Ljava/lang/Object; 3 256
-Ljava/util/LinkedList;listIterator(I)Ljava/util/ListIterator; 3 640
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$LSR;)V 3 256
-Lavrora/sim/radio/CC1000Radio;getPower()D 3 241
-Lavrora/monitors/PacketMonitor$Mon;renderPacket(Ljava/lang/String;)Ljava/lang/StringBuffer; 3 111
-Ljava/nio/ByteBuffer;clear()Ljava/nio/ByteBuffer; 3 384
-Lavrora/sim/clock/DeltaQueue;removeEvent(Lavrora/sim/Simulator$Event;)V 3 256
-Ljava/util/zip/ZipFile$Source;access$1100(Ljava/util/zip/ZipFile$Source;)J 1 128
-Ljava/util/ArrayDeque;elementAt([Ljava/lang/Object;I)Ljava/lang/Object; 3 384
-Lcck/text/StringUtil;justify(ZLjava/lang/StringBuffer;Ljava/lang/String;I)V 3 384
-Ljava/security/SecureClassLoader;getProtectionDomain(Ljava/security/CodeSource;)Ljava/security/ProtectionDomain; 3 528
-Ljava/net/URLClassLoader;getAndVerifyPackage(Ljava/lang/String;Ljava/util/jar/Manifest;Ljava/net/URL;)Ljava/lang/Package; 3 384
-Ljava/io/BufferedInputStream;getInIfOpen()Ljava/io/InputStream; 3 288
-Lavrora/arch/legacy/LegacyInstr$AND;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 512
-Ljava/lang/String;substring(I)Ljava/lang/String; 3 256
-Lavrora/sim/AtmelInterpreter;getIORegisterByte(I)B 3 640
-Ljava/lang/System;getSecurityManager()Ljava/lang/SecurityManager; 1 1187
-Ljava/lang/StringUTF16;getChar([BI)C 4 5632
-Ljava/io/PrintStream;newLine()V 3 211
-Lavrora/sim/AtmelInterpreter;writeVolatile(IB)B 3 1024
-Ljdk/internal/loader/URLClassPath$JarLoader;getResource(Ljava/lang/String;Z)Ljdk/internal/loader/Resource; 3 256
-Ljava/lang/StringBuffer;<init>(I)V 3 395
-Ljava/lang/StringBuilder;append(Ljava/lang/String;)Ljava/lang/StringBuilder; 4 5291
-Ljava/util/zip/ZipFile;getZipEntry(Ljava/lang/String;[BI)Ljava/util/zip/ZipEntry; 3 256
-Ljava/util/zip/Inflater;getBytesWritten()J 3 384
-Ljava/lang/Float;isInfinite(F)Z 3 256
-Lavrora/arch/legacy/LegacyInstr$ICALL;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Ljava/nio/charset/CharsetDecoder;reset()Ljava/nio/charset/CharsetDecoder; 3 256
-Lavrora/sim/clock/DeltaQueue;advanceSlow(J)V 3 261
-Lavrora/sim/radio/CC1000Radio$RadioRegister;write(B)V 3 411
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$CBI;)V 3 1664
-Ljava/nio/CharBuffer;position(I)Ljava/nio/Buffer; 3 384
-Lcck/elf/ELFDataInputStream;read_Elf32_Word()I 3 512
-Ljava/util/zip/ZipFile$ZipFileInflaterInputStream;fill()V 3 256
-Ljava/util/zip/ZipCoder;toString([BII)Ljava/lang/String; 3 256
-Ljava/lang/Integer;stringSize(I)I 3 256
-Lsun/nio/cs/StreamEncoder;implWrite(Ljava/nio/CharBuffer;)V 3 512
-Lavrora/arch/legacy/LegacyInstr$SUB;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Lavrora/sim/AtmelInterpreter;writeRegisterWord(Lavrora/arch/legacy/LegacyRegister;I)V 3 1040
-Lavrora/sim/mcu/ATMegaFamily$FlagRegister$Notification;invoke(I)V 3 384
-Lavrora/sim/Simulator;getID()I 1 128
-Ljava/nio/charset/CharsetEncoder;implReset()V 3 256
-Lavrora/sim/clock/RippleSynchronizer$WaitLink;<init>(J)V 3 5504
-Lavrora/sim/mcu/ADC$MUXRegister;isSingleEnded()Z 3 256
-Ljava/util/jar/JarFile;getInputStream(Ljava/util/zip/ZipEntry;)Ljava/io/InputStream; 3 512
-Lavrora/sim/radio/Medium$Transmission;<init>(Lavrora/sim/radio/Medium;Lavrora/sim/radio/Medium$Transmitter;DD)V 3 256
-Ljava/lang/Number;<init>()V 3 512
-Ljava/util/ArrayList;elementData(I)Ljava/lang/Object; 3 256
-Lcck/util/Arithmetic;roundup(II)I 3 256
-Ljava/lang/Module;isNamed()Z 3 256
-Lavrora/sim/mcu/ADC$ControlRegister;getPrescaler()I 3 258
-Lavrora/arch/legacy/LegacyDisassembler;decode_9(I)Lavrora/arch/legacy/LegacyInstr; 3 406
-Ljava/util/WeakHashMap;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 3 256
-Ljava/security/CodeSource;getCertificates()[Ljava/security/cert/Certificate; 3 256
-Ljava/util/WeakHashMap;hash(Ljava/lang/Object;)I 3 256
-Ljava/util/concurrent/ConcurrentHashMap;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 3 256
-Ljava/lang/String;lastIndexOf(I)I 3 475
-Ljava/util/WeakHashMap;maskNull(Ljava/lang/Object;)Ljava/lang/Object; 3 256
-Ljava/util/LinkedList$ListItr;remove()V 3 256
-Ljava/util/concurrent/ConcurrentHashMap;tabAt([Ljava/util/concurrent/ConcurrentHashMap$Node;I)Ljava/util/concurrent/ConcurrentHashMap$Node; 4 7680
-Lsun/nio/fs/UnixException;errno()I 1 128
-Ljava/lang/ref/WeakReference;<init>(Ljava/lang/Object;Ljava/lang/ref/ReferenceQueue;)V 3 256
-Lavrora/sim/mcu/Timer8Bit$BufferedRegister;write(B)V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SUBI;)V 3 1921
-Lavrora/sim/platform/ExternalFlash$PA3Output;write(Z)V 3 256
-Ljava/nio/charset/CharsetDecoder;implReset()V 3 256
-Ljava/nio/Buffer;position(I)Ljava/nio/Buffer; 4 5541
-Lavrora/arch/legacy/LegacyInstr;access$3300(ILavrora/arch/legacy/LegacyRegister;)Lavrora/arch/legacy/LegacyRegister; 3 256
-Lavrora/sim/radio/CC1000Radio;getFrequency()D 3 241
-Lavrora/sim/mcu/ATMegaFamily$FlagRegister;setPosted(IZ)V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;pushPC(I)V 3 512
-Lsun/nio/cs/StreamEncoder;ensureOpen()V 3 512
-Ljava/lang/StringBuilder;toString()Ljava/lang/String; 4 5242
-Ljdk/internal/loader/URLClassPath$JarLoader;access$600(Ljdk/internal/loader/URLClassPath$JarLoader;)Ljava/net/URL; 1 128
-Lavrora/arch/legacy/LegacyDisassembler;decode_23(I)Lavrora/arch/legacy/LegacyInstr; 3 425
-Lavrora/sim/radio/CC1000Radio$PA_POWRegister;decode(B)V 3 256
-Lavrora/arch/legacy/LegacyInstr;access$1300(II)I 3 384
-Ljava/io/OutputStreamWriter;write([CII)V 3 384
-Lavrora/sim/radio/Medium$Receiver$Ticker;fire()V 3 640
-Ljava/nio/Buffer;checkIndex(I)I 3 256
-Ljava/lang/Math;min(II)I 4 5382
-Ljava/util/jar/Manifest;getEntries()Ljava/util/Map; 1 128
-Lsun/nio/fs/UnixPath;resolve(Ljava/nio/file/Path;)Ljava/nio/file/Path; 3 256
-Ljava/util/zip/ZipFile$Source;readAt([BIIJ)I 3 390
-Lcck/util/Arithmetic;low(I)B 3 642
-Ljdk/internal/loader/URLClassPath$Loader;getBaseURL()Ljava/net/URL; 1 128
-Ljava/util/zip/ZipFile$ZipFileInflaterInputStream;available()I 3 384
-Lavrora/sim/state/VolatileBehavior;<init>()V 3 256
-Ljava/lang/Exception;<init>(Ljava/lang/String;)V 3 256
-Lavrora/monitors/PacketMonitor$Mon;fireBeforeTransmitEnd(Lavrora/sim/radio/Medium$Transmitter;)V 3 384
-Lavrora/sim/mcu/Timer8Bit$TCNTnRegister;write(B)V 3 256
-Ljava/lang/StringLatin1;getChars([BII[CI)V 3 384
-Ljava/io/PrintStream;print(Ljava/lang/String;)V 3 377
-Lavrora/sim/AtmelInterpreter;fireBeforeWrite(ZIB)V 3 898
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$DEC;)V 3 512
-Ljava/util/Locale;getDefault()Ljava/util/Locale; 3 384
-Ljava/io/PrintStream;write(Ljava/lang/String;)V 3 249
-Ljava/security/CodeSource;getLocation()Ljava/net/URL; 1 128
-Ljava/util/zip/ZipFile$ZipFileInputStream;initDataOffset()J 3 390
-Lavrora/arch/legacy/LegacyInstr;GPR(ILavrora/arch/legacy/LegacyRegister;)Lavrora/arch/legacy/LegacyRegister; 3 384
-Ljava/io/FileOutputStream$1;<init>(Ljava/io/FileOutputStream;)V 3 512
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SUB;)V 3 256
-Ljava/nio/Buffer;flip()Ljava/nio/Buffer; 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$BRGE;)V 3 385
-Lavrora/monitors/PacketMonitor$Mon;fireAfterReceiveEnd(Lavrora/sim/radio/Medium$Receiver;)V 3 257
-Lavrora/arch/legacy/LegacyInstr$OR;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Lavrora/sim/radio/CC1000Radio$RSSIOutput;getVoltage()F 3 257
-Ljava/util/zip/ZipFile$Source;getEntryPos([BZ)I 3 121
-Ljava/net/URL;getProtocol()Ljava/lang/String; 1 128
-Lavrora/sim/clock/RippleSynchronizer;notifyLink(Lavrora/sim/clock/RippleSynchronizer$WaitLink;)V 3 640
-Lavrora/sim/radio/Medium$Receiver;endReceive()V 3 265
-Ljava/util/zip/ZipUtils;CENSIG([BI)J 3 384
-Lavrora/sim/mcu/ADC$ControlRegister$ConversionEvent;fire()V 3 256
-Ljava/lang/String;concat(Ljava/lang/String;)Ljava/lang/String; 3 256
-Lavrora/monitors/PacketMonitor$Mon;clear()V 3 256
-Ljava/lang/String;equals(Ljava/lang/Object;)Z 4 5664
-Ljava/lang/String;toLowerCase()Ljava/lang/String; 3 384
-Lavrora/arch/legacy/LegacyInstr$RET;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 640
-Ljava/nio/CharBuffer;position(I)Ljava/nio/CharBuffer; 3 384
-Ljava/nio/Buffer;clear()Ljava/nio/Buffer; 4 5635
-Lavrora/sim/util/MulticastFSMProbe;fireBeforeTransition(II)V 3 362
-Ljava/lang/Math;max(II)I 3 432
-Ljava/util/zip/ZipFile$Source;readFullyAt([BIIJ)I 3 249
-Lavrora/sim/mcu/ADC$ControlRegister;convertVoltage()I 3 256
-Ljava/net/URLClassLoader$1;run()Ljava/lang/Class; 3 384
-Lavrora/sim/mcu/RegisterLayout;getIOReg(Ljava/lang/String;)I 3 256
-Ljava/util/zip/ZipUtils;LG([BI)J 3 256
-Ljava/io/PrintStream;write([BII)V 3 512
-Ljava/util/ArrayDeque;addLast(Ljava/lang/Object;)V 3 256
-Lavrora/arch/legacy/LegacyInstr$SEC;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Ljava/io/FilterOutputStream;close()V 3 512
-Lcck/text/StringUtil;appendFract(Ljava/lang/StringBuffer;DI)V 3 250
-Ljava/lang/AbstractStringBuilder;checkRange(III)V 3 256
-Lavrora/core/Program;writeByteInto(BI)V 3 256
-Ljava/lang/CharacterDataLatin1;getType(I)I 3 256
-Ljava/util/zip/ZipFile;access$600(Ljava/util/zip/ZipFile;)Ljava/util/zip/ZipFile$Source; 1 128
-Lavrora/sim/mcu/SPI$SPCRReg;decode(B)V 3 256
-Lavrora/arch/legacy/LegacyInstr;access$3100(II)I 3 256
-Lavrora/sim/AtmelInterpreter;popByte()B 3 1152
-Ljdk/internal/loader/URLClassPath;getLoader(I)Ljdk/internal/loader/URLClassPath$Loader; 3 256
-Lavrora/sim/clock/MainClock;removeEvent(Lavrora/sim/Simulator$Event;)V 3 256
-Ljava/util/zip/ZipFile;getEntry(Ljava/lang/String;)Ljava/util/zip/ZipEntry; 3 384
-Lavrora/sim/mcu/ATMegaFamily$FlagRegister;flagBit(I)V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$OR;)V 3 256
-Ljava/lang/String;<init>([BLjava/lang/String;)V 3 384
-Lavrora/sim/radio/Medium;newTransmission(Lavrora/sim/radio/Medium$Transmitter;DD)Lavrora/sim/radio/Medium$Transmission; 3 256
-Ljava/util/LinkedHashMap;removeEldestEntry(Ljava/util/Map$Entry;)Z 1 128
-Ljava/util/LinkedList$ListItr;next()Ljava/lang/Object; 3 896
-Ljava/util/Hashtable;get(Ljava/lang/Object;)Ljava/lang/Object; 3 256
-Lcck/util/Arithmetic;setBit(JIZ)J 3 640
-Lavrora/sim/radio/Medium;access$400()I 3 257
-Ljava/nio/charset/CharsetDecoder;maxCharsPerByte()F 1 128
-Ljdk/internal/math/FDBigInteger;trimLeadingZeros()V 3 256
-Lavrora/arch/legacy/LegacyDisassembler;decode_25(I)Lavrora/arch/legacy/LegacyInstr; 3 361
-Lavrora/core/Program;writeInstr(Lavrora/arch/AbstractInstr;I)V 3 384
-Lsun/net/www/ParseUtil;encodePath(Ljava/lang/String;Z)Ljava/lang/String; 3 478
-Lavrora/arch/legacy/LegacyInstr$STS;<init>(IILavrora/arch/legacy/LegacyRegister;)V 3 384
-Lavrora/arch/legacy/LegacyInstr;access$500(ILavrora/arch/legacy/LegacyRegister;)Lavrora/arch/legacy/LegacyRegister; 3 384
-Ljava/util/WeakHashMap;expungeStaleEntries()V 3 384
-Lavrora/sim/radio/CC1000Radio$CurrentRegister;decode(B)V 3 256
-Lavrora/sim/mcu/ADC$ControlRegister;access$100(Lavrora/sim/mcu/ADC$ControlRegister;)I 3 256
-Ljava/io/PrintStream;println(Ljava/lang/String;)V 3 340
-Lavrora/sim/AtmelInterpreter;setPosted(IZ)V 3 640
-Lavrora/core/Program;checkAddress(I)V 3 256
-Ljava/net/URL;getAuthority()Ljava/lang/String; 1 128
-Lcck/util/Arithmetic;setBit(BI)B 3 1537
-Lavrora/sim/InterruptTable;enable(I)V 3 338
-Ljava/lang/String;regionMatches(ZILjava/lang/String;II)Z 3 256
-Lavrora/arch/legacy/LegacyDisassembler;decode_8(I)Lavrora/arch/legacy/LegacyInstr; 3 282
-Ljava/net/URLStreamHandler;getDefaultPort()I 1 128
-Lavrora/arch/legacy/LegacyInstr$ADIW;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 512
-Lavrora/sim/util/MulticastFSMProbe;<init>()V 3 256
-Lavrora/arch/legacy/LegacyInstr;access$900(II)I 3 384
-Ljava/util/Objects;checkIndex(II)I 3 256
-Ljava/net/URLStreamHandler;setURL(Ljava/net/URL;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V 3 384
-Ljava/lang/String;access$100(Ljava/lang/String;)[B 1 128
-Ljava/net/URL;set(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V 3 384
-Ljava/lang/Throwable;<init>(Ljava/lang/String;)V 3 256
-Lavrora/sim/platform/ExternalFlash$PD5Output;write(Z)V 3 1285
-Ljava/util/zip/ZipFile$ZipFileInflaterInputStream;close()V 3 384
-Lavrora/sim/radio/Medium$Transmitter;beginTransmit(DD)V 3 369
-Ljava/util/LinkedHashMap;clear()V 3 384
-Ljava/lang/Character;getType(I)I 3 256
-Ljava/util/StringTokenizer;skipDelimiters(I)I 3 256
-Ljdk/internal/misc/Unsafe;copyMemoryChecks(Ljava/lang/Object;JLjava/lang/Object;JJ)V 3 384
-Lavrora/sim/mcu/ADC$ControlRegister;stopConversion()V 3 266
-Lavrora/arch/legacy/LegacyRegister;hashCode()I 3 256
-Ljava/util/zip/ZipUtils;SH([BI)I 3 256
-Ljava/nio/Buffer;<init>(IIII)V 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$BRNE;)V 3 640
-Ljava/util/ArrayDeque;add(Ljava/lang/Object;)Z 3 256
-Ljava/lang/Integer;getChars(II[B)I 3 256
-Ljava/util/jar/JarFile;checkForSpecialAttributes()V 3 256
-Ljava/nio/charset/CharsetEncoder;encode(Ljava/nio/CharBuffer;Ljava/nio/ByteBuffer;Z)Ljava/nio/charset/CoderResult; 3 492
-Lsun/nio/cs/StreamEncoder;flushBuffer()V 3 384
-Ljdk/internal/perf/PerfCounter;addElapsedTimeFrom(J)V 3 256
-Lsun/nio/fs/UnixNativeDispatcher;copyToNativeBuffer(Lsun/nio/fs/UnixPath;)Lsun/nio/fs/NativeBuffer; 3 384
-Ljava/util/jar/Attributes;get(Ljava/lang/Object;)Ljava/lang/Object; 3 256
-Ljava/lang/ClassLoader;getClassLoadingLock(Ljava/lang/String;)Ljava/lang/Object; 3 256
-Ljava/util/zip/ZipFile;getInputStream(Ljava/util/zip/ZipEntry;)Ljava/io/InputStream; 3 256
-Ljava/util/zip/ZipFile$ZipFileInputStream;size()J 1 128
-Lsun/net/www/ParseUtil;firstEncodeIndex(Ljava/lang/String;)I 3 121
-Lsun/nio/cs/UTF_8$Encoder;encode([CII[B)I 3 128
-Ljava/util/jar/Manifest;getMainAttributes()Ljava/util/jar/Attributes; 1 128
-Lavrora/sim/util/TransactionalList;isEmpty()Z 3 1280
-Ljava/util/jar/JarFile$JarFileEntry;getName()Ljava/lang/String; 1 128
-Lavrora/sim/state/RegisterUtil$BoolView;setValue(Z)V 3 512
-Ljava/util/zip/ZipFile$Source;getEntryHash(I)I 3 256
-Ljava/util/HashMap;hash(Ljava/lang/Object;)I 4 28160
-Lsun/nio/cs/StreamEncoder;writeBytes()V 3 511
-Ljava/net/URL;<init>(Ljava/net/URL;Ljava/lang/String;Ljava/net/URLStreamHandler;)V 3 229
-Ljava/io/FileOutputStream;close()V 3 512
-Ljava/lang/ClassLoader;loadClass(Ljava/lang/String;)Ljava/lang/Class; 3 256
-Lcck/util/Option$Str;set(Ljava/lang/String;)V 1 128
-Lavrora/sim/AtmelInterpreter;toSRAM(I)I 3 256
-Lsun/nio/cs/StreamEncoder;implWrite([CII)V 3 512
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SBC;)V 3 256
-Lavrora/arch/legacy/LegacyDisassembler;relative(II)I 3 304
-Ljava/lang/String$CaseInsensitiveComparator;compare(Ljava/lang/Object;Ljava/lang/Object;)I 3 256
-Ljava/nio/DirectLongBufferU;ix(I)J 3 256
-Ljava/lang/ClassLoader;defineClass(Ljava/lang/String;[BIILjava/security/ProtectionDomain;)Ljava/lang/Class; 3 528
-Ljava/lang/String;<init>([CIILjava/lang/Void;)V 4 8396
-Lavrora/sim/clock/DeltaQueue;free(Lavrora/sim/clock/DeltaQueue$EventList;)V 3 272
-Lavrora/sim/radio/Medium$Receiver;isChannelClear(II)Z 3 382
-Lavrora/sim/InterruptTable;unpost(I)V 3 447
-Ljava/util/AbstractList;<init>()V 3 330
-Ljava/net/URLClassLoader$1;<init>(Ljava/net/URLClassLoader;Ljava/lang/String;)V 3 384
-Ljava/lang/StringLatin1;getChar([BI)C 3 384
-Ljava/io/PushbackInputStream;ensureOpen()V 3 256
-Lavrora/sim/mcu/ADC$ControlRegister;invoke(I)V 3 256
-Ljava/io/FilterInputStream;<init>(Ljava/io/InputStream;)V 3 256
-Ljava/util/ArrayDeque;pollFirst()Ljava/lang/Object; 3 384
-Ljava/net/URLClassLoader;defineClass(Ljava/lang/String;Ljdk/internal/loader/Resource;)Ljava/lang/Class; 3 469
-Ljava/util/zip/ZipFile;ensureOpen()V 3 256
-Ljava/util/jar/Attributes;getValue(Ljava/util/jar/Attributes$Name;)Ljava/lang/String; 3 384
-Lavrora/arch/legacy/LegacyInstr;asInstr()Lavrora/arch/legacy/LegacyInstr; 3 1793
-Lavrora/sim/radio/Medium;access$300()D 3 256
-Ljava/lang/StringLatin1;indexOf([B[B)I 3 256
-Lavrora/arch/legacy/LegacyInterpreter;runLoop()V 3 60423
-Ljava/lang/String;getBytes([BIB)V 4 5393
-Ljava/util/zip/ZipUtils;CENLEN([BI)J 3 256
-Ljava/util/StringTokenizer;nextToken()Ljava/lang/String; 3 384
-Ljava/lang/invoke/MethodTypeForm;erasedType()Ljava/lang/invoke/MethodType; 1 128
-Lorg/dacapo/harness/TeeOutputStream;write(I)V 3 256
-Ljava/util/zip/ZipUtils;CENCOM([BI)I 3 384
-Lavrora/sim/radio/Medium$Receiver;earliestNewTransmission(J)Lavrora/sim/radio/Medium$Transmission; 3 410
-Ljava/lang/StringLatin1;toLowerCase(Ljava/lang/String;[BLjava/util/Locale;)Ljava/lang/String; 3 256
-Ljava/nio/ByteBuffer;hasArray()Z 3 256
-Ljava/lang/StringDecoderUTF8;decode([BII)Ljava/lang/StringCoding$Result; 3 384
-Ljava/lang/StringCoding;encodeUTF8(B[B)[B 3 128
-Ljava/util/zip/Inflater;setInput([BII)V 3 386
-Lcck/util/Arithmetic;lowestBit(J)I 3 512
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$BREQ;)V 3 512
-Lorg/dacapo/parser/ConfigFileTokenManager;jjCheckNAdd(I)V 3 256
-Ljava/util/HashMap;putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; 4 16896
-Ljava/nio/ByteBuffer;limit(I)Ljava/nio/Buffer; 3 384
-Ljava/lang/StringLatin1;toChars([B)[C 3 256
-Lavrora/arch/legacy/LegacyDisassembler;decode_STS_0(I)Lavrora/arch/legacy/LegacyInstr; 3 438
-Ljava/nio/ByteBuffer;position(I)Ljava/nio/ByteBuffer; 4 5504
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$INC;)V 3 256
-Lorg/dacapo/parser/SimpleCharStream;readChar()C 3 256
-Ljava/util/LinkedHashMap;newNode(ILjava/lang/Object;Ljava/lang/Object;Ljava/util/HashMap$Node;)Ljava/util/HashMap$Node; 3 256
-Lavrora/sim/Simulation$Node;getSimulator()Lavrora/sim/Simulator; 1 128
-Lavrora/arch/legacy/LegacyInstr$IMMREG_class;<init>(Lavrora/arch/legacy/LegacyInstrProperties;ILavrora/arch/legacy/LegacyRegister;)V 3 256
-Ljava/util/Arrays;copyOfRange([BII)[B 4 5379
-Lavrora/sim/AtmelInterpreter;writeIORegisterByte(IB)V 3 768
-Ljava/security/ProtectionDomain;getCodeSource()Ljava/security/CodeSource; 1 128
-Lavrora/arch/legacy/LegacyInstr$CBI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1664
-Lcck/util/Arithmetic;setBit(IIZ)I 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$RJMP;)V 3 1792
-Lavrora/sim/mcu/SPI;exchange(Lavrora/sim/mcu/SPI$Frame;)Lavrora/sim/mcu/SPI$Frame; 3 384
-Ljava/nio/charset/Charset;lookup(Ljava/lang/String;)Ljava/nio/charset/Charset; 3 256
-Lavrora/arch/legacy/LegacyInstr$WORD_class;<init>(Lavrora/arch/legacy/LegacyInstrProperties;I)V 3 485
-Lavrora/arch/legacy/LegacyRegister;nextRegister()Lavrora/arch/legacy/LegacyRegister; 3 642
-Lavrora/sim/AtmelInterpreter;pushByte(B)V 3 1152
-Ljdk/internal/perf/PerfCounter;add(J)V 3 256
-Ljava/lang/StringCoding;lookupCharset(Ljava/lang/String;)Ljava/nio/charset/Charset; 3 384
-Ljava/net/URL;getHost()Ljava/lang/String; 1 128
-Lcck/text/StringUtil;justify(ZLjava/lang/String;I)Ljava/lang/String; 3 256
-Lavrora/arch/legacy/LegacyInstr$MOV;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 896
-Ljava/lang/Character;toLowerCase(C)C 3 256
-Ljava/io/BufferedInputStream;fill()V 3 386
-Lavrora/sim/radio/CC1000Radio$SerialConfigurationInterface$PDATAOutput;write(Z)V 3 1280
-Ljava/util/Vector;add(Ljava/lang/Object;[Ljava/lang/Object;I)V 3 384
-Ljava/util/concurrent/ConcurrentHashMap$BaseIterator;hasNext()Z 3 256
-Lavrora/sim/AtmelInterpreter;getSP()I 3 1664
-Ljava/io/FileOutputStream$1;close()V 3 512
-Ljava/nio/charset/CharsetEncoder;reset()Ljava/nio/charset/CharsetEncoder; 3 256
-Ljdk/internal/loader/Resource;cachedInputStream()Ljava/io/InputStream; 3 512
-Ljava/nio/ByteBuffer;array()[B 3 256
-Ljava/util/jar/JarFile;maybeInstantiateVerifier()V 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$CPSE;)V 3 640
-Ljava/util/zip/ZipEntry;getName()Ljava/lang/String; 1 128
-Lsun/nio/cs/UTF_8$Encoder;encodeArrayLoop(Ljava/nio/CharBuffer;Ljava/nio/ByteBuffer;)Ljava/nio/charset/CoderResult; 3 234
-Lavrora/arch/legacy/LegacyDisassembler;decode_31(I)Lavrora/arch/legacy/LegacyInstr; 3 246
-Lsun/nio/fs/UnixPath;getByteArrayForSysCalls()[B 3 384
-Ljava/net/URL;getFile()Ljava/lang/String; 1 128
-Ljava/util/jar/JarFile;getEntry(Ljava/lang/String;)Ljava/util/zip/ZipEntry; 3 384
-Lavrora/sim/radio/Medium$TXRX;getCycleTime(J)J 3 640
-Ljava/io/UnixFileSystem;prefixLength(Ljava/lang/String;)I 3 384
-Ljava/lang/Long;stringSize(J)I 3 257
-Ljava/io/OutputStreamWriter;flushBuffer()V 3 384
-Lavrora/arch/legacy/LegacyInstr$LDI;<init>(ILavrora/arch/legacy/LegacyRegister;I)V 3 256
-Ljava/io/FileDescriptor;access$100(Ljava/io/FileDescriptor;)Z 1 128
-Ljava/util/ArrayDeque;poll()Ljava/lang/Object; 3 384
-Lavrora/monitors/LEDMonitor$Mon;fireBeforeTransition(II)V 3 256
-Ljava/io/FileOutputStream;write(I)V 3 256
-Ljdk/internal/loader/URLClassPath$JarLoader;ensureOpen()V 3 391
-Ljava/lang/StringCoding;decode(Ljava/lang/String;[BII)Ljava/lang/StringCoding$Result; 3 447
-Ljava/util/StringTokenizer;hasMoreTokens()Z 3 256
-Ljava/io/FileDescriptor$1;getAppend(Ljava/io/FileDescriptor;)Z 3 256
-Lavrora/arch/legacy/LegacyDisassembler;getReg([Lavrora/arch/legacy/LegacyRegister;I)Lavrora/arch/legacy/LegacyRegister; 3 384
-Ljava/util/ArrayList;size()I 1 128
-Ljava/util/zip/InflaterInputStream;read([BII)I 3 256
-Ljava/lang/Character;isLetterOrDigit(I)Z 3 256
-Ljava/io/FileOutputStream;write([BII)V 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$CPI;)V 3 641
-Ljava/util/ArrayList$Itr;<init>(Ljava/util/ArrayList;)V 3 256
-Ljava/text/StringCharacterIterator;current()C 3 256
-Ljava/lang/ref/ReferenceQueue;remove()Ljava/lang/ref/Reference; 3 384
-Lavrora/arch/legacy/LegacyDisassembler;disassembleLegacy([BII)Lavrora/arch/legacy/LegacyInstr; 3 423
-Ljava/nio/charset/Charset;isSupported(Ljava/lang/String;)Z 3 256
-Ljava/lang/String;<init>([BIILjava/lang/String;)V 3 256
-Lavrora/sim/AtmelInterpreter$IORegBehavior;read(I)I 3 1152
-Ljava/nio/CharBuffer;arrayOffset()I 3 384
-Lcck/text/Terminal;println(Ljava/lang/String;)V 3 339
-Ljava/io/FilterInputStream;available()I 3 256
-Ljdk/internal/misc/VM;addFinalRefCount(I)V 3 256
-Ljava/net/URL;getPath()Ljava/lang/String; 1 128
-Lavrora/sim/AtmelInterpreter$SREGBehavior;read(I)I 3 512
-Ljava/util/zip/ZipFile$ZipFileInputStream;read([BII)I 3 256
-Ljava/util/LinkedHashMap;get(Ljava/lang/Object;)Ljava/lang/Object; 3 384
-Ljava/util/jar/JarFile;getManifest()Ljava/util/jar/Manifest; 3 512
-Lsun/nio/fs/Util;followLinks([Ljava/nio/file/LinkOption;)Z 3 256
-Ljava/nio/ByteBuffer;wrap([B)Ljava/nio/ByteBuffer; 3 353
-Ljava/lang/ref/ReferenceQueue;remove(J)Ljava/lang/ref/Reference; 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$LDD;)V 3 384
-Ljava/util/Optional;empty()Ljava/util/Optional; 3 256
-Ljava/util/zip/ZipEntry;isDirectory()Z 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$ROR;)V 3 388
-Lavrora/arch/legacy/LegacyInstr;checkReg(ILavrora/arch/legacy/LegacyRegister;Lavrora/arch/legacy/LegacyRegister$Set;)Lavrora/arch/legacy/LegacyRegister; 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$LD;)V 3 256
-Lavrora/sim/radio/CC1000Radio$RadioRegister;<init>(Lavrora/sim/radio/CC1000Radio;Ljava/lang/String;B)V 3 256
-Ljava/lang/StringCoding;deref(Ljava/lang/ThreadLocal;)Ljava/lang/Object; 3 256
-Lavrora/sim/platform/ExternalFlash$PD3Output;write(Z)V 3 1280
-Ljava/util/zip/ZipInputStream;read([BII)I 3 256
-Ljava/nio/HeapByteBuffer;<init>([BII)V 3 353
-Ljava/util/zip/CRC32;updateBytesCheck([BII)V 3 256
-Ljava/util/concurrent/ConcurrentHashMap;computeIfAbsent(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object; 3 256
-Lavrora/sim/clock/Clock;cyclesToMillis(J)D 3 896
-Lcck/util/Arithmetic;getBit(II)Z 3 384
-Ljava/io/PushbackInputStream;read([BII)I 3 256
-Ljava/net/URLClassLoader;isSealed(Ljava/lang/String;Ljava/util/jar/Manifest;)Z 3 256
-Ljava/net/URL;getQuery()Ljava/lang/String; 1 128
-Lavrora/arch/legacy/LegacyDisassembler;decode_root(I)Lavrora/arch/legacy/LegacyInstr; 3 384
-Ljava/io/BufferedOutputStream;flushBuffer()V 3 1035
-Ljava/util/zip/ZipInputStream;ensureOpen()V 3 256
-Ljava/util/zip/CRC32;update([BII)V 3 303
-Lsun/nio/fs/LinuxFileSystemProvider;readAttributes(Ljava/nio/file/Path;Ljava/lang/Class;[Ljava/nio/file/LinkOption;)Ljava/nio/file/attribute/BasicFileAttributes; 3 256
-Ljava/lang/StringLatin1;charAt([BI)C 4 93696
-Ljava/io/FileDescriptor;attach(Ljava/io/Closeable;)V 3 384
-Lavrora/sim/radio/CC1000Radio$SPITicker;fire()V 3 384
-Ljava/io/InputStream;<init>()V 3 256
-Lcck/elf/ELFDataInputStream;read_4()I 3 512
-Ljava/util/jar/Attributes$Name;hashCode()I 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$EOR;)V 3 640
-Ljava/util/zip/ZipEntry;getSize()J 1 128
-Ljava/nio/file/Files;provider(Ljava/nio/file/Path;)Ljava/nio/file/spi/FileSystemProvider; 3 384
-Lavrora/sim/mcu/Timer8Bit$BufferedRegister;flush()V 3 256
-Ljava/util/zip/CRC32;updateBytes(I[BII)I 3 256
-Ljava/io/File;<init>(Ljava/io/File;Ljava/lang/String;)V 3 512
-Lavrora/sim/InterruptTable;disable(I)V 3 434
-Lavrora/sim/InterruptTable;disableAll()V 3 512
-Lavrora/arch/legacy/LegacyInstr$BRCC;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Lavrora/sim/mcu/Timer8Bit;access$100(Lavrora/sim/mcu/Timer8Bit;Lavrora/sim/Simulator$Event;I)V 3 256
-Lavrora/sim/mcu/SPI;unpostSPIInterrupt()V 3 512
-Lavrora/arch/legacy/LegacyDisassembler;decode_root0(I)Lavrora/arch/legacy/LegacyInstr; 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$BRPL;)V 3 256
-Lavrora/arch/legacy/LegacyInstr$NOP;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1541
-Ljava/util/WeakHashMap;indexFor(II)I 3 256
-Ljava/io/File;getPath()Ljava/lang/String; 1 128
-Ljava/util/zip/ZipInputStream;readFully([BII)V 3 256
-Ljava/io/OutputStream;<init>()V 3 256
-Ljava/io/OutputStream;flush()V 3 256
-Lavrora/arch/legacy/LegacyInstr$MULS;<init>(ILavrora/arch/legacy/LegacyRegister;Lavrora/arch/legacy/LegacyRegister;)V 3 384
-Ljava/lang/ref/Finalizer;<init>(Ljava/lang/Object;)V 3 256
-Ljava/util/BitSet;checkInvariants()V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$COM;)V 3 640
-Lavrora/arch/legacy/LegacyDisassembler;decode_LDI_0(I)Lavrora/arch/legacy/LegacyInstr; 3 295
-Ljava/io/ExpiringCache;clear()V 3 384
-Ljava/lang/String$CaseInsensitiveComparator;compare(Ljava/lang/String;Ljava/lang/String;)I 3 256
-Lavrora/arch/legacy/LegacyInstr$LDI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1664
-Ljava/util/zip/Inflater;reset()V 3 256
-Ljava/lang/ref/ReferenceQueue;poll()Ljava/lang/ref/Reference; 3 813
-Ljava/io/UnixFileSystem;normalize(Ljava/lang/String;)Ljava/lang/String; 3 128
-Ljava/lang/ref/Finalizer;add()V 3 386
-Lavrora/sim/mcu/Timer8Bit;tickerStart(I)V 3 256
-Ljava/nio/CharBuffer;<init>(IIII[CI)V 3 458
-Lavrora/sim/AtmelInterpreter;getFlashByte(I)B 3 384
-Ljava/io/PushbackInputStream;unread([BII)V 3 334
-Ljava/util/zip/ZipInputStream;getNextEntry()Ljava/util/zip/ZipEntry; 3 256
-Ljava/io/FilterOutputStream;<init>(Ljava/io/OutputStream;)V 3 384
-Ljava/lang/StringBuilder;append(I)Ljava/lang/StringBuilder; 3 400
-Lsun/nio/fs/UnixPath;normalizeAndCheck(Ljava/lang/String;)Ljava/lang/String; 3 187
-Ljava/util/zip/ZipFile$ZipFileInflaterInputStream;finalize()V 3 256
-Ljava/util/WeakHashMap;remove(Ljava/lang/Object;)Ljava/lang/Object; 3 384
-Ljava/io/FileOutputStream;<init>(Ljava/io/File;Z)V 3 384
-Lavrora/arch/legacy/LegacyDisassembler;decode_MOVW_0(I)Lavrora/arch/legacy/LegacyInstr; 3 439
-Ljava/util/zip/ZipFile$ZipFileInputStream;finalize()V 3 256
-Ljava/net/URLStreamHandler;toExternalForm(Ljava/net/URL;)Ljava/lang/String; 3 512
-Lavrora/sim/AtmelInterpreter;installIOReg(ILavrora/sim/ActiveRegister;)V 3 256
-Lavrora/sim/radio/Medium$Probe$List;fireBeforeTransmitEnd(Lavrora/sim/radio/Medium$Transmitter;)V 3 267
-Ljava/util/zip/ZipFile;releaseInflater(Ljava/util/zip/Inflater;)V 3 351
-Lavrora/sim/FiniteStateMachine;fireBefore(Lavrora/sim/util/MulticastFSMProbe;II)V 3 1155
-Ljava/util/zip/InflaterInputStream;<init>(Ljava/io/InputStream;Ljava/util/zip/Inflater;I)V 3 256
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$LPMD;)V 3 256
-Ljdk/internal/loader/URLClassPath$JarLoader;checkResource(Ljava/lang/String;ZLjava/util/jar/JarEntry;)Ljdk/internal/loader/Resource; 3 350
-Ljava/util/BitSet;wordIndex(I)I 3 256
-Ljava/io/RandomAccessFile;readFully([BII)V 3 400
-Ljava/lang/CharacterData;of(I)Ljava/lang/CharacterData; 4 5523
-Ljava/util/Vector;addElement(Ljava/lang/Object;)V 3 384
-Lavrora/sim/clock/RippleSynchronizer$NotifyEvent;currentWaitLink()Lavrora/sim/clock/RippleSynchronizer$WaitLink; 3 640
-Lcck/util/Arithmetic;word(BB)S 3 256
-Ljava/security/SecureClassLoader$CodeSourceKey;<init>(Ljava/security/CodeSource;)V 3 512
-Ljava/util/zip/ZipUtils;CENOFF([BI)J 3 384
-Lsun/net/www/protocol/jar/Handler;indexOfBangSlash(Ljava/lang/String;)I 3 384
-Lavrora/sim/InterruptTable;getPendingInterrupts()J 1 128
-Ljava/net/URLClassLoader;findClass(Ljava/lang/String;)Ljava/lang/Class; 3 384
-Ljava/net/URLClassLoader$1;run()Ljava/lang/Object; 3 384
-Ljava/util/zip/ZipFile$Source;access$200(Ljava/util/zip/ZipFile$Source;)[B 1 128
-Lavrora/core/Program;readInstr(I)Lavrora/arch/AbstractInstr; 3 256
-Lsun/net/www/protocol/jar/Handler;parseURL(Ljava/net/URL;Ljava/lang/String;II)V 3 384
-Ljdk/internal/perf/PerfCounter;getReadClassBytesTime()Ljdk/internal/perf/PerfCounter; 3 384
-Lavrora/arch/legacy/LegacyRegister$Set;contains(Lavrora/arch/legacy/LegacyRegister;)Z 3 256
-Lsun/net/www/protocol/jar/Handler;parseContextSpec(Ljava/net/URL;Ljava/lang/String;)Ljava/lang/String; 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SBRS;)V 3 1408
-Ljava/lang/Long;toString(J)Ljava/lang/String; 3 257
-Lsun/net/www/ParseUtil;<init>()V 3 384
-Lavrora/sim/clock/DeltaQueue;free(Lavrora/sim/clock/DeltaQueue$Link;)V 3 640
-Lavrora/arch/legacy/LegacyInterpreter;invokeInterrupt(J)V 3 512
-Ljava/net/URLStreamHandler;setURL(Ljava/net/URL;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V 3 384
-Lavrora/sim/AtmelInterpreter;getRegisterWord(Lavrora/arch/legacy/LegacyRegister;)I 3 642
-Ljava/security/SecureClassLoader;defineClass(Ljava/lang/String;[BIILjava/security/CodeSource;)Ljava/lang/Class; 3 384
-Ljava/util/zip/ZipEntry;<init>(Ljava/util/zip/ZipEntry;)V 3 583
-Ljdk/internal/misc/Unsafe;getLong(J)J 3 384
-Ljdk/internal/misc/Unsafe;putLong(JJ)V 3 384
-Lavrora/monitors/PacketMonitor$Mon;renderByte(ICZLjava/lang/StringBuffer;)Z 3 256
-Lavrora/sim/RWRegister;getValue()I 1 128
-Lavrora/sim/RWRegister;<init>()V 3 256
-Ljava/util/BitSet;get(I)Z 3 285
-Lavrora/arch/legacy/LegacyInstr$BRLT;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1153
-Ljava/nio/Buffer;limit(I)Ljava/nio/Buffer; 4 5402
-Lavrora/sim/mcu/SPI$SPDReg;write(B)V 3 512
-Ljava/lang/String;substring(II)Ljava/lang/String; 4 5389
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$CPC;)V 3 645
-Lavrora/arch/legacy/LegacyInstr$LSR;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lsun/net/www/ParseUtil;canonizeString(Ljava/lang/String;)Ljava/lang/String; 3 384
-Ljava/nio/ByteBuffer;<init>(IIII[BI)V 3 374
-Lavrora/sim/mcu/SPI;receive(Lavrora/sim/mcu/SPI$Frame;)V 3 384
-Ljdk/internal/math/FDBigInteger;mult([III[I)V 3 219
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$BRCC;)V 3 256
-Lcck/text/StringUtil;leftJustify(Ljava/lang/String;I)Ljava/lang/String; 3 256
-Lavrora/sim/radio/CC1000Radio$Receiver;setBER(D)V 3 384
-Lavrora/arch/legacy/LegacyInstr;IMM6(II)I 3 384
-Lavrora/sim/util/TransactionalList;<init>()V 3 256
-Lavrora/sim/clock/RippleSynchronizer;waitForNeighbors(J)V 3 768
-Lavrora/sim/FiniteStateMachine$State;<init>(Lavrora/sim/FiniteStateMachine;Ljava/lang/String;[I)V 3 256
-Lavrora/sim/mcu/ATMega128;getSleepMode()I 3 512
-Lavrora/sim/util/SimUtil;toIDTimeString(Ljava/lang/StringBuffer;ILavrora/sim/clock/Clock;)V 3 208
-Lavrora/sim/mcu/SPI$SPDReg;read()B 3 640
-Ljava/util/zip/ZipUtils;CENSIZ([BI)J 3 461
-Lavrora/arch/legacy/LegacyInstr$STD;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Ljava/util/jar/JarFile;getManifestFromReference()Ljava/util/jar/Manifest; 3 512
-Lavrora/sim/radio/Medium$Receiver$Ticker;deliverByte(J)V 3 258
-Ljava/security/SecureClassLoader$1;<init>(Ljava/security/SecureClassLoader;Ljava/security/CodeSource;)V 3 512
-Ljava/security/SecureClassLoader$CodeSourceKey;hashCode()I 3 512
-Ljava/lang/AbstractStringBuilder;append(I)Ljava/lang/AbstractStringBuilder; 3 400
-Ljava/util/Objects;requireNonNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object; 3 384
-Ljava/lang/ClassLoader;checkCerts(Ljava/lang/String;Ljava/security/CodeSource;)V 3 512
-Ljava/lang/ref/Reference;clear()V 3 384
-Ljava/nio/file/Files;readAttributes(Ljava/nio/file/Path;Ljava/lang/Class;[Ljava/nio/file/LinkOption;)Ljava/nio/file/attribute/BasicFileAttributes; 3 256
-Lavrora/sim/AtmelInterpreter$IORegBehavior;<init>(Lavrora/sim/ActiveRegister;)V 3 384
-Ljava/io/FileDescriptor;closeAll(Ljava/io/Closeable;)V 3 384
-Lavrora/sim/clock/MainClock;skipAhead()V 3 512
-Ljdk/internal/module/Resources;mayTranslate(Ljava/lang/String;II)Z 3 384
-Lavrora/sim/mcu/MCUProperties;getIOReg(Ljava/lang/String;)I 3 256
-Lavrora/sim/radio/Medium$Receiver;getIntersection(J)Ljava/util/List; 3 256
-Lavrora/sim/mcu/DefaultMCU$Pin;<init>(Lavrora/sim/mcu/DefaultMCU;I)V 3 256
-Lavrora/sim/state/RegisterUtil$BitRangeView;getValue()I 3 256
-Ljava/lang/CharacterDataLatin1;toUpperCase(I)I 3 384
-Lavrora/sim/mcu/AtmelMicrocontroller;getPin(Ljava/lang/String;)Lavrora/sim/mcu/Microcontroller$Pin; 3 256
-Ljava/util/LinkedList$ListItr;<init>(Ljava/util/LinkedList;I)V 3 640
-Ljava/lang/StringBuilder;<init>()V 4 5240
-Lavrora/sim/mcu/AtmelMicrocontroller;installIOReg(Ljava/lang/String;Lavrora/sim/ActiveRegister;)Lavrora/sim/ActiveRegister; 3 256
-Ljava/util/HashMap;get(Ljava/lang/Object;)Ljava/lang/Object; 4 6429
-Ljava/lang/Integer;intValue()I 1 128
-Lavrora/sim/Simulator;getMicrocontroller()Lavrora/sim/mcu/Microcontroller; 1 128
-Ljava/lang/Integer;numberOfLeadingZeros(I)I 3 263
-Lavrora/sim/mcu/AtmelInternalDevice;installIOReg(Ljava/lang/String;Lavrora/sim/ActiveRegister;)V 3 256
-Lavrora/sim/mcu/DefaultMCU;getSimulator()Lavrora/sim/Simulator; 1 128
-Lavrora/sim/platform/LED;write(Z)V 3 256
-Lavrora/sim/Simulator;getClock()Lavrora/sim/clock/MainClock; 1 128
-Lorg/dacapo/harness/DacapoClassLoader;loadClass(Ljava/lang/String;Z)Ljava/lang/Class; 3 384
-Lavrora/sim/AtmelInterpreter;writeDataByte(IB)V 3 897
-Lavrora/sim/clock/RippleSynchronizer;waitForLink(Lavrora/sim/clock/RippleSynchronizer$WaitLink;)V 3 768
-Lavrora/sim/mcu/MCUProperties;getPin(Ljava/lang/String;)I 3 396
-Lavrora/arch/legacy/LegacyRegister;getNumber()I 1 128
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$STPI;)V 3 924
-Lavrora/sim/AtmelInterpreter;getRegisterByte(Lavrora/arch/legacy/LegacyRegister;)B 3 388
-Lavrora/arch/legacy/LegacyInstr$STPI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1182
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$ADC;)V 3 384
-Ljava/nio/charset/CharsetEncoder;maxBytesPerChar()F 1 128
-Lavrora/arch/legacy/LegacyDisassembler;decode_21(I)Lavrora/arch/legacy/LegacyInstr; 3 380
-Lavrora/sim/clock/DeltaQueue;advance(J)V 3 521
-Ljava/lang/StringCoding$StringDecoder;requestedCharsetName()Ljava/lang/String; 1 128
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$IN;)V 3 640
-Ljava/nio/ByteBuffer;arrayOffset()I 3 384
-Lavrora/sim/radio/Medium$TXRX;getBitNum(J)J 3 640
-Ljava/lang/AbstractStringBuilder;append(J)Ljava/lang/AbstractStringBuilder; 3 256
-Lavrora/sim/clock/DeltaQueue;getCount()J 1 128
-Lavrora/sim/AtmelInterpreter;writeRegisterByte(Lavrora/arch/legacy/LegacyRegister;B)V 3 516
-Lavrora/arch/legacy/LegacyInterpreter;low(I)B 3 643
-Lavrora/arch/legacy/LegacyInterpreter;bit(Z)B 3 533
-Lavrora/sim/AtmelInterpreter;fireAfterWrite(ZIB)V 3 899
-Lavrora/arch/legacy/LegacyInstr$CPC;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1041
-Lavrora/arch/legacy/LegacyInstr$BRNE;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1186
-Lavrora/arch/legacy/LegacyInstr$BRCS;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lavrora/sim/AtmelInterpreter$SREGBehavior;write(II)I 3 512
-Lavrora/sim/AtmelInterpreter;readSRAM(ZI)B 3 1024
-Lavrora/sim/RWRegister;read()B 1 128
-Lcck/util/Arithmetic;getBit(BI)Z 3 1282
-Lavrora/sim/platform/ExternalFlash;access$100(Lavrora/sim/platform/ExternalFlash;)Z 1 128
-Lavrora/sim/mcu/DefaultMCU$Pin;write(Z)V 3 1419
-Lavrora/sim/mcu/DefaultMCU$Pin;printWrite(Z)V 3 1428
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$MOV;)V 3 896
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$NOP;)V 3 1668
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$BRLT;)V 3 1154
-Ljava/lang/String;<init>([C)V 3 294
-Lavrora/arch/legacy/LegacyInstr$SBIW;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1153
-Ljava/util/Arrays;fill([BB)V 3 60416
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$CP;)V 3 1281
-Lavrora/sim/AtmelInterpreter;commit()V 3 385
-Lavrora/arch/legacy/LegacyInstr$CP;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1280
-Lavrora/sim/AtmelInterpreter;readVolatile(I)B 3 1024
-Lavrora/sim/AtmelInterpreter;fireBeforeRead(ZI)V 3 1152
-Lavrora/sim/mcu/SPI;newFrame(B)Lavrora/sim/mcu/SPI$Frame; 3 640
-Lavrora/sim/InterruptTable;afterInvoke(I)V 3 512
-Lcck/util/Arithmetic;setBit(BIZ)B 3 1152
-Lavrora/sim/FiniteStateMachine;fireAfter(Lavrora/sim/util/MulticastFSMProbe;II)V 3 1152
-Ljava/lang/String;checkBoundsBeginEnd(III)V 4 5389
-Lavrora/sim/AtmelInterpreter;setIORegBit(IIZ)V 3 1280
-Ljava/util/zip/ZipEntry;<init>(Ljava/lang/String;)V 3 256
-Lavrora/sim/mcu/SPI$SPSReg;clearSPIF()V 3 384
-Lavrora/sim/radio/CC1000Radio$SerialConfigurationInterface$PCLKOutput;write(Z)V 3 1281
-Ljava/nio/DirectLongBufferU;get(I)J 3 384
-Lavrora/sim/platform/ExternalFlash;access$1702(Lavrora/sim/platform/ExternalFlash;Z)Z 3 1280
-Ljava/io/BufferedWriter;newLine()V 3 256
-Lavrora/sim/AtmelInterpreter;getRegisterUnsigned(Lavrora/arch/legacy/LegacyRegister;)I 3 1408
-Lavrora/arch/legacy/LegacyInstr$SBI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1664
-Lavrora/arch/legacy/LegacyInstr$LPM;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 256
-Lavrora/arch/legacy/LegacyInstr$RJMP;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1792
-Lavrora/sim/radio/Medium$Receiver$Ticker;fireUnlocked(J)V 3 640
-Lavrora/sim/Segment;direct_read(I)B 3 384
-Lavrora/arch/legacy/LegacyInstr$SUBI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 1920
-Lavrora/arch/legacy/LegacyInstr$BREQ;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 512
-Lsun/nio/fs/UnixPath;isEmpty()Z 3 256
-Lavrora/sim/radio/CC1000Radio$SerialConfigurationInterface;access$200(Lavrora/sim/radio/CC1000Radio$SerialConfigurationInterface;)V 3 1920
-Ljava/io/BufferedOutputStream;<init>(Ljava/io/OutputStream;I)V 3 384
-Lavrora/sim/radio/CC1000Radio$SerialConfigurationInterface;clockInBit()V 3 1923
-Lavrora/sim/radio/CC1000Radio$SerialConfigurationInterface$PALEOutput;write(Z)V 3 1155
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$MOVW;)V 3 256
-Lavrora/arch/legacy/LegacyInstr$ADD;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 2048
-Lavrora/arch/legacy/LegacyInterpreter;fastLoop()V 4 161901
-Lavrora/sim/RWRegister;write(B)V 1 128
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$AND;)V 3 512
-Ljava/lang/ClassLoader;compareCerts([Ljava/security/cert/Certificate;[Ljava/security/cert/Certificate;)Z 3 256
-Lavrora/sim/AtmelInterpreter;setSP(I)V 3 1664
-Lavrora/sim/AtmelInterpreter;getDataByte(I)B 3 1280
-Lavrora/sim/CodeSegment;readInstr(I)Lavrora/arch/legacy/LegacyInstr; 3 1793
-Ljava/util/LinkedList$ListItr;hasNext()Z 3 1024
-Lavrora/sim/clock/MainClock;getCount()J 3 1024
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$PUSH;)V 3 1024
-Ljava/net/URLClassLoader;access$000(Ljava/net/URLClassLoader;)Ljdk/internal/loader/URLClassPath; 1 128
-Lavrora/arch/legacy/LegacyInstr$ORI;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lavrora/arch/legacy/LegacyInstr;EGPR(ILavrora/arch/legacy/LegacyRegister;)Lavrora/arch/legacy/LegacyRegister; 3 256
-Lavrora/arch/legacy/LegacyInstr$LDS;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 768
-Ljava/io/FileOutputStream;access$000(Ljava/io/FileOutputStream;)V 3 512
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$LDS;)V 3 768
-Ljava/util/LinkedList$ListItr;checkForComodification()V 3 896
-Lavrora/sim/clock/DeltaQueue$Link;add(Lavrora/sim/Simulator$Event;)V 3 640
-Lavrora/sim/radio/CC1000Radio$MainRegister;decode(B)V 3 256
-Ljava/util/AbstractList;listIterator()Ljava/util/ListIterator; 3 640
-Ljava/lang/Object;wait()V 3 768
-Ljava/lang/String;lastIndexOf(II)I 3 475
-Lavrora/sim/clock/MainClock;insertEvent(Lavrora/sim/Simulator$Event;J)V 3 768
-Lavrora/arch/legacy/LegacyInstr$EOR;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 640
-Lavrora/sim/clock/DeltaQueue;insertEvent(Lavrora/sim/Simulator$Event;J)V 3 768
-Lavrora/sim/clock/DeltaQueue;newEventList(Lavrora/sim/Simulator$Event;Lavrora/sim/clock/DeltaQueue$EventList;)Lavrora/sim/clock/DeltaQueue$EventList; 3 768
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$OUT;)V 3 768
-Lavrora/arch/legacy/LegacyInstr$OUT;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 768
-Lavrora/sim/clock/DeltaQueue$Link;fire()V 3 640
-Lavrora/arch/legacy/LegacyInstr$CALL;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 512
-Lavrora/sim/clock/DeltaQueue;skipAhead()V 3 512
-Lavrora/sim/clock/RippleSynchronizer;advance(JLavrora/sim/clock/RippleSynchronizer$WaitLink;)Lavrora/sim/clock/RippleSynchronizer$WaitLink; 3 640
-Lcck/elf/ELFDataInputStream;read_1()I 3 256
-Lavrora/sim/radio/Medium$Receiver;access$100(Lavrora/sim/radio/Medium$Receiver;J)Lavrora/sim/radio/Medium$Transmission; 3 512
-Lavrora/sim/clock/DerivedClock;insertEvent(Lavrora/sim/Simulator$Event;J)V 3 256
-Lavrora/arch/legacy/LegacyInstr$ST;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lavrora/sim/AtmelInterpreter;disableInterrupts()V 3 512
-Lavrora/sim/clock/DeltaQueue;newLink(Lavrora/sim/Simulator$Event;JLavrora/sim/clock/DeltaQueue$Link;)Lavrora/sim/clock/DeltaQueue$Link; 3 640
-Lavrora/sim/RWRegister;setValue(I)V 3 640
-Lavrora/arch/legacy/LegacyInstr$ADC;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lavrora/arch/legacy/LegacyInterpreter;high(I)B 3 640
-Lsun/nio/cs/UTF_8$Encoder;encodeLoop(Ljava/nio/CharBuffer;Ljava/nio/ByteBuffer;)Ljava/nio/charset/CoderResult; 3 512
-Ljava/lang/Package$VersionInfo;access$600(Ljava/lang/Package$VersionInfo;)Ljava/net/URL; 1 128
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$SEC;)V 3 256
-Lavrora/monitors/PacketMonitor$Mon;appendTime(Ljava/lang/StringBuffer;)V 3 237
-Ljava/util/AbstractSequentialList;iterator()Ljava/util/Iterator; 3 640
-Ljava/util/LinkedList;isPositionIndex(I)Z 3 640
-Lavrora/sim/radio/CC1000Radio$PA_POWRegister;getPower()I 3 256
-Lavrora/sim/AtmelInterpreter;advanceClock(J)V 3 640
-Lavrora/arch/legacy/LegacyInstr$JMP;accept(Lavrora/arch/legacy/LegacyInstrVisitor;)V 3 384
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$ST;)V 3 257
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$JMP;)V 3 384
-Lavrora/sim/mcu/SPI;postSPIInterrupt()V 3 384
-Lavrora/sim/mcu/SPI$SPSReg;setSPIF()V 3 384
-Lavrora/sim/clock/RippleSynchronizer;waitFor(JLavrora/sim/clock/RippleSynchronizer$WaitLink;)V 3 768
-Lavrora/arch/legacy/LegacyInterpreter;visit(Lavrora/arch/legacy/LegacyInstr$ORI;)V 3 512
+java.util.LinkedHashMap$Entry::<init> 3 256 -1
+java.lang.CharacterDataLatin1::toUpperCaseEx 3 384 -1
+java.lang.Character::toUpperCaseEx 3 384 -1
+java.util.LinkedHashMap::removeEldestEntry 1 128 -1
+java.lang.StringLatin1::inflate 4 955 -1
+java.util.jar.JarFile::getManifestFromReference 3 384 -1
+avrora.sim.CodeSegment::load 3 60416 65
+avrora.core.Program::readProgramByte 3 512 -1
+java.util.zip.ZipFile::getInputStream 3 384 -1
+jdk.internal.loader.URLClassPath::getResource 3 384 -1
+java.net.URL::getProtocol 1 128 -1
+sun.net.www.protocol.jar.Handler::indexOfBangSlash 3 393 -1
+avrora.sim.util.SimUtil::toIDTimeString 3 278 -1
+java.lang.Character::getType 3 256 -1
+jdk.internal.loader.URLClassPath$JarLoader::ensureOpen 3 388 -1
+java.util.zip.ZipFile::releaseInflater 3 333 -1
+java.net.URL::set 3 384 -1
+java.net.URLClassLoader::isSealed 3 256 -1
+java.util.ArrayDeque::elementAt 3 384 -1
+java.io.BufferedInputStream::fill 3 386 -1
+java.util.ArrayDeque::pollFirst 3 384 -1
+java.util.zip.ZipUtils::CENOFF 3 384 -1
+java.util.ArrayDeque::poll 3 384 -1
+org.dacapo.harness.TeeOutputStream::write 3 256 -1
+java.util.zip.ZipEntry::<init> 3 256 -1
+jdk.internal.loader.URLClassPath$JarLoader$2::getManifest 3 384 -1
+java.util.zip.ZipInputStream::readEnd 3 347 -1
+avrora.arch.legacy.LegacyInstr$CBI::accept 3 1281 -1
+cck.util.Arithmetic::signExtend 3 432 -1
+avrora.arch.legacy.LegacyInstr::access$3100 3 384 -1
+avrora.sim.FiniteStateMachine::transition 3 544 -1
+java.util.LinkedList::checkPositionIndex 3 512 -1
+cck.elf.ELFDataInputStream::read_Elf32_uchar 3 640 -1
+avrora.arch.legacy.LegacyDisassembler::decode_21 3 376 -1
+avrora.arch.legacy.LegacyInstr$JMP::accept 3 512 -1
+java.lang.StringBuffer::append 3 256 -1
+java.util.jar.JarFile::maybeInstantiateVerifier 3 256 -1
+avrora.arch.legacy.LegacyInstr$WORD_class::<init> 3 484 -1
+sun.net.util.URLUtil::urlNoFragString 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::decode_24 3 390 -1
+java.lang.ref.Finalizer::remove 3 512 -1
+avrora.arch.legacy.LegacyInstr$REGIMM_class::<init> 3 256 -1
+java.lang.StringLatin1::indexOf 4 3187 -1
+avrora.sim.radio.Medium$Receiver::access$200 3 384 -1
+avrora.arch.legacy.LegacyInstr::access$1200 3 256 -1
+java.security.SecureClassLoader$CodeSourceKey::hashCode 3 512 -1
+avrora.arch.legacy.LegacyInstr$REGREG_class::<init> 3 384 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::finalize 3 256 -1
+avrora.arch.legacy.LegacyInstr::checkImm 3 256 -1
+avrora.arch.legacy.LegacyInstr$SUB::accept 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::decode_root 3 384 -1
+avrora.arch.legacy.LegacyDisassembler::decode_STS_0 3 363 -1
+sun.net.www.protocol.jar.Handler::parseContextSpec 3 393 -1
+avrora.arch.legacy.LegacyDisassembler::disassembleLegacy 3 384 -1
+avrora.core.Program::writeInstr 3 256 -1
+java.io.File::<init> 3 384 -1
+java.lang.Integer::getChars 3 256 -1
+java.util.BitSet::checkInvariants 3 256 -1
+java.lang.Integer::stringSize 3 256 -1
+java.lang.Module::isNamed 3 256 -1
+java.util.jar.JarFile$JarFileEntry::<init> 3 256 -1
+jdk.internal.loader.URLClassPath$JarLoader$2::getCodeSourceURL 3 512 -1
+java.util.zip.InflaterInputStream::<init> 3 256 -1
+java.util.HashMap::containsKey 4 11648 -1
+java.util.Vector::add 3 256 -1
+java.util.zip.CRC32::reset 3 256 -1
+java.util.zip.ZipInputStream::read 3 256 -1
+avrora.arch.legacy.LegacyInstr$STS::<init> 3 512 -1
+java.lang.Number::<init> 3 384 -1
+avrora.arch.legacy.LegacyInstr::DADDR 3 384 -1
+avrora.arch.legacy.LegacyInstr$ADD::accept 3 1154 -1
+avrora.sim.radio.CC1000Radio$Receiver::setRSSI 3 384 -1
+java.io.UnixFileSystem::delete 3 384 -1
+avrora.arch.legacy.LegacyInstr$NOP::accept 2 1024 -1
+java.util.ArrayList::get 3 256 -1
+jdk.internal.perf.PerfCounter::add 3 256 -1
+avrora.sim.mcu.SPI$SPDReg::read 3 640 -1
+avrora.arch.legacy.LegacyInstr::access$1300 3 384 -1
+java.util.jar.JarFile::isMultiRelease 3 384 -1
+avrora.sim.radio.CC1000Radio$RadioRegister::<init> 3 256 -1
+java.util.WeakHashMap::remove 3 384 -1
+java.util.ArrayList::elementData 3 256 -1
+java.net.URL::getQuery 1 128 -1
+avrora.core.Program::writeByteInto 3 256 -1
+cck.elf.ELFDataInputStream::read_1 3 256 -1
+java.lang.String::checkBoundsOffCount 4 5364 -1
+java.nio.Buffer::checkIndex 3 256 -1
+java.util.HashMap::put 3 9088 -1
+avrora.sim.mcu.SPI::exchange 3 384 -1
+java.io.PrintStream::write 3 512 -1
+java.util.Objects::checkIndex 3 256 -1
+java.io.FilterInputStream::read 3 256 -1
+java.lang.CharacterDataLatin1::getType 3 256 -1
+avrora.sim.clock.DeltaQueue::advance 3 515 -1
+java.net.URLClassLoader::access$000 1 128 -1
+java.io.FilterInputStream::<init> 3 256 -1
+avrora.sim.AtmelInterpreter::fireAfterRead 3 1024 -1
+java.util.jar.Manifest::getEntries 1 128 -1
+java.lang.Exception::<init> 3 256 -1
+java.util.jar.Manifest::getMainAttributes 1 128 -1
+avrora.sim.mcu.DefaultMCU::access$000 1 128 -1
+avrora.sim.mcu.ATMega128::getSleepMode 3 768 -1
+avrora.sim.radio.CC1000Radio$MainRegister::decode 3 256 -1
+java.net.URLStreamHandler::toExternalForm 3 531 -1
+java.security.CodeSource::getCertificates 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::decode_MULS_0 3 578 -1
+java.util.WeakHashMap$Entry::<init> 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::decode_30 3 412 -1
+avrora.sim.AtmelInterpreter::getSP 3 770 -1
+avrora.sim.Simulator::getID 1 128 -1
+java.util.LinkedHashMap::newNode 3 256 -1
+java.util.zip.ZipCoder::getBytes 3 256 -1
+java.util.WeakHashMap::maskNull 3 256 -1
+java.util.LinkedHashMap::get 3 256 -1
+jdk.internal.misc.VM::addFinalRefCount 3 256 -1
+java.lang.String::regionMatches 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::getWord 3 419 -1
+java.util.zip.Inflater::ended 3 256 -1
+avrora.sim.clock.RippleSynchronizer$NotifyEvent::fire 3 256 -1
+java.util.zip.ZipEntry::getSize 1 128 -1
+avrora.arch.legacy.LegacyInstr$CPSE::accept 3 768 -1
+java.lang.String::equalsIgnoreCase 3 256 -1
+avrora.sim.AtmelInterpreter::writeSRAM 3 641 -1
+java.lang.AbstractStringBuilder::append 4 6408 -1
+java.security.SecureClassLoader$CodeSourceKey::equals 3 384 -1
+java.util.zip.ZipFile$Source::access$1100 1 128 -1
+java.net.URL::<init> 3 229 -1
+avrora.arch.legacy.LegacyInstr$ICALL::accept 3 256 -1
+java.io.BufferedWriter::ensureOpen 3 384 -1
+java.util.zip.ZipFile$ZipFileInputStream::initDataOffset 3 389 -1
+java.lang.ref.Finalizer::access$000 3 384 -1
+avrora.arch.legacy.LegacyDisassembler::decode_MOVW_0 3 493 -1
+sun.nio.cs.UTF_8$Encoder::encode 3 128 -1
+java.util.WeakHashMap::hash 3 256 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::close 3 384 -1
+java.util.WeakHashMap::indexFor 3 256 -1
+avrora.sim.radio.CC1000Radio::getFrequency 3 241 -1
+java.util.zip.ZipFile::getZipEntry 3 256 -1
+avrora.sim.util.TransactionalList::beginTransaction 3 257 -1
+java.security.CodeSource::getLocation 1 128 -1
+java.util.zip.ZipFile$Source::getEntryPos 3 256 -1
+java.net.URLStreamHandler::setURL 3 384 -1
+java.security.CodeSource::getLocationNoFragString 1 128 -1
+java.lang.Long::stringSize 3 459 -1
+java.lang.ClassLoader::definePackage 3 256 -1
+java.net.URL::getPort 1 128 -1
+java.lang.String::toLowerCase 3 256 -1
+avrora.arch.legacy.LegacyInstr::EGPR 3 256 -1
+java.lang.System$2::invokeFinalize 3 640 -1
+java.util.zip.ZipFile::ensureOpen 3 256 -1
+java.util.zip.Inflater::reset 3 256 -1
+java.lang.ref.Finalizer::hasBeenFinalized 3 512 -1
+java.util.ArrayDeque::add 3 512 -1
+avrora.sim.clock.RippleSynchronizer$WaitLink::<init> 2 5965 -1
+java.lang.ref.Finalizer::access$100 3 512 -1
+java.util.zip.ZipFile$ZipFileInputStream::<init> 3 384 -1
+java.lang.NamedPackage::module 1 128 -1
+java.lang.ref.Reference::clear 3 384 -1
+java.io.FileOutputStream::write 3 384 -1
+java.lang.ref.Finalizer::register 3 256 -1
+avrora.sim.Simulator::getMicrocontroller 1 128 -1
+avrora.sim.clock.RippleSynchronizer::notifyLink 3 512 -1
+java.net.URL::getFile 1 128 -1
+org.dacapo.harness.DacapoClassLoader::loadClass 3 384 -1
+java.lang.StringLatin1::getChar 3 384 -1
+java.util.jar.Attributes::get 3 384 -1
+java.lang.Throwable::fillInStackTrace 3 256 -1
+sun.nio.cs.StreamEncoder::writeBytes 3 512 -1
+java.util.jar.JarFile::access$400 1 128 -1
+org.dacapo.parser.ConfigFileTokenManager::jjCheckNAdd 3 256 -1
+java.security.ProtectionDomain::getCodeSource 1 128 -1
+avrora.arch.legacy.LegacyDisassembler::decode_23 3 434 -1
+avrora.arch.legacy.LegacyRegister::nextRegister 3 512 -1
+java.io.BufferedInputStream::getInIfOpen 3 270 -1
+java.util.zip.ZipFile$Source::addEntry 3 384 -1
+java.lang.StringLatin1::toUpperCase 3 140 -1
+java.lang.StringBuilder::append 4 5376 -1
+java.util.zip.Inflater::setInput 3 386 -1
+avrora.sim.mcu.AtmelMicrocontroller::getPin 3 384 -1
+cck.text.Verbose::isVerbose 3 730 -1
+sun.nio.cs.UTF_8$Encoder::encodeArrayLoop 3 198 -1
+avrora.arch.legacy.LegacyDisassembler::decode_25 3 361 -1
+java.lang.StringBuilder::toString 4 5326 -1
+avrora.sim.platform.ExternalFlash::access$1702 3 1024 -1
+avrora.arch.legacy.LegacyRegister::hashCode 3 256 -1
+avrora.sim.clock.DeltaQueue::insertEvent 3 640 -1
+avrora.sim.radio.Medium$TXRX::getBitNum 3 512 -1
+java.lang.String::endsWith 3 256 -1
+jdk.internal.misc.Unsafe::copyMemoryChecks 3 384 -1
+java.lang.Integer::hashCode 3 256 -1
+cck.util.Arithmetic::uword 3 643 -1
+avrora.sim.radio.Medium$Receiver$Ticker::deliverByte 3 384 -1
+java.lang.StringUTF16::getChar 4 5632 -1
+java.util.zip.ZipInputStream::readFully 3 256 -1
+java.nio.CharBuffer::limit 3 512 -1
+java.util.zip.ZipFile::access$300 1 128 -1
+java.lang.ClassLoader::loadClass 3 256 -1
+java.nio.ByteBuffer::clear 3 384 -1
+java.lang.StringLatin1::toChars 3 256 -1
+java.lang.String::indexOf 3 256 -1
+sun.nio.fs.UnixException::errno 1 128 -1
+avrora.sim.mcu.MCUProperties::getIOReg 3 384 -1
+java.util.jar.JarFile::getEntry 3 384 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::available 3 256 -1
+cck.elf.ELFDataInputStream::read_Elf32_Word 3 512 -1
+jdk.internal.math.FDBigInteger::<init> 3 256 -1
+java.io.RandomAccessFile::seek 3 256 -1
+avrora.sim.Segment::read 3 512 -1
+java.io.File::getName 3 256 -1
+java.util.LinkedList::add 3 384 -1
+java.lang.Integer::<init> 3 384 -1
+java.nio.CharBuffer::arrayOffset 3 384 -1
+avrora.sim.mcu.DefaultMCU$Pin::write 3 1025 -1
+java.util.LinkedList::unlink 3 256 -1
+java.io.File::isDirectory 3 384 -1
+avrora.arch.legacy.LegacyDisassembler::decode_31 3 246 -1
+avrora.arch.legacy.LegacyInstr$OR::accept 3 256 -1
+avrora.sim.clock.RippleSynchronizer::access$000 3 256 -1
+java.util.jar.Attributes$Name::hashCode 3 256 -1
+avrora.sim.AtmelInterpreter::getIORegisterByte 3 512 -1
+java.lang.StringBuilder::<init> 3 256 -1
+java.net.URL::getAuthority 1 128 -1
+jdk.internal.loader.URLClassPath$Loader::getBaseURL 1 128 -1
+java.io.FilterOutputStream::<init> 3 256 -1
+java.util.LinkedHashMap::clear 3 384 -1
+java.util.zip.ZipFile$ZipFileInputStream::read 3 256 -1
+java.util.HashMap::getNode 4 6147 -1
+avrora.sim.clock.DeltaQueue$Link::fire 3 512 -1
+avrora.sim.mcu.RegisterLayout::getIOReg 3 384 -1
+java.io.FileDescriptor::<init> 3 256 -1
+java.lang.StringCoding::encode 3 384 -1
+java.io.ExpiringCache::clear 3 256 -1
+avrora.sim.clock.MainClock::skipAhead 3 384 -1
+avrora.arch.legacy.LegacyInstr$ADC::accept 3 386 -1
+cck.util.Option$Str::set 1 128 -1
+java.lang.StringDecoderUTF8::decode 3 384 -1
+java.lang.Long::toString 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::decode_LDI_0 3 423 -1
+java.lang.ref.Finalizer::add 3 387 -1
+cck.elf.ELFDataInputStream::read_4 3 512 -1
+java.nio.charset.Charset::lookup 3 373 -1
+java.lang.StringCoding::lookupCharset 3 242 -1
+java.util.Hashtable::get 3 256 -1
+java.io.UnixFileSystem::normalize 3 128 -1
+java.nio.ByteBuffer::hasArray 3 256 -1
+java.util.zip.ZipUtils::CENTIM 3 256 -1
+java.lang.StringCoding::encodeUTF8 3 158 -1
+jdk.internal.module.Resources::mayTranslate 3 384 -1
+java.lang.StringCoding::decode 3 256 -1
+java.lang.String::<init> 3 256 -1
+java.lang.StringLatin1::toLowerCase 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::decode_root0 3 384 -1
+avrora.sim.AtmelInterpreter::readVolatile 3 1026 -1
+java.lang.ref.SoftReference::get 3 256 -1
+java.nio.ByteBuffer::position 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::getReg 3 384 -1
+java.nio.charset.CharsetEncoder::implReset 3 256 -1
+java.util.Vector::addElement 3 384 -1
+java.util.zip.ZipUtils::CENHOW 3 256 -1
+java.io.FileDescriptor$1::getAppend 3 256 -1
+avrora.core.Program::readInstr 3 512 -1
+java.util.jar.JarFile$JarFileEntry::getName 1 128 -1
+java.nio.charset.CharsetEncoder::maxBytesPerChar 1 128 -1
+java.lang.StringLatin1::canEncode 4 17753 -1
+java.util.zip.ZipEntry::getName 1 128 -1
+java.io.PushbackInputStream::unread 3 478 -1
+java.nio.HeapByteBuffer::<init> 3 353 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface::inputWriteBit 3 898 -1
+java.io.UnixFileSystem::getBooleanAttributes 3 256 -1
+java.io.BufferedWriter::write 3 256 -1
+jdk.internal.perf.PerfCounter::addElapsedTimeFrom 3 256 -1
+java.util.zip.ZipEntry::isDirectory 3 384 -1
+avrora.arch.legacy.LegacyInstr$IMMREG_class::<init> 3 512 -1
+avrora.sim.AtmelInterpreter::writeRegisterByte 3 515 -1
+avrora.sim.radio.Medium$Probe$List::fireAfterReceive 3 559 -1
+avrora.arch.legacy.LegacyInstr$MOVW::<init> 3 512 -1
+java.lang.StringLatin1::lastIndexOf 4 1117 -1
+java.util.zip.ZipFile$Source::access$200 1 128 -1
+java.io.FilterInputStream::available 3 256 -1
+java.lang.invoke.LambdaForm$MH/870698190::identity_L 3 1077 -1
+java.util.zip.ZipInputStream::createZipEntry 3 384 -1
+sun.nio.cs.UTF_8$Decoder::decode 3 162 -1
+java.util.zip.ZipUtils::LG 3 256 -1
+java.util.zip.ZipUtils::CENLEN 3 256 -1
+java.lang.Character::isLetterOrDigit 3 256 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::fill 3 256 -1
+java.io.FileOutputStream::finalize 3 512 -1
+avrora.sim.AtmelInterpreter::getRegisterWord 3 644 -1
+java.util.ArrayList$Itr::<init> 3 256 -1
+jdk.internal.loader.URLClassPath$JarLoader::checkResource 3 347 -1
+java.io.FileDescriptor::closeAll 3 512 -1
+java.net.URL::getHost 1 128 -1
+sun.nio.fs.UnixPath::getByteArrayForSysCalls 3 384 -1
+avrora.sim.AtmelInterpreter$IORegBehavior::write 3 1024 -1
+avrora.arch.legacy.LegacyDisassembler::decode_9 3 406 -1
+java.lang.ref.Finalizer::<init> 3 256 -1
+avrora.sim.radio.Medium$Receiver::getIntersection 3 384 -1
+java.util.zip.ZipFile$ZipFileInputStream::finalize 3 256 -1
+java.nio.CharBuffer::position 3 384 -1
+avrora.sim.AtmelInterpreter$IORegBehavior::<init> 3 640 -1
+java.lang.System::getSecurityManager 1 1190 -1
+java.lang.Package$VersionInfo::access$600 1 128 -1
+java.nio.Buffer::remaining 3 256 -1
+sun.nio.fs.UnixPath::isEmpty 3 256 -1
+avrora.arch.legacy.LegacyInstr$LPMD::accept 3 384 -1
+java.lang.String::access$100 1 128 -1
+java.lang.AbstractStringBuilder::checkRange 3 256 -1
+org.dacapo.parser.ConfigFileTokenManager::jjCheckNAddStates 3 256 -1
+avrora.sim.mcu.DefaultMCU$Pin::read 3 640 -1
+java.lang.CharacterDataLatin1::toLowerCase 3 384 -1
+sun.nio.fs.LinuxFileSystemProvider::readAttributes 3 256 -1
+java.io.BufferedWriter::flushBuffer 3 256 -1
+avrora.sim.radio.Medium$Transmission::<init> 3 256 -1
+avrora.sim.RWRegister::getValue 1 128 -1
+java.lang.Character::toLowerCase 3 384 -1
+jdk.internal.loader.URLClassPath::getLoader 3 561 -1
+avrora.core.Program::checkAddress 3 256 -1
+java.nio.charset.Charset::isSupported 3 246 -1
+java.nio.ByteBuffer::arrayOffset 3 384 -1
+java.util.zip.ZipInputStream::readLOC 3 388 -1
+java.nio.HeapCharBuffer::<init> 3 458 -1
+java.util.WeakHashMap::put 3 256 -1
+java.util.zip.ZipFile$Source::hashN 3 108 -1
+java.util.jar.Attributes::getValue 3 384 -1
+avrora.sim.radio.Medium::access$400 3 256 -1
+avrora.monitors.PacketMonitor$Mon::renderPacket 3 111 -1
+java.util.zip.Inflater::ensureOpen 3 256 -1
+java.util.zip.ZipUtils::CENCOM 3 384 -1
+java.nio.Buffer::<init> 3 384 -1
+avrora.arch.legacy.LegacyInstr::access$3300 3 256 -1
+java.lang.invoke.MethodTypeForm::erasedType 1 128 -1
+avrora.sim.clock.DeltaQueue::newEventList 3 640 -1
+java.lang.Integer::intValue 1 128 -1
+java.lang.StringLatin1::charAt 4 67072 -1
+java.util.zip.InflaterInputStream::ensureOpen 3 256 -1
+avrora.monitors.LEDMonitor$Mon::fireBeforeTransition 3 384 -1
+jdk.internal.math.FDBigInteger::mult 3 219 -1
+java.io.FileDescriptor::access$100 1 128 -1
+java.io.PushbackInputStream::ensureOpen 3 256 -1
+java.io.File::isInvalid 3 384 -1
+java.util.zip.ZipUtils::SH 3 256 -1
+avrora.sim.AtmelInterpreter::getRegisterUnsigned 3 898 -1
+avrora.sim.radio.Medium$Receiver::waitForNeighbors 3 640 -1
+java.util.LinkedList$Node::<init> 3 384 -1
+java.util.HashMap::clear 3 256 -1
+avrora.sim.clock.RippleSynchronizer$NotifyEvent::access$100 3 640 -1
+java.io.BufferedOutputStream::<init> 3 256 -1
+sun.net.www.ParseUtil::encodePath 3 256 -1
+java.lang.ref.ReferenceQueue::reallyPoll 3 258 -1
+avrora.sim.AtmelInterpreter::getDataByte 3 768 -1
+java.lang.StringCoding::deref 3 256 -1
+avrora.arch.legacy.LegacyInterpreter::runLoop 3 60417 21
+java.util.LinkedList$ListItr::checkForComodification 3 512 -1
+avrora.arch.legacy.LegacyInstr$RETI::accept 3 768 -1
+java.nio.ByteBuffer::array 3 352 -1
+java.util.Objects::requireNonNull 3 384 -1
+avrora.arch.legacy.LegacyDisassembler::decode_22 3 256 -1
+java.io.FileDescriptor::attach 3 384 -1
+cck.util.Arithmetic::high 3 654 -1
+jdk.internal.util.Preconditions::checkIndex 3 256 -1
+java.nio.Buffer::flip 3 384 -1
+cck.text.StringUtil::toFixedFloat 3 367 -1
+java.net.URL::getRef 1 128 -1
+jdk.internal.loader.URLClassPath$JarLoader::access$700 1 128 -1
+java.util.AbstractList::<init> 3 329 -1
+avrora.sim.RWRegister::write 1 129 -1
+sun.nio.fs.UnixPath::<init> 3 384 -1
+java.util.StringTokenizer::hasMoreTokens 3 256 -1
+avrora.sim.AtmelInterpreter::toSRAM 3 640 -1
+java.lang.String::substring 3 256 -1
+avrora.sim.clock.DeltaQueue::insertAfter 3 512 -1
+java.nio.CharBuffer::<init> 3 458 -1
+java.util.zip.ZipFile$ZipFileInputStream::size 1 128 -1
+java.lang.ref.WeakReference::<init> 3 256 -1
+avrora.arch.legacy.LegacyInterpreter::fastLoop 3 182340 5
+avrora.monitors.PacketMonitor$Mon::appendTime 3 239 -1
+avrora.arch.legacy.LegacyInstr$SLEEP::accept 3 768 -1
+java.util.zip.ZStreamRef::address 1 128 -1
+java.nio.DirectLongBufferU::ix 3 256 -1
+java.util.Arrays::copyOf 3 722 -1
+avrora.sim.mcu.SPI::invoke 3 512 -1
+avrora.arch.legacy.LegacyInstr::<init> 3 256 -1
+avrora.arch.legacy.LegacyInstr$CPC::accept 3 898 -1
+java.util.ArrayList::iterator 3 256 -1
+avrora.sim.mcu.Timer8Bit$Mode_CTC::fire 3 384 -1
+java.util.concurrent.ConcurrentHashMap$Traverser::advance 3 256 -1
+java.lang.Package::isSealed 3 256 -1
+java.net.URL::getPath 1 128 -1
+java.lang.ref.Finalizer::runFinalizer 3 512 -1
+java.util.zip.ZipUtils::CENFLG 3 384 -1
+java.io.UnixFileSystem::resolve 3 256 -1
+jdk.internal.misc.Unsafe::checkOffset 3 384 -1
+java.util.LinkedList$ListItr::hasNext 3 512 -1
+jdk.internal.loader.URLClassPath$JarLoader::access$600 1 128 -1
+avrora.sim.state.VolatileBehavior::<init> 3 640 -1
+avrora.arch.legacy.LegacyInstr$CPI::accept 3 771 -1
+java.util.zip.Inflater::inflate 3 256 -1
+sun.nio.fs.UnixPath::normalizeAndCheck 3 187 -1
+org.dacapo.parser.SimpleCharStream::readChar 3 256 -1
+java.lang.String::charAt 3 67072 -1
+java.util.concurrent.ConcurrentHashMap::computeIfAbsent 3 256 -1
+java.nio.Buffer::clear 3 384 -1
+java.nio.ByteBuffer::wrap 3 353 -1
+java.lang.String::toCharArray 3 256 -1
+avrora.sim.mcu.ADC$MUXRegister::isSingleEnded 3 258 -1
+java.util.zip.ZipUtils::CENNAM 3 384 -1
+java.util.zip.ZipUtils::CENEXT 3 384 -1
+cck.util.Arithmetic::word 3 384 -1
+java.lang.Math::min 4 5376 -1
+avrora.sim.radio.CC1000Radio::getPower 3 241 -1
+java.lang.ClassLoader::checkName 3 256 -1
+avrora.sim.clock.MainClock::removeEvent 3 256 -1
+java.lang.String::getBytes 3 384 -1
+java.util.LinkedList$ListItr::next 3 512 -1
+sun.nio.cs.StreamEncoder::write 3 515 -1
+java.lang.Float::isInfinite 3 256 -1
+java.nio.charset.CharsetEncoder::reset 3 256 -1
+java.io.FilterOutputStream::write 3 167 -1
+java.util.jar.JarFile::getInputStream 3 384 -1
+avrora.sim.radio.CC1000Radio$Transmitter::nextByte 3 256 -1
+java.lang.Throwable::<init> 3 256 -1
+sun.net.www.ParseUtil::canonizeString 3 521 -1
+avrora.sim.clock.DerivedClock::insertEvent 3 512 -1
+java.util.StringTokenizer::scanToken 3 213 -1
+java.util.LinkedList::linkLast 3 384 -1
+java.util.zip.ZipFile$Source::getEntryHash 3 256 -1
+java.nio.CharBuffer::wrap 3 458 -1
+sun.nio.fs.UnixNativeDispatcher::copyToNativeBuffer 3 384 -1
+java.io.PrintStream::print 3 316 -1
+java.lang.ClassLoader::findLoadedClass 3 256 -1
+avrora.arch.legacy.LegacyInstr::access$500 3 384 -1
+avrora.sim.mcu.DefaultMCU$Pin::<init> 3 384 -1
+avrora.sim.radio.Medium$Probe$List::fireAfterReceiveEnd 3 271 -1
+java.nio.ByteBuffer::limit 3 384 -1
+sun.nio.fs.NativeBuffers::copyCStringToNativeBuffer 3 384 -1
+cck.util.Arithmetic::clearBit 3 1152 -1
+java.util.ArrayList::add 3 256 -1
+java.util.zip.InflaterInputStream::read 3 256 -1
+java.util.zip.ZipFile$ZipFileInputStream::close 3 334 -1
+java.net.URLClassLoader::getAndVerifyPackage 3 384 -1
+java.util.WeakHashMap::expungeStaleEntries 3 384 -1
+avrora.sim.state.RegisterUtil$BoolView::setValue 3 512 -1
+cck.text.StringUtil::space 3 252 -1
+avrora.sim.mcu.ADC$ControlRegister::write 3 256 -1
+sun.nio.fs.Util::followLinks 3 256 -1
+java.lang.ClassLoader::getNamedPackage 3 512 -1
+java.nio.ByteBuffer::<init> 3 374 -1
+jdk.internal.misc.Unsafe::checkNativeAddress 3 513 -1
+avrora.sim.clock.RippleSynchronizer::waitForNeighbors 3 640 -1
+java.lang.ClassLoader::compareCerts 3 384 -1
+java.io.FileOutputStream$1::<init> 3 512 -1
+avrora.arch.legacy.LegacyInterpreter::low 3 514 -1
+java.util.zip.ZipInputStream::ensureOpen 3 256 -1
+org.dacapo.parser.SimpleCharStream::UpdateLineColumn 3 256 -1
+java.io.BufferedOutputStream::write 3 256 -1
+java.util.zip.ZipFile::access$600 1 128 -1
+java.util.LinkedList::listIterator 3 512 -1
+avrora.arch.legacy.LegacyInterpreter::high 4 8724 -1
+java.io.BufferedOutputStream::flushBuffer 3 1167 -1
+avrora.sim.clock.DeltaQueue::getCount 1 129 -1
+java.nio.charset.CharsetDecoder::reset 3 256 -1
+avrora.sim.mcu.ADC$ControlRegister::insertConversion 3 319 -1
+avrora.sim.mcu.Timer8Bit::compareMatch 3 258 -1
+java.util.AbstractSequentialList::iterator 3 512 -1
+jdk.internal.loader.URLClassPath$JarLoader::getResource 3 256 -1
+java.nio.charset.CharsetDecoder::implReset 3 256 -1
+java.util.zip.ZipFile$Source::readFullyAt 3 249 -1
+java.util.zip.ZipCoder::toString 3 256 -1
+java.lang.StringCoding$StringDecoder::requestedCharsetName 1 128 -1
+java.io.PushbackInputStream::read 3 256 -1
+java.util.ArrayDeque::addLast 3 256 -1
+avrora.sim.mcu.ATMegaFamily$PortRegister::write 3 896 -1
+org.dacapo.harness.Benchmark::fileFromInputStream 3 512 -1
+java.util.concurrent.ConcurrentHashMap::tabAt 4 7680 -1
+avrora.sim.InterruptTable::enableAll 3 578 -1
+java.util.zip.CRC32::update 3 256 -1
+java.util.Optional::empty 3 256 -1
+java.lang.String$CaseInsensitiveComparator::compare 3 256 -1
+java.util.jar.JarFile::getManifest 3 512 -1
+java.lang.invoke.LambdaForm$MH/654582261::linkToTargetMethod 3 1076 -1
+java.util.zip.ZipFile$Source::isMetaName 3 384 -1
+java.io.OutputStream::<init> 3 256 -1
+avrora.sim.mcu.MCUProperties::getPin 3 384 -1
+java.io.BufferedOutputStream::flush 3 256 -1
+java.util.zip.ZipCoder::isUTF8 1 128 -1
+avrora.sim.radio.CC1000Radio$Receiver::setBER 3 512 -1
+avrora.sim.platform.ExternalFlash$PA3Output::write 3 256 -1
+avrora.sim.radio.CC1000Radio$RSSIOutput::getVoltage 3 384 -1
+java.util.BitSet::wordIndex 3 256 -1
+java.io.FileOutputStream::access$000 3 512 -1
+java.util.zip.InflaterInputStream::fill 3 256 -1
+java.util.Locale::getDefault 3 384 -1
+sun.net.www.ParseUtil::firstEncodeIndex 3 121 -1
+java.util.concurrent.ConcurrentHashMap$BaseIterator::hasNext 3 256 -1
+avrora.sim.mcu.ADC$ControlRegister::convertVoltage 3 256 -1
+java.util.zip.ZipFile::getEntry 3 256 -1
+java.util.zip.CRC32::updateBytesCheck 3 460 -1
+avrora.sim.AtmelInterpreter::setSP 3 770 -1
+java.util.zip.CRC32::getValue 3 218 -1
+java.util.zip.ZipInputStream::getNextEntry 3 256 -1
+java.lang.CharacterData::of 4 5428 -1
+avrora.sim.radio.Medium$Receiver::isChannelClear 3 512 -1
+jdk.internal.loader.Resource::cachedInputStream 3 384 -1
+java.nio.Bits::byteOrder 3 384 -1
+java.lang.StringLatin1::regionMatchesCI 3 256 -1
+avrora.arch.legacy.LegacyInstr$DEC::accept 3 384 -1
+java.io.FilterOutputStream::close 3 512 -1
+sun.util.locale.LocaleUtils::isUpper 3 256 -1
+avrora.arch.legacy.LegacyRegister::getNumber 1 135 -1
+java.io.FileOutputStream::close 3 512 -1
+java.util.zip.ZipUtils::CENSIG 3 384 -1
+java.util.Arrays::copyOfRange 4 5537 -1
+java.util.ArrayList::size 1 128 -1
+java.security.SecureClassLoader$1::<init> 3 512 -1
+java.nio.DirectLongBufferU::get 3 384 -1
+avrora.sim.Simulation::getPrinter 3 730 -1
+avrora.sim.RWRegister::setValue 3 512 -1
+java.net.URLClassLoader::defineClass 3 384 -1
+java.util.BitSet::get 3 285 -1
+avrora.sim.mcu.SPI$Frame::<init> 3 256 -1
+avrora.arch.legacy.LegacyInstr::access$900 3 256 -1
+java.lang.String::startsWith 4 5379 -1
+cck.text.StringUtil::leftJustify 3 256 -1
+java.lang.String::checkBoundsBeginEnd 4 5536 -1
+avrora.arch.legacy.LegacyRegister$Set::contains 3 256 -1
+java.nio.file.Files::readAttributes 3 256 -1
+cck.text.StringUtil::justify 3 256 -1
+avrora.sim.util.MulticastFSMProbe::<init> 3 256 -1
+avrora.sim.FiniteStateMachine$State::<init> 3 256 -1
+java.lang.ref.ReferenceQueue::enqueue 3 256 -1
+java.net.URLClassLoader$1::<init> 3 512 -1
+avrora.sim.AtmelInterpreter::fireBeforeRead 3 1025 -1
+avrora.sim.FiniteStateMachine::fireBefore 3 896 -1
+java.net.URLClassLoader$1::run 3 512 -1
+java.net.URLClassLoader::findClass 3 516 -1
+java.security.SecureClassLoader$CodeSourceKey::<init> 3 512 -1
+avrora.arch.legacy.LegacyInstr::checkReg 3 256 -1
+avrora.sim.AtmelInterpreter::popByte 3 640 -1
+java.net.URLClassLoader::access$100 3 384 -1
+java.lang.ClassLoader::preDefineClass 3 512 -1
+java.lang.ClassLoader::checkCerts 3 512 -1
+avrora.monitors.PacketMonitor$Mon::append 3 256 -1
+avrora.sim.RWRegister::<init> 3 512 -1
+java.lang.ClassLoader::postDefineClass 3 512 -1
+jdk.internal.loader.URLClassPath$JarLoader$2::getCodeSigners 3 512 -1
+java.util.Arrays::fill 3 60416 5
+java.util.HashMap::get 4 6429 -1
+avrora.sim.radio.Medium$Receiver::access$100 3 640 -1
+avrora.sim.AtmelInterpreter::installIOReg 3 384 -1
+avrora.sim.mcu.AtmelMicrocontroller::installIOReg 3 384 -1
+avrora.sim.mcu.DefaultMCU::getSimulator 1 128 -1
+avrora.sim.mcu.ADC$MUXRegister::getSingleIndex 3 256 -1
+avrora.sim.mcu.ADC$ControlRegister$ConversionEvent::fire 3 257 -1
+java.util.StringTokenizer::skipDelimiters 3 256 -1
+avrora.sim.AtmelInterpreter::getRegisterByte 3 387 -1
+sun.nio.cs.UTF_8$Encoder::encodeLoop 3 512 -1
+avrora.sim.clock.MainClock::advance 3 512 -1
+avrora.sim.AtmelInterpreter::commit 3 514 -1
+avrora.sim.util.TransactionalList::<init> 3 256 -1
+avrora.sim.AtmelInterpreter::fireBeforeWrite 3 515 -1
+avrora.arch.legacy.LegacyInterpreter::visit 3 524 -1
+avrora.sim.AtmelInterpreter::fireAfterWrite 3 642 -1
+avrora.sim.mcu.DefaultMCU$Pin::printWrite 3 1042 -1
+avrora.arch.legacy.LegacyInterpreter::bit 3 769 -1
+avrora.sim.AtmelInterpreter::writeRegisterWord 3 896 -1
+avrora.arch.legacy.LegacyInstr$POP::accept 3 640 -1
+avrora.arch.legacy.LegacyInstr$SBIW::accept 3 1026 -1
+avrora.arch.legacy.LegacyInstr$SBRS::accept 3 1152 -1
+avrora.arch.legacy.LegacyInstr$BRLT::accept 2 1027 -1
+avrora.sim.util.TransactionalList::endTransaction 3 385 -1
+avrora.arch.legacy.LegacyInstr$STPI::accept 3 898 -1
+avrora.arch.legacy.LegacyInstr$BRNE::accept 3 1025 -1
+avrora.sim.AtmelInterpreter::pushByte 3 640 -1
+java.util.zip.Inflater::getBytesWritten 3 645 -1
+avrora.arch.legacy.LegacyInstr$CP::accept 2 1025 -1
+avrora.arch.legacy.LegacyInstr$OUT::accept 3 640 -1
+avrora.sim.util.TransactionalList::isEmpty 3 1024 -1
+avrora.arch.legacy.LegacyInstr$RJMP::accept 3 1281 -1
+avrora.sim.AtmelInterpreter::readSRAM 3 1025 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PCLKOutput::write 3 1025 -1
+java.io.FileOutputStream$1::close 3 512 -1
+avrora.sim.platform.ExternalFlash$PD5Output::write 3 1027 -1
+avrora.sim.platform.ExternalFlash::access$100 1 128 -1
+avrora.sim.RWRegister::read 1 129 -1
+java.util.zip.ZipFile::getInflater 3 384 -1
+avrora.arch.legacy.LegacyInstr$IN::accept 3 512 -1
+avrora.sim.AtmelInterpreter$IORegBehavior::read 3 1025 -1
+avrora.arch.legacy.LegacyInstr::GPR 3 384 -1
+java.io.RandomAccessFile::read 3 256 -1
+avrora.sim.AtmelInterpreter::setIORegBit 3 898 -1
+cck.util.Arithmetic::setBit 3 897 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PALEOutput::write 3 1153 -1
+java.io.OutputStreamWriter::flushBuffer 3 384 -1
+avrora.sim.platform.ExternalFlash$PD3Output::write 3 896 -1
+avrora.sim.clock.DeltaQueue$Link::add 3 512 -1
+avrora.arch.legacy.LegacyInstr$SBI::accept 3 1024 -1
+cck.util.Arithmetic::getBit 3 510 -1
+avrora.sim.mcu.SPI$SPSReg::clearSPIF 3 512 -1
+avrora.sim.AtmelInterpreter::writeDataByte 3 1027 -1
+avrora.sim.clock.DeltaQueue::removeEvent 3 209 -1
+cck.util.Arithmetic::low 3 640 -1
+avrora.arch.legacy.LegacyInstr$SUBI::accept 3 1152 -1
+avrora.arch.legacy.LegacyInstr$LDI::accept 3 1024 -1
+avrora.sim.mcu.DefaultMCU$Pin::setOutputDir 3 1024 -1
+avrora.arch.legacy.LegacyInstr::asInstr 3 771 -1
+java.io.File::delete 3 384 -1
+java.util.zip.ZipUtils::get32 3 256 -1
+avrora.sim.Simulator::getClock 1 128 -1
+avrora.sim.AtmelInterpreter::enableInterrupts 3 576 -1
+avrora.sim.mcu.DefaultMCU$Pin::printRead 3 640 -1
+avrora.arch.legacy.LegacyInstr$STS::accept 3 768 -1
+avrora.sim.clock.RippleSynchronizer::waitForLink 3 768 -1
+avrora.sim.clock.MainClock::getCount 3 640 -1
+avrora.arch.legacy.LegacyInstr$PUSH::accept 3 640 -1
+java.io.OutputStream::flush 3 256 -1
+avrora.arch.legacy.LegacyInstr$MOV::accept 3 513 -1
+avrora.sim.FiniteStateMachine::fireAfter 3 896 -1
+avrora.sim.Simulator::getPrinter 3 730 -1
+avrora.sim.mcu.SPI::receive 3 617 -1
+avrora.arch.legacy.LegacyInstr$LDS::accept 3 512 -1
+java.util.concurrent.ConcurrentHashMap::put 3 256 -1
+avrora.sim.radio.Medium$Receiver::endReceive 3 265 -1
+avrora.sim.mcu.ADC$ControlRegister::invoke 3 257 -1
+avrora.sim.clock.Clock::cyclesToMillis 3 640 -1
+avrora.sim.clock.MainClock::insertEvent 3 256 -1
+avrora.arch.legacy.LegacyInstr$EOR::accept 3 512 -1
+avrora.sim.Simulation$Node::getSimulator 1 128 -1
+avrora.sim.mcu.SPI$SPDReg::write 3 640 -1
+avrora.sim.InterruptTable::getPendingInterrupts 1 128 -1
+java.lang.String::concat 3 256 -1
+avrora.sim.FiniteStateMachine::getCurrentState 1 128 -1
+java.lang.ref.ReferenceQueue::poll 3 813 -1
+java.lang.Object::wait 3 512 -1
+avrora.arch.legacy.LegacyInterpreter::uword 3 512 -1
+avrora.sim.state.RegisterUtil$BoolView::getValue 3 256 -1
+sun.nio.cs.StreamEncoder::ensureOpen 3 512 -1
+java.util.AbstractList::listIterator 3 512 -1
+avrora.sim.clock.DeltaQueue::newLink 3 512 -1
+java.util.StringTokenizer::nextToken 3 384 -1
+avrora.sim.clock.DeltaQueue::free 3 512 -1
+avrora.sim.AtmelInterpreter::writeIORegisterByte 3 640 -1
+avrora.sim.AtmelInterpreter::disableInterrupts 3 384 -1
+avrora.sim.clock.RippleSynchronizer$NotifyEvent::currentWaitLink 3 512 -1
+avrora.sim.clock.RippleSynchronizer::advance 3 512 -1
+java.lang.System::lineSeparator 3 256 -1
+avrora.arch.legacy.LegacyInstr$AND::accept 3 512 -1
+avrora.sim.clock.DeltaQueue::skipAhead 3 586 -1
+avrora.arch.legacy.LegacyDisassembler::relative 3 432 -1
+avrora.sim.AtmelInterpreter::setPosted 3 512 -1
+avrora.arch.legacy.LegacyInstr::getSize 4 9000 -1
+java.util.LinkedList::node 3 512 -1
+java.util.WeakHashMap::getTable 3 384 -1
+avrora.sim.Segment::checked_read 3 384 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::<init> 3 384 -1
+avrora.sim.radio.Medium$Receiver$Ticker::fire 3 512 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PDATAOutput::write 3 896 -1
+avrora.sim.mcu.SPI::newFrame 3 640 -1
+java.util.LinkedList$ListItr::<init> 3 640 -1
+avrora.sim.radio.Medium$Receiver::access$000 3 640 -1
+avrora.sim.SimulatorThread::getSimulator 3 640 -1
+avrora.arch.legacy.LegacyInstr$BRGE::accept 3 512 -1
+avrora.sim.AtmelInterpreter::advanceClock 3 640 -1
+java.io.UnixFileSystem::prefixLength 3 256 -1
+avrora.sim.clock.RippleSynchronizer::waitFor 3 640 -1
+java.lang.ClassLoader::addClass 3 512 -1
+avrora.sim.radio.Medium$Receiver$Ticker::fireUnlocked 3 768 -1
+avrora.sim.radio.Medium$TXRX::getCycleTime 3 768 -1
+avrora.arch.legacy.LegacyInstr$ORI::accept 3 384 -1
+avrora.sim.clock.DeltaQueue::advanceSlow 3 389 -1
+sun.nio.fs.NativeBuffers::getNativeBufferFromCache 3 384 -1
+avrora.sim.AtmelInterpreter$SREGBehavior::write 3 512 -1
+java.io.RandomAccessFile::readFully 3 256 -1
+avrora.sim.radio.CC1000Radio$SPITicker::fire 3 384 -1
+cck.text.Terminal::println 3 278 -1
+avrora.sim.InterruptTable::post 3 256 -1
+avrora.arch.legacy.LegacyInterpreter::invokeInterrupt 3 384 -1
+avrora.sim.mcu.SPI$SPSReg::setSPIF 3 512 -1
+avrora.sim.mcu.ATMegaFamily$FlagRegister::setPosted 3 256 -1
+java.net.URLStreamHandler::getDefaultPort 1 128 -1
+avrora.arch.legacy.LegacyInterpreter::leaveSleepMode 3 384 -1
+avrora.arch.legacy.LegacyInstr$BREQ::accept 3 512 -1
+avrora.sim.AtmelInterpreter$SREGBehavior::read 3 641 -1
+avrora.sim.radio.CC1000Radio$CurrentRegister::decode 3 256 -1
+java.util.LinkedList$ListItr::remove 3 256 -1
+avrora.sim.mcu.SPI::postSPIInterrupt 3 512 -1
+avrora.sim.InterruptTable::unpost 3 521 -1
+avrora.arch.legacy.LegacyInterpreter::sleepLoop 3 664 -1
+java.util.zip.ZipUtils::get16 3 256 -1
+avrora.sim.mcu.AtmelMicrocontroller::wakeup 3 640 -1
+avrora.sim.InterruptTable::beforeInvoke 3 632 -1
+avrora.sim.InterruptTable::afterInvoke 3 640 -1
+avrora.sim.mcu.SPI::unpostSPIInterrupt 3 640 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface::clockInBit 3 1119 -1
+avrora.sim.mcu.SPI$TransferEvent::enableTransfer 3 640 -1
+cck.util.Arithmetic::getBitField 3 853 -1
+java.io.OutputStreamWriter::write 3 384 -1
+avrora.arch.legacy.LegacyInterpreter::enterSleepMode 3 768 -1
+avrora.sim.mcu.AtmelMicrocontroller::sleep 3 768 -1
+java.nio.charset.CharsetDecoder::maxCharsPerByte 1 128 -1
+avrora.arch.legacy.LegacyInstr$COM::accept 3 768 -1
+java.lang.ref.ReferenceQueue::remove 3 256 -1
+avrora.sim.CodeSegment::readInstr 3 1793 -1
+avrora.sim.AtmelInterpreter::getInstr 3 1792 -1
+jdk.internal.misc.Unsafe::copyMemory 3 384 -1
+java.io.FileOutputStream::open 3 512 -1
+avrora.sim.radio.Medium$Receiver::beginReceive 3 375 -1
+avrora.sim.AtmelInterpreter::getInstrSize 3 1792 -1
+avrora.arch.legacy.LegacyInstr$SBCI::accept 3 384 -1
+avrora.arch.legacy.LegacyInstr$CLI::accept 3 256 -1
+avrora.sim.state.RegisterUtil$BitRangeView::getValue 3 256 -1
+avrora.sim.radio.Medium::isCorruptedByte 3 256 -1
+avrora.sim.radio.Medium::access$300 3 386 -1
+java.util.zip.ZipFile$Source::readAt 3 390 -1
+avrora.sim.radio.Medium$Transmission::end 3 369 -1
+avrora.arch.legacy.LegacyInstr$RET::accept 3 640 -1
+avrora.sim.radio.Medium$Receiver::intersect 3 512 -1
+java.util.LinkedList::<init> 3 256 -1
+avrora.arch.legacy.LegacyInstr$BRCS::accept 3 384 -1
+java.nio.charset.CharsetEncoder::encode 3 469 -1
+avrora.sim.radio.Medium$Receiver::earliestNewTransmission 3 410 -1
+cck.text.Terminal::append 3 384 -1
+avrora.arch.legacy.LegacyInstr$BRPL::accept 3 256 -1
+avrora.arch.legacy.LegacyDisassembler::disassemble 3 384 -1
+avrora.sim.InterruptTable::enable 3 354 -1
+cck.util.Arithmetic::lowestBit 3 632 -1
+avrora.arch.legacy.LegacyInstr$MOVW::accept 3 256 -1
+avrora.arch.legacy.LegacyInstr$BRCC::accept 3 256 -1
+avrora.sim.AtmelInterpreter::setEnabled 3 384 -1
+avrora.arch.legacy.LegacyInstr$ADIW::accept 3 384 -1
+java.lang.ClassLoader::defineClassSourceLocation 3 512 -1
+cck.text.StringUtil::convertToHex 3 499 -1
+java.lang.Character::toUpperCase 3 256 -1
+avrora.monitors.PacketMonitor$Mon::renderByte 3 385 -1
+avrora.arch.legacy.LegacyInstr$STD::accept 3 384 -1
+avrora.sim.radio.Medium$BasicArbitrator::computeReceivedPower 3 384 -1
+avrora.sim.radio.CC1000Radio$Receiver::nextByte 3 384 -1
+avrora.arch.legacy.LegacyInstr$CALL::accept 3 256 -1
+avrora.sim.AtmelInterpreter::getFlashByte 3 514 -1
+java.util.zip.Inflater::getRemaining 3 256 -1
+java.io.FileOutputStream::<init> 3 256 -1
+avrora.arch.legacy.LegacyInstr$SBRC::accept 3 256 -1
+avrora.sim.radio.Medium$BasicArbitrator::mergeTransmissions 3 559 -1
+java.util.ArrayDeque::inc 3 256 -1
+avrora.sim.radio.Medium$Transmission::getByteAtTime 3 641 -1
+avrora.sim.radio.Medium$Probe$List::fireBeforeTransmitEnd 3 267 -1
+java.lang.String::equals 4 5661 -1
+avrora.sim.mcu.ADC$ControlRegister::getPrescaler 3 256 -1
+jdk.internal.perf.PerfCounter::get 3 256 -1
+java.nio.Buffer::limit 4 5377 -1
+java.lang.AbstractStringBuilder::<init> 4 5326 -1
+avrora.arch.legacy.LegacyInstr$LDD::accept 3 384 -1
+avrora.sim.clock.DeltaQueue$Link::remove 3 389 -1
+java.nio.CharBuffer::hasArray 3 512 -1
+java.nio.file.Files::provider 3 384 -1
+java.io.PrintStream::ensureOpen 3 384 -1
+avrora.sim.radio.Medium$Transmitter$Ticker::fire 3 256 -1
+avrora.sim.radio.Medium::newTransmission 3 256 -1
+avrora.arch.legacy.LegacyInstr::IMM8 3 384 -1
+avrora.arch.legacy.LegacyInstr$ROR::accept 3 513 -1
+sun.nio.cs.StreamEncoder::flushBuffer 3 384 -1
+avrora.arch.legacy.LegacyInstr$LPM::accept 3 384 -1
+avrora.arch.legacy.LegacyInstr$ANDI::accept 3 384 -1
+avrora.monitors.PacketMonitor$Mon::fireBeforeTransmit 3 384 -1
+avrora.arch.legacy.LegacyInstr$LD::accept 3 256 -1
+java.io.Writer::write 3 256 -1
+avrora.arch.legacy.LegacyInstr$SBC::accept 3 256 -1
+java.lang.String::toString 3 306 -1
+avrora.sim.radio.CC1000Radio$PA_POWRegister::decode 3 256 -1
+java.nio.ByteBuffer::flip 3 384 -1
+java.lang.StringBuffer::toString 3 547 -1
+avrora.sim.platform.LED::write 3 384 -1
+avrora.monitors.LEDMonitor$Mon::fireAfterTransition 3 384 -1
+avrora.sim.mcu.ATMegaFamily$DirectionRegister::write 3 385 -1
+java.lang.StringLatin1::newString 4 12705 -1
+java.lang.StringBuffer::<init> 3 267 -1
+avrora.arch.legacy.LegacyInstr$SEC::accept 3 256 -1
+java.io.InputStream::<init> 3 256 -1
+java.lang.String::getChars 3 382 -1
+sun.nio.cs.StreamEncoder::isOpen 3 384 -1
+avrora.sim.mcu.Timer8Bit$BufferedRegister::read 3 512 -1
+sun.nio.cs.StreamEncoder::implFlushBuffer 3 384 -1
+java.lang.Long::getChars 3 463 -1
+java.lang.CharacterDataLatin1::toUpperCase 3 384 -1
+java.nio.Buffer::hasRemaining 3 256 -1
+avrora.arch.legacy.LegacyInstr$INC::accept 3 256 -1
+avrora.sim.mcu.ADC$ControlRegister::unpostADCInterrupt 3 256 -1
+avrora.arch.legacy.LegacyInstr$LDI::<init> 3 585 -1
+sun.nio.cs.StreamEncoder::implWrite 3 512 -1
+avrora.sim.mcu.ADC$ControlRegister::stopConversion 3 259 -1
+avrora.sim.Segment::direct_read 3 384 -1
+java.io.BufferedWriter::newLine 3 256 -1
+avrora.sim.mcu.SPI$SPCRReg::decode 3 256 -1
+java.text.StringCharacterIterator::current 3 256 -1
+java.io.PrintStream::newLine 3 278 -1
+avrora.arch.legacy.LegacyInstr$ST::accept 3 384 -1
+avrora.sim.radio.Medium$BasicArbitrator::lockTransmission 1 128 -1
+java.io.PrintStream::println 3 279 -1
+avrora.sim.InterruptTable::disable 3 420 -1
+avrora.arch.legacy.LegacyInstr$SEI::accept 3 256 -1
+avrora.sim.mcu.ADC$ControlRegister::access$100 3 256 -1
+avrora.arch.legacy.LegacyInstr$LSR::accept 3 384 -1
+avrora.sim.mcu.SPI$SPCRReg::write 3 385 -1
+avrora.monitors.PacketMonitor$Mon::clear 3 256 -1
+avrora.sim.output.SimPrinter::printBuffer 3 406 -1
+cck.text.StringUtil::appendFract 3 294 -1
+avrora.sim.InterruptTable::disableAll 3 384 -1
+avrora.monitors.PacketMonitor$Mon::fireAfterReceiveEnd 3 256 -1
+cck.elf.ELFStringTable::getString 3 256 -1
+java.nio.Buffer::position 4 5376 -1
+avrora.sim.radio.CC1000Radio$PA_POWRegister::getPower 3 256 -1
+avrora.sim.mcu.Timer8Bit$BufferedRegister::write 3 256 -1
+avrora.sim.mcu.Timer8Bit$BufferedRegister::flush 3 256 -1
+java.util.zip.ZipUtils::CENSIZ 3 461 -1
+avrora.sim.mcu.ATMegaFamily$FlagRegister::flagBit 3 256 -1
+avrora.sim.mcu.ATMegaFamily$FlagRegister$Notification::invoke 3 384 -1
+avrora.monitors.PacketMonitor$Mon::fireAfterReceive 3 641 -1
+avrora.sim.radio.Medium$Probe$List::fireBeforeTransmit 3 256 -1
+avrora.sim.clock.RippleSynchronizer::insertLink 3 264 -1
+java.io.File::getPath 1 128 -1
+avrora.sim.radio.Medium::access$302 4 6683 -1
+avrora.sim.radio.Medium::access$402 4 6689 -1
+cck.elf.ELFDataInputStream::asInt 3 512 -1
+avrora.sim.radio.Medium$BasicArbitrator::getNoise 4 6688 -1
+java.util.jar.JarFile::checkForSpecialAttributes 3 256 -1
+cck.util.Arithmetic::roundup 3 256 -1
+avrora.sim.radio.Medium$Transmitter::beginTransmit 3 369 -1
+avrora.monitors.PacketMonitor$Mon::fireBeforeTransmitEnd 3 384 -1
+sun.net.www.protocol.jar.Handler::parseURL 3 256 -1
+java.lang.ClassLoader::getClassLoadingLock 3 256 -1

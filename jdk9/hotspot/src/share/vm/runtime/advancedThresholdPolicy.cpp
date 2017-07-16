@@ -548,54 +548,40 @@ void AdvancedThresholdPolicy::submit_compile(const methodHandle& mh, int bci, Co
   int hot_count = (bci == InvocationEntryBci) ? mh->invocation_count() : mh->backedge_count();
   update_rate(os::javaTimeMillis(), mh());
   //std::cout << "Compiling Method " << getMethodName (mh) << " at level " << (int)level << " count " << hot_count << std::endl; 
-if (UseAOSDBOptCompile and aosDBIsInit ())
-{
-    if (!mh->is_aosdb_data_retrieved ())
-    {
-        mh->set_aosdb_data_retrieved (true);
-        {
-            std::string methodFullDesc = getMethodName (mh);
-            //if (methodFullDesc != "Ljava/nio/charset/Charset;lookup(Ljava/lang/String;)Ljava/nio/charset/Charset;")
-            {
-                int opt_level, _hot_count;
-                
-                if (aosDBFindMethodInfo (methodFullDesc, opt_level, _hot_count))
-                {
-                    if (UseAOSDBVerbose)
-                    {     
-                        std::cout << "Submit Method: "<< " methodFullDesc " << 
-                            methodFullDesc << " hot_count " << _hot_count << " opt_level " <<
-                            opt_level << " from orig hot_count " << hot_count << " opt_level " << opt_level << std::endl;
-                            if (opt_level != (int)level)
-                                std::cout << "different opt level " << std::endl;
-                            
-                    }
-                    hot_count = _hot_count;
-                    
-                    if (opt_level == 1)
-                        level = CompLevel_simple;
-                        
-                    if (opt_level == 2)
-                        level =  CompLevel_limited_profile;
-                        
-                    if (opt_level == 3)
-                        level = CompLevel_full_profile;
-                    
-                    if (opt_level == 4)
-                        level = CompLevel_full_optimization;
-                }
-                else
-                {
-                    if (UseAOSDBVerbose)
-                    {
-                        std::cout << "Cannot find method: " << methodFullDesc << " in AOSDB" << std::endl;
-                    }
-                }
-            }
-        }
-    }
-}
-  CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
+  std::string m_name = getMethodName ((methodHandle&)mh);
+  int i=-1, j, k = -1;
+  bool m_in_aos = false;
+  if (aosDBIsInit ())
+  {
+      if (UseAOSDBOptCompile)
+      {
+          m_in_aos = true; //In AOSDBOptCompile, a method is submitted only if it is in AOS DB
+      }
+      else
+        m_in_aos = aosDBFindMethodInfo (m_name, i,j,k);
+  }
+    
+  if (UseAOSDBVerbose)
+  {
+      std::cout << "UseAOSDBOptCompile " << UseAOSDBOptCompile << " aosDBIsInit () " << aosDBIsInit () << 
+      " NotCompileInPolicy " << NotCompileInPolicy << " aosDBFindMethodInfo " << m_in_aos <<std::endl;
+        
+      if (NotCompileInPolicy && aosDBIsInit () && UseAOSDBOptCompile && !m_in_aos)
+      {
+        std::cout << "method " << m_name << " not found in aosdb " << std::endl;
+     }
+  }
+  
+  if (UseAOSDBBulkCompile && !NotCompileInPolicy && UseAOSDBRead && m_in_aos && 
+        bci == InvocationEntryBci && k == -1 && i != -1)
+    level = (CompLevel) i;
+  
+  if ((!NotCompileInPolicy && !UseAOSDBRead) || 
+      (!NotCompileInPolicy && UseAOSDBRead && m_in_aos && bci == InvocationEntryBci && k == -1) || 
+      //k == -1 ensures that a osr method in AOSDB does not compiles here, even if it is not osr in bci
+      (UseAOSDBOptCompile && !aosDBIsInit () && NotCompileInPolicy) || 
+      (NotCompileInPolicy && aosDBIsInit () && UseAOSDBOptCompile && !m_in_aos))
+    CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
 }
 
 /*void AdvancedThresholdPolicy::submit_compile_with_hot_count(const methodHandle& mh, int bci, CompLevel level) {
