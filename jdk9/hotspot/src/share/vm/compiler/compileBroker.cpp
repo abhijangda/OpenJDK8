@@ -1886,28 +1886,28 @@ if (UseAOSDBRecord && aosDBIsInit () && task->method () != NULL)
         //TODO: Add hot_method, osr_bci, and reason to the database
         if (UseAOSDBVerbose)
         {
-            std::cout << "Adding method: " << methodFullDesc << " opt level: "<< 
-                task->comp_level () << "count " << task->hot_count () << " hotmethod " << hotMethodFullDesc << 
+            /*std::cout <<   "Adding method: " << methodFullDesc << " opt level: "<< 
+                task->comp_level () << " count " << task->hot_count () << " hotmethod " << hotMethodFullDesc << 
                 " method desc == hot method desc " << (methodFullDesc == hotMethodFullDesc) << 
                 " ptr equal " << (hot_method == (task->method())) <<
-                " osr_bci " << task->osr_bci () << std::endl;
+                " osr_bci " << task->osr_bci () << std::endl;*/
         }
         
         aosDBAddMethodInfo (methodFullDesc, task->comp_level(), task->hot_count (), task->osr_bci ());
         
         if (UseAOSDBVerbose)
         {
-            std::cout << "Added method: " << methodFullDesc << " opt level: "<< 
-                task->comp_level() << "count " << task->hot_count() << " hotmethod " << hotMethodFullDesc << std::endl;
+            /*std::cout << "Added method: " << methodFullDesc << " opt level: "<< 
+                task->comp_level() << "count " << task->hot_count() << " hotmethod " << hotMethodFullDesc << std::endl;*/
         }
     }
     else
     {
         if (UseAOSDBVerbose)
         {
-            std::cout << "UseAOSDBRecord " << UseAOSDBRecord << "aosDBIsInit () " << aosDBIsInit () << 
-            "task->method " << (uint64_t)task->method () << " task->hot_method () " << 
-    (uint64_t)task->hot_method () << std::endl;
+            //std::cout << "UseAOSDBRecord " << UseAOSDBRecord << "aosDBIsInit () " << aosDBIsInit () << 
+            //"task->method " << (uint64_t)task->method () << " task->hot_method () " << 
+    //(uint64_t)task->hot_method () << std::endl;
         }
     }
   elapsedTimer time;

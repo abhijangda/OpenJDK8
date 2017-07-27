@@ -1,829 +1,886 @@
-java.util.LinkedHashMap$Entry::<init> 3 256 -1
-java.lang.CharacterDataLatin1::toUpperCaseEx 3 384 -1
-java.lang.Character::toUpperCaseEx 3 384 -1
-java.util.LinkedHashMap::removeEldestEntry 1 128 -1
-java.lang.StringLatin1::inflate 4 955 -1
-java.util.jar.JarFile::getManifestFromReference 3 384 -1
-avrora.sim.CodeSegment::load 3 60416 65
-avrora.core.Program::readProgramByte 3 512 -1
-java.util.zip.ZipFile::getInputStream 3 384 -1
-jdk.internal.loader.URLClassPath::getResource 3 384 -1
-java.net.URL::getProtocol 1 128 -1
-sun.net.www.protocol.jar.Handler::indexOfBangSlash 3 393 -1
-avrora.sim.util.SimUtil::toIDTimeString 3 278 -1
-java.lang.Character::getType 3 256 -1
-jdk.internal.loader.URLClassPath$JarLoader::ensureOpen 3 388 -1
-java.util.zip.ZipFile::releaseInflater 3 333 -1
-java.net.URL::set 3 384 -1
-java.net.URLClassLoader::isSealed 3 256 -1
-java.util.ArrayDeque::elementAt 3 384 -1
-java.io.BufferedInputStream::fill 3 386 -1
-java.util.ArrayDeque::pollFirst 3 384 -1
-java.util.zip.ZipUtils::CENOFF 3 384 -1
-java.util.ArrayDeque::poll 3 384 -1
-org.dacapo.harness.TeeOutputStream::write 3 256 -1
-java.util.zip.ZipEntry::<init> 3 256 -1
-jdk.internal.loader.URLClassPath$JarLoader$2::getManifest 3 384 -1
-java.util.zip.ZipInputStream::readEnd 3 347 -1
-avrora.arch.legacy.LegacyInstr$CBI::accept 3 1281 -1
-cck.util.Arithmetic::signExtend 3 432 -1
-avrora.arch.legacy.LegacyInstr::access$3100 3 384 -1
-avrora.sim.FiniteStateMachine::transition 3 544 -1
-java.util.LinkedList::checkPositionIndex 3 512 -1
-cck.elf.ELFDataInputStream::read_Elf32_uchar 3 640 -1
-avrora.arch.legacy.LegacyDisassembler::decode_21 3 376 -1
-avrora.arch.legacy.LegacyInstr$JMP::accept 3 512 -1
-java.lang.StringBuffer::append 3 256 -1
-java.util.jar.JarFile::maybeInstantiateVerifier 3 256 -1
-avrora.arch.legacy.LegacyInstr$WORD_class::<init> 3 484 -1
-sun.net.util.URLUtil::urlNoFragString 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::decode_24 3 390 -1
-java.lang.ref.Finalizer::remove 3 512 -1
-avrora.arch.legacy.LegacyInstr$REGIMM_class::<init> 3 256 -1
-java.lang.StringLatin1::indexOf 4 3187 -1
-avrora.sim.radio.Medium$Receiver::access$200 3 384 -1
-avrora.arch.legacy.LegacyInstr::access$1200 3 256 -1
-java.security.SecureClassLoader$CodeSourceKey::hashCode 3 512 -1
-avrora.arch.legacy.LegacyInstr$REGREG_class::<init> 3 384 -1
-java.util.zip.ZipFile$ZipFileInflaterInputStream::finalize 3 256 -1
-avrora.arch.legacy.LegacyInstr::checkImm 3 256 -1
-avrora.arch.legacy.LegacyInstr$SUB::accept 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::decode_root 3 384 -1
-avrora.arch.legacy.LegacyDisassembler::decode_STS_0 3 363 -1
-sun.net.www.protocol.jar.Handler::parseContextSpec 3 393 -1
-avrora.arch.legacy.LegacyDisassembler::disassembleLegacy 3 384 -1
-avrora.core.Program::writeInstr 3 256 -1
-java.io.File::<init> 3 384 -1
-java.lang.Integer::getChars 3 256 -1
-java.util.BitSet::checkInvariants 3 256 -1
-java.lang.Integer::stringSize 3 256 -1
-java.lang.Module::isNamed 3 256 -1
-java.util.jar.JarFile$JarFileEntry::<init> 3 256 -1
-jdk.internal.loader.URLClassPath$JarLoader$2::getCodeSourceURL 3 512 -1
-java.util.zip.InflaterInputStream::<init> 3 256 -1
-java.util.HashMap::containsKey 4 11648 -1
-java.util.Vector::add 3 256 -1
-java.util.zip.CRC32::reset 3 256 -1
-java.util.zip.ZipInputStream::read 3 256 -1
-avrora.arch.legacy.LegacyInstr$STS::<init> 3 512 -1
-java.lang.Number::<init> 3 384 -1
-avrora.arch.legacy.LegacyInstr::DADDR 3 384 -1
-avrora.arch.legacy.LegacyInstr$ADD::accept 3 1154 -1
-avrora.sim.radio.CC1000Radio$Receiver::setRSSI 3 384 -1
-java.io.UnixFileSystem::delete 3 384 -1
-avrora.arch.legacy.LegacyInstr$NOP::accept 2 1024 -1
-java.util.ArrayList::get 3 256 -1
-jdk.internal.perf.PerfCounter::add 3 256 -1
-avrora.sim.mcu.SPI$SPDReg::read 3 640 -1
-avrora.arch.legacy.LegacyInstr::access$1300 3 384 -1
-java.util.jar.JarFile::isMultiRelease 3 384 -1
-avrora.sim.radio.CC1000Radio$RadioRegister::<init> 3 256 -1
-java.util.WeakHashMap::remove 3 384 -1
-java.util.ArrayList::elementData 3 256 -1
-java.net.URL::getQuery 1 128 -1
-avrora.core.Program::writeByteInto 3 256 -1
-cck.elf.ELFDataInputStream::read_1 3 256 -1
-java.lang.String::checkBoundsOffCount 4 5364 -1
-java.nio.Buffer::checkIndex 3 256 -1
-java.util.HashMap::put 3 9088 -1
-avrora.sim.mcu.SPI::exchange 3 384 -1
-java.io.PrintStream::write 3 512 -1
-java.util.Objects::checkIndex 3 256 -1
-java.io.FilterInputStream::read 3 256 -1
-java.lang.CharacterDataLatin1::getType 3 256 -1
-avrora.sim.clock.DeltaQueue::advance 3 515 -1
-java.net.URLClassLoader::access$000 1 128 -1
-java.io.FilterInputStream::<init> 3 256 -1
-avrora.sim.AtmelInterpreter::fireAfterRead 3 1024 -1
-java.util.jar.Manifest::getEntries 1 128 -1
-java.lang.Exception::<init> 3 256 -1
-java.util.jar.Manifest::getMainAttributes 1 128 -1
-avrora.sim.mcu.DefaultMCU::access$000 1 128 -1
-avrora.sim.mcu.ATMega128::getSleepMode 3 768 -1
-avrora.sim.radio.CC1000Radio$MainRegister::decode 3 256 -1
-java.net.URLStreamHandler::toExternalForm 3 531 -1
-java.security.CodeSource::getCertificates 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::decode_MULS_0 3 578 -1
-java.util.WeakHashMap$Entry::<init> 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::decode_30 3 412 -1
-avrora.sim.AtmelInterpreter::getSP 3 770 -1
-avrora.sim.Simulator::getID 1 128 -1
-java.util.LinkedHashMap::newNode 3 256 -1
-java.util.zip.ZipCoder::getBytes 3 256 -1
-java.util.WeakHashMap::maskNull 3 256 -1
-java.util.LinkedHashMap::get 3 256 -1
-jdk.internal.misc.VM::addFinalRefCount 3 256 -1
-java.lang.String::regionMatches 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::getWord 3 419 -1
-java.util.zip.Inflater::ended 3 256 -1
-avrora.sim.clock.RippleSynchronizer$NotifyEvent::fire 3 256 -1
-java.util.zip.ZipEntry::getSize 1 128 -1
-avrora.arch.legacy.LegacyInstr$CPSE::accept 3 768 -1
-java.lang.String::equalsIgnoreCase 3 256 -1
-avrora.sim.AtmelInterpreter::writeSRAM 3 641 -1
-java.lang.AbstractStringBuilder::append 4 6408 -1
-java.security.SecureClassLoader$CodeSourceKey::equals 3 384 -1
-java.util.zip.ZipFile$Source::access$1100 1 128 -1
-java.net.URL::<init> 3 229 -1
-avrora.arch.legacy.LegacyInstr$ICALL::accept 3 256 -1
-java.io.BufferedWriter::ensureOpen 3 384 -1
-java.util.zip.ZipFile$ZipFileInputStream::initDataOffset 3 389 -1
-java.lang.ref.Finalizer::access$000 3 384 -1
-avrora.arch.legacy.LegacyDisassembler::decode_MOVW_0 3 493 -1
-sun.nio.cs.UTF_8$Encoder::encode 3 128 -1
-java.util.WeakHashMap::hash 3 256 -1
-java.util.zip.ZipFile$ZipFileInflaterInputStream::close 3 384 -1
-java.util.WeakHashMap::indexFor 3 256 -1
-avrora.sim.radio.CC1000Radio::getFrequency 3 241 -1
-java.util.zip.ZipFile::getZipEntry 3 256 -1
-avrora.sim.util.TransactionalList::beginTransaction 3 257 -1
-java.security.CodeSource::getLocation 1 128 -1
-java.util.zip.ZipFile$Source::getEntryPos 3 256 -1
-java.net.URLStreamHandler::setURL 3 384 -1
-java.security.CodeSource::getLocationNoFragString 1 128 -1
-java.lang.Long::stringSize 3 459 -1
-java.lang.ClassLoader::definePackage 3 256 -1
-java.net.URL::getPort 1 128 -1
-java.lang.String::toLowerCase 3 256 -1
-avrora.arch.legacy.LegacyInstr::EGPR 3 256 -1
-java.lang.System$2::invokeFinalize 3 640 -1
-java.util.zip.ZipFile::ensureOpen 3 256 -1
-java.util.zip.Inflater::reset 3 256 -1
-java.lang.ref.Finalizer::hasBeenFinalized 3 512 -1
-java.util.ArrayDeque::add 3 512 -1
-avrora.sim.clock.RippleSynchronizer$WaitLink::<init> 2 5965 -1
-java.lang.ref.Finalizer::access$100 3 512 -1
-java.util.zip.ZipFile$ZipFileInputStream::<init> 3 384 -1
-java.lang.NamedPackage::module 1 128 -1
-java.lang.ref.Reference::clear 3 384 -1
-java.io.FileOutputStream::write 3 384 -1
-java.lang.ref.Finalizer::register 3 256 -1
-avrora.sim.Simulator::getMicrocontroller 1 128 -1
-avrora.sim.clock.RippleSynchronizer::notifyLink 3 512 -1
-java.net.URL::getFile 1 128 -1
-org.dacapo.harness.DacapoClassLoader::loadClass 3 384 -1
-java.lang.StringLatin1::getChar 3 384 -1
-java.util.jar.Attributes::get 3 384 -1
-java.lang.Throwable::fillInStackTrace 3 256 -1
-sun.nio.cs.StreamEncoder::writeBytes 3 512 -1
-java.util.jar.JarFile::access$400 1 128 -1
-org.dacapo.parser.ConfigFileTokenManager::jjCheckNAdd 3 256 -1
-java.security.ProtectionDomain::getCodeSource 1 128 -1
-avrora.arch.legacy.LegacyDisassembler::decode_23 3 434 -1
-avrora.arch.legacy.LegacyRegister::nextRegister 3 512 -1
-java.io.BufferedInputStream::getInIfOpen 3 270 -1
-java.util.zip.ZipFile$Source::addEntry 3 384 -1
-java.lang.StringLatin1::toUpperCase 3 140 -1
-java.lang.StringBuilder::append 4 5376 -1
-java.util.zip.Inflater::setInput 3 386 -1
-avrora.sim.mcu.AtmelMicrocontroller::getPin 3 384 -1
-cck.text.Verbose::isVerbose 3 730 -1
-sun.nio.cs.UTF_8$Encoder::encodeArrayLoop 3 198 -1
-avrora.arch.legacy.LegacyDisassembler::decode_25 3 361 -1
-java.lang.StringBuilder::toString 4 5326 -1
-avrora.sim.platform.ExternalFlash::access$1702 3 1024 -1
-avrora.arch.legacy.LegacyRegister::hashCode 3 256 -1
-avrora.sim.clock.DeltaQueue::insertEvent 3 640 -1
-avrora.sim.radio.Medium$TXRX::getBitNum 3 512 -1
-java.lang.String::endsWith 3 256 -1
-jdk.internal.misc.Unsafe::copyMemoryChecks 3 384 -1
-java.lang.Integer::hashCode 3 256 -1
-cck.util.Arithmetic::uword 3 643 -1
-avrora.sim.radio.Medium$Receiver$Ticker::deliverByte 3 384 -1
-java.lang.StringUTF16::getChar 4 5632 -1
-java.util.zip.ZipInputStream::readFully 3 256 -1
-java.nio.CharBuffer::limit 3 512 -1
-java.util.zip.ZipFile::access$300 1 128 -1
-java.lang.ClassLoader::loadClass 3 256 -1
-java.nio.ByteBuffer::clear 3 384 -1
-java.lang.StringLatin1::toChars 3 256 -1
-java.lang.String::indexOf 3 256 -1
-sun.nio.fs.UnixException::errno 1 128 -1
-avrora.sim.mcu.MCUProperties::getIOReg 3 384 -1
-java.util.jar.JarFile::getEntry 3 384 -1
-java.util.zip.ZipFile$ZipFileInflaterInputStream::available 3 256 -1
-cck.elf.ELFDataInputStream::read_Elf32_Word 3 512 -1
-jdk.internal.math.FDBigInteger::<init> 3 256 -1
-java.io.RandomAccessFile::seek 3 256 -1
-avrora.sim.Segment::read 3 512 -1
-java.io.File::getName 3 256 -1
-java.util.LinkedList::add 3 384 -1
-java.lang.Integer::<init> 3 384 -1
-java.nio.CharBuffer::arrayOffset 3 384 -1
-avrora.sim.mcu.DefaultMCU$Pin::write 3 1025 -1
-java.util.LinkedList::unlink 3 256 -1
-java.io.File::isDirectory 3 384 -1
-avrora.arch.legacy.LegacyDisassembler::decode_31 3 246 -1
-avrora.arch.legacy.LegacyInstr$OR::accept 3 256 -1
-avrora.sim.clock.RippleSynchronizer::access$000 3 256 -1
-java.util.jar.Attributes$Name::hashCode 3 256 -1
-avrora.sim.AtmelInterpreter::getIORegisterByte 3 512 -1
-java.lang.StringBuilder::<init> 3 256 -1
-java.net.URL::getAuthority 1 128 -1
-jdk.internal.loader.URLClassPath$Loader::getBaseURL 1 128 -1
-java.io.FilterOutputStream::<init> 3 256 -1
-java.util.LinkedHashMap::clear 3 384 -1
-java.util.zip.ZipFile$ZipFileInputStream::read 3 256 -1
-java.util.HashMap::getNode 4 6147 -1
-avrora.sim.clock.DeltaQueue$Link::fire 3 512 -1
-avrora.sim.mcu.RegisterLayout::getIOReg 3 384 -1
-java.io.FileDescriptor::<init> 3 256 -1
-java.lang.StringCoding::encode 3 384 -1
-java.io.ExpiringCache::clear 3 256 -1
-avrora.sim.clock.MainClock::skipAhead 3 384 -1
-avrora.arch.legacy.LegacyInstr$ADC::accept 3 386 -1
-cck.util.Option$Str::set 1 128 -1
-java.lang.StringDecoderUTF8::decode 3 384 -1
-java.lang.Long::toString 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::decode_LDI_0 3 423 -1
-java.lang.ref.Finalizer::add 3 387 -1
-cck.elf.ELFDataInputStream::read_4 3 512 -1
-java.nio.charset.Charset::lookup 3 373 -1
-java.lang.StringCoding::lookupCharset 3 242 -1
-java.util.Hashtable::get 3 256 -1
-java.io.UnixFileSystem::normalize 3 128 -1
-java.nio.ByteBuffer::hasArray 3 256 -1
-java.util.zip.ZipUtils::CENTIM 3 256 -1
-java.lang.StringCoding::encodeUTF8 3 158 -1
-jdk.internal.module.Resources::mayTranslate 3 384 -1
-java.lang.StringCoding::decode 3 256 -1
-java.lang.String::<init> 3 256 -1
-java.lang.StringLatin1::toLowerCase 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::decode_root0 3 384 -1
-avrora.sim.AtmelInterpreter::readVolatile 3 1026 -1
-java.lang.ref.SoftReference::get 3 256 -1
-java.nio.ByteBuffer::position 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::getReg 3 384 -1
-java.nio.charset.CharsetEncoder::implReset 3 256 -1
-java.util.Vector::addElement 3 384 -1
-java.util.zip.ZipUtils::CENHOW 3 256 -1
-java.io.FileDescriptor$1::getAppend 3 256 -1
-avrora.core.Program::readInstr 3 512 -1
-java.util.jar.JarFile$JarFileEntry::getName 1 128 -1
-java.nio.charset.CharsetEncoder::maxBytesPerChar 1 128 -1
-java.lang.StringLatin1::canEncode 4 17753 -1
-java.util.zip.ZipEntry::getName 1 128 -1
-java.io.PushbackInputStream::unread 3 478 -1
-java.nio.HeapByteBuffer::<init> 3 353 -1
-avrora.sim.radio.CC1000Radio$SerialConfigurationInterface::inputWriteBit 3 898 -1
-java.io.UnixFileSystem::getBooleanAttributes 3 256 -1
-java.io.BufferedWriter::write 3 256 -1
-jdk.internal.perf.PerfCounter::addElapsedTimeFrom 3 256 -1
-java.util.zip.ZipEntry::isDirectory 3 384 -1
-avrora.arch.legacy.LegacyInstr$IMMREG_class::<init> 3 512 -1
-avrora.sim.AtmelInterpreter::writeRegisterByte 3 515 -1
-avrora.sim.radio.Medium$Probe$List::fireAfterReceive 3 559 -1
-avrora.arch.legacy.LegacyInstr$MOVW::<init> 3 512 -1
-java.lang.StringLatin1::lastIndexOf 4 1117 -1
-java.util.zip.ZipFile$Source::access$200 1 128 -1
-java.io.FilterInputStream::available 3 256 -1
-java.lang.invoke.LambdaForm$MH/870698190::identity_L 3 1077 -1
-java.util.zip.ZipInputStream::createZipEntry 3 384 -1
-sun.nio.cs.UTF_8$Decoder::decode 3 162 -1
-java.util.zip.ZipUtils::LG 3 256 -1
-java.util.zip.ZipUtils::CENLEN 3 256 -1
-java.lang.Character::isLetterOrDigit 3 256 -1
-java.util.zip.ZipFile$ZipFileInflaterInputStream::fill 3 256 -1
-java.io.FileOutputStream::finalize 3 512 -1
-avrora.sim.AtmelInterpreter::getRegisterWord 3 644 -1
-java.util.ArrayList$Itr::<init> 3 256 -1
-jdk.internal.loader.URLClassPath$JarLoader::checkResource 3 347 -1
-java.io.FileDescriptor::closeAll 3 512 -1
-java.net.URL::getHost 1 128 -1
-sun.nio.fs.UnixPath::getByteArrayForSysCalls 3 384 -1
-avrora.sim.AtmelInterpreter$IORegBehavior::write 3 1024 -1
-avrora.arch.legacy.LegacyDisassembler::decode_9 3 406 -1
-java.lang.ref.Finalizer::<init> 3 256 -1
-avrora.sim.radio.Medium$Receiver::getIntersection 3 384 -1
-java.util.zip.ZipFile$ZipFileInputStream::finalize 3 256 -1
-java.nio.CharBuffer::position 3 384 -1
-avrora.sim.AtmelInterpreter$IORegBehavior::<init> 3 640 -1
-java.lang.System::getSecurityManager 1 1190 -1
-java.lang.Package$VersionInfo::access$600 1 128 -1
-java.nio.Buffer::remaining 3 256 -1
-sun.nio.fs.UnixPath::isEmpty 3 256 -1
-avrora.arch.legacy.LegacyInstr$LPMD::accept 3 384 -1
-java.lang.String::access$100 1 128 -1
-java.lang.AbstractStringBuilder::checkRange 3 256 -1
-org.dacapo.parser.ConfigFileTokenManager::jjCheckNAddStates 3 256 -1
-avrora.sim.mcu.DefaultMCU$Pin::read 3 640 -1
-java.lang.CharacterDataLatin1::toLowerCase 3 384 -1
-sun.nio.fs.LinuxFileSystemProvider::readAttributes 3 256 -1
-java.io.BufferedWriter::flushBuffer 3 256 -1
-avrora.sim.radio.Medium$Transmission::<init> 3 256 -1
-avrora.sim.RWRegister::getValue 1 128 -1
-java.lang.Character::toLowerCase 3 384 -1
-jdk.internal.loader.URLClassPath::getLoader 3 561 -1
-avrora.core.Program::checkAddress 3 256 -1
-java.nio.charset.Charset::isSupported 3 246 -1
-java.nio.ByteBuffer::arrayOffset 3 384 -1
-java.util.zip.ZipInputStream::readLOC 3 388 -1
-java.nio.HeapCharBuffer::<init> 3 458 -1
-java.util.WeakHashMap::put 3 256 -1
-java.util.zip.ZipFile$Source::hashN 3 108 -1
-java.util.jar.Attributes::getValue 3 384 -1
-avrora.sim.radio.Medium::access$400 3 256 -1
-avrora.monitors.PacketMonitor$Mon::renderPacket 3 111 -1
-java.util.zip.Inflater::ensureOpen 3 256 -1
-java.util.zip.ZipUtils::CENCOM 3 384 -1
-java.nio.Buffer::<init> 3 384 -1
-avrora.arch.legacy.LegacyInstr::access$3300 3 256 -1
-java.lang.invoke.MethodTypeForm::erasedType 1 128 -1
-avrora.sim.clock.DeltaQueue::newEventList 3 640 -1
-java.lang.Integer::intValue 1 128 -1
-java.lang.StringLatin1::charAt 4 67072 -1
-java.util.zip.InflaterInputStream::ensureOpen 3 256 -1
-avrora.monitors.LEDMonitor$Mon::fireBeforeTransition 3 384 -1
-jdk.internal.math.FDBigInteger::mult 3 219 -1
-java.io.FileDescriptor::access$100 1 128 -1
-java.io.PushbackInputStream::ensureOpen 3 256 -1
-java.io.File::isInvalid 3 384 -1
-java.util.zip.ZipUtils::SH 3 256 -1
-avrora.sim.AtmelInterpreter::getRegisterUnsigned 3 898 -1
-avrora.sim.radio.Medium$Receiver::waitForNeighbors 3 640 -1
-java.util.LinkedList$Node::<init> 3 384 -1
-java.util.HashMap::clear 3 256 -1
-avrora.sim.clock.RippleSynchronizer$NotifyEvent::access$100 3 640 -1
-java.io.BufferedOutputStream::<init> 3 256 -1
-sun.net.www.ParseUtil::encodePath 3 256 -1
-java.lang.ref.ReferenceQueue::reallyPoll 3 258 -1
-avrora.sim.AtmelInterpreter::getDataByte 3 768 -1
-java.lang.StringCoding::deref 3 256 -1
-avrora.arch.legacy.LegacyInterpreter::runLoop 3 60417 21
-java.util.LinkedList$ListItr::checkForComodification 3 512 -1
-avrora.arch.legacy.LegacyInstr$RETI::accept 3 768 -1
-java.nio.ByteBuffer::array 3 352 -1
-java.util.Objects::requireNonNull 3 384 -1
-avrora.arch.legacy.LegacyDisassembler::decode_22 3 256 -1
-java.io.FileDescriptor::attach 3 384 -1
-cck.util.Arithmetic::high 3 654 -1
-jdk.internal.util.Preconditions::checkIndex 3 256 -1
-java.nio.Buffer::flip 3 384 -1
-cck.text.StringUtil::toFixedFloat 3 367 -1
-java.net.URL::getRef 1 128 -1
-jdk.internal.loader.URLClassPath$JarLoader::access$700 1 128 -1
-java.util.AbstractList::<init> 3 329 -1
-avrora.sim.RWRegister::write 1 129 -1
-sun.nio.fs.UnixPath::<init> 3 384 -1
-java.util.StringTokenizer::hasMoreTokens 3 256 -1
-avrora.sim.AtmelInterpreter::toSRAM 3 640 -1
-java.lang.String::substring 3 256 -1
-avrora.sim.clock.DeltaQueue::insertAfter 3 512 -1
-java.nio.CharBuffer::<init> 3 458 -1
-java.util.zip.ZipFile$ZipFileInputStream::size 1 128 -1
-java.lang.ref.WeakReference::<init> 3 256 -1
-avrora.arch.legacy.LegacyInterpreter::fastLoop 3 182340 5
-avrora.monitors.PacketMonitor$Mon::appendTime 3 239 -1
-avrora.arch.legacy.LegacyInstr$SLEEP::accept 3 768 -1
-java.util.zip.ZStreamRef::address 1 128 -1
-java.nio.DirectLongBufferU::ix 3 256 -1
-java.util.Arrays::copyOf 3 722 -1
-avrora.sim.mcu.SPI::invoke 3 512 -1
-avrora.arch.legacy.LegacyInstr::<init> 3 256 -1
-avrora.arch.legacy.LegacyInstr$CPC::accept 3 898 -1
-java.util.ArrayList::iterator 3 256 -1
-avrora.sim.mcu.Timer8Bit$Mode_CTC::fire 3 384 -1
-java.util.concurrent.ConcurrentHashMap$Traverser::advance 3 256 -1
-java.lang.Package::isSealed 3 256 -1
-java.net.URL::getPath 1 128 -1
-java.lang.ref.Finalizer::runFinalizer 3 512 -1
-java.util.zip.ZipUtils::CENFLG 3 384 -1
-java.io.UnixFileSystem::resolve 3 256 -1
-jdk.internal.misc.Unsafe::checkOffset 3 384 -1
-java.util.LinkedList$ListItr::hasNext 3 512 -1
-jdk.internal.loader.URLClassPath$JarLoader::access$600 1 128 -1
-avrora.sim.state.VolatileBehavior::<init> 3 640 -1
-avrora.arch.legacy.LegacyInstr$CPI::accept 3 771 -1
-java.util.zip.Inflater::inflate 3 256 -1
-sun.nio.fs.UnixPath::normalizeAndCheck 3 187 -1
-org.dacapo.parser.SimpleCharStream::readChar 3 256 -1
-java.lang.String::charAt 3 67072 -1
-java.util.concurrent.ConcurrentHashMap::computeIfAbsent 3 256 -1
-java.nio.Buffer::clear 3 384 -1
-java.nio.ByteBuffer::wrap 3 353 -1
-java.lang.String::toCharArray 3 256 -1
-avrora.sim.mcu.ADC$MUXRegister::isSingleEnded 3 258 -1
-java.util.zip.ZipUtils::CENNAM 3 384 -1
-java.util.zip.ZipUtils::CENEXT 3 384 -1
-cck.util.Arithmetic::word 3 384 -1
-java.lang.Math::min 4 5376 -1
-avrora.sim.radio.CC1000Radio::getPower 3 241 -1
-java.lang.ClassLoader::checkName 3 256 -1
-avrora.sim.clock.MainClock::removeEvent 3 256 -1
-java.lang.String::getBytes 3 384 -1
-java.util.LinkedList$ListItr::next 3 512 -1
-sun.nio.cs.StreamEncoder::write 3 515 -1
-java.lang.Float::isInfinite 3 256 -1
-java.nio.charset.CharsetEncoder::reset 3 256 -1
-java.io.FilterOutputStream::write 3 167 -1
-java.util.jar.JarFile::getInputStream 3 384 -1
-avrora.sim.radio.CC1000Radio$Transmitter::nextByte 3 256 -1
-java.lang.Throwable::<init> 3 256 -1
-sun.net.www.ParseUtil::canonizeString 3 521 -1
-avrora.sim.clock.DerivedClock::insertEvent 3 512 -1
-java.util.StringTokenizer::scanToken 3 213 -1
-java.util.LinkedList::linkLast 3 384 -1
-java.util.zip.ZipFile$Source::getEntryHash 3 256 -1
-java.nio.CharBuffer::wrap 3 458 -1
-sun.nio.fs.UnixNativeDispatcher::copyToNativeBuffer 3 384 -1
-java.io.PrintStream::print 3 316 -1
-java.lang.ClassLoader::findLoadedClass 3 256 -1
-avrora.arch.legacy.LegacyInstr::access$500 3 384 -1
-avrora.sim.mcu.DefaultMCU$Pin::<init> 3 384 -1
-avrora.sim.radio.Medium$Probe$List::fireAfterReceiveEnd 3 271 -1
-java.nio.ByteBuffer::limit 3 384 -1
-sun.nio.fs.NativeBuffers::copyCStringToNativeBuffer 3 384 -1
-cck.util.Arithmetic::clearBit 3 1152 -1
-java.util.ArrayList::add 3 256 -1
-java.util.zip.InflaterInputStream::read 3 256 -1
-java.util.zip.ZipFile$ZipFileInputStream::close 3 334 -1
-java.net.URLClassLoader::getAndVerifyPackage 3 384 -1
-java.util.WeakHashMap::expungeStaleEntries 3 384 -1
-avrora.sim.state.RegisterUtil$BoolView::setValue 3 512 -1
-cck.text.StringUtil::space 3 252 -1
-avrora.sim.mcu.ADC$ControlRegister::write 3 256 -1
-sun.nio.fs.Util::followLinks 3 256 -1
-java.lang.ClassLoader::getNamedPackage 3 512 -1
-java.nio.ByteBuffer::<init> 3 374 -1
-jdk.internal.misc.Unsafe::checkNativeAddress 3 513 -1
-avrora.sim.clock.RippleSynchronizer::waitForNeighbors 3 640 -1
-java.lang.ClassLoader::compareCerts 3 384 -1
-java.io.FileOutputStream$1::<init> 3 512 -1
-avrora.arch.legacy.LegacyInterpreter::low 3 514 -1
-java.util.zip.ZipInputStream::ensureOpen 3 256 -1
-org.dacapo.parser.SimpleCharStream::UpdateLineColumn 3 256 -1
-java.io.BufferedOutputStream::write 3 256 -1
-java.util.zip.ZipFile::access$600 1 128 -1
-java.util.LinkedList::listIterator 3 512 -1
-avrora.arch.legacy.LegacyInterpreter::high 4 8724 -1
-java.io.BufferedOutputStream::flushBuffer 3 1167 -1
-avrora.sim.clock.DeltaQueue::getCount 1 129 -1
-java.nio.charset.CharsetDecoder::reset 3 256 -1
-avrora.sim.mcu.ADC$ControlRegister::insertConversion 3 319 -1
-avrora.sim.mcu.Timer8Bit::compareMatch 3 258 -1
-java.util.AbstractSequentialList::iterator 3 512 -1
-jdk.internal.loader.URLClassPath$JarLoader::getResource 3 256 -1
-java.nio.charset.CharsetDecoder::implReset 3 256 -1
-java.util.zip.ZipFile$Source::readFullyAt 3 249 -1
-java.util.zip.ZipCoder::toString 3 256 -1
-java.lang.StringCoding$StringDecoder::requestedCharsetName 1 128 -1
-java.io.PushbackInputStream::read 3 256 -1
-java.util.ArrayDeque::addLast 3 256 -1
-avrora.sim.mcu.ATMegaFamily$PortRegister::write 3 896 -1
-org.dacapo.harness.Benchmark::fileFromInputStream 3 512 -1
-java.util.concurrent.ConcurrentHashMap::tabAt 4 7680 -1
-avrora.sim.InterruptTable::enableAll 3 578 -1
-java.util.zip.CRC32::update 3 256 -1
-java.util.Optional::empty 3 256 -1
-java.lang.String$CaseInsensitiveComparator::compare 3 256 -1
-java.util.jar.JarFile::getManifest 3 512 -1
-java.lang.invoke.LambdaForm$MH/654582261::linkToTargetMethod 3 1076 -1
-java.util.zip.ZipFile$Source::isMetaName 3 384 -1
-java.io.OutputStream::<init> 3 256 -1
-avrora.sim.mcu.MCUProperties::getPin 3 384 -1
-java.io.BufferedOutputStream::flush 3 256 -1
-java.util.zip.ZipCoder::isUTF8 1 128 -1
-avrora.sim.radio.CC1000Radio$Receiver::setBER 3 512 -1
-avrora.sim.platform.ExternalFlash$PA3Output::write 3 256 -1
-avrora.sim.radio.CC1000Radio$RSSIOutput::getVoltage 3 384 -1
-java.util.BitSet::wordIndex 3 256 -1
-java.io.FileOutputStream::access$000 3 512 -1
-java.util.zip.InflaterInputStream::fill 3 256 -1
-java.util.Locale::getDefault 3 384 -1
-sun.net.www.ParseUtil::firstEncodeIndex 3 121 -1
-java.util.concurrent.ConcurrentHashMap$BaseIterator::hasNext 3 256 -1
-avrora.sim.mcu.ADC$ControlRegister::convertVoltage 3 256 -1
-java.util.zip.ZipFile::getEntry 3 256 -1
-java.util.zip.CRC32::updateBytesCheck 3 460 -1
-avrora.sim.AtmelInterpreter::setSP 3 770 -1
-java.util.zip.CRC32::getValue 3 218 -1
-java.util.zip.ZipInputStream::getNextEntry 3 256 -1
-java.lang.CharacterData::of 4 5428 -1
-avrora.sim.radio.Medium$Receiver::isChannelClear 3 512 -1
-jdk.internal.loader.Resource::cachedInputStream 3 384 -1
-java.nio.Bits::byteOrder 3 384 -1
-java.lang.StringLatin1::regionMatchesCI 3 256 -1
-avrora.arch.legacy.LegacyInstr$DEC::accept 3 384 -1
-java.io.FilterOutputStream::close 3 512 -1
-sun.util.locale.LocaleUtils::isUpper 3 256 -1
-avrora.arch.legacy.LegacyRegister::getNumber 1 135 -1
-java.io.FileOutputStream::close 3 512 -1
-java.util.zip.ZipUtils::CENSIG 3 384 -1
-java.util.Arrays::copyOfRange 4 5537 -1
-java.util.ArrayList::size 1 128 -1
-java.security.SecureClassLoader$1::<init> 3 512 -1
-java.nio.DirectLongBufferU::get 3 384 -1
-avrora.sim.Simulation::getPrinter 3 730 -1
-avrora.sim.RWRegister::setValue 3 512 -1
-java.net.URLClassLoader::defineClass 3 384 -1
-java.util.BitSet::get 3 285 -1
-avrora.sim.mcu.SPI$Frame::<init> 3 256 -1
-avrora.arch.legacy.LegacyInstr::access$900 3 256 -1
-java.lang.String::startsWith 4 5379 -1
-cck.text.StringUtil::leftJustify 3 256 -1
-java.lang.String::checkBoundsBeginEnd 4 5536 -1
-avrora.arch.legacy.LegacyRegister$Set::contains 3 256 -1
-java.nio.file.Files::readAttributes 3 256 -1
-cck.text.StringUtil::justify 3 256 -1
-avrora.sim.util.MulticastFSMProbe::<init> 3 256 -1
-avrora.sim.FiniteStateMachine$State::<init> 3 256 -1
-java.lang.ref.ReferenceQueue::enqueue 3 256 -1
-java.net.URLClassLoader$1::<init> 3 512 -1
-avrora.sim.AtmelInterpreter::fireBeforeRead 3 1025 -1
-avrora.sim.FiniteStateMachine::fireBefore 3 896 -1
-java.net.URLClassLoader$1::run 3 512 -1
-java.net.URLClassLoader::findClass 3 516 -1
-java.security.SecureClassLoader$CodeSourceKey::<init> 3 512 -1
-avrora.arch.legacy.LegacyInstr::checkReg 3 256 -1
-avrora.sim.AtmelInterpreter::popByte 3 640 -1
-java.net.URLClassLoader::access$100 3 384 -1
-java.lang.ClassLoader::preDefineClass 3 512 -1
-java.lang.ClassLoader::checkCerts 3 512 -1
-avrora.monitors.PacketMonitor$Mon::append 3 256 -1
-avrora.sim.RWRegister::<init> 3 512 -1
-java.lang.ClassLoader::postDefineClass 3 512 -1
-jdk.internal.loader.URLClassPath$JarLoader$2::getCodeSigners 3 512 -1
-java.util.Arrays::fill 3 60416 5
-java.util.HashMap::get 4 6429 -1
-avrora.sim.radio.Medium$Receiver::access$100 3 640 -1
-avrora.sim.AtmelInterpreter::installIOReg 3 384 -1
-avrora.sim.mcu.AtmelMicrocontroller::installIOReg 3 384 -1
-avrora.sim.mcu.DefaultMCU::getSimulator 1 128 -1
-avrora.sim.mcu.ADC$MUXRegister::getSingleIndex 3 256 -1
-avrora.sim.mcu.ADC$ControlRegister$ConversionEvent::fire 3 257 -1
-java.util.StringTokenizer::skipDelimiters 3 256 -1
-avrora.sim.AtmelInterpreter::getRegisterByte 3 387 -1
-sun.nio.cs.UTF_8$Encoder::encodeLoop 3 512 -1
-avrora.sim.clock.MainClock::advance 3 512 -1
-avrora.sim.AtmelInterpreter::commit 3 514 -1
-avrora.sim.util.TransactionalList::<init> 3 256 -1
-avrora.sim.AtmelInterpreter::fireBeforeWrite 3 515 -1
-avrora.arch.legacy.LegacyInterpreter::visit 3 524 -1
-avrora.sim.AtmelInterpreter::fireAfterWrite 3 642 -1
-avrora.sim.mcu.DefaultMCU$Pin::printWrite 3 1042 -1
-avrora.arch.legacy.LegacyInterpreter::bit 3 769 -1
-avrora.sim.AtmelInterpreter::writeRegisterWord 3 896 -1
-avrora.arch.legacy.LegacyInstr$POP::accept 3 640 -1
-avrora.arch.legacy.LegacyInstr$SBIW::accept 3 1026 -1
-avrora.arch.legacy.LegacyInstr$SBRS::accept 3 1152 -1
-avrora.arch.legacy.LegacyInstr$BRLT::accept 2 1027 -1
-avrora.sim.util.TransactionalList::endTransaction 3 385 -1
-avrora.arch.legacy.LegacyInstr$STPI::accept 3 898 -1
-avrora.arch.legacy.LegacyInstr$BRNE::accept 3 1025 -1
-avrora.sim.AtmelInterpreter::pushByte 3 640 -1
-java.util.zip.Inflater::getBytesWritten 3 645 -1
-avrora.arch.legacy.LegacyInstr$CP::accept 2 1025 -1
-avrora.arch.legacy.LegacyInstr$OUT::accept 3 640 -1
-avrora.sim.util.TransactionalList::isEmpty 3 1024 -1
-avrora.arch.legacy.LegacyInstr$RJMP::accept 3 1281 -1
-avrora.sim.AtmelInterpreter::readSRAM 3 1025 -1
-avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PCLKOutput::write 3 1025 -1
-java.io.FileOutputStream$1::close 3 512 -1
-avrora.sim.platform.ExternalFlash$PD5Output::write 3 1027 -1
-avrora.sim.platform.ExternalFlash::access$100 1 128 -1
-avrora.sim.RWRegister::read 1 129 -1
-java.util.zip.ZipFile::getInflater 3 384 -1
-avrora.arch.legacy.LegacyInstr$IN::accept 3 512 -1
-avrora.sim.AtmelInterpreter$IORegBehavior::read 3 1025 -1
-avrora.arch.legacy.LegacyInstr::GPR 3 384 -1
-java.io.RandomAccessFile::read 3 256 -1
-avrora.sim.AtmelInterpreter::setIORegBit 3 898 -1
-cck.util.Arithmetic::setBit 3 897 -1
-avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PALEOutput::write 3 1153 -1
-java.io.OutputStreamWriter::flushBuffer 3 384 -1
-avrora.sim.platform.ExternalFlash$PD3Output::write 3 896 -1
-avrora.sim.clock.DeltaQueue$Link::add 3 512 -1
-avrora.arch.legacy.LegacyInstr$SBI::accept 3 1024 -1
-cck.util.Arithmetic::getBit 3 510 -1
-avrora.sim.mcu.SPI$SPSReg::clearSPIF 3 512 -1
-avrora.sim.AtmelInterpreter::writeDataByte 3 1027 -1
-avrora.sim.clock.DeltaQueue::removeEvent 3 209 -1
-cck.util.Arithmetic::low 3 640 -1
-avrora.arch.legacy.LegacyInstr$SUBI::accept 3 1152 -1
-avrora.arch.legacy.LegacyInstr$LDI::accept 3 1024 -1
-avrora.sim.mcu.DefaultMCU$Pin::setOutputDir 3 1024 -1
-avrora.arch.legacy.LegacyInstr::asInstr 3 771 -1
-java.io.File::delete 3 384 -1
-java.util.zip.ZipUtils::get32 3 256 -1
-avrora.sim.Simulator::getClock 1 128 -1
-avrora.sim.AtmelInterpreter::enableInterrupts 3 576 -1
-avrora.sim.mcu.DefaultMCU$Pin::printRead 3 640 -1
-avrora.arch.legacy.LegacyInstr$STS::accept 3 768 -1
-avrora.sim.clock.RippleSynchronizer::waitForLink 3 768 -1
-avrora.sim.clock.MainClock::getCount 3 640 -1
-avrora.arch.legacy.LegacyInstr$PUSH::accept 3 640 -1
-java.io.OutputStream::flush 3 256 -1
-avrora.arch.legacy.LegacyInstr$MOV::accept 3 513 -1
-avrora.sim.FiniteStateMachine::fireAfter 3 896 -1
-avrora.sim.Simulator::getPrinter 3 730 -1
-avrora.sim.mcu.SPI::receive 3 617 -1
-avrora.arch.legacy.LegacyInstr$LDS::accept 3 512 -1
-java.util.concurrent.ConcurrentHashMap::put 3 256 -1
-avrora.sim.radio.Medium$Receiver::endReceive 3 265 -1
-avrora.sim.mcu.ADC$ControlRegister::invoke 3 257 -1
-avrora.sim.clock.Clock::cyclesToMillis 3 640 -1
-avrora.sim.clock.MainClock::insertEvent 3 256 -1
-avrora.arch.legacy.LegacyInstr$EOR::accept 3 512 -1
-avrora.sim.Simulation$Node::getSimulator 1 128 -1
-avrora.sim.mcu.SPI$SPDReg::write 3 640 -1
-avrora.sim.InterruptTable::getPendingInterrupts 1 128 -1
-java.lang.String::concat 3 256 -1
-avrora.sim.FiniteStateMachine::getCurrentState 1 128 -1
-java.lang.ref.ReferenceQueue::poll 3 813 -1
-java.lang.Object::wait 3 512 -1
-avrora.arch.legacy.LegacyInterpreter::uword 3 512 -1
-avrora.sim.state.RegisterUtil$BoolView::getValue 3 256 -1
-sun.nio.cs.StreamEncoder::ensureOpen 3 512 -1
-java.util.AbstractList::listIterator 3 512 -1
-avrora.sim.clock.DeltaQueue::newLink 3 512 -1
-java.util.StringTokenizer::nextToken 3 384 -1
-avrora.sim.clock.DeltaQueue::free 3 512 -1
-avrora.sim.AtmelInterpreter::writeIORegisterByte 3 640 -1
-avrora.sim.AtmelInterpreter::disableInterrupts 3 384 -1
-avrora.sim.clock.RippleSynchronizer$NotifyEvent::currentWaitLink 3 512 -1
-avrora.sim.clock.RippleSynchronizer::advance 3 512 -1
-java.lang.System::lineSeparator 3 256 -1
-avrora.arch.legacy.LegacyInstr$AND::accept 3 512 -1
-avrora.sim.clock.DeltaQueue::skipAhead 3 586 -1
-avrora.arch.legacy.LegacyDisassembler::relative 3 432 -1
-avrora.sim.AtmelInterpreter::setPosted 3 512 -1
-avrora.arch.legacy.LegacyInstr::getSize 4 9000 -1
-java.util.LinkedList::node 3 512 -1
-java.util.WeakHashMap::getTable 3 384 -1
-avrora.sim.Segment::checked_read 3 384 -1
-java.util.zip.ZipFile$ZipFileInflaterInputStream::<init> 3 384 -1
-avrora.sim.radio.Medium$Receiver$Ticker::fire 3 512 -1
-avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PDATAOutput::write 3 896 -1
-avrora.sim.mcu.SPI::newFrame 3 640 -1
-java.util.LinkedList$ListItr::<init> 3 640 -1
-avrora.sim.radio.Medium$Receiver::access$000 3 640 -1
-avrora.sim.SimulatorThread::getSimulator 3 640 -1
-avrora.arch.legacy.LegacyInstr$BRGE::accept 3 512 -1
-avrora.sim.AtmelInterpreter::advanceClock 3 640 -1
-java.io.UnixFileSystem::prefixLength 3 256 -1
-avrora.sim.clock.RippleSynchronizer::waitFor 3 640 -1
-java.lang.ClassLoader::addClass 3 512 -1
-avrora.sim.radio.Medium$Receiver$Ticker::fireUnlocked 3 768 -1
-avrora.sim.radio.Medium$TXRX::getCycleTime 3 768 -1
-avrora.arch.legacy.LegacyInstr$ORI::accept 3 384 -1
-avrora.sim.clock.DeltaQueue::advanceSlow 3 389 -1
-sun.nio.fs.NativeBuffers::getNativeBufferFromCache 3 384 -1
-avrora.sim.AtmelInterpreter$SREGBehavior::write 3 512 -1
-java.io.RandomAccessFile::readFully 3 256 -1
-avrora.sim.radio.CC1000Radio$SPITicker::fire 3 384 -1
-cck.text.Terminal::println 3 278 -1
-avrora.sim.InterruptTable::post 3 256 -1
-avrora.arch.legacy.LegacyInterpreter::invokeInterrupt 3 384 -1
-avrora.sim.mcu.SPI$SPSReg::setSPIF 3 512 -1
-avrora.sim.mcu.ATMegaFamily$FlagRegister::setPosted 3 256 -1
-java.net.URLStreamHandler::getDefaultPort 1 128 -1
-avrora.arch.legacy.LegacyInterpreter::leaveSleepMode 3 384 -1
-avrora.arch.legacy.LegacyInstr$BREQ::accept 3 512 -1
-avrora.sim.AtmelInterpreter$SREGBehavior::read 3 641 -1
-avrora.sim.radio.CC1000Radio$CurrentRegister::decode 3 256 -1
-java.util.LinkedList$ListItr::remove 3 256 -1
-avrora.sim.mcu.SPI::postSPIInterrupt 3 512 -1
-avrora.sim.InterruptTable::unpost 3 521 -1
-avrora.arch.legacy.LegacyInterpreter::sleepLoop 3 664 -1
-java.util.zip.ZipUtils::get16 3 256 -1
-avrora.sim.mcu.AtmelMicrocontroller::wakeup 3 640 -1
-avrora.sim.InterruptTable::beforeInvoke 3 632 -1
-avrora.sim.InterruptTable::afterInvoke 3 640 -1
-avrora.sim.mcu.SPI::unpostSPIInterrupt 3 640 -1
-avrora.sim.radio.CC1000Radio$SerialConfigurationInterface::clockInBit 3 1119 -1
-avrora.sim.mcu.SPI$TransferEvent::enableTransfer 3 640 -1
-cck.util.Arithmetic::getBitField 3 853 -1
-java.io.OutputStreamWriter::write 3 384 -1
-avrora.arch.legacy.LegacyInterpreter::enterSleepMode 3 768 -1
-avrora.sim.mcu.AtmelMicrocontroller::sleep 3 768 -1
-java.nio.charset.CharsetDecoder::maxCharsPerByte 1 128 -1
-avrora.arch.legacy.LegacyInstr$COM::accept 3 768 -1
-java.lang.ref.ReferenceQueue::remove 3 256 -1
-avrora.sim.CodeSegment::readInstr 3 1793 -1
-avrora.sim.AtmelInterpreter::getInstr 3 1792 -1
-jdk.internal.misc.Unsafe::copyMemory 3 384 -1
-java.io.FileOutputStream::open 3 512 -1
-avrora.sim.radio.Medium$Receiver::beginReceive 3 375 -1
-avrora.sim.AtmelInterpreter::getInstrSize 3 1792 -1
-avrora.arch.legacy.LegacyInstr$SBCI::accept 3 384 -1
-avrora.arch.legacy.LegacyInstr$CLI::accept 3 256 -1
-avrora.sim.state.RegisterUtil$BitRangeView::getValue 3 256 -1
-avrora.sim.radio.Medium::isCorruptedByte 3 256 -1
-avrora.sim.radio.Medium::access$300 3 386 -1
-java.util.zip.ZipFile$Source::readAt 3 390 -1
-avrora.sim.radio.Medium$Transmission::end 3 369 -1
-avrora.arch.legacy.LegacyInstr$RET::accept 3 640 -1
-avrora.sim.radio.Medium$Receiver::intersect 3 512 -1
-java.util.LinkedList::<init> 3 256 -1
-avrora.arch.legacy.LegacyInstr$BRCS::accept 3 384 -1
-java.nio.charset.CharsetEncoder::encode 3 469 -1
-avrora.sim.radio.Medium$Receiver::earliestNewTransmission 3 410 -1
-cck.text.Terminal::append 3 384 -1
-avrora.arch.legacy.LegacyInstr$BRPL::accept 3 256 -1
-avrora.arch.legacy.LegacyDisassembler::disassemble 3 384 -1
-avrora.sim.InterruptTable::enable 3 354 -1
-cck.util.Arithmetic::lowestBit 3 632 -1
-avrora.arch.legacy.LegacyInstr$MOVW::accept 3 256 -1
-avrora.arch.legacy.LegacyInstr$BRCC::accept 3 256 -1
-avrora.sim.AtmelInterpreter::setEnabled 3 384 -1
-avrora.arch.legacy.LegacyInstr$ADIW::accept 3 384 -1
-java.lang.ClassLoader::defineClassSourceLocation 3 512 -1
-cck.text.StringUtil::convertToHex 3 499 -1
-java.lang.Character::toUpperCase 3 256 -1
-avrora.monitors.PacketMonitor$Mon::renderByte 3 385 -1
-avrora.arch.legacy.LegacyInstr$STD::accept 3 384 -1
-avrora.sim.radio.Medium$BasicArbitrator::computeReceivedPower 3 384 -1
-avrora.sim.radio.CC1000Radio$Receiver::nextByte 3 384 -1
-avrora.arch.legacy.LegacyInstr$CALL::accept 3 256 -1
-avrora.sim.AtmelInterpreter::getFlashByte 3 514 -1
-java.util.zip.Inflater::getRemaining 3 256 -1
-java.io.FileOutputStream::<init> 3 256 -1
-avrora.arch.legacy.LegacyInstr$SBRC::accept 3 256 -1
-avrora.sim.radio.Medium$BasicArbitrator::mergeTransmissions 3 559 -1
-java.util.ArrayDeque::inc 3 256 -1
-avrora.sim.radio.Medium$Transmission::getByteAtTime 3 641 -1
-avrora.sim.radio.Medium$Probe$List::fireBeforeTransmitEnd 3 267 -1
-java.lang.String::equals 4 5661 -1
-avrora.sim.mcu.ADC$ControlRegister::getPrescaler 3 256 -1
-jdk.internal.perf.PerfCounter::get 3 256 -1
-java.nio.Buffer::limit 4 5377 -1
-java.lang.AbstractStringBuilder::<init> 4 5326 -1
-avrora.arch.legacy.LegacyInstr$LDD::accept 3 384 -1
-avrora.sim.clock.DeltaQueue$Link::remove 3 389 -1
-java.nio.CharBuffer::hasArray 3 512 -1
-java.nio.file.Files::provider 3 384 -1
-java.io.PrintStream::ensureOpen 3 384 -1
-avrora.sim.radio.Medium$Transmitter$Ticker::fire 3 256 -1
-avrora.sim.radio.Medium::newTransmission 3 256 -1
-avrora.arch.legacy.LegacyInstr::IMM8 3 384 -1
-avrora.arch.legacy.LegacyInstr$ROR::accept 3 513 -1
-sun.nio.cs.StreamEncoder::flushBuffer 3 384 -1
-avrora.arch.legacy.LegacyInstr$LPM::accept 3 384 -1
-avrora.arch.legacy.LegacyInstr$ANDI::accept 3 384 -1
-avrora.monitors.PacketMonitor$Mon::fireBeforeTransmit 3 384 -1
-avrora.arch.legacy.LegacyInstr$LD::accept 3 256 -1
-java.io.Writer::write 3 256 -1
-avrora.arch.legacy.LegacyInstr$SBC::accept 3 256 -1
-java.lang.String::toString 3 306 -1
-avrora.sim.radio.CC1000Radio$PA_POWRegister::decode 3 256 -1
-java.nio.ByteBuffer::flip 3 384 -1
-java.lang.StringBuffer::toString 3 547 -1
-avrora.sim.platform.LED::write 3 384 -1
-avrora.monitors.LEDMonitor$Mon::fireAfterTransition 3 384 -1
-avrora.sim.mcu.ATMegaFamily$DirectionRegister::write 3 385 -1
-java.lang.StringLatin1::newString 4 12705 -1
-java.lang.StringBuffer::<init> 3 267 -1
-avrora.arch.legacy.LegacyInstr$SEC::accept 3 256 -1
-java.io.InputStream::<init> 3 256 -1
-java.lang.String::getChars 3 382 -1
-sun.nio.cs.StreamEncoder::isOpen 3 384 -1
-avrora.sim.mcu.Timer8Bit$BufferedRegister::read 3 512 -1
-sun.nio.cs.StreamEncoder::implFlushBuffer 3 384 -1
-java.lang.Long::getChars 3 463 -1
-java.lang.CharacterDataLatin1::toUpperCase 3 384 -1
-java.nio.Buffer::hasRemaining 3 256 -1
-avrora.arch.legacy.LegacyInstr$INC::accept 3 256 -1
-avrora.sim.mcu.ADC$ControlRegister::unpostADCInterrupt 3 256 -1
-avrora.arch.legacy.LegacyInstr$LDI::<init> 3 585 -1
-sun.nio.cs.StreamEncoder::implWrite 3 512 -1
-avrora.sim.mcu.ADC$ControlRegister::stopConversion 3 259 -1
-avrora.sim.Segment::direct_read 3 384 -1
-java.io.BufferedWriter::newLine 3 256 -1
-avrora.sim.mcu.SPI$SPCRReg::decode 3 256 -1
-java.text.StringCharacterIterator::current 3 256 -1
-java.io.PrintStream::newLine 3 278 -1
-avrora.arch.legacy.LegacyInstr$ST::accept 3 384 -1
-avrora.sim.radio.Medium$BasicArbitrator::lockTransmission 1 128 -1
-java.io.PrintStream::println 3 279 -1
-avrora.sim.InterruptTable::disable 3 420 -1
-avrora.arch.legacy.LegacyInstr$SEI::accept 3 256 -1
-avrora.sim.mcu.ADC$ControlRegister::access$100 3 256 -1
-avrora.arch.legacy.LegacyInstr$LSR::accept 3 384 -1
-avrora.sim.mcu.SPI$SPCRReg::write 3 385 -1
-avrora.monitors.PacketMonitor$Mon::clear 3 256 -1
-avrora.sim.output.SimPrinter::printBuffer 3 406 -1
-cck.text.StringUtil::appendFract 3 294 -1
-avrora.sim.InterruptTable::disableAll 3 384 -1
-avrora.monitors.PacketMonitor$Mon::fireAfterReceiveEnd 3 256 -1
-cck.elf.ELFStringTable::getString 3 256 -1
-java.nio.Buffer::position 4 5376 -1
-avrora.sim.radio.CC1000Radio$PA_POWRegister::getPower 3 256 -1
-avrora.sim.mcu.Timer8Bit$BufferedRegister::write 3 256 -1
-avrora.sim.mcu.Timer8Bit$BufferedRegister::flush 3 256 -1
-java.util.zip.ZipUtils::CENSIZ 3 461 -1
-avrora.sim.mcu.ATMegaFamily$FlagRegister::flagBit 3 256 -1
-avrora.sim.mcu.ATMegaFamily$FlagRegister$Notification::invoke 3 384 -1
-avrora.monitors.PacketMonitor$Mon::fireAfterReceive 3 641 -1
-avrora.sim.radio.Medium$Probe$List::fireBeforeTransmit 3 256 -1
-avrora.sim.clock.RippleSynchronizer::insertLink 3 264 -1
-java.io.File::getPath 1 128 -1
-avrora.sim.radio.Medium::access$302 4 6683 -1
-avrora.sim.radio.Medium::access$402 4 6689 -1
-cck.elf.ELFDataInputStream::asInt 3 512 -1
-avrora.sim.radio.Medium$BasicArbitrator::getNoise 4 6688 -1
-java.util.jar.JarFile::checkForSpecialAttributes 3 256 -1
-cck.util.Arithmetic::roundup 3 256 -1
-avrora.sim.radio.Medium$Transmitter::beginTransmit 3 369 -1
-avrora.monitors.PacketMonitor$Mon::fireBeforeTransmitEnd 3 384 -1
-sun.net.www.protocol.jar.Handler::parseURL 3 256 -1
-java.lang.ClassLoader::getClassLoadingLock 3 256 -1
+java.lang.StringUTF16::compress 4 9861 -1 -1
+java.util.Arrays::fill 3 8 5 3
+java.util.zip.ZipFile$Source::getEntryHash 3 256 -1 -1
+java.lang.Class::getPackageName 3 384 -1 -1
+java.io.BufferedInputStream::getBufIfOpen 4 14521 -1 -1
+java.util.zip.ZipUtils::CENOFF 3 384 -1 -1
+java.nio.DirectLongBufferU::ix 3 256 -1 -1
+java.util.ArrayDeque::poll 3 512 -1 -1
+org.dacapo.harness.TeeOutputStream::write 4 10680 -1 -1
+java.util.ArrayDeque::pollFirst 3 512 -1 -1
+avrora.arch.legacy.LegacyInstr$REG_class::<init> 3 471 -1 -1
+java.nio.HeapCharBuffer::<init> 3 512 -1 -1
+java.util.BitSet::get 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$LDI::<init> 3 512 -1 -1
+sun.nio.cs.StreamEncoder::implWrite 3 512 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_MOVW_0 3 640 -1 -1
+sun.nio.cs.UTF_8$Encoder::encode 3 128 -1 -1
+cck.util.Arithmetic::signExtend 3 457 -1 -1
+avrora.arch.legacy.LegacyInstr::access$3100 3 512 -1 -1
+avrora.sim.FiniteStateMachine::transition 4 11129 -1 -1
+java.util.LinkedList::checkPositionIndex 3 768 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_21 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$JMP::accept 4 13020 -1 -1
+java.nio.Buffer::position 4 5505 -1 -1
+cck.elf.ELFStringTable::getString 3 500 -1 -1
+avrora.sim.clock.RippleSynchronizer::waitFor 4 11113 -1 -1
+java.io.UnixFileSystem::prefixLength 3 384 -1 -1
+sun.net.www.protocol.jar.Handler::indexOfBangSlash 3 512 -1 -1
+avrora.sim.platform.ExternalFlash::access$1702 1 4535 -1 -1
+avrora.arch.legacy.LegacyRegister::hashCode 4 5383 -1 -1
+java.io.RandomAccessFile::readFully 3 384 -1 -1
+avrora.sim.radio.CC1000Radio$SPITicker::fire 4 12008 -1 -1
+java.util.zip.Inflater::getBytesWritten 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$CP::accept 4 36080 -1 -1
+avrora.arch.legacy.LegacyInstr$OUT::accept 4 10178 -1 -1
+java.lang.Number::<init> 3 512 -1 -1
+java.lang.StringBuffer::append 4 76461 -1 -1
+java.util.jar.JarFile::maybeInstantiateVerifier 3 512 -1 -1
+cck.elf.ELFDataInputStream::read_Elf32_uchar 3 640 -1 -1
+avrora.core.Program::readInstr 4 8987 -1 -1
+java.util.jar.JarFile$JarFileEntry::getName 1 128 -1 -1
+jdk.internal.math.FDBigInteger::trimLeadingZeros 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$WORD_class::<init> 3 332 -1 -1
+sun.net.util.URLUtil::urlNoFragString 3 512 -1 -1
+avrora.arch.legacy.LegacyInstr::IMM8 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$ROR::accept 4 5683 -1 -1
+java.lang.ref.Finalizer::remove 3 512 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_24 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$REGIMM_class::<init> 3 384 -1 -1
+java.lang.StringLatin1::indexOf 4 923 -1 -1
+avrora.sim.radio.Medium$Receiver::access$200 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr::HGPR 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr::access$1200 3 384 -1 -1
+java.util.zip.Inflater::reset 3 256 -1 -1
+java.lang.ref.Finalizer::hasBeenFinalized 3 512 -1 -1
+cck.text.Terminal::append 4 5688 -1 -1
+avrora.sim.radio.Medium$Receiver::earliestNewTransmission 4 11030 -1 -1
+jdk.internal.loader.URLClassPath$JarLoader::getResource 3 256 -1 -1
+java.util.AbstractSequentialList::iterator 4 11072 -1 -1
+avrora.arch.legacy.LegacyInstr$REGREG_class::<init> 3 256 -1 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::finalize 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$STD::accept 4 5517 -1 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface::access$200 3 1408 -1 -1
+avrora.sim.InterruptTable::enableAll 3 773 -1 -1
+org.dacapo.harness.Benchmark::fileFromInputStream 3 512 -1 -1
+java.util.jar.Attributes::get 3 256 -1 -1
+java.lang.Throwable::fillInStackTrace 3 256 -1 -1
+java.util.ArrayList::size 1 128 -1 -1
+java.util.Arrays::copyOfRange 4 5392 -1 -1
+avrora.sim.AtmelInterpreter::installIOReg 3 256 -1 -1
+java.util.zip.ZipUtils::CENSIG 3 384 -1 -1
+cck.elf.ELFDataInputStream::read_Elf32_Addr 3 384 -1 -1
+java.util.HashMap::resize 4 2075 -1 -1
+java.io.FilterOutputStream::close 3 256 -1 -1
+java.lang.StringLatin1::regionMatchesCI 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$DEC::accept 4 6795 -1 -1
+avrora.arch.legacy.LegacyInterpreter::high 3 768 -1 -1
+avrora.sim.AtmelInterpreter::writeDataByte 4 20917 -1 -1
+avrora.sim.clock.DeltaQueue::removeEvent 3 256 -1 -1
+avrora.sim.mcu.Timer8Bit::access$000 3 640 -1 -1
+avrora.sim.mcu.SPI$Frame::<init> 3 256 -1 -1
+java.util.zip.CRC32::getValue 3 256 -1 -1
+java.lang.ref.WeakReference::<init> 3 256 -1 -1
+avrora.monitors.PacketMonitor$Mon::append 4 5576 -1 -1
+java.util.zip.ZipFile::releaseInflater 3 512 -1 -1
+java.lang.ref.SoftReference::get 3 256 -1 -1
+java.nio.ByteBuffer::position 4 5381 -1 -1
+java.nio.charset.Charset::forName 3 384 -1 -1
+java.io.PushbackInputStream::unread 3 512 -1 -1
+java.nio.HeapByteBuffer::<init> 3 384 -1 -1
+java.util.zip.ZStreamRef::address 1 128 -1 -1
+avrora.arch.legacy.LegacyInstr$SLEEP::accept 4 14342 -1 -1
+java.nio.Buffer::<init> 4 5377 -1 -1
+avrora.arch.legacy.LegacyInstr::access$3300 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$LDS::accept 4 6274 -1 -1
+java.util.ArrayList$Itr::<init> 3 256 -1 -1
+avrora.sim.AtmelInterpreter::getRegisterWord 4 7846 -1 -1
+java.io.FileOutputStream::finalize 3 512 -1 -1
+java.util.zip.ZipFile::ensureOpen 3 256 -1 -1
+java.lang.AbstractStringBuilder::checkRange 3 256 -1 -1
+java.lang.String::access$100 1 128 -1 -1
+avrora.arch.legacy.LegacyDisassembler::disassembleLegacy 4 5619 -1 -1
+sun.invoke.util.Wrapper::forBasicType 3 384 -1 -1
+avrora.sim.clock.DeltaQueue::getCount 1 128 -1 -1
+java.io.BufferedOutputStream::flushBuffer 3 1161 -1 -1
+java.util.zip.CRC32::updateBytes 3 256 -1 -1
+avrora.sim.radio.CC1000Radio$PA_POWRegister::getPower 3 256 -1 -1
+java.net.URL::getDefaultPort 3 512 -1 -1
+avrora.sim.mcu.DefaultMCU$Pin::printRead 3 512 -1 -1
+avrora.sim.radio.CC1000Radio$MainRegister::decode 3 256 -1 -1
+java.net.URLStreamHandler::toExternalForm 3 512 -1 -1
+java.util.concurrent.ConcurrentHashMap$Traverser::advance 3 256 -1 -1
+jdk.internal.module.Resources::mayTranslate 3 384 -1 -1
+java.io.FilterOutputStream::write 4 889 28 4
+java.nio.charset.CharsetEncoder::reset 3 256 -1 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface::inputWriteBit 3 1153 -1 -1
+java.util.LinkedList::listIterator 4 11095 -1 -1
+java.util.zip.ZipFile::access$600 1 128 -1 -1
+java.net.URLStreamHandler::getDefaultPort 1 128 -1 -1
+avrora.arch.legacy.LegacyInterpreter::leaveSleepMode 3 768 -1 -1
+java.io.BufferedWriter::write 4 5381 -1 -1
+java.io.UnixFileSystem::getBooleanAttributes 3 384 -1 -1
+jdk.internal.misc.Unsafe::putLong 3 384 -1 -1
+java.nio.charset.CharsetEncoder::implReset 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$MULS::<init> 3 512 -1 -1
+java.util.HashMap::put 3 9439 -1 -1
+java.io.PrintStream::write 3 512 -1 -1
+avrora.sim.mcu.SPI::exchange 3 640 -1 -1
+cck.util.Arithmetic::high 1 2472 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_22 3 384 -1 -1
+java.io.FileDescriptor::attach 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$LDI::accept 4 7723 -1 -1
+sun.nio.cs.StreamEncoder::write 3 512 -1 -1
+java.util.LinkedList$ListItr::next 4 6592 -1 -1
+java.lang.Float::isInfinite 3 256 -1 -1
+sun.net.www.protocol.jar.Handler::parseURL 3 384 -1 -1
+java.lang.ClassLoader::getClassLoadingLock 3 256 -1 -1
+avrora.sim.AtmelInterpreter::setEnabled 3 512 -1 -1
+avrora.sim.platform.LED::write 4 6535 -1 -1
+java.net.URL::toExternalForm 3 512 -1 -1
+jdk.internal.misc.Unsafe::checkSize 3 384 -1 -1
+avrora.sim.mcu.ADC$MUXRegister::isSingleEnded 3 256 -1 -1
+java.lang.String::toCharArray 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$PUSH::accept 4 6883 -1 -1
+java.util.zip.ZipFile$Source::readFullyAt 3 256 -1 -1
+java.util.zip.ZipCoder::toString 3 384 -1 -1
+java.io.FileOutputStream::access$000 3 512 -1 -1
+avrora.sim.platform.ExternalFlash$PD3Output::write 4 20189 -1 -1
+java.util.BitSet::wordIndex 3 256 -1 -1
+java.lang.StringLatin1::getChars 3 384 -1 -1
+avrora.sim.mcu.Timer8Bit::access$100 3 640 -1 -1
+java.util.Objects::requireNonNull 3 384 -1 -1
+java.util.zip.ZipEntry::<init> 3 512 -1 -1
+java.lang.String::toString 3 414 -1 -1
+avrora.arch.legacy.LegacyInstr$ANDI::accept 4 5515 -1 -1
+jdk.internal.loader.Resource::getBytes 3 516 -1 -1
+avrora.sim.radio.Medium::isCorruptedByte 3 512 -1 -1
+avrora.monitors.PacketMonitor$Mon::clear 3 256 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_25 3 384 -1 -1
+java.lang.StringBuilder::toString 4 5638 -1 -1
+java.io.BufferedOutputStream::write 3 256 -1 -1
+org.dacapo.parser.SimpleCharStream::UpdateLineColumn 3 384 -1 -1
+java.lang.String::endsWith 3 384 -1 -1
+java.lang.Character::toLowerCase 3 384 -1 -1
+java.util.zip.Inflater::getBytesRead 3 512 -1 -1
+avrora.sim.AtmelInterpreter::getInstr 3 1408 -1 -1
+java.nio.DirectLongBufferU::put 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$BRCS::accept 4 5538 -1 -1
+jdk.internal.util.Preconditions::checkIndex 3 256 -1 -1
+java.nio.Buffer::flip 3 384 -1 -1
+cck.text.StringUtil::toFixedFloat 3 256 -1 -1
+avrora.sim.mcu.AtmelMicrocontroller::getPin 3 384 -1 -1
+cck.text.Verbose::isVerbose 3 640 -1 -1
+java.io.UnixFileSystem::delete 3 512 -1 -1
+avrora.arch.legacy.LegacyInstr$NOP::accept 4 9362 -1 -1
+avrora.sim.AtmelInterpreter::writeRegisterByte 4 7245 -1 -1
+avrora.arch.legacy.LegacyInstr$IMMREG_class::<init> 3 512 -1 -1
+avrora.sim.radio.Medium$Probe$List::fireAfterReceive 4 7714 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_20 3 512 -1 -1
+avrora.sim.AtmelInterpreter::writeRegisterWord 4 26744 -1 -1
+avrora.arch.legacy.LegacyInstr$POP::accept 4 6900 -1 -1
+avrora.sim.mcu.Timer8Bit$BufferedRegister::write 3 256 -1 -1
+cck.elf.ELFSymbolTable$Entry::isFunction 3 384 -1 -1
+avrora.sim.util.MulticastFSMProbe::<init> 3 256 -1 -1
+java.io.OutputStreamWriter::write 4 5507 -1 -1
+cck.util.Arithmetic::getBitField 4 7876 -1 -1
+java.util.zip.InflaterInputStream::ensureOpen 3 256 -1 -1
+avrora.monitors.LEDMonitor$Mon::fireBeforeTransition 1 1417 -1 -1
+jdk.internal.perf.PerfCounter::get 3 256 -1 -1
+java.nio.Buffer::limit 4 5419 -1 -1
+avrora.sim.mcu.ADC$ControlRegister::getPrescaler 3 256 -1 -1
+java.lang.String::equals 4 11988 -1 -1
+java.util.zip.Inflater::ensureOpen 4 5414 -1 -1
+jdk.internal.perf.PerfCounter::getReadClassBytesTime 3 384 -1 -1
+java.util.LinkedHashMap$Entry::<init> 3 256 -1 -1
+java.io.File::getPath 1 128 -1 -1
+avrora.sim.radio.Medium::access$302 4 9175 -1 -1
+avrora.sim.radio.Medium$Probe$List::fireAfterReceiveEnd 3 256 -1 -1
+cck.elf.ELFDataInputStream::read_2 3 384 -1 -1
+java.util.LinkedHashMap::removeEldestEntry 1 128 -1 -1
+java.io.PrintStream::print 3 290 -1 -1
+sun.nio.fs.UnixNativeDispatcher::copyToNativeBuffer 3 384 -1 -1
+java.io.BufferedWriter::min 3 256 -1 -1
+avrora.sim.clock.DeltaQueue::insertEvent 3 16441 -1 -1
+avrora.sim.radio.Medium$TXRX::getBitNum 3 640 -1 -1
+sun.nio.cs.StreamEncoder::flushBuffer 4 5507 -1 -1
+sun.nio.cs.UTF_8$Encoder::encodeArrayLoop 4 867 73 4
+avrora.sim.mcu.AtmelInternalDevice::installIOReg 3 256 -1 -1
+java.lang.invoke.MethodType::equals 3 384 -1 -1
+java.lang.ClassLoader::checkName 3 256 -1 -1
+avrora.sim.clock.MainClock::removeEvent 3 257 -1 -1
+avrora.sim.radio.CC1000Radio::getPower 3 256 -1 -1
+avrora.sim.AtmelInterpreter$IORegBehavior::read 3 1024 -1 -1
+java.util.LinkedList$ListItr::<init> 4 12295 -1 -1
+java.util.zip.Inflater::inflate 3 256 -1 -1
+sun.nio.fs.UnixPath::normalizeAndCheck 3 229 -1 -1
+jdk.internal.loader.URLClassPath$JarLoader::access$600 1 128 -1 -1
+avrora.arch.legacy.LegacyInstr$CPI::accept 4 7996 -1 -1
+avrora.sim.state.VolatileBehavior::<init> 3 256 -1 -1
+java.nio.ByteBuffer::<init> 3 256 -1 -1
+sun.nio.fs.UnixPath::resolve 3 256 -1 -1
+avrora.sim.mcu.ADC$ControlRegister::stopConversion 3 256 -1 -1
+avrora.sim.clock.DeltaQueue::skipAhead 4 11068 -1 -1
+java.util.zip.ZipFile$ZipFileInputStream::close 3 256 -1 -1
+java.util.zip.ZipInputStream::ensureOpen 3 384 -1 -1
+avrora.sim.mcu.Timer8Bit::compareMatch 3 256 -1 -1
+avrora.sim.mcu.ADC$ControlRegister::insertConversion 3 256 -1 -1
+java.nio.charset.CharsetDecoder::reset 3 384 -1 -1
+avrora.sim.FiniteStateMachine::getTransitionTime 3 1024 -1 -1
+java.util.LinkedList$ListItr::hasNext 4 7122 -1 -1
+jdk.internal.misc.Unsafe::checkOffset 3 384 -1 -1
+jdk.internal.loader.URLClassPath$JarLoader$2::getManifest 3 384 -1 -1
+java.util.zip.ZipInputStream::readEnd 3 512 -1 -1
+avrora.arch.legacy.LegacyInstr$CBI::accept 4 12949 -1 -1
+java.io.PushbackInputStream::read 3 384 -1 -1
+java.lang.StringCoding$StringDecoder::requestedCharsetName 1 128 -1 -1
+java.util.zip.ZipCoder::isUTF8 1 128 -1 -1
+java.util.zip.Inflater::setInput 3 512 -1 -1
+java.util.zip.ZipCoder::decoder 3 384 -1 -1
+avrora.sim.radio.CC1000Radio$RSSIOutput::getVoltage 3 256 -1 -1
+java.util.zip.ZipFile$Source::access$100 3 512 -1 -1
+java.util.jar.JarEntry::<init> 3 512 -1 -1
+java.io.OutputStream::<init> 3 256 -1 -1
+avrora.sim.mcu.MCUProperties::getPin 3 384 -1 -1
+avrora.sim.mcu.DefaultMCU$Pin::read 3 646 -1 -1
+org.dacapo.parser.ConfigFileTokenManager::jjCheckNAddStates 3 256 -1 -1
+avrora.sim.radio.Medium$BasicArbitrator::computeReceivedPower 3 384 -1 -1
+avrora.sim.state.RegisterUtil$BitRangeView::getValue 4 6403 -1 -1
+avrora.arch.legacy.LegacyInstr$CLI::accept 4 5382 -1 -1
+cck.text.StringUtil::appendFract 3 256 -1 -1
+sun.nio.cs.StreamEncoder::isOpen 3 384 -1 -1
+avrora.sim.clock.DeltaQueue::insertAfter 4 15556 -1 -1
+java.nio.CharBuffer::<init> 3 512 -1 -1
+avrora.sim.mcu.SPI$TransferEvent::enableTransfer 4 14507 -1 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface::clockInBit 3 1280 -1 -1
+java.lang.String::substring 4 5659 -1 -1
+avrora.sim.radio.Medium$Receiver::access$100 3 640 -1 -1
+java.util.HashMap::get 4 6429 -1 -1
+avrora.sim.clock.DeltaQueue::advanceSlow 4 5509 -1 -1
+avrora.arch.legacy.LegacyInstr$ORI::accept 4 12060 -1 -1
+java.net.URLClassLoader::isSealed 3 384 -1 -1
+avrora.sim.Simulation::getPrinter 3 640 -1 -1
+avrora.sim.RWRegister::setValue 1 1762 -1 -1
+java.nio.DirectLongBufferU::get 3 384 -1 -1
+avrora.arch.legacy.LegacyInterpreter::sleepLoop 4 42350 5 4
+avrora.arch.legacy.LegacyInstr::access$900 3 512 -1 -1
+java.lang.String::startsWith 3 5676 -1 -1
+avrora.sim.clock.RippleSynchronizer$NotifyEvent::access$100 3 768 -1 -1
+java.util.HashMap::clear 3 384 -1 -1
+avrora.sim.util.SimUtil::toIDTimeString 3 256 -1 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PDATAOutput::write 1 2562 -1 -1
+avrora.sim.mcu.SPI::newFrame 3 768 -1 -1
+jdk.internal.loader.URLClassPath$JarLoader$2::getCodeSourceURL 3 384 -1 -1
+java.lang.ClassLoader::findLoadedClass 3 256 -1 -1
+java.nio.ByteBuffer::limit 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$LPM::accept 4 5529 -1 -1
+avrora.monitors.PacketMonitor$Mon::renderPacket 4 864 29 3
+java.util.jar.Attributes::getValue 3 384 -1 -1
+avrora.sim.radio.Medium::access$400 3 384 -1 -1
+java.nio.charset.Charset::isSupported 3 384 -1 -1
+avrora.core.Program::checkAddress 4 5488 -1 -1
+java.nio.ByteBuffer::arrayOffset 3 384 -1 -1
+java.util.zip.ZipInputStream::readLOC 3 384 -1 -1
+avrora.sim.radio.Medium$Receiver::waitForNeighbors 3 640 -1 -1
+java.util.LinkedList$Node::<init> 3 512 -1 -1
+avrora.sim.AtmelInterpreter::getRegisterUnsigned 3 1152 -1 -1
+java.security.SecureClassLoader$CodeSourceKey::equals 3 512 -1 -1
+java.lang.String::equalsIgnoreCase 3 256 -1 -1
+java.lang.String$CaseInsensitiveComparator::compare 3 256 -1 -1
+java.util.Optional::empty 3 256 -1 -1
+java.nio.ByteBuffer::array 3 798 -1 -1
+java.util.ArrayDeque::elementAt 3 512 -1 -1
+avrora.arch.legacy.LegacyInstr$RETI::accept 4 12291 -1 -1
+java.lang.StringCoding::deref 3 256 -1 -1
+java.net.URL::set 3 512 -1 -1
+avrora.sim.radio.CC1000Radio$Receiver::setRSSI 1 1709 -1 -1
+avrora.arch.legacy.LegacyInstr$ADD::accept 4 13271 -1 -1
+avrora.arch.legacy.LegacyInstr::DADDR 3 512 -1 -1
+jdk.internal.loader.URLClassPath::getResource 3 256 -1 -1
+java.net.URL::getProtocol 1 128 -1 -1
+java.io.UnixFileSystem::resolve 3 384 -1 -1
+avrora.sim.AtmelInterpreter::toSRAM 1 1285 -1 -1
+java.util.concurrent.ConcurrentHashMap::casTabAt 4 1408 -1 -1
+avrora.sim.CodeSegment::load 3 65536 16 3
+java.util.jar.JarFile::getManifestFromReference 3 512 -1 -1
+java.lang.Character::isLetterOrDigit 3 256 -1 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::fill 3 256 -1 -1
+java.util.zip.ZipUtils::CENLEN 3 256 -1 -1
+java.lang.String::coder 4 28323 -1 -1
+java.util.zip.CRC32::reset 3 256 -1 -1
+java.util.Vector::add 3 256 -1 -1
+java.lang.AbstractStringBuilder::append 3 256 -1 -1
+avrora.sim.AtmelInterpreter::writeSRAM 4 23091 -1 -1
+avrora.sim.RWRegister::<init> 3 256 -1 -1
+java.lang.Integer::getChars 3 256 -1 -1
+java.lang.invoke.MethodTypeForm::erasedType 1 128 -1 -1
+java.lang.Character::getType 3 256 -1 -1
+avrora.arch.legacy.LegacyInterpreter::pushPC 3 768 -1 -1
+avrora.sim.AtmelInterpreter::disableInterrupts 3 768 -1 -1
+java.io.BufferedOutputStream::<init> 3 384 -1 -1
+java.lang.String::lastIndexOf 3 384 -1 -1
+avrora.sim.mcu.ADC$ControlRegister::unpostADCInterrupt 3 378 -1 -1
+avrora.sim.InterruptTable::beforeInvoke 4 13167 -1 -1
+sun.nio.fs.UnixPath::getFileSystem 3 384 -1 -1
+java.util.stream.ReferencePipeline::forEachWithCancel 4 1794 -1 -1
+java.util.zip.ZipEntry::getName 1 128 -1 -1
+avrora.sim.AtmelInterpreter::getDataByte 4 29909 -1 -1
+java.lang.ref.ReferenceQueue::reallyPoll 3 256 -1 -1
+avrora.sim.AtmelInterpreter::readSRAM 4 8020 -1 -1
+avrora.arch.legacy.LegacyInstr$RJMP::accept 4 13399 -1 -1
+java.io.PushbackInputStream::ensureOpen 3 384 -1 -1
+avrora.sim.Simulation$Node::getSimulator 1 128 -1 -1
+avrora.sim.mcu.SPI$SPDReg::write 4 14412 -1 -1
+avrora.sim.radio.Medium$Receiver::access$000 3 640 -1 -1
+cck.util.Arithmetic::getBit 4 8263 -1 -1
+avrora.sim.mcu.SPI$SPSReg::clearSPIF 3 768 -1 -1
+sun.nio.cs.StreamEncoder::ensureOpen 3 512 -1 -1
+java.util.AbstractList::listIterator 3 640 -1 -1
+avrora.sim.state.RegisterUtil$BoolView::getValue 4 10997 -1 -1
+cck.text.StringUtil::leftJustify 3 256 -1 -1
+cck.util.Arithmetic::clearBit 3 1280 -1 -1
+java.io.BufferedInputStream::fill 3 384 -1 -1
+avrora.sim.AtmelInterpreter::writeVolatile 3 897 -1 -1
+sun.nio.fs.NativeBuffers::copyCStringToNativeBuffer 3 384 -1 -1
+avrora.core.Program::readProgramByte 4 11144 -1 -1
+java.util.zip.InflaterInputStream::read 3 256 -1 -1
+java.lang.CharacterDataLatin1::toLowerCase 4 5589 -1 -1
+java.util.zip.ZipInputStream::read 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$STS::<init> 3 384 -1 -1
+avrora.sim.mcu.ATMegaFamily$FlagRegister::setPosted 3 256 -1 -1
+avrora.sim.mcu.SPI$SPSReg::setSPIF 3 512 -1 -1
+java.util.LinkedList::isPositionIndex 3 768 -1 -1
+avrora.sim.mcu.Timer8Bit$Mode_CTC::fire 4 7827 -1 -1
+java.lang.StringLatin1::inflate 4 979 -1 -1
+java.util.zip.ZipFile::getEntry 3 512 -1 -1
+java.util.zip.CRC32::updateBytesCheck 3 384 -1 -1
+cck.util.Arithmetic::word 1 3449 -1 -1
+avrora.sim.clock.RippleSynchronizer::waitForLink 4 11023 -1 -1
+java.util.AbstractSequentialList::<init> 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$STS::accept 4 9184 -1 -1
+jdk.internal.misc.Unsafe::getLong 3 384 -1 -1
+avrora.sim.util.TransactionalList::isEmpty 4 11985 -1 -1
+avrora.arch.legacy.LegacyInstr::asInstr 1 2765 -1 -1
+java.text.StringCharacterIterator::current 3 256 -1 -1
+java.io.PrintStream::newLine 3 256 -1 -1
+java.util.zip.ZipFile::getInputStream 3 384 -1 -1
+avrora.sim.util.MulticastFSMProbe::fireBeforeTransition 4 6540 -1 -1
+avrora.sim.AtmelInterpreter::getInterruptVectorAddress 3 768 -1 -1
+java.util.zip.ZipUtils::CENCOM 3 384 -1 -1
+avrora.monitors.PacketMonitor$Mon::fireBeforeTransmitEnd 3 384 -1 -1
+avrora.monitors.LEDMonitor$Mon::fireAfterTransition 4 5513 -1 -1
+java.nio.charset.CharsetEncoder::encode 4 5639 -1 -1
+cck.util.Option$Str::set 1 128 -1 -1
+java.lang.StringDecoderUTF8::decode 4 875 -1 -1
+java.lang.Long::toString 3 257 -1 -1
+java.util.jar.JarFile::getJarEntry 3 256 -1 -1
+avrora.sim.AtmelInterpreter::enableInterrupts 3 773 -1 -1
+avrora.sim.mcu.SPI$SPDReg$TransmitRegister::write 3 1024 -1 -1
+java.util.StringTokenizer::nextToken 3 384 -1 -1
+avrora.sim.clock.DeltaQueue::free 3 280 -1 -1
+java.io.BufferedWriter::flushBuffer 4 6405 -1 -1
+sun.nio.fs.LinuxFileSystemProvider::readAttributes 3 256 -1 -1
+sun.net.www.ParseUtil::encodePath 3 256 -1 -1
+jdk.internal.loader.URLClassPath$JarLoader::ensureOpen 3 512 -1 -1
+java.util.HashMap::isEmpty 3 2891 -1 -1
+avrora.sim.radio.Medium::access$300 1 27300 -1 -1
+avrora.sim.clock.MainClock::getCount 4 6811 -1 -1
+avrora.monitors.PacketMonitor$Mon::fireBeforeTransmit 3 384 -1 -1
+avrora.sim.clock.DeltaQueue::newLink 3 14275 -1 -1
+avrora.arch.legacy.LegacyInterpreter::uword 3 768 -1 -1
+java.lang.Integer::stringSize 3 256 -1 -1
+java.util.BitSet::checkInvariants 3 256 -1 -1
+avrora.sim.InterruptTable::afterInvoke 4 14296 -1 -1
+java.lang.ref.ReferenceQueue::poll 3 806 -1 -1
+java.lang.Object::wait 4 6133 -1 -1
+avrora.arch.legacy.LegacyInstr::<init> 4 6561 -1 -1
+sun.nio.cs.UTF_8$Decoder::decode 3 199 -1 -1
+avrora.sim.AtmelInterpreter::writeIORegisterByte 3 768 -1 -1
+java.util.WeakHashMap::getTable 3 384 -1 -1
+avrora.sim.Segment::checked_read 3 385 -1 -1
+avrora.arch.legacy.LegacyInstr$EOR::accept 4 11131 -1 -1
+avrora.sim.clock.MainClock::insertEvent 3 21510 -1 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::<init> 3 384 -1 -1
+avrora.sim.radio.Medium$Receiver$Ticker::fire 4 10979 -1 -1
+java.util.zip.InflaterInputStream::fill 3 256 -1 -1
+avrora.sim.radio.Medium$Transmitter$Ticker::fire 4 5537 -1 -1
+avrora.sim.radio.Medium::newTransmission 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$BREQ::accept 4 8975 -1 -1
+avrora.sim.AtmelInterpreter$SREGBehavior::read 3 640 -1 -1
+java.util.zip.ZipCoder::encoder 3 512 -1 -1
+avrora.sim.radio.CC1000Radio$CurrentRegister::decode 3 256 -1 -1
+avrora.sim.radio.CC1000Radio$Transmitter::nextByte 3 384 -1 -1
+java.util.jar.JarFile::getInputStream 3 256 -1 -1
+avrora.monitors.PacketMonitor$Mon::fireAfterReceiveEnd 3 256 -1 -1
+avrora.sim.InterruptTable::disableAll 3 768 -1 -1
+cck.util.Arithmetic::lowestBit 4 14179 -1 -1
+avrora.arch.legacy.LegacyInstr$MOVW::accept 4 5386 -1 -1
+avrora.sim.InterruptTable::disable 3 384 -1 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PCLKOutput::write 4 7819 -1 -1
+avrora.sim.radio.Medium$Transmitter::beginTransmit 3 384 -1 -1
+avrora.sim.radio.Medium$TXRX::getCycleTime 3 897 -1 -1
+avrora.sim.AtmelInterpreter$SREGBehavior::write 3 640 -1 -1
+avrora.sim.FiniteStateMachine$State::<init> 3 384 -1 -1
+cck.text.Terminal::println 3 316 -1 -1
+avrora.sim.output.SimPrinter::printBuffer 3 321 -1 -1
+java.util.LinkedList$ListItr::remove 3 256 -1 -1
+avrora.sim.mcu.SPI::postSPIInterrupt 3 512 -1 -1
+java.util.zip.ZipFile$ZipFileInputStream::size 1 128 -1 -1
+avrora.sim.mcu.Timer8Bit$BufferedRegister::flush 3 256 -1 -1
+java.lang.ref.SoftReference::<init> 3 256 -1 -1
+java.nio.charset.CoderResult::isOverflow 3 512 -1 -1
+avrora.sim.radio.Medium$Receiver$Ticker::fireUnlocked 4 11227 -1 -1
+java.lang.ClassLoader::addClass 3 384 -1 -1
+avrora.sim.mcu.SPI::invoke 4 12350 -1 -1
+avrora.sim.AtmelInterpreter::commit 4 8209 -1 -1
+avrora.sim.mcu.DefaultMCU$Pin::printWrite 4 12735 -1 -1
+java.lang.Long::getChars 4 5383 -1 -1
+avrora.sim.mcu.SPI::unpostSPIInterrupt 3 768 -1 -1
+avrora.arch.legacy.LegacyInstr$SEI::accept 3 256 -1 -1
+avrora.monitors.PacketMonitor$Mon::fireAfterReceive 4 6691 -1 -1
+avrora.sim.clock.RippleSynchronizer::insertLink 3 256 -1 -1
+avrora.sim.radio.Medium$Probe$List::fireBeforeTransmit 3 384 -1 -1
+java.nio.charset.CharsetDecoder::implReset 3 384 -1 -1
+avrora.sim.clock.MainClock::advance 3 385 -1 -1
+avrora.arch.legacy.LegacyInterpreter::enterSleepMode 3 896 -1 -1
+avrora.arch.legacy.LegacyInstr$BRPL::accept 4 6700 -1 -1
+avrora.sim.mcu.Timer8Bit$BufferedRegister::read 3 640 -1 -1
+sun.nio.cs.StreamEncoder::implFlushBuffer 3 384 -1 -1
+java.net.URLClassLoader::access$100 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$LD::accept 4 5505 -1 -1
+java.net.URLClassLoader::defineClass 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$BRGE::accept 4 7688 -1 -1
+avrora.sim.SimulatorThread::getSimulator 3 768 -1 -1
+avrora.arch.legacy.LegacyInstr$BRCC::accept 4 5428 -1 -1
+java.util.LinkedList::<init> 3 384 -1 -1
+jdk.internal.module.IllegalAccessMaps$$Lambda$18/488970385::test 4 6787 -1 -1
+avrora.sim.radio.Medium::access$402 3 384 -1 -1
+avrora.sim.mcu.ATMegaFamily$FlagRegister$Notification::invoke 3 384 -1 -1
+java.nio.CharBuffer::wrap 3 512 -1 -1
+cck.elf.ELFDataInputStream::read_Elf32_Half 3 384 -1 -1
+cck.util.Arithmetic::setBit 4 26113 -1 -1
+avrora.sim.mcu.Timer8Bit$TCNTnRegister::write 3 384 -1 -1
+avrora.sim.mcu.ADC$ControlRegister::convertVoltage 3 257 -1 -1
+java.net.URLClassLoader$1::run 3 512 -1 -1
+java.lang.String::valueOf 3 274 -1 -1
+avrora.sim.AtmelInterpreter::advanceClock 3 768 -1 -1
+java.nio.ByteBuffer::wrap 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$SBC::accept 4 5378 -1 -1
+avrora.sim.AtmelInterpreter::fireBeforeRead 3 1152 -1 -1
+avrora.sim.FiniteStateMachine::fireBefore 3 1280 -1 -1
+java.io.BufferedOutputStream::flush 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$AND::accept 4 11008 -1 -1
+avrora.sim.AtmelInterpreter::setSP 3 1536 -1 -1
+jdk.internal.misc.Unsafe::putObjectRelease 3 384 -1 -1
+avrora.sim.mcu.SPI$SPCRReg::decode 3 256 -1 -1
+avrora.sim.InterruptTable::unpost 4 14154 -1 -1
+sun.nio.cs.UTF_8$Encoder::encodeLoop 4 5640 -1 -1
+avrora.sim.clock.DeltaQueue::access$000 3 896 -1 -1
+java.nio.charset.Charset::lookup 3 384 -1 -1
+cck.elf.ELFDataInputStream::read_4 3 384 -1 -1
+avrora.sim.AtmelInterpreter::pushByte 4 14387 -1 -1
+avrora.arch.legacy.LegacyInstr$BRNE::accept 4 7824 -1 -1
+avrora.arch.legacy.LegacyInterpreter::bit 4 13375 -1 -1
+avrora.sim.mcu.Timer8Bit::tickerStart 3 641 -1 -1
+avrora.sim.clock.RippleSynchronizer::advance 4 12053 -1 -1
+java.lang.String::checkBoundsBeginEnd 4 5668 -1 -1
+avrora.arch.legacy.LegacyInstr$SBIW::accept 4 36244 -1 -1
+avrora.sim.util.TransactionalList::endTransaction 4 5556 -1 -1
+avrora.arch.legacy.LegacyInstr$SUBI::accept 4 13281 -1 -1
+cck.util.Arithmetic::low 1 13832 -1 -1
+avrora.sim.platform.ExternalFlash::access$100 1 128 -1 -1
+avrora.sim.RWRegister::read 1 128 -1 -1
+avrora.sim.InterruptTable::getPendingInterrupts 1 128 -1 -1
+cck.text.StringUtil::convertToHex 4 5663 -1 -1
+java.security.SecureClassLoader$CodeSourceKey::<init> 3 512 -1 -1
+java.lang.StringBuffer::<init> 3 262 -1 -1
+java.io.Writer::write 3 256 -1 -1
+java.security.CodeSource::<init> 3 512 -1 -1
+avrora.arch.legacy.LegacyInstr$CALL::accept 4 11150 -1 -1
+avrora.sim.AtmelInterpreter::getFlashByte 3 640 -1 -1
+java.lang.ref.Finalizer::runFinalizer 3 512 -1 -1
+java.util.zip.ZipUtils::CENFLG 3 384 -1 -1
+avrora.sim.Segment::read 4 5554 -1 -1
+java.lang.String::getBytes 4 5750 -1 -1
+avrora.monitors.PacketMonitor$Mon::renderByte 4 5817 -1 -1
+java.lang.Character::toUpperCase 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$ADIW::accept 4 5652 -1 -1
+avrora.arch.legacy.LegacyInstr$SBCI::accept 4 6691 -1 -1
+avrora.sim.mcu.ATMegaFamily$DirectionRegister::write 4 2419 -1 -1
+avrora.sim.mcu.AtmelMicrocontroller::installIOReg 3 256 -1 -1
+avrora.sim.Simulator::getPrinter 3 640 -1 -1
+avrora.sim.FiniteStateMachine::fireAfter 3 1280 -1 -1
+avrora.sim.mcu.SPI::receive 4 12031 -1 -1
+avrora.sim.radio.Medium$Receiver::endReceive 3 256 -1 -1
+java.util.concurrent.ConcurrentHashMap::put 3 256 -1 -1
+java.io.OutputStreamWriter::flushBuffer 3 384 -1 -1
+avrora.sim.radio.CC1000Radio$SerialConfigurationInterface$PALEOutput::write 4 13506 -1 -1
+avrora.sim.radio.CC1000Radio$Receiver::nextByte 4 7691 -1 -1
+avrora.sim.mcu.Timer8Bit::tickerFinish 3 640 -1 -1
+avrora.sim.radio.Medium$BasicArbitrator::mergeTransmissions 4 13137 -1 -1
+java.lang.StringBuffer::toString 4 5632 -1 -1
+java.io.FileOutputStream::close 3 512 -1 -1
+sun.util.locale.LocaleUtils::isUpper 3 256 -1 -1
+avrora.arch.legacy.LegacyRegister::getNumber 1 133 -1 -1
+avrora.arch.legacy.LegacyInterpreter::visit 4 5381 -1 -1
+avrora.sim.mcu.AtmelMicrocontroller::sleep 4 14363 -1 -1
+avrora.sim.AtmelInterpreter::fireAfterWrite 4 7633 -1 -1
+avrora.sim.mcu.AtmelMicrocontroller::wakeup 4 9278 -1 -1
+java.util.zip.ZipUtils::get16 4 3294 -1 -1
+avrora.sim.clock.RippleSynchronizer$NotifyEvent::currentWaitLink 3 640 -1 -1
+java.net.URL::toString 3 384 -1 -1
+avrora.sim.radio.Medium$Probe$List::fireBeforeTransmitEnd 3 384 -1 -1
+java.util.zip.CRC32::update 3 256 -1 -1
+java.lang.AbstractStringBuilder::<init> 4 5636 -1 -1
+avrora.arch.legacy.LegacyInstr$LDD::accept 4 5527 -1 -1
+avrora.sim.clock.DeltaQueue$Link::remove 4 5518 -1 -1
+avrora.sim.radio.CC1000Radio$PA_POWRegister::decode 3 256 -1 -1
+java.nio.ByteBuffer::flip 4 5504 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_STS_0 3 384 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_root 4 6685 -1 -1
+java.nio.CharBuffer::hasArray 3 256 -1 -1
+avrora.sim.mcu.ADC$ControlRegister$ConversionEvent::fire 3 256 -1 -1
+avrora.sim.mcu.ADC$MUXRegister::getSingleIndex 3 256 -1 -1
+avrora.sim.mcu.DefaultMCU::getSimulator 1 128 -1 -1
+java.util.ArrayList::add 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$LPMD::accept 4 5521 -1 -1
+sun.nio.fs.UnixPath::isEmpty 3 256 -1 -1
+avrora.sim.util.TransactionalList::<init> 3 256 -1 -1
+sun.net.www.ParseUtil::<init> 3 384 -1 -1
+avrora.sim.AtmelInterpreter::fireBeforeWrite 4 7526 -1 -1
+avrora.sim.RWRegister::write 1 128 -1 -1
+sun.nio.fs.UnixPath::<init> 3 384 -1 -1
+java.util.StringTokenizer::hasMoreTokens 3 384 -1 -1
+java.util.zip.ZipInputStream::getNextEntry 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$SBI::accept 4 11632 -1 -1
+avrora.sim.clock.DeltaQueue$Link::add 3 768 -1 -1
+java.util.zip.ZipUtils::LG 3 256 -1 -1
+avrora.sim.AtmelInterpreter::getRegisterByte 4 6075 -1 -1
+java.util.StringTokenizer::skipDelimiters 3 384 -1 -1
+java.util.zip.ZipInputStream::createZipEntry 3 384 -1 -1
+java.io.FilterInputStream::available 3 256 -1 -1
+java.util.zip.ZipFile$Source::access$200 1 128 -1 -1
+java.lang.invoke.LambdaForm$MH/870698190::identity_L 3 1091 -1 -1
+java.lang.CharacterDataLatin1::toUpperCaseEx 3 256 -1 -1
+java.util.jar.Manifest::getEntries 1 128 -1 -1
+avrora.arch.legacy.LegacyInstr$MOV::accept 4 9315 -1 -1
+java.io.OutputStream::flush 1 1292 -1 -1
+java.nio.Buffer::remaining 3 256 -1 -1
+avrora.sim.platform.ExternalFlash$PD5Output::write 4 20211 -1 -1
+java.io.FileOutputStream$1::close 3 512 -1 -1
+java.io.PrintStream::println 3 316 -1 -1
+avrora.sim.radio.Medium$BasicArbitrator::lockTransmission 1 128 -1 -1
+avrora.arch.legacy.LegacyInstr$ST::accept 4 5386 -1 -1
+avrora.sim.AtmelInterpreter$IORegBehavior::<init> 3 384 -1 -1
+java.nio.CharBuffer::position 4 5535 -1 -1
+java.lang.ref.Finalizer::<init> 3 256 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_9 3 384 -1 -1
+avrora.sim.AtmelInterpreter$IORegBehavior::write 3 1024 -1 -1
+java.lang.StringLatin1::canEncode 4 20825 -1 -1
+avrora.sim.Simulator::getClock 1 128 -1 -1
+java.util.zip.ZipUtils::get32 3 512 -1 -1
+java.io.File::delete 3 384 -1 -1
+avrora.sim.AtmelInterpreter::setIORegBit 4 11793 -1 -1
+java.io.RandomAccessFile::read 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr::GPR 3 384 -1 -1
+java.nio.charset.CharsetEncoder::maxBytesPerChar 1 128 -1 -1
+avrora.sim.radio.Medium$Receiver::isChannelClear 3 256 -1 -1
+jdk.internal.loader.Resource::cachedInputStream 3 512 -1 -1
+java.lang.CharacterData::of 4 10802 -1 -1
+java.io.FileDescriptor$1::getAppend 3 256 -1 -1
+sun.nio.fs.Util::followLinks 3 256 -1 -1
+avrora.sim.mcu.ADC$ControlRegister::write 4 5397 -1 -1
+java.security.SecureClassLoader::getProtectionDomain 3 512 -1 -1
+java.util.zip.ZipUtils::CENHOW 3 256 -1 -1
+java.lang.StringLatin1::charAt 4 80636 -1 -1
+java.lang.Integer::intValue 1 128 -1 -1
+avrora.sim.clock.DeltaQueue::newEventList 4 6111 -1 -1
+java.util.Vector::addElement 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr$COM::accept 4 14413 -1 -1
+java.nio.charset.CharsetDecoder::maxCharsPerByte 1 128 -1 -1
+avrora.arch.legacy.LegacyDisassembler::getReg 4 5588 -1 -1
+java.lang.StringLatin1::lastIndexOf 4 1227 -1 -1
+avrora.arch.legacy.LegacyInstr$MOVW::<init> 3 512 -1 -1
+java.lang.String::<init> 3 9798 -1 -1
+java.util.ArrayList::iterator 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$CPC::accept 4 29448 -1 -1
+java.lang.StringCoding::decode 3 384 -1 -1
+avrora.sim.mcu.ADC$ControlRegister::invoke 3 385 -1 -1
+avrora.sim.clock.Clock::cyclesToMillis 1 2489 -1 -1
+avrora.sim.radio.Medium$Receiver::getIntersection 4 13016 -1 -1
+java.util.zip.ZipFile$ZipFileInputStream::finalize 3 384 -1 -1
+java.lang.StringCoding::encodeUTF8 4 942 -1 -1
+java.util.zip.ZipUtils::CENTIM 3 256 -1 -1
+java.util.Optional::orElse 3 384 -1 -1
+sun.nio.fs.UnixPath::getByteArrayForSysCalls 3 384 -1 -1
+java.net.URL::getHost 1 128 -1 -1
+java.util.ArrayList::get 3 256 -1 -1
+java.nio.ByteBuffer::hasArray 3 512 -1 -1
+java.io.UnixFileSystem::normalize 4 1002 -1 -1
+java.util.Hashtable::get 3 256 -1 -1
+avrora.sim.clock.MainClock::skipAhead 3 640 -1 -1
+java.io.ExpiringCache::clear 3 512 -1 -1
+avrora.arch.legacy.LegacyInterpreter::low 1 3310 -1 -1
+java.io.FileOutputStream$1::<init> 3 512 -1 -1
+java.nio.Buffer::clear 3 512 -1 -1
+org.dacapo.parser.SimpleCharStream::readChar 3 256 -1 -1
+java.util.concurrent.ConcurrentHashMap::computeIfAbsent 3 256 -1 -1
+java.lang.String::charAt 4 85862 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_31 3 256 -1 -1
+java.io.File::isDirectory 3 384 -1 -1
+java.lang.StringCoding::lookupCharset 3 384 -1 -1
+avrora.sim.mcu.SPI$SPCRReg::write 3 257 -1 -1
+avrora.arch.legacy.LegacyInstr$LSR::accept 4 6587 -1 -1
+avrora.sim.mcu.ADC$ControlRegister::access$100 3 256 -1 -1
+java.util.WeakHashMap::expungeStaleEntries 3 384 -1 -1
+java.net.URLClassLoader::getAndVerifyPackage 3 384 -1 -1
+java.lang.ref.Finalizer::add 3 384 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_LDI_0 3 512 -1 -1
+cck.text.StringUtil::toHex 3 646 -1 -1
+avrora.sim.util.MulticastFSMProbe::fireAfterTransition 4 6537 -1 -1
+jdk.internal.misc.Unsafe::checkNativeAddress 3 452 -1 -1
+avrora.sim.clock.RippleSynchronizer::waitForNeighbors 4 12189 -1 -1
+java.lang.ClassLoader::compareCerts 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$ADC::accept 4 6673 -1 -1
+cck.text.StringUtil::space 3 249 -1 -1
+avrora.sim.state.RegisterUtil$BoolView::setValue 4 11999 -1 -1
+java.lang.System::getSecurityManager 1 1409 -1 -1
+java.lang.Package$VersionInfo::access$600 1 128 -1 -1
+java.lang.StringCoding::encode 3 384 -1 -1
+java.io.FileDescriptor::<init> 3 256 -1 -1
+java.util.zip.Inflater::getRemaining 3 512 -1 -1
+java.io.FileOutputStream::<init> 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$SBRC::accept 4 5379 -1 -1
+avrora.sim.mcu.RegisterLayout::getIOReg 3 256 -1 -1
+java.util.zip.ZipUtils::SH 4 1996 -1 -1
+java.io.File::isInvalid 3 384 -1 -1
+avrora.sim.clock.DeltaQueue$Link::fire 4 16134 -1 -1
+java.util.HashMap::getNode 4 7065 -1 -1
+cck.elf.ELFDataInputStream::asInt 3 384 -1 -1
+avrora.sim.radio.Medium$BasicArbitrator::getNoise 4 9174 -1 -1
+java.util.zip.ZipFile$ZipFileInputStream::read 3 256 -1 -1
+java.util.LinkedHashMap::clear 3 512 -1 -1
+java.io.FilterOutputStream::<init> 3 256 -1 -1
+jdk.internal.loader.URLClassPath$Loader::getBaseURL 1 128 -1 -1
+java.net.URLClassLoader::findClass 3 512 -1 -1
+java.net.URL::getAuthority 1 128 -1 -1
+avrora.sim.AtmelInterpreter::setPosted 4 14056 -1 -1
+avrora.arch.legacy.LegacyDisassembler::relative 3 457 -1 -1
+java.io.BufferedWriter::newLine 3 256 -1 -1
+avrora.sim.Segment::direct_read 3 384 -1 -1
+java.util.LinkedList::node 3 768 -1 -1
+avrora.arch.legacy.LegacyInstr::getSize 4 9024 -1 -1
+java.lang.StringBuilder::<init> 4 5638 -1 -1
+java.util.LinkedList::add 4 7822 -1 -1
+java.io.File::getName 3 256 -1 -1
+java.util.LinkedList::unlink 3 256 -1 -1
+avrora.sim.mcu.DefaultMCU$Pin::write 3 98287 -1 -1
+java.nio.CharBuffer::arrayOffset 3 384 -1 -1
+java.lang.Integer::<init> 3 512 -1 -1
+avrora.sim.mcu.DefaultMCU$Pin::setOutputDir 3 1024 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_4 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$STPI::accept 3 896 -1 -1
+java.lang.Character::toUpperCaseEx 3 256 -1 -1
+avrora.sim.radio.CC1000Radio$RadioRegister::<init> 3 256 -1 -1
+java.util.jar.JarFile::isMultiRelease 3 256 -1 -1
+avrora.arch.legacy.LegacyInterpreter::invokeInterrupt 4 10035 -1 -1
+avrora.sim.InterruptTable::post 4 10937 -1 -1
+avrora.arch.legacy.LegacyInstr::access$1300 3 384 -1 -1
+cck.elf.ELFDataInputStream::read_Elf32_Word 3 384 -1 -1
+java.util.zip.ZipUtils::CENNAM 3 384 -1 -1
+java.util.zip.ZipUtils::CENEXT 3 384 -1 -1
+avrora.arch.legacy.LegacyInstr::IMM6 3 512 -1 -1
+java.util.concurrent.ConcurrentHashMap::setTabAt 3 384 -1 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::available 3 384 -1 -1
+java.util.jar.JarFile::getEntry 3 512 -1 -1
+avrora.sim.mcu.MCUProperties::getIOReg 3 256 -1 -1
+sun.nio.fs.UnixException::errno 1 128 -1 -1
+java.lang.String::indexOf 3 256 -1 -1
+java.lang.StringLatin1::toChars 3 256 -1 -1
+java.nio.ByteBuffer::clear 3 384 -1 -1
+java.lang.ClassLoader::loadClass 3 256 -1 -1
+java.util.zip.ZipFile::access$300 1 128 -1 -1
+java.nio.CharBuffer::limit 3 640 -1 -1
+java.util.jar.JarFile::checkForSpecialAttributes 3 256 -1 -1
+cck.util.Arithmetic::roundup 3 384 -1 -1
+java.util.zip.ZipInputStream::readFully 3 256 -1 -1
+java.lang.StringUTF16::getChar 4 5632 -1 -1
+avrora.sim.radio.Medium$Receiver$Ticker::deliverByte 4 15051 -1 -1
+cck.util.Arithmetic::uword 4 14959 -1 -1
+java.lang.Integer::hashCode 3 640 -1 -1
+java.lang.Integer::numberOfLeadingZeros 3 256 -1 -1
+jdk.internal.misc.Unsafe::copyMemoryChecks 3 384 -1 -1
+java.lang.StringBuilder::append 3 384 -1 -1
+java.util.zip.ZipFile$Source::addEntry 4 1999 -1 -1
+java.nio.Buffer::hasRemaining 3 512 -1 -1
+avrora.arch.legacy.LegacyInstr$INC::accept 4 5378 -1 -1
+java.lang.CharacterDataLatin1::toUpperCase 3 384 -1 -1
+java.io.BufferedInputStream::getInIfOpen 3 384 -1 -1
+java.net.URLClassLoader$1::<init> 3 512 -1 -1
+java.lang.ref.ReferenceQueue::enqueue 3 256 -1 -1
+java.lang.StringLatin1::getChar 3 384 -1 -1
+java.io.FileOutputStream::write 4 10680 -1 -1
+java.lang.ref.Reference::clear 3 384 -1 -1
+avrora.sim.radio.Medium$Receiver::beginReceive 3 256 -1 -1
+jdk.internal.misc.Unsafe::copyMemory 3 384 -1 -1
+avrora.sim.AtmelInterpreter::getInstrSize 3 1409 -1 -1
+java.lang.NamedPackage::module 1 128 -1 -1
+java.io.PrintStream::ensureOpen 3 384 -1 -1
+java.nio.file.Files::provider 3 384 -1 -1
+java.util.zip.ZipFile$ZipFileInputStream::<init> 3 384 -1 -1
+java.lang.String::getChars 3 384 -1 -1
+java.io.InputStream::<init> 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$SEC::accept 3 256 -1 -1
+avrora.sim.clock.RippleSynchronizer::notifyLink 3 640 -1 -1
+avrora.sim.Simulator::getMicrocontroller 1 128 -1 -1
+java.lang.ref.Finalizer::register 3 256 -1 -1
+java.lang.ref.ReferenceQueue::remove 3 384 -1 -1
+avrora.sim.CodeSegment::readInstr 3 1281 -1 -1
+java.lang.ref.Finalizer::access$100 3 512 -1 -1
+avrora.sim.clock.RippleSynchronizer$WaitLink::<init> 3 640 -1 -1
+java.util.ArrayDeque::add 3 512 -1 -1
+java.lang.System$2::invokeFinalize 3 640 -1 -1
+avrora.arch.legacy.LegacyInstr::EGPR 3 512 -1 -1
+org.dacapo.harness.DacapoClassLoader::loadClass 3 384 -1 -1
+java.net.URL::getFile 1 128 -1 -1
+avrora.sim.RWRegister::getValue 1 128 -1 -1
+avrora.sim.radio.Medium$Transmission::<init> 3 384 -1 -1
+java.lang.String::toLowerCase 3 384 -1 -1
+java.lang.invoke.LambdaForm$MH/654582261::linkToTargetMethod 3 1091 -1 -1
+java.util.jar.JarFile::getManifest 3 512 -1 -1
+java.util.zip.ZipFile$Source::isMetaName 3 384 -1 -1
+java.net.URL::getPort 1 128 -1 -1
+java.lang.ClassLoader::definePackage 3 256 -1 -1
+java.lang.Long::stringSize 4 5376 -1 -1
+java.security.CodeSource::getLocationNoFragString 1 128 -1 -1
+java.net.URLStreamHandler::setURL 3 512 -1 -1
+java.util.LinkedList$ListItr::checkForComodification 4 8601 -1 -1
+avrora.arch.legacy.LegacyInterpreter::runLoop 3 113665 21 4
+java.util.zip.ZipFile$Source::getEntryPos 3 483 -1 -1
+avrora.sim.util.TransactionalList::beginTransaction 3 385 -1 -1
+java.util.zip.ZipFile::getZipEntry 3 256 -1 -1
+java.security.CodeSource::getLocation 1 128 -1 -1
+avrora.sim.radio.CC1000Radio::getFrequency 3 256 -1 -1
+java.util.WeakHashMap::indexFor 3 256 -1 -1
+java.util.zip.ZipFile$ZipFileInflaterInputStream::close 3 384 -1 -1
+avrora.sim.radio.Medium$Transmission::getByteAtTime 4 7696 -1 -1
+java.util.ArrayDeque::inc 3 256 -1 -1
+java.util.concurrent.ConcurrentHashMap$BaseIterator::hasNext 3 256 -1 -1
+java.util.Locale::getDefault 3 384 -1 -1
+sun.net.www.ParseUtil::firstEncodeIndex 3 121 -1 -1
+java.lang.Math::min 4 10508 -1 -1
+java.lang.ref.Finalizer::access$000 3 384 -1 -1
+java.util.zip.ZipFile$ZipFileInputStream::initDataOffset 3 384 -1 -1
+avrora.sim.radio.Medium$Transmission::end 3 256 -1 -1
+avrora.sim.radio.Medium$Receiver::intersect 4 8998 -1 -1
+avrora.arch.legacy.LegacyInstr$RET::accept 4 10129 -1 -1
+java.util.zip.ZipFile$Source::readAt 3 384 -1 -1
+java.util.zip.ZipUtils::CENSIZ 3 256 -1 -1
+avrora.sim.mcu.ATMegaFamily$FlagRegister::flagBit 3 256 -1 -1
+java.net.URL::getRef 1 128 -1 -1
+jdk.internal.loader.URLClassPath$JarLoader::access$700 1 128 -1 -1
+java.util.AbstractList::<init> 3 256 -1 -1
+java.io.BufferedWriter::ensureOpen 3 384 -1 -1
+java.lang.String::concat 3 256 -1 -1
+avrora.sim.FiniteStateMachine::getCurrentState 1 128 -1 -1
+java.util.WeakHashMap::hash 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$ICALL::accept 4 5377 -1 -1
+java.net.URL::<init> 3 256 -1 -1
+java.util.zip.ZipFile$Source::access$1100 1 128 -1 -1
+java.nio.file.Files::readAttributes 3 256 -1 -1
+avrora.arch.legacy.LegacyRegister$Set::contains 3 256 -1 -1
+cck.text.StringUtil::justify 3 384 -1 -1
+java.io.FileDescriptor::access$100 1 128 -1 -1
+jdk.internal.math.FDBigInteger::mult 3 219 -1 -1
+avrora.sim.AtmelInterpreter::getIORegisterByte 3 768 -1 -1
+java.util.jar.Attributes$Name::hashCode 3 384 -1 -1
+java.io.RandomAccessFile::seek 3 384 -1 -1
+jdk.internal.math.FDBigInteger::<init> 3 256 -1 -1
+avrora.arch.legacy.LegacyRegister::nextRegister 1 3228 -1 -1
+java.security.ProtectionDomain::getCodeSource 1 128 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_23 3 640 -1 -1
+avrora.arch.legacy.LegacyInstr$BRLT::accept 4 16605 -1 -1
+avrora.arch.legacy.LegacyInstr$SBRS::accept 4 14421 -1 -1
+java.lang.StringLatin1::toLowerCase 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$CPSE::accept 4 14421 -1 -1
+java.util.zip.ZipEntry::getSize 1 128 -1 -1
+avrora.sim.mcu.ATMega128::getSleepMode 4 15447 -1 -1
+avrora.sim.mcu.DefaultMCU::access$000 1 128 -1 -1
+java.util.jar.Manifest::getMainAttributes 1 128 -1 -1
+java.lang.Exception::<init> 3 256 -1 -1
+avrora.sim.clock.RippleSynchronizer::access$000 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr$OR::accept 3 257 -1 -1
+avrora.arch.legacy.LegacyInstr$IN::accept 4 10059 -1 -1
+java.util.zip.ZipFile::getInflater 3 384 -1 -1
+avrora.sim.platform.ExternalFlash$PA3Output::write 3 256 -1 -1
+avrora.sim.radio.CC1000Radio$Receiver::setBER 1 1709 -1 -1
+avrora.monitors.PacketMonitor$Mon::appendTime 3 256 -1 -1
+avrora.arch.legacy.LegacyInterpreter::fastLoop 4 306438 5 4
+avrora.sim.AtmelInterpreter::fireAfterRead 4 11645 -1 -1
+java.io.FilterInputStream::<init> 3 256 -1 -1
+java.net.URLClassLoader::access$000 1 128 -1 -1
+avrora.sim.clock.DeltaQueue::advance 4 7829 -1 -1
+java.lang.CharacterDataLatin1::getType 3 256 -1 -1
+java.io.FilterInputStream::read 3 256 -1 -1
+java.util.Objects::checkIndex 3 256 -1 -1
+java.nio.Buffer::checkIndex 3 256 -1 -1
+java.lang.String::checkBoundsOffCount 4 5734 -1 -1
+cck.elf.ELFDataInputStream::read_1 3 256 -1 -1
+avrora.sim.AtmelInterpreter::popByte 4 13909 -1 -1
+avrora.arch.legacy.LegacyInstr::checkReg 3 256 -1 -1
+avrora.core.Program::writeByteInto 1 4301 -1 -1
+java.net.URL::getQuery 1 128 -1 -1
+java.util.ArrayList::elementData 3 256 -1 -1
+avrora.sim.InterruptTable::enable 4 5524 -1 -1
+avrora.arch.legacy.LegacyDisassembler::disassemble 4 5580 -1 -1
+java.util.WeakHashMap::remove 3 384 -1 -1
+avrora.sim.mcu.DefaultMCU$Pin::<init> 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr::access$500 3 384 -1 -1
+jdk.internal.loader.URLClassPath::getLoader 3 256 -1 -1
+jdk.internal.misc.VM::addFinalRefCount 3 256 -1 -1
+java.util.LinkedHashMap::get 3 256 -1 -1
+java.lang.AbstractStringBuilder::getCoder 4 5512 -1 -1
+avrora.sim.Simulator::getID 1 128 -1 -1
+sun.nio.fs.UnixPath::toUnixPath 3 384 -1 -1
+avrora.sim.AtmelInterpreter::getSP 3 1536 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_30 3 384 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_MULS_0 3 512 -1 -1
+java.util.WeakHashMap$Entry::<init> 3 256 -1 -1
+java.util.WeakHashMap::maskNull 3 256 -1 -1
+java.util.zip.ZipCoder::getBytes 3 512 -1 -1
+java.util.LinkedHashMap::newNode 3 256 -1 -1
+java.util.Collections$UnmodifiableCollection$1::hasNext 4 10661 -1 -1
+avrora.sim.mcu.SPI$SPDReg::read 4 13394 -1 -1
+jdk.internal.perf.PerfCounter::add 3 256 -1 -1
+avrora.sim.mcu.ATMegaFamily$PortRegister::write 4 13704 -1 -1
+java.util.ArrayDeque::addLast 3 256 -1 -1
+java.util.zip.ZipFile$Source::hashN 4 94918 2 4
+java.util.WeakHashMap::put 3 256 -1 -1
+java.util.zip.InflaterInputStream::<init> 3 256 -1 -1
+java.lang.Package::isSealed 3 256 -1 -1
+java.net.URL::getPath 1 128 -1 -1
+java.lang.AbstractStringBuilder::isLatin1 4 10539 -1 -1
+avrora.sim.clock.RippleSynchronizer$NotifyEvent::fire 4 5378 -1 -1
+java.util.zip.Inflater::ended 3 256 -1 -1
+java.lang.String::regionMatches 3 256 -1 -1
+avrora.arch.legacy.LegacyDisassembler::getWord 3 384 -1 -1
+java.security.CodeSource::getCertificates 3 512 -1 -1
+java.io.FileDescriptor::closeAll 3 512 -1 -1
+jdk.internal.loader.URLClassPath$JarLoader::checkResource 3 256 -1 -1
+java.util.zip.ZipEntry::isDirectory 3 384 -1 -1
+jdk.internal.perf.PerfCounter::addElapsedTimeFrom 3 256 -1 -1
+java.util.StringTokenizer::scanToken 3 446 -1 -1
+java.util.LinkedList::linkLast 4 6690 -1 -1
+avrora.sim.clock.DerivedClock::insertEvent 4 7794 -1 -1
+sun.net.www.ParseUtil::canonizeString 3 512 -1 -1
+java.lang.Throwable::<init> 3 256 -1 -1
+java.io.File::<init> 3 384 -1 -1
+avrora.core.Program::writeInstr 4 5445 -1 -1
+sun.net.www.protocol.jar.Handler::parseContextSpec 3 512 -1 -1
+avrora.arch.legacy.LegacyInstr$SUB::accept 3 256 -1 -1
+avrora.arch.legacy.LegacyInstr::checkImm 3 256 -1 -1
+avrora.sim.AtmelInterpreter::readVolatile 3 1024 -1 -1
+avrora.arch.legacy.LegacyDisassembler::decode_root0 4 5972 -1 -1
+sun.nio.cs.StreamEncoder::writeBytes 3 512 -1 -1
+java.util.jar.JarFile::access$400 1 128 -1 -1
+org.dacapo.parser.ConfigFileTokenManager::jjCheckNAdd 3 256 -1 -1

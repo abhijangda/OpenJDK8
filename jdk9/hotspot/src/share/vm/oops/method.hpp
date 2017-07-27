@@ -85,6 +85,7 @@ class Method : public Metadata {
     _reserved_stack_access = 1 << 7,
     _in_aosdb_thread       = 1 << 8,
     _aosdb_data_retrieved  = 1 << 9,
+    _from_aosdb            = 1 << 10,
   };
   mutable u2 _flags;
 
@@ -915,6 +916,20 @@ class Method : public Metadata {
 
   void set_aosdb_data_retrieved (bool x) {
     _flags = x ? (_flags | _aosdb_data_retrieved) : (_flags & ~_aosdb_data_retrieved);
+  }
+  
+  bool is_from_aosdb () const {
+    // EMCP methods are old but not obsolete or deleted. Equivalent
+    // Modulo Constant Pool means the method is equivalent except
+    // the constant pool and instructions that access the constant
+    // pool might be different.
+    // If a breakpoint is set in a redefined method, its EMCP methods that are
+    // still running must have a breakpoint also.
+    return (_flags & _from_aosdb) != 0;
+  }
+
+  void set_from_aosdb (bool x) {
+    _flags = x ? (_flags | _from_aosdb) : (_flags & ~_from_aosdb);
   }
   
   TRACE_DEFINE_FLAG_ACCESSOR;

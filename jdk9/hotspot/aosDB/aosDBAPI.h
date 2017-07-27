@@ -20,12 +20,14 @@ bool aosDBVisitNextMethod ();
 void aosDBVisitBegin ();
 int aosDBGetNumberOfMethods ();
 //mongo_aosdb_setVerbose ();
-bool aosDBGetMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts, int& bci);
+bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& highestOptLevel, int& counts,
+                             int& highestOsrBci, int& highestOsrLevel);
 void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts, int bci);
 void aosDBPrint ();
 void aosDBWriteDB ();
 void aosDBClearDB ();
-bool aosDBFindMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts, int& bci);
+bool aosDBFindMethodInfo (std::string& methodFullDesc, int& highestOptLevel, int& counts,
+                         int& highestOsrBci, int& highestOsrLevel);
 int aosDBGetMethodsFoundInDB ();
 int aosDBGetMethodsNotFoundInDB ();
 int aosDBGetMethodsFoundAtOptLevelInDB (int l);

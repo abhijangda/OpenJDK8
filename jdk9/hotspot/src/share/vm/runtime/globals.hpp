@@ -960,6 +960,10 @@ public:
           "Initialize AOS Databse")                                         \
   product(bool, UseAOSDBVerbose, false,                                     \
           "Enable AOSDB Verbose mode")                                      \
+  product(bool, UseAOSDBVerboseOSR, false,                                     \
+          "Enable AOSDB Verbose mode")                                      \
+  product(bool, PrintInLoopEvent, false,\
+          "Print in loop_event")\
   product(bool, UseAOSDBBulkCompile, false,                                 \
           "Read AOS Database and compile all methods before                 \
            running main thread")                                            \
@@ -970,7 +974,44 @@ public:
           "Print Statistics about AOS Database")                            \
   product(bool, NotCompileInPolicy, false,                                  \
           "Do not compile in advanced threshold policy")                    \
-                                                                            \
+  product(bool, NormalCompilation, false,                                   \
+          "Compile Normally ")                                              \
+  product(bool, OnlyCompileMethodsInAOSDB, false,                           \
+          "Only Compile those methods which are in AOS DB")                 \
+  product(bool, NotCompileOSRMethodsInAOSDB, false,                         \
+          "Disable compilation for methods listed as OSR in AOSDB")         \
+  product(bool, CompileMethodsNotInAOSDB, false,                         \
+          "Compile Methods which are not in AOS DB in policy::submit_compile ")         \
+  product(bool, UseAOSDBStopCompilationAt4, false,                          \
+          "Do not compile methods at level 4 in Policy::submit_compile if AOSDBOptCompile is enabled")\
+  product(bool, CompileOSRAtLevelInAOSDB, false,                            \
+          "Compile OSR Methods at the level mentioned in AOS DB")\
+  product(bool, OnlyMakeOSRForMethodsInAOSDB, false, \
+          "Only do OSR compilation for methods in AOSDB")\
+  product(bool, NoOSRForFindLoop, false,\
+          "Disable OSR compilation for findLoop method")\
+  product(bool, CompileFastLoopAtOSR3, false, \
+          "Compile fastLoop at 3 OSR")\
+  product(bool, CompileFastLoopAtOSR4, false, \
+          "Compile fastLoop at 4 OSR")\
+  product(bool, OSRInLoopEvent, false,\
+          "Enable OptCompile with OSR in loop event")\
+  product(bool, OSRCompileInLoopEvent, false,\
+          "OSR Compile in loop_event")\
+  product(bool, CompileRunLoopAt4OSRThen4, false,                            \
+          "If True Compile runLoop function at 4 as OSR then 4")            \
+  product(bool, CompileRunLoopAt4OSRThen3, false,                            \
+          "If True Compile runLoop function at 4 as OSR then 3")            \
+  product(bool, TimeOSRCompilationInAOSDB, false,                            \
+          "Get the time OSR compilation with AOS DB Opt Compile takes")            \
+  product(bool, NormalCompilationForFindLoop, false,                            \
+          "Do Normal Compilation For findLoop with AOS DB")            \
+  product(bool, NormalCompilationForFastLoopInPolicy, false,\
+          "Normal Compilation for fastLoop in AdvancedThresholdPolicy::submit_compile")\
+  product(bool, FastLoopMaxInlineSize0, false,\
+          "Set MaxInlineSize to 0 before compiling fastLoop and reset it to orig after compilation")\
+  product(bool, CompileFastLoopAtOSRNextLevel, false,\
+          "Compile fastLoop at next_level in loop_in_event")\
   product_pd(bool, UseOSErrorReporting,                                     \
           "Let VM fatal error propagate to the OS (ie. WER on Windows)")    \
                                                                             \

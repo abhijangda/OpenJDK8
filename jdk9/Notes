@@ -1,0 +1,57 @@
+Using AOSDBOptCompile and not compiling methods which have been compiled as OSR atleast once in vanilla HotSpot:
+
+(i)./java -XX:FreqInlineSize=0 -XX:-TimeOSRCompilationInAOSDB -XX:-CompileOSRAtLevelInAOSDB -XX:+NotCompileOSRMethodsInAOSDB -XX:+NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintInlining -jar dacapo.jar avrora
+
+(ii)./java -XX:-ProfileInterpreter -XX:FreqInlineSize=0 -XX:+NoOSRForFindLoop -XX:-OnlyMakeOSRForMethodsInAOSDB -XX:-CompileOSRAtLevelInAOSDB -XX:+NotCompileOSRMethodsInAOSDB -XX:+UseAOSDBRead -XX:+RangeCheckElimination -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintInlining -jar dacapo.jar avrora
+
+(i) performs 1.1x better than (ii). The condition "not compiling methods which have been compiled as OSR atleast once in vanilla HotSpot" is added because method "fastLoop" is first compiled as OSR at level 3 and then as normal method at level 4. If the condition is just not to compile an OSR method, then "fastLoop" gets compiled at level 4 directly by (i) but (ii) goes through OSR at 3 and then at 4, which is unfair to be honest. Moreover, it is also made sure that none of the methods which are not listed in AOSDB are not compiled in both (i) and (ii).
+
+In the above case we do not set -XX:MaxInlineSize=0. Setting this option in both cases decreases speedup to 1.04x. However, in "fastLoop", inling of two functions happens in (ii) which has to be stopped.
+
+Hence, we need to develop technique so that if a method is compiled as OSR atleast once then (i) this OSR method is first compiled at level 3, which takes less time than 4 and the OSR would happen at the loop's backward edge, and (ii) the method at level 3 will be eventually replaced by method at level 4.
+
+
+Using AOSDBOptCompile with OSR:
+
+Original Args:
+(i) ./java -XX:-UseAOSDBVerbose -XX:-PrintInLoopEvent -XX:-FastLoopMaxInlineSize0 -XX:-NormalCompilationForFastLoopInPolicy -XX:-CompileFastLoopAtOSRNextLevel -XX:+NormalCompilationForFindLoop -XX:+OSRCompileInLoopEvent -XX:-UseAOSDBVerboseOSR -XX:+OSRInLoopEvent -XX:FreqInlineSize=0 -XX:-TimeOSRCompilationInAOSDB -XX:-CompileFastLoopAtOSR4 -XX:-CompileFastLoopAtOSR3 -XX:-CompileOSRAtLevelInAOSDB -XX:+NotCompileOSRMethodsInAOSDB -XX:+NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:-C1UpdateMethodData -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintNMethods -XX:-PrintInlining -jar dacapo.jar avrora > out1.txt
+
+(ii) ./java -XX:-FastLoopMaxInlineSize0 -XX:-BlockLayoutByFrequency -XX:+CompileFastLoopAtOSRNextLevel -XX:+NormalCompilationForFastLoopInPolicy -XX:-ProfileInterpreter -XX:FreqInlineSize=0 -XX:-NoOSRForFindLoop -XX:-OnlyMakeOSRForMethodsInAOSDB -XX:+CompileOSRAtLevelInAOSDB -XX:-NotCompileOSRMethodsInAOSDB -XX:+UseAOSDBRead -XX:+RangeCheckElimination -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:-C1UpdateMethodData -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintNMethods -XX:-PrintInlining -XX:-LogCompilation -jar dacapo.jar avrora > printcompilation1.txt
+
+Cleaned Up Command Line Args:
+(i) ./java -XX:+OSRInLoopEvent -XX:FreqInlineSize=0 -XX:+NotCompileOSRMethodsInAOSDB -XX:+NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:-C1UpdateMethodData -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintNMethods -XX:-PrintInlining -jar dacapo.jar avrora > out1.txt
+
+(ii) ./java -XX:-ProfileInterpreter -XX:FreqInlineSize=0 -XX:-NotCompileOSRMethodsInAOSDB -XX:+UseAOSDBRead -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:-C1UpdateMethodData -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintNMethods -XX:-PrintInlining -XX:-LogCompilation -jar dacapo.jar avrora > printcompilation1.txt
+
+With this OSR compilation has been implemented too, and (i) performs with a speedup of 1.15x than (ii).
+
+
+
+HAVE TO BE RE-WRITTEN AFTER CURRENT AOS DB Update FIASCO
+
+OSR Compilation of OSR methods in AOS DB:
+(i)./java -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora
+	and 
+(ii) ./java -XX:+UseAOSDBRead -XX:+RangeCheckElimination -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora.
+
+(i) performs 1.26x better than (ii). Here, only OSR compilation is done for those methods which are specified as OSR in AOSDB or are not specified as OSR in AOSDB but specified TieredCompilation says that this method has to be compiled as OSR and these methods are not compiled at any other level.
+
+TieredCompilation with AOSDB OptCompile
+
+To improve the performance of "TieredCompilation with AOSDB OptCompile", we first eliminate compilation of OSR Methods in AOS DB (+NotCompileOSRMethodsInAOSDB), i.e. run following command line
+
+(i) ./java -XX:+NotCompileOSRMethodsInAOSDB -XX:-NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora
+
+Normal HotSpot without compilation of OSR methods in AOS DB
+(ii) ./java -XX:+NotCompileOSRMethodsInAOSDB -XX:+UseAOSDBRead -XX:+RangeCheckElimination -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora
+
+Both (i) and (ii) compiles all methods other than OSR methods. Here (i) performs 1.04x of (ii). Seeing the print compilation of (i) it can be seen that several methods present in AOS DB changes compilation from 3 -> 4 or 3 -> 1 or compiles again at 3.
+
+Running java with two versions: 
+(i)./java -XX:+NotCompileOSRMethodsInAOSDB -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora
+	and 
+(ii) ./java -XX:+NotCompileOSRMethodsInAOSDB -XX:+UseAOSDBRead -XX:+RangeCheckElimination -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora.
+
+(i) performs 1.04x (ii). 
+
+And if (i) is run with -XX:+NotCompileInPolicy (instead of -XX:-NotCompileInPolicy), (i) performs 1.19x. This (i) performs better than previous (i) because most of the methods has to be compiled at 3, but it takes lot of time to compile at 3 because of contention at level 3 (soo many methods compiling at 3), so, in the mean time the method gets compiled at another level (1 or 4) and makes the method at 3 either "not entrant" or replace it.  Compiling (i) with -XX:+UseAOSDBStopCompilationAt4 (to not compile methods at level 4 which are in AOS DB with level 3) improves the execution time from 5744 msec to 5430 msec.

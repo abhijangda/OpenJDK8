@@ -212,10 +212,14 @@ void CompileTask::print_impl(outputStream* st, Method* method, int compile_id, i
   bool is_synchronized = false;
   bool has_exception_handler = false;
   bool is_native = false;
+  bool is_from_aosdb = false;
+  bool is_in_aosdb_thread = false;
   if (method != NULL) {
     is_synchronized       = method->is_synchronized();
     has_exception_handler = method->has_exception_handler();
     is_native             = method->is_native();
+    is_from_aosdb         = method->is_from_aosdb ();
+    is_in_aosdb_thread    = method->is_in_aosdb_thread ();
   }
   // method attributes
   const char compile_type   = is_osr_method                   ? '%' : ' ';
@@ -223,9 +227,10 @@ void CompileTask::print_impl(outputStream* st, Method* method, int compile_id, i
   const char exception_char = has_exception_handler           ? '!' : ' ';
   const char blocking_char  = is_blocking                     ? 'b' : ' ';
   const char native_char    = is_native                       ? 'n' : ' ';
-
+  const char from_aosdb     = is_from_aosdb                   ? 'a' : ' ';
+  const char in_aosdb_thread = is_in_aosdb_thread             ? 'l' : ' '; //for compilation from AdvancedThresholdPolicy::loop_event
   // print method attributes
-  st->print("%c%c%c%c%c ", compile_type, sync_char, exception_char, blocking_char, native_char);
+  st->print("%c%c%c%c%c%c%c ", compile_type, sync_char, exception_char, blocking_char, native_char, from_aosdb, in_aosdb_thread);
 
   if (TieredCompilation) {
     if (comp_level != -1)  st->print("%d ", comp_level);

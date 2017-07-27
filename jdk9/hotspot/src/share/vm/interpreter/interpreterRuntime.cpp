@@ -992,6 +992,120 @@ IRT_ENTRY(void, InterpreterRuntime::profile_method(JavaThread* thread))
   }
 IRT_END
 
+/*void aosdb_find_and_submit_method (Method* method, JavaThread* thread, bool from_loop_event)
+{
+  if (!method->is_aosdb_data_retrieved () && aosDBIsInit ())
+{
+    {
+        method->set_aosdb_data_retrieved (true);
+        {
+            std::string methodFullDesc = getMethodName (method);
+            {
+                int opt_level, _hot_count, bci, osr_once_bci, osr_once_level;
+                CompLevel level;
+                
+                if (aosDBFindMethodInfo (methodFullDesc, opt_level, _hot_count, bci, osr_once_bci, osr_once_level))
+                {
+                    if (UseAOSDBVerbose)
+                    {     
+                        if (bci == -1)
+                            std::cout << "Submit Method: "<< " methodFullDesc " << 
+                                methodFullDesc << " hot_count " << _hot_count << " opt_level " <<
+                                opt_level << " bci " << bci << " osr_once_bci " << osr_once_bci << " from_loop_event " << from_loop_event << std::endl;
+                        else
+                            std::cout << "CannotSubmit Method: " << " methodFullDesc " << 
+                                methodFullDesc << " hot_count " << _hot_count << " opt_level " <<
+                                opt_level << " bci " << bci << " osr_once_bci " << osr_once_bci << " from_loop_event " << from_loop_event << std::endl;
+                    }
+                    
+                    level = (CompLevel)opt_level;
+                    AdvancedThresholdPolicy* policy = (AdvancedThresholdPolicy*) CompilationPolicy::policy ();
+                    if ((NotCompileOSRMethodsInAOSDB && bci == -1 && osr_once_bci == -1) || 
+                        (!NotCompileOSRMethodsInAOSDB && from_loop_event && bci != -1))
+                    {
+                        method->set_from_aosdb (true);
+                        if (osr_once_bci == -1)
+                        {
+                            policy->submit_compile_with_hot_count (method, bci, level, _hot_count, thread);
+                        }
+                        else
+                        {
+                            if (bci == -1)
+                            {
+                                if (CompileFastLoopAtOSR3)
+                                {
+                                    if (TimeOSRCompilationInAOSDB)
+                                    {
+                                        clock_t t1 = clock();
+                                        policy->submit_compile_with_hot_count (method, osr_once_bci, 
+                                                                           (CompLevel)3, 
+                                                                           _hot_count, thread);
+                                        clock_t t2 = clock();
+                                        printf ("compiling fastLoop OSR at level %d takes %lf ms\n", 3, ((t2-t1)*1000.0f)/CLOCKS_PER_SEC);
+                                    }
+                                    else
+                                        policy->submit_compile_with_hot_count (method, osr_once_bci, 
+                                                                               (CompLevel)3, 
+                                                                               _hot_count, thread);
+                                                                               
+                                }
+                                if (CompileFastLoopAtOSR4)
+                                {
+                                    if (TimeOSRCompilationInAOSDB)
+                                    {
+                                        clock_t t1 = clock();
+                                        policy->submit_compile_with_hot_count (method, osr_once_bci, 
+                                                                           (CompLevel)4, 
+                                                                           _hot_count, thread);
+                                        clock_t t2 = clock();
+                                        printf ("compiling fastLoop OSR at level %d takes %lf ms\n", 4, ((t2-t1)*1000.0f)/CLOCKS_PER_SEC);
+                                    }
+                                    else
+                                        policy->submit_compile_with_hot_count (method, osr_once_bci, 
+                                                                               (CompLevel)4, 
+                                                                                _hot_count, thread);
+                                }
+                                
+                                if (NormalCompilationForFindLoop)
+                                    policy->submit_compile_with_hot_count (method, 
+                                                                           bci, 
+                                                                           level, 
+                                                                           _hot_count, thread);
+                            }
+                            else
+                            {
+                                if (TimeOSRCompilationInAOSDB)
+                                {
+                                    clock_t t1 = clock();
+                                    policy->submit_compile_with_hot_count (method, bci, level, _hot_count, thread);
+                                    clock_t t2 = clock();
+                                    printf ("compiling OSR at level %d takes %lf ms\n", level, ((t2-t1)*1000.0f)/CLOCKS_PER_SEC);
+                                }
+                                else
+                                    policy->submit_compile_with_hot_count (method, bci, level, _hot_count, thread);
+                                if (CompileRunLoopAt4OSRThen4)
+                                    policy->submit_compile_with_hot_count (method, -1, level, _hot_count, thread);
+                                else if (CompileRunLoopAt4OSRThen3)
+                                    policy->submit_compile_with_hot_count (method, -1, (CompLevel)3, _hot_count, thread);
+                            }
+                        }
+                        method->set_from_aosdb (false);
+                    }
+                }
+                else
+                {
+                    if (UseAOSDBVerbose)
+                    {
+                        std::cout << "Cannot find method: " << methodFullDesc << " in AOSDB" << std::endl;
+                    }
+                }
+            }
+        }
+    }
+}
+}
+*/
+
 IRT_ENTRY(void, InterpreterRuntime::aosdb_find_method(JavaThread* thread))
   // use UnlockFlagSaver to clear and restore the _do_not_unlock_if_synchronized
   // flag, in case this method triggers classloading which will call into Java.
@@ -999,7 +1113,9 @@ IRT_ENTRY(void, InterpreterRuntime::aosdb_find_method(JavaThread* thread))
 
   frame fr = thread->last_frame();
   assert(fr.is_interpreted_frame(), "must come from interpreter");
+  //aosdb_find_and_submit_method (fr.interpreter_frame_method(), thread, false);
   methodHandle method(thread, fr.interpreter_frame_method());
+  bool from_loop_event = !OSRInLoopEvent;
   
   if (!method->is_aosdb_data_retrieved () && aosDBIsInit ())
 {
@@ -1008,27 +1124,94 @@ IRT_ENTRY(void, InterpreterRuntime::aosdb_find_method(JavaThread* thread))
         {
             std::string methodFullDesc = getMethodName (method);
             {
-                int opt_level, _hot_count, bci;
+                int opt_level, _hot_count, osr_bci, osr_level;
                 CompLevel level;
                 
-                if (aosDBFindMethodInfo (methodFullDesc, opt_level, _hot_count, bci))
+                if (aosDBFindMethodInfo (methodFullDesc, opt_level, _hot_count, osr_bci, osr_level))
                 {
                     if (UseAOSDBVerbose)
                     {     
-                        if (bci == -1)
                             std::cout << "Submit Method: "<< " methodFullDesc " << 
                                 methodFullDesc << " hot_count " << _hot_count << " opt_level " <<
-                                opt_level << " bci " << bci << std::endl;
-                        else
-                            std::cout << "CannotSubmit Method: " << " methodFullDesc " << 
-                                methodFullDesc << " hot_count " << _hot_count << " opt_level " <<
-                                opt_level << " bci " << bci << std::endl;
+                                opt_level << " osr_bci " << osr_bci << " osr_level " << osr_level << " from_loop_event " << from_loop_event << std::endl;
                     }
                     
                     level = (CompLevel)opt_level;
                     AdvancedThresholdPolicy* policy = (AdvancedThresholdPolicy*) CompilationPolicy::policy ();
-                    if (bci == -1)
-                        policy->submit_compile_with_hot_count (method, bci, level, _hot_count, thread);
+                    if (OSRInLoopEvent && osr_bci != -1)
+                        method->set_aosdb_data_retrieved (false);
+                        
+                    if ((NotCompileOSRMethodsInAOSDB && osr_bci == -1) || 
+                        (!NotCompileOSRMethodsInAOSDB && from_loop_event))
+                    {//TODO: Correct, remove option NotCompileOSRMethodsInAOSDB
+                        method->set_from_aosdb (true);
+                        if (osr_bci == -1)
+                        {
+                            policy->submit_compile_with_hot_count (method, osr_bci, level, _hot_count, thread);
+                        }
+                        else
+                        {
+                            if (osr_bci == -1)
+                            {
+                                if (CompileFastLoopAtOSR3)
+                                {
+                                    if (TimeOSRCompilationInAOSDB)
+                                    {
+                                        clock_t t1 = clock();
+                                        policy->submit_compile_with_hot_count (method, osr_bci, 
+                                                                           (CompLevel)3, 
+                                                                           _hot_count, thread);
+                                        clock_t t2 = clock();
+                                        printf ("compiling fastLoop OSR at level %d takes %lf ms\n", 3, ((t2-t1)*1000.0f)/CLOCKS_PER_SEC);
+                                    }
+                                    else
+                                        policy->submit_compile_with_hot_count (method, osr_bci, 
+                                                                               (CompLevel)3, 
+                                                                               _hot_count, thread);
+                                                                               
+                                }
+                                if (CompileFastLoopAtOSR4)
+                                {
+                                    if (TimeOSRCompilationInAOSDB)
+                                    {
+                                        clock_t t1 = clock();
+                                        policy->submit_compile_with_hot_count (method, osr_bci, 
+                                                                           (CompLevel)4, 
+                                                                           _hot_count, thread);
+                                        clock_t t2 = clock();
+                                        printf ("compiling fastLoop OSR at level %d takes %lf ms\n", 4, ((t2-t1)*1000.0f)/CLOCKS_PER_SEC);
+                                    }
+                                    else
+                                        policy->submit_compile_with_hot_count (method, osr_bci, 
+                                                                               (CompLevel)4, 
+                                                                                _hot_count, thread);
+                                }
+                                
+                                if (NormalCompilationForFindLoop)
+                                    policy->submit_compile_with_hot_count (method, 
+                                                                           -1, 
+                                                                           level, 
+                                                                           _hot_count, thread);
+                            }
+                            else
+                            {
+                                if (TimeOSRCompilationInAOSDB)
+                                {
+                                    clock_t t1 = clock();
+                                    policy->submit_compile_with_hot_count (method, osr_bci, level, _hot_count, thread);
+                                    clock_t t2 = clock();
+                                    printf ("compiling OSR at level %d takes %lf ms\n", level, ((t2-t1)*1000.0f)/CLOCKS_PER_SEC);
+                                }
+                                else
+                                    policy->submit_compile_with_hot_count (method, osr_bci, level, _hot_count, thread);
+                                if (CompileRunLoopAt4OSRThen4)
+                                    policy->submit_compile_with_hot_count (method, -1, level, _hot_count, thread);
+                                else if (CompileRunLoopAt4OSRThen3)
+                                    policy->submit_compile_with_hot_count (method, -1, (CompLevel)3, _hot_count, thread);
+                            }
+                        }
+                        method->set_from_aosdb (false);
+                    }
                 }
                 else
                 {

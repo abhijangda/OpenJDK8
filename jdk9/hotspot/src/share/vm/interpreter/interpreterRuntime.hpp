@@ -34,6 +34,8 @@
 #include "runtime/thread.hpp"
 #include "utilities/macros.hpp"
 
+void aosdb_find_and_submit_method (Method* method, JavaThread* thread, bool from_loop_event);
+
 // The InterpreterRuntime is called by the interpreter for everything
 // that cannot/should not be dealt with in assembly and needs C support.
 

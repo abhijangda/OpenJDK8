@@ -1518,7 +1518,7 @@ address TemplateInterpreterGenerator::generate_normal_entry(bool synchronized) {
       //__ bind(aosdb_find_method);
     
   // invocation counter overflow
-  if (inc_counter) {
+  if (inc_counter) {  
     if (ProfileInterpreter) {
       // We have decided to profile this method in the interpreter
       __ bind(profile_method);

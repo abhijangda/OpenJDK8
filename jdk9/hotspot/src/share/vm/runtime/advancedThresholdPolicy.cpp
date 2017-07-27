@@ -27,6 +27,7 @@
 #include "runtime/advancedThresholdPolicy.hpp"
 #include "runtime/simpleThresholdPolicy.inline.hpp"
 #include "compiler/compileBroker.hpp"
+#include "interpreter/interpreterRuntime.hpp"
 #include "aosdb/aosDBAPI.h"
 #include "aosdb/helperFunctions.h"
 #include <iostream>
@@ -524,22 +525,91 @@ CompLevel AdvancedThresholdPolicy::call_event(Method* method, CompLevel cur_leve
   return next_level;
 }
 
+static int fillMethodTimes = 0;
+
 // Determine if we should do an OSR compilation of a given method.
-CompLevel AdvancedThresholdPolicy::loop_event(Method* method, CompLevel cur_level, JavaThread * thread) {
-  CompLevel next_level = common(&AdvancedThresholdPolicy::loop_predicate, method, cur_level, true);
+CompLevel AdvancedThresholdPolicy::loop_event(Method* _method, CompLevel cur_level, JavaThread * thread) {
+  CompLevel next_level = common(&AdvancedThresholdPolicy::loop_predicate, _method, cur_level, true);
+  
   if (cur_level == CompLevel_none) {
     // If there is a live OSR method that means that we deopted to the interpreter
     // for the transition.
-    CompLevel osr_level = MIN2((CompLevel)method->highest_osr_comp_level(), next_level);
+    CompLevel osr_level = MIN2((CompLevel)_method->highest_osr_comp_level(), next_level);
     if (osr_level > CompLevel_none) {
       return osr_level;
     }
   }
+  
 #if INCLUDE_JVMCI
   if (UseJVMCICompiler) {
-    next_level = JVMCIRuntime::adjust_comp_level(method, true, next_level, thread);
+    next_level = JVMCIRuntime::adjust_comp_level(_method, true, next_level, thread);
   }
 #endif
+  
+  if (UseAOSDBOptCompile && OSRInLoopEvent && !_method->is_aosdb_data_retrieved ())
+  {
+    assert (NotCompileOSRMethodsInAOSDB == false, 
+            "Cannot Enable both OSRInLoopEvent and NotCompilatOSRMethodsInAOSDB \
+            at the same time");
+    
+    _method->set_aosdb_data_retrieved (true);
+    std::string methodFullDesc = getMethodName (_method);
+    
+    if (PrintInLoopEvent)
+    {
+      std::cout << "loop_event: Method is " << methodFullDesc << " method ptr " << (uint64_t) _method << std::endl;
+    }
+    
+    bool fastLoopCond = methodFullDesc == "avrora.arch.legacy.LegacyInterpreter::fastLoop";
+    bool fillCond = methodFullDesc == "java.util.Arrays::fill";
+    int _hot_count = -2, osr_bci = -2;
+    int opt_level = -2, osr_level = 4;
+        
+    if (fillCond && fillMethodTimes <= 1)
+      fillMethodTimes++;
+      
+    if (((CompileFastLoopAtOSR4 && ((fillCond && fillMethodTimes == 1) || !fillCond)) 
+           || !CompileFastLoopAtOSR4) && 
+        aosDBIsInit () && aosDBFindMethodInfo (methodFullDesc, opt_level, _hot_count, osr_bci, osr_level))
+    {      
+      _method->set_in_aosdb_thread (true);
+      assert ((osr_bci > 0 && osr_level > 0) || (osr_bci < 0 && osr_level < 0));
+      if (osr_bci > 0 && osr_level > 0 && opt_level > 0)
+      {
+        /*if (fastLoopCond || methodFullDesc == "sun.nio.cs.UTF_8$Encoder::encodeArrayLoop")
+          osr_once_level = 4;
+        else
+          osr_once_level = 3;*/
+        this->submit_compile_with_hot_count (_method, osr_bci, 
+                                             (CompLevel)osr_level, 
+                                             _hot_count, thread);
+        
+        int prev = MaxInlineSize;
+        if (FastLoopMaxInlineSize0)
+          MaxInlineSize = 0;
+        this->submit_compile_with_hot_count (_method, 
+                                               -1, 
+                                               (CompLevel)opt_level, 
+                                               _hot_count, thread);
+        if (FastLoopMaxInlineSize0)
+          MaxInlineSize = prev;
+      }
+      else
+      {
+        int prev = MaxInlineSize;
+        if (FastLoopMaxInlineSize0)
+          MaxInlineSize = 0;
+        this->submit_compile_with_hot_count (_method, osr_bci, 
+                                             (CompLevel)osr_level, 
+                                             _hot_count, thread);
+        if (FastLoopMaxInlineSize0)
+          MaxInlineSize = prev;
+      }
+
+      _method->set_in_aosdb_thread (false);
+    }
+  }
+    
   return next_level;
 }
 
@@ -549,39 +619,133 @@ void AdvancedThresholdPolicy::submit_compile(const methodHandle& mh, int bci, Co
   update_rate(os::javaTimeMillis(), mh());
   //std::cout << "Compiling Method " << getMethodName (mh) << " at level " << (int)level << " count " << hot_count << std::endl; 
   std::string m_name = getMethodName ((methodHandle&)mh);
-  int i=-1, j, k = -1;
-  bool m_in_aos = false;
-  if (aosDBIsInit ())
-  {
-      if (UseAOSDBOptCompile)
-      {
-          m_in_aos = true; //In AOSDBOptCompile, a method is submitted only if it is in AOS DB
-      }
-      else
-        m_in_aos = aosDBFindMethodInfo (m_name, i,j,k);
-  }
+  int i=-1, j = -2, k = -1, l = -1, m = -1;
+  bool m_in_aos = !OnlyCompileMethodsInAOSDB;
+  //if (NotCompileOSRMethodsInAOSDB)
+  m_in_aos = false;
     
+  assert (!(NormalCompilation == true &&   OnlyCompileMethodsInAOSDB == true && NotCompileOSRMethodsInAOSDB == true));
+  if (aosDBIsInit () && (OnlyCompileMethodsInAOSDB || UseAOSDBOptCompile || 
+                         UseAOSDBRead || NotCompileOSRMethodsInAOSDB))
+  {
+      //if (UseAOSDBOptCompile)
+      {
+          //m_in_aos = true; //In AOSDBOptCompile, a method is submitted only if it is in AOS DB
+      }
+      //else
+        m_in_aos = aosDBFindMethodInfo (m_name, i,j,l, m);
+      
+      if (UseAOSDBVerbose)
+      {
+        std::cout << "method " << m_name << " " << m_in_aos << " found in aosdb " << i << " " << j << " " << k << std::endl;
+      }
+  }
+  else
+  {
+    if (UseAOSDBVerbose)
+      std::cout << "aosDBIsInit () " << aosDBIsInit () << " NotCompileOSRMethodsInAOSDB " << NotCompileOSRMethodsInAOSDB << std::endl;
+  }
+
   if (UseAOSDBVerbose)
   {
-      std::cout << "UseAOSDBOptCompile " << UseAOSDBOptCompile << " aosDBIsInit () " << aosDBIsInit () << 
+      /*std::cout << "UseAOSDBOptCompile " << UseAOSDBOptCompile << " aosDBIsInit () " << aosDBIsInit () << 
       " NotCompileInPolicy " << NotCompileInPolicy << " aosDBFindMethodInfo " << m_in_aos <<std::endl;
         
       if (NotCompileInPolicy && aosDBIsInit () && UseAOSDBOptCompile && !m_in_aos)
       {
         std::cout << "method " << m_name << " not found in aosdb " << std::endl;
-     }
+     }*/
   }
   
-  if (UseAOSDBBulkCompile && !NotCompileInPolicy && UseAOSDBRead && m_in_aos && 
-        bci == InvocationEntryBci && k == -1 && i != -1)
-    level = (CompLevel) i;
+  //if (UseAOSDBBulkCompile && !NotCompileInPolicy && UseAOSDBRead && m_in_aos && 
+  //      bci == InvocationEntryBci && k == -1 && i != -1)
+  //  level = (CompLevel) i;
   
-  if ((!NotCompileInPolicy && !UseAOSDBRead) || 
-      (!NotCompileInPolicy && UseAOSDBRead && m_in_aos && bci == InvocationEntryBci && k == -1) || 
-      //k == -1 ensures that a osr method in AOSDB does not compiles here, even if it is not osr in bci
-      (UseAOSDBOptCompile && !aosDBIsInit () && NotCompileInPolicy) || 
-      (NotCompileInPolicy && aosDBIsInit () && UseAOSDBOptCompile && !m_in_aos))
+  //runLoop method is always OSR compiled. In DB it is compiled at level 3, hence, using
+  //UseAOSDBOptCompile compiles it at level 3. But, with UseAOSDBRead it is compiled
+  //at first 3 and then at 4. To compare apples to apples, following condition is added
+  //so that runLoop is compiled at 3 in both cases. Similarly for fastLoop.
+  //Also, with UseAOSDBRead, fastLoop first gets compiled at level 3 with OSR then
+  //at level 4 without OSR, which should not happen.
+  if (NormalCompilation)
+  {
     CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
+    return;
+  }
+
+  /*bool runLoopCond = (m_name == "avrora.arch.legacy.LegacyInterpreter::runLoop" ||
+                      m_name == "avrora.arch.legacy.LegacyInterpreter::fastLoop");
+  
+  if (NoOSRForFindLoop && fastLoopCond && bci != InvocationEntryBci)
+    return;
+    
+  if (aosDBIsInit () && (UseAOSDBOptCompile || UseAOSDBRead) && CompileFastLoopAtOSRNextLevel && 
+      runLoopCond && ((NormalCompilationForFastLoopInPolicy && bci == -1) || 
+                       bci != -1))
+  {
+    int prev = MaxInlineSize;
+    if (FastLoopMaxInlineSize0)
+      MaxInlineSize = 0;
+    CompileBroker::compile_method (mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
+    if (FastLoopMaxInlineSize0)
+      MaxInlineSize = prev;
+    return;
+  }
+  else
+  {
+    if (aosDBIsInit () && runLoopCond && (UseAOSDBOptCompile || UseAOSDBRead))
+      return;
+  }
+  
+  bool compile_osr_at_level_in_aosdb = false;
+  
+  if (CompileOSRAtLevelInAOSDB)
+  {
+      if (bci != InvocationEntryBci)
+        compile_osr_at_level_in_aosdb = true;
+      else if (k != -1 && bci == InvocationEntryBci)
+        compile_osr_at_level_in_aosdb = true;
+  }
+
+  if (NormalCompilationForFastLoopInPolicy && fastLoopCond && bci == InvocationEntryBci)
+  {
+    CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
+    return;
+  }*/
+    
+  if ((!NotCompileInPolicy && !(UseAOSDBRead || UseAOSDBOptCompile)) || 
+  
+      (!(OnlyMakeOSRForMethodsInAOSDB && 
+         (bci != InvocationEntryBci || (bci == -1 && (k != -1 || l != -1))))
+       && !NotCompileOSRMethodsInAOSDB &&
+       !NotCompileInPolicy && UseAOSDBRead && (m_in_aos || !aosDBIsInit ())) ||
+       
+      (OnlyMakeOSRForMethodsInAOSDB && !NotCompileOSRMethodsInAOSDB && !NotCompileInPolicy && 
+       UseAOSDBRead && m_in_aos && bci != InvocationEntryBci) || 
+       
+      (!NotCompileOSRMethodsInAOSDB && UseAOSDBBulkCompile && !NotCompileInPolicy && 
+        UseAOSDBRead && m_in_aos && bci == InvocationEntryBci && k == -1) || 
+      
+      (NotCompileOSRMethodsInAOSDB && (UseAOSDBRead || UseAOSDBOptCompile) && 
+        (m_in_aos || !aosDBIsInit ()) && (k == -1 && bci == -1 && l == -1) && !UseAOSDBStopCompilationAt4) ||
+      
+      (NotCompileOSRMethodsInAOSDB && (UseAOSDBRead || UseAOSDBOptCompile) && 
+        m_in_aos && k == -1 && UseAOSDBStopCompilationAt4 && ((int)level) < 4) ||
+      //k == -1 ensures that a osr method in AOSDB does not compiles here, even if it is not osr in bci
+      
+      /*(CompileOSRAtLevelInAOSDB && !NotCompileOSRMethodsInAOSDB && !NotCompileInPolicy && 
+       UseAOSDBRead && m_in_aos && 
+       ((!fastLoopCond && level == (CompLevel)i && bci != InvocationEntryBci) || 
+        (fastLoopCond && level == (CompLevel)4 && bci == -1))) ||
+       */
+      (UseAOSDBOptCompile && !aosDBIsInit () && NotCompileInPolicy) || 
+      
+      (CompileMethodsNotInAOSDB && NotCompileInPolicy && aosDBIsInit () && 
+        UseAOSDBOptCompile && !m_in_aos))
+    {
+        mh->set_from_aosdb (false);
+        CompileBroker::compile_method(mh, bci, level, mh, hot_count, CompileTask::Reason_Tiered, thread);
+    }
 }
 
 /*void AdvancedThresholdPolicy::submit_compile_with_hot_count(const methodHandle& mh, int bci, CompLevel level) {

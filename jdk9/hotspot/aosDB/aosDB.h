@@ -14,21 +14,31 @@ class AOSDatabaseElement
 {
 private:
     std::string methodFullDesc;
-    int optLevel;
+    int highestOptLevel;
     int counts;
     int bci;
     bool empty;
+    int highestOsrBci; //-1 if OSR never happened, if OSR happened once represents the bci
+    int highestOsrLevel;
     
     AOSDatabaseElement ()
     {
     }
     
 public:
+    static int getInvalidBciValue () {return -2;}
     friend AOSDatabase;
     std::string& getMethodFullDesc () {return methodFullDesc;}
-    int getOptLevel () {return optLevel;}
+    int getHighestOptLevel () {return highestOptLevel;}
     int getCounts () {return counts;}
-    int getBci () {return bci;}
+    //int getBci () {return bci;}
+    int getHighestOsrBci () {return highestOsrBci;}
+    int getHighestOsrLevel () {return  highestOsrLevel;}
+    void setHighestOptLevel (int l){highestOptLevel=l;}
+    void setCounts (int c){counts = c;}
+    //void setBci (int b) {bci=b;}
+    void setHighestOsrBci (int o) {highestOsrBci = o;}
+    void setHighestOsrLevel (int o) {highestOsrLevel = o;}
     
     std::string getClassName ()
     {
@@ -43,26 +53,31 @@ public:
         return methodFullDesc.substr (pos, size);  
     }
     
-    AOSDatabaseElement (std::string _methodDesc, int _optLevel, int _counts, int _bci):
-        methodFullDesc (_methodDesc), optLevel (_optLevel), counts (_counts), bci (_bci)
+    AOSDatabaseElement (std::string _methodDesc, int _highestOptLevel, int _counts, 
+                        int _highestOsrBci, int _highestOsrLevel):
+        methodFullDesc (_methodDesc), highestOptLevel (_highestOptLevel), counts (_counts), 
+        highestOsrBci(_highestOsrBci), highestOsrLevel(_highestOsrLevel)
     {
     }
     
     AOSDatabaseElement (const AOSDatabaseElement& a)
     {
         methodFullDesc = a.methodFullDesc;
-        optLevel = a.optLevel;
+        highestOptLevel = a.highestOptLevel;
         counts = a.counts;
-        bci = a.bci;
+        highestOsrBci = a.highestOsrBci;
+        highestOsrLevel = a.highestOsrLevel;
     }
     
      friend std::ostream &operator<< (std::ostream &os, const AOSDatabaseElement& e) { 
-         os << e.methodFullDesc << " " << e.optLevel << " " << e.counts << " " << e.bci << "\n";
+         os << e.methodFullDesc << " " << e.highestOptLevel << " " << e.counts << " " 
+            << e.highestOsrBci << " " << e.highestOsrLevel << "\n";
          return os;            
       }
 
       friend std::istream &operator>>(std::istream &is, AOSDatabaseElement& e) { 
-         is >> e.methodFullDesc >> e.optLevel >> e.counts >> e.bci;
+         is >> e.methodFullDesc >> e.highestOptLevel >> e.counts >> 
+            e.highestOsrBci >> e.highestOsrLevel;
          return is;            
       }
 };
@@ -156,26 +171,82 @@ public:
     
     void insertDBElement (AOSDatabaseElement& elem)
     {
-        methToElement.emplace (elem.getMethodFullDesc (), elem);
+        /*insertMethodInfo (elem.getMethodFullDesc (), elem.getHighestOptLevel (), 
+                          elem.getCounts (), elem.getHighestOsrBci (), elem.getHighestOsrLevel ());*/
     }
     
     void insertMethodInfo (std::string methodFullDesc, int optLevel,
                            int counts, int bci)
     {
-        AOSDatabaseElement elem (methodFullDesc, optLevel, counts, bci);
         if (verbose)
         {
-            std::cout << "AOSDatabaseElement created " << elem << std::endl;
+            if (bci == -1)
+            {
+                AOSDatabaseElement elem (methodFullDesc, optLevel, counts, bci, -1);
+                std::cout << "AOSDatabaseElement created " << elem << std::endl;
+            }
+            else
+            {
+                AOSDatabaseElement elem (methodFullDesc, optLevel, counts, -1, bci);
+                std::cout << "AOSDatabaseElement created " << elem << std::endl;
+            }
         }
         
-        methToElement.emplace (methodFullDesc, elem);
+        int highestOsrBci = -1;
+        int highestOsrLevel = -1;
+        int highestOptLevel = -1;
+        auto it = methToElement.find (methodFullDesc);
+        
+        if (it == methToElement.end ())
+        {           
+            if (bci == -1)
+            {
+                highestOptLevel = optLevel;
+            }
+            else
+            {
+                highestOsrBci = bci;
+                highestOsrLevel = optLevel;
+            }
+            
+            AOSDatabaseElement elem (methodFullDesc, highestOptLevel, counts, 
+                                     highestOsrBci, highestOsrLevel);
+            methToElement.emplace (methodFullDesc, elem);
+        }
+        else
+        {
+            highestOsrBci = it->second.getHighestOsrBci ();
+            highestOsrLevel = it->second.getHighestOsrLevel ();
+            highestOptLevel = it->second.getHighestOptLevel ();
+            
+            if (bci == -1)
+            {
+                highestOptLevel = optLevel;
+            }
+            else
+            {
+                highestOsrLevel = optLevel;
+                highestOsrBci = bci;
+            }
+            
+            it->second.setHighestOptLevel (highestOptLevel);
+            it->second.setCounts (counts);
+            it->second.setHighestOsrBci (highestOsrBci);
+            it->second.setHighestOsrLevel (highestOsrLevel);
+            //methToElement.erase (it);
+            //AOSDatabaseElement elem (methodFullDesc, optLevel, counts, bci, osr_once_bci);
+            //methToElement.emplace (methodFullDesc, elem);
+        }
+        
         if (verbose)
         {
-            std::cout << "AOSDatabaseElement added " << std::endl;
+            AOSDatabaseElement elem (methodFullDesc, highestOptLevel, counts, highestOsrBci, highestOsrLevel);
+            std::cout << "AOSDatabaseElement added " << elem << std::endl;
         }
     }
     
-    bool findMethodInfo (const std::string& methodFullDesc, int& optLevel, int& counts, int& bci)
+    bool findMethodInfo (const std::string& methodFullDesc, int& highestOptLevel, 
+                         int& counts, int& highestOsrBci, int& highestOsrLevel)
     {
         auto it = methToElement.find (methodFullDesc);
         if (it == methToElement.end ())
@@ -184,13 +255,16 @@ public:
                 methodsNotFoundInDB++;
             return false;
         }
-        optLevel = it->second.getOptLevel ();
+        
+        highestOptLevel = it->second.getHighestOptLevel ();
         counts = it->second.getCounts ();
-        bci = it->second.getBci ();
+        highestOsrBci = it->second.getHighestOsrBci ();
+        highestOsrLevel = it->second.getHighestOsrLevel ();
+        
         if (recordStats)
         {
             methodsFoundInDB++;
-            methodsFoundAtOptLevelInDB[optLevel]++;
+            methodsFoundAtOptLevelInDB[highestOptLevel]++;
         }
         
         return true;

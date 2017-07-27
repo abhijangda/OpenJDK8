@@ -56,7 +56,8 @@ int aosDBGetNumberOfMethods ()
     return aosdb->getNMethods();
 }
 
-bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts, int& bci)
+bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& highestOptLevel, int& counts,
+                         int& highestOsrBci, int& highestOsrLevel)
 {
     assert (currentIter != nullptr);
     
@@ -64,14 +65,15 @@ bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& optLevel, int& co
         return false;
 
     methodFullDesc = (**currentIter).getMethodFullDesc ();
-    optLevel = (**currentIter).getOptLevel ();
+    highestOptLevel = (**currentIter).getHighestOptLevel ();
     counts = (**currentIter).getCounts ();
-    bci = (**currentIter).getBci ();
-    
+    highestOsrBci = (**currentIter).getHighestOsrBci ();
+    highestOsrLevel = (**currentIter).getHighestOsrLevel ();
     return true;
 }
 
-void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts, int bci)
+void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts, 
+                         int bci)
 {
     //assert (currentIter != nullptr && *currentIter == aosdb->end ());
     
@@ -103,9 +105,11 @@ void aosDBClearDB ()
     aosdb->clearDB ();
 }
 
-bool aosDBFindMethodInfo (std::string& methodFullDesc, int& optLevel, int& counts, int& bci)
+bool aosDBFindMethodInfo (std::string& methodFullDesc, int& highestOptLevel, int& counts,
+                         int& highestOsrBci, int& highestOsrLevel)
 {
-    return aosdb->findMethodInfo (methodFullDesc, optLevel, counts, bci);
+    return aosdb->findMethodInfo (methodFullDesc, highestOptLevel, counts, 
+                                  highestOsrBci, highestOsrLevel);
 }
 
 int aosDBGetMethodsFoundInDB ()
@@ -131,7 +135,7 @@ int aosDBGetMethodsFoundAtOptLevelInDB (int l)
 #ifdef __TEST_API__
 int main ()
 {
-    aosDBInit ();
+    aosDBInit (true, true);
     std::cout << "Initialize"<<std::endl;
     aosDBRead ();
     std::cout << "DB Read"<<std::endl;
@@ -143,8 +147,8 @@ int main ()
         std::string desc;
         int optLevel;
         int counts;
-        
-        aosDBGetCurrMethodInfo (desc, optLevel, counts);
+        int bci;
+        aosDBGetCurrMethodInfo (desc, optLevel, counts, bci);
         
         std::cout << desc << " " << optLevel << " " << counts << std::endl;
     }
