@@ -27,31 +27,3 @@ With this OSR compilation has been implemented too, and (i) performs with a spee
 
 
 
-HAVE TO BE RE-WRITTEN AFTER CURRENT AOS DB Update FIASCO
-
-OSR Compilation of OSR methods in AOS DB:
-(i)./java -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora
-	and 
-(ii) ./java -XX:+UseAOSDBRead -XX:+RangeCheckElimination -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora.
-
-(i) performs 1.26x better than (ii). Here, only OSR compilation is done for those methods which are specified as OSR in AOSDB or are not specified as OSR in AOSDB but specified TieredCompilation says that this method has to be compiled as OSR and these methods are not compiled at any other level.
-
-TieredCompilation with AOSDB OptCompile
-
-To improve the performance of "TieredCompilation with AOSDB OptCompile", we first eliminate compilation of OSR Methods in AOS DB (+NotCompileOSRMethodsInAOSDB), i.e. run following command line
-
-(i) ./java -XX:+NotCompileOSRMethodsInAOSDB -XX:-NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora
-
-Normal HotSpot without compilation of OSR methods in AOS DB
-(ii) ./java -XX:+NotCompileOSRMethodsInAOSDB -XX:+UseAOSDBRead -XX:+RangeCheckElimination -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora
-
-Both (i) and (ii) compiles all methods other than OSR methods. Here (i) performs 1.04x of (ii). Seeing the print compilation of (i) it can be seen that several methods present in AOS DB changes compilation from 3 -> 4 or 3 -> 1 or compiles again at 3.
-
-Running java with two versions: 
-(i)./java -XX:+NotCompileOSRMethodsInAOSDB -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora
-	and 
-(ii) ./java -XX:+NotCompileOSRMethodsInAOSDB -XX:+UseAOSDBRead -XX:+RangeCheckElimination -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -jar dacapo.jar avrora.
-
-(i) performs 1.04x (ii). 
-
-And if (i) is run with -XX:+NotCompileInPolicy (instead of -XX:-NotCompileInPolicy), (i) performs 1.19x. This (i) performs better than previous (i) because most of the methods has to be compiled at 3, but it takes lot of time to compile at 3 because of contention at level 3 (soo many methods compiling at 3), so, in the mean time the method gets compiled at another level (1 or 4) and makes the method at 3 either "not entrant" or replace it.  Compiling (i) with -XX:+UseAOSDBStopCompilationAt4 (to not compile methods at level 4 which are in AOS DB with level 3) improves the execution time from 5744 msec to 5430 msec.
