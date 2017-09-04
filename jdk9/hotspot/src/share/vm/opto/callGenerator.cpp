@@ -41,9 +41,25 @@
 #include "opto/subnode.hpp"
 #include "runtime/sharedRuntime.hpp"
 
+#include <iostream>
+#include "compiler/compileBroker.hpp"
+#include "aosdb/aosDBAPI.h"
+
 // Utility function.
 const TypeFunc* CallGenerator::tf() const {
   return TypeFunc::make(method());
+}
+
+ciCallProfile CallGenerator::getProfileDataForMethodAtBci (std::string& methodDesc, int bci)
+{
+  int limit = -1, count = -1, morphism = -1;
+  int recv_cnt[ciCallProfile::MorphismLimit+1] ={ -1, -1, -1};
+
+  if (!aosDBFindMethodCallProfile (methodDesc, bci, limit, morphism, 
+                                   count, recv_cnt))
+    return ciCallProfile(-1, -1, -1, recv_cnt);
+    
+  return ciCallProfile (limit, morphism, count, recv_cnt);
 }
 
 bool CallGenerator::is_inlined_method_handle_intrinsic(JVMState* jvms, ciMethod* callee) {
@@ -87,6 +103,7 @@ JVMState* ParseGenerator::generate(JVMState* jvms) {
   }
 
   Parse parser(jvms, method(), _expected_uses);
+  //std::cout << "ParseGenerator::generate " << getMethodName (method ()->get_Method()) << " expected_uses " << _expected_uses << std::endl;
   // Grab signature for matching/allocation
 #ifdef ASSERT
   if (parser.tf() != (parser.depth() == 1 ? C->tf() : tf())) {
@@ -831,12 +848,13 @@ CallGenerator* CallGenerator::for_method_handle_inline(JVMState* jvms, ciMethod*
                                  "signatures mismatch");
           return NULL;
         }
-
+        std::cout << "CallGenerator::for_method_handle_inline _invokeBasic calling C->call_generator PROB_ALWAYS " << PROB_ALWAYS << std::endl;
         CallGenerator* cg = C->call_generator(target, vtable_index,
                                               false /* call_does_dispatch */,
                                               jvms,
                                               true /* allow_inline */,
                                               PROB_ALWAYS);
+        std::cout << "CallGenerator::for_method_handle_inline called C->call_generator" << std::endl;
         return cg;
       } else {
         print_inlining_failure(C, callee, jvms->depth() - 1, jvms->bci(),
@@ -917,10 +935,12 @@ CallGenerator* CallGenerator::for_method_handle_inline(JVMState* jvms, ciMethod*
           // provide us with a type
           speculative_receiver_type = (receiver_type != NULL) ? receiver_type->speculative_type() : NULL;
         }
+        std::cout << "CallGenerator::for_method_handle_inline linkToVirtual calling C->call_generator PROB_ALWAYS " << PROB_ALWAYS << std::endl;
         CallGenerator* cg = C->call_generator(target, vtable_index, call_does_dispatch, jvms,
                                               true /* allow_inline */,
                                               PROB_ALWAYS,
                                               speculative_receiver_type);
+        std::cout << "CallGenerator::for_method_handle_inline called C->call_generator" << std::endl;
         return cg;
       } else {
         print_inlining_failure(C, callee, jvms->depth() - 1, jvms->bci(),

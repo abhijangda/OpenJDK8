@@ -72,6 +72,27 @@ bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& highestOptLevel, 
     return true;
 }
 
+bool aosDBGetCurrMethodCallProfile (int bci, int& limits, int& morphism, 
+                                        int& count, int* receiver_count)
+{
+    assert (currentIter != nullptr);
+    
+    if (*currentIter == aosdb->end ())
+        return false;
+    
+    AOSDatabaseElementCallProfile* p = (**currentIter).getCallProfileForBci (bci);
+    
+    if (p == nullptr)
+        return false;
+    
+    limits = p->getLimit ();
+    count = p->getCount ();
+    morphism = p->getMorphism ();
+    p->getReceiverCount (receiver_count);
+    
+    return true;
+}
+
 void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts, 
                          int bci)
 {
@@ -84,6 +105,29 @@ void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts,
     }
     
     aosdb->insertMethodInfo (methodFullDesc, optLevel, counts, bci);
+}
+
+void aosDBAddMethodCallProfileForBci (std::string& methodFullDesc, int bci, 
+                                          int limit, int morphism, int count,
+                                          int receiver_count[MorphismLimit+1])
+{
+    aosdb->insertCallProfileForMethod (methodFullDesc, bci, limit, morphism,
+                                           count, receiver_count);
+}
+
+void aosDBAddMethodCountProfileForBci (std::string& methodFullDesc, int bci, 
+                                       int count)
+{
+    aosdb->insertCountProfileForMethod (methodFullDesc, bci, count);
+}
+
+void aosDBAddHotDataForMethod (std::string& methodFullDesc,
+                                int interpreterInvocationCount, int throwoutCount,
+                                int invocationCount, int backedgeCount)
+{
+    aosdb->insertHotDataForMethod (methodFullDesc, interpreterInvocationCount, 
+                                   throwoutCount, invocationCount,
+                                   backedgeCount);
 }
 
 void aosDBVisitBegin ()
@@ -110,6 +154,28 @@ bool aosDBFindMethodInfo (std::string& methodFullDesc, int& highestOptLevel, int
 {
     return aosdb->findMethodInfo (methodFullDesc, highestOptLevel, counts, 
                                   highestOsrBci, highestOsrLevel);
+}
+
+bool aosDBFindMethodCallProfile (std::string& methodFullDesc, int& bci, 
+                                     int& limit, int& morphism, int& count,
+                                     int receiver_count[MorphismLimit+1])
+{
+    return aosdb->findCallProfileForMethod (methodFullDesc, bci, limit,
+                                                morphism, count, receiver_count);
+}
+
+bool aosDBFindMethodCountProfile (std::string& methodFullDesc, int& bci, 
+                                  int& count)
+{
+    return aosdb->findCountProfileForMethod (methodFullDesc, bci, count);
+}
+
+bool aosDBFindHotDataForMethod (std::string& methodFullDesc,
+                                int& interpreterInvocationCount, int& throwoutCount,
+                                int& invocationCount, int& backedgeCount)
+{
+    return aosdb->findHotDataForMethod (methodFullDesc, interpreterInvocationCount, 
+                                        throwoutCount, invocationCount, backedgeCount);
 }
 
 int aosDBGetMethodsFoundInDB ()

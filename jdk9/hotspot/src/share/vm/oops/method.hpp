@@ -39,6 +39,8 @@
 #include "utilities/accessFlags.hpp"
 #include "utilities/growableArray.hpp"
 
+#include <set>
+
 // A Method represents a Java method.
 //
 // Note that most applications load thousands of methods, so keeping the size of this
@@ -115,7 +117,7 @@ class Method : public Metadata {
   // Constructor
   Method(ConstMethod* xconst, AccessFlags access_flags);
  public:
-
+  static std::set<Method*> allMethodsSet;
   static Method* allocate(ClassLoaderData* loader_data,
                           int byte_code_size,
                           AccessFlags access_flags,

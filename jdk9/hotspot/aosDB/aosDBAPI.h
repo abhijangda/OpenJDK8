@@ -22,12 +22,28 @@ int aosDBGetNumberOfMethods ();
 //mongo_aosdb_setVerbose ();
 bool aosDBGetCurrMethodInfo (std::string& methodFullDesc, int& highestOptLevel, int& counts,
                              int& highestOsrBci, int& highestOsrLevel);
+bool aosDBGetCurrMethodCallProfile (int bci, int& limits, int& morphism, 
+                                        int& count, int* receiver_count);
 void aosDBAddMethodInfo (std::string& methodFullDesc, int optLevel, int counts, int bci);
+void aosDBAddMethodCallProfileForBci (std::string& methodFullDesc, int bci, 
+                                          int limit, int morphism, int count,
+                                          int receiver_count[]);
+void aosDBAddMethodCountProfileForBci (std::string& methodFullDesc, int bci, int count);
+void aosDBAddHotDataForMethod (std::string& methodFullDesc,
+                                int interpreterInvocationCount, int throwoutCount,
+                                int invocationCount, int backedgeCount);
 void aosDBPrint ();
 void aosDBWriteDB ();
 void aosDBClearDB ();
 bool aosDBFindMethodInfo (std::string& methodFullDesc, int& highestOptLevel, int& counts,
                          int& highestOsrBci, int& highestOsrLevel);
+bool aosDBFindMethodCallProfile (std::string& methodFullDesc, int& bci, 
+                                     int& limit, int& morphism, int& count,
+                                     int receiver_count[]);
+bool aosDBFindMethodCountProfile (std::string& methodFullDesc, int& bci, int& count);
+bool aosDBFindHotDataForMethod (std::string& methodFullDesc,
+                                int& interpreterInvocationCount, int& throwoutCount,
+                                int& invocationCount, int& backedgeCount);
 int aosDBGetMethodsFoundInDB ();
 int aosDBGetMethodsNotFoundInDB ();
 int aosDBGetMethodsFoundAtOptLevelInDB (int l);

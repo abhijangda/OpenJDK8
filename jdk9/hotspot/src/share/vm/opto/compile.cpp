@@ -73,6 +73,9 @@
 #include "runtime/timer.hpp"
 #include "utilities/copy.hpp"
 
+#include <iostream>
+#include "compiler/compileBroker.hpp"
+#include "aosdb/aosDBAPI.h"
 
 // -------------------- Compile::mach_constant_base_node -----------------------
 // Constant table base node singleton.
@@ -775,7 +778,23 @@ Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr
         cg = find_intrinsic(method(), false);
       }
       if (cg == NULL) {
-        float past_uses = method()->interpreter_invocation_count();
+        float past_uses;
+        int _intInvocationCount, _throwcount, _invocationCount, _backedgeCount;
+        
+        if (UseAOSDBHotData)
+        {
+          std::string m_name = getMethodName (method ()->get_Method());
+          aosDBFindHotDataForMethod (m_name, _intInvocationCount, _throwcount, 
+                                     _invocationCount, _backedgeCount);
+          method()->set_db_interpreter_invocation_count (_intInvocationCount);
+          method()->set_db_interpreter_throwout_count (_throwcount);
+          method()->set_db_invocation_count (_invocationCount);
+          method()->set_db_backedge_count (_backedgeCount);
+          past_uses = _intInvocationCount;
+        }
+        else
+          past_uses = method()->interpreter_invocation_count();
+          
         float expected_uses = past_uses;
         cg = CallGenerator::for_inline(method(), expected_uses);
       }
@@ -786,7 +805,10 @@ Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr
       return;
     }
     JVMState* jvms = build_start_state(start(), tf());
-    if ((jvms = cg->generate(jvms)) == NULL) {
+    //std::cout << "Compile calling cg->generate " << getMethodName (method()->get_Method ()) << std::endl;
+    jvms = cg->generate(jvms);
+    //std::cout << "Compile called cg->generate " << std::endl;
+    if ((jvms) == NULL) {
       if (!failure_reason_is(C2Compiler::retry_class_loading_during_parsing())) {
         record_method_not_compilable("method parse failed");
       }
@@ -2019,16 +2041,20 @@ void Compile::inline_boxing_calls(PhaseIterGVN& igvn) {
 void Compile::inline_incrementally_one(PhaseIterGVN& igvn) {
   assert(IncrementalInline, "incremental inlining should be on");
   PhaseGVN* gvn = initial_gvn();
-
+  
+  //std::cout <<"inline_incrementally_one"<<std::endl;
   set_inlining_progress(false);
   for_igvn()->clear();
   gvn->replace_with(&igvn);
-
+  std::cout << "Not Implemented: inline_incrementally_one" << std::endl;
   {
     TracePhase tp("incrementalInline_inline", &timers[_t_incrInline_inline]);
     int i = 0;
     for (; i <_late_inlines.length() && !inlining_progress(); i++) {
       CallGenerator* cg = _late_inlines.at(i);
+      //if (cg->method () != NULL and cg->method ()->get_Method() != NULL)
+      std::cout << "IMPLEMENT THIS: inlining incrementally " << getMethodName (cg->method ()->get_Method()) << std::endl;
+        
       _late_inlines_pos = i+1;
       cg->do_late_inline();
       if (failing())  return;
@@ -2063,7 +2089,8 @@ void Compile::inline_incrementally(PhaseIterGVN& igvn) {
   uint low_live_nodes = 0;
 
   while(inlining_progress() && _late_inlines.length() > 0) {
-
+    //std::cout << "Not Implemented inline_incrementally " << _late_inlines.length() << std::endl;
+  
     if (live_nodes() > (uint)LiveNodeCountInliningCutoff) {
       if (low_live_nodes < (uint)LiveNodeCountInliningCutoff * 8 / 10) {
         TracePhase tp("incrementalInline_ideal", &timers[_t_incrInline_ideal]);

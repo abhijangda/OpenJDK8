@@ -31,6 +31,8 @@
 #include "opto/type.hpp"
 #include "runtime/deoptimization.hpp"
 
+#include "ci/ciCallProfile.hpp"
+
 //---------------------------CallGenerator-------------------------------------
 // The subclasses of this class handle generation of ideal nodes for
 // call sites and method entry points.
@@ -48,6 +50,9 @@ class CallGenerator : public ResourceObj {
   CallGenerator(ciMethod* method) : _method(method) {}
 
  public:
+ 
+  static ciCallProfile getProfileDataForMethodAtBci (std::string& methodDesc, int bci);
+  
   // Accessors
   ciMethod*          method() const             { return _method; }
 

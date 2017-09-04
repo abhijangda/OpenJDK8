@@ -41,6 +41,9 @@
 #include "runtime/vm_version.hpp"
 #include "utilities/bitMap.inline.hpp"
 
+#include <iostream>
+#include "compiler/compileBroker.hpp"
+
 class BlockListBuilder VALUE_OBJ_CLASS_SPEC {
  private:
   Compilation* _compilation;
@@ -3376,7 +3379,12 @@ bool GraphBuilder::try_inline(ciMethod* callee, bool holder_known, bool ignore_r
 
   // clear out any existing inline bailout condition
   clear_inline_bailout();
-
+  //TODO: C1 Inlining, there does not seems any need to handle this because
+  //C1 compiler is not using profile information to inline methods. It seems
+  //that this is happening.
+  
+  //if (UseAOSDBPrintInline)
+    //std::cout << "C1 Inline Caller: " << getMethodName (method()->get_Method()) << " Callee: " << getMethodName (callee->get_Method()) << std::endl;
   // exclude methods we don't want to inline
   msg = should_not_inline(callee);
   if (msg != NULL) {
@@ -3730,6 +3738,12 @@ void GraphBuilder::fill_sync_handler(Value lock, BlockBegin* sync_handler, bool 
 
 bool GraphBuilder::try_inline_full(ciMethod* callee, bool holder_known, bool ignore_return, Bytecodes::Code bc, Value receiver) {
   assert(!callee->is_native(), "callee must not be native");
+  
+  //TODO: C1 Inlining
+//  if (UseAOSDBPrintInline)
+//    std::cout << "try_inline_full: C1 Inline Caller: " << getMethodName (method()->get_Method()) << " Callee: " << getMethodName (callee->get_Method()) << std::endl;
+
+
   if (CompilationPolicy::policy()->should_not_inline(compilation()->env(), callee)) {
     INLINE_BAILOUT("inlining prohibited by policy");
   }

@@ -45,6 +45,8 @@
 #include "runtime/deoptimization.hpp"
 #include "runtime/sharedRuntime.hpp"
 
+#include <iostream>
+
 #ifndef PRODUCT
 extern int explicit_null_checks_inserted,
            explicit_null_checks_elided;
@@ -2342,6 +2344,15 @@ void Parse::do_one_bytecode() {
   case Bytecodes::_invokespecial:
   case Bytecodes::_invokevirtual:
   case Bytecodes::_invokeinterface:
+    if (UseAOSDBRecordHotData)
+    {
+      //Insert method into bciWithProfileInfo
+      if (UseAOSDBRecordHotDataVerbose2 || UseAOSDBVerbose)
+        std::cout << "insert method info in bciWithProfileInfo " << getMethodName (_method->get_Method ()) << std::endl;
+      ciMethod::insertInBciWithProfileInfo (_method, bci());
+      if (UseAOSDBRecordHotDataVerbose2 || UseAOSDBVerbose)
+        std::cout << "insertED method info" << std::endl;
+    }
     do_call();
     break;
   case Bytecodes::_checkcast:

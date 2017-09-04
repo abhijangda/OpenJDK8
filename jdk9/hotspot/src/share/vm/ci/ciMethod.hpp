@@ -34,17 +34,21 @@
 #include "utilities/bitMap.hpp"
 #include "trace/tracing.hpp"
 
+#include <map>
+#include <vector>
+
 class ciMethodBlocks;
 class MethodLiveness;
 class Arena;
 class BCEscapeAnalyzer;
 class InlineTree;
 
+typedef std::map<Method*, std::vector<int> > BciWithProfileInfo;
 // ciMethod
 //
 // This class represents a Method* in the HotSpot virtual
 // machine.
-class ciMethod : public ciMetadata {
+class ciMethod  : public ciMetadata {
   friend class CompileBroker;
   CI_PACKAGE_ACCESS
   friend class ciEnv;
@@ -74,7 +78,14 @@ class ciMethod : public ciMetadata {
   int _interpreter_throwout_count;
   int _instructions_size;
   int _size_of_parameters;
-
+  
+  /*All counts received from aosdb*/
+  int _db_interpreter_invocation_count;
+  int _db_interpreter_throwout_count;
+  int _db_invocation_count;
+  int _db_backedge_count;
+  bool _db_data_loaded;
+  
   bool _uses_monitors;
   bool _balanced_monitors;
   bool _is_c1_compilable;
@@ -116,8 +127,47 @@ class ciMethod : public ciMetadata {
   // Check bytecode and profile data collected are compatible
   void assert_virtual_call_type_ok(int bci);
   void assert_call_type_ok(int bci);
-
+  
  public:
+
+  //A map of all bytecode indexes asociated with a relevant profile info
+  static BciWithProfileInfo bciWithProfileInfo;
+  static void insertInBciWithProfileInfo (ciMethod* method, int bci);
+  
+  int db_interpreter_invocation_count () {
+    assert (_db_interpreter_invocation_count != -1, "_db_interpreter_invocation_count shall not be -1");
+    load_aosdb_data (false);
+    assert (_db_data_loaded);
+    return _db_interpreter_invocation_count;
+  }
+  
+  int db_interpreter_throwout_count () {
+    assert (_db_interpreter_throwout_count != -1, "_db_interpreter_throwout_count shall not be -1");
+    load_aosdb_data (false);
+    assert (_db_data_loaded);
+    return _db_interpreter_throwout_count;
+  }
+  
+  int db_invocation_count () {
+    assert (_db_invocation_count != -1, "_db_invocation_count shall not be -1");
+    load_aosdb_data (false);
+    assert (_db_data_loaded);
+    return _db_invocation_count;
+  }
+  
+  int db_backedge_count () {
+    assert (_db_backedge_count != -1, "_db_backedge_count shall not be -1");
+    load_aosdb_data (false);
+    assert (_db_data_loaded);
+    return _db_backedge_count;
+  }
+  
+  void load_aosdb_data (bool reload);
+  void set_db_interpreter_invocation_count (int c) {_db_interpreter_invocation_count = c;}
+  void set_db_interpreter_throwout_count (int c) {_db_interpreter_throwout_count = c;}
+  void set_db_invocation_count (int c) {_db_invocation_count = c;}
+  void set_db_backedge_count (int c) {_db_backedge_count = c;}
+  
   void check_is_loaded() const                   { assert(is_loaded(), "not loaded"); }
 
   // Basic method information.
@@ -175,7 +225,7 @@ class ciMethod : public ciMetadata {
   int interpreter_throwout_count() const         { check_is_loaded(); return _interpreter_throwout_count; }
   int size_of_parameters() const                 { check_is_loaded(); return _size_of_parameters; }
   int nmethod_age() const                        { check_is_loaded(); return _nmethod_age; }
-
+  
   // Should the method be compiled with an age counter?
   bool profile_aging() const;
 
@@ -246,6 +296,7 @@ class ciMethod : public ciMetadata {
   ciTypeFlow*   get_osr_flow_analysis(int osr_bci);  // alternate entry point
   ciCallProfile call_profile_at_bci(int bci);
   int           interpreter_call_site_count(int bci);
+  int           db_interpreter_call_site_count(int bci);
 
   // Does type profiling provide any useful information at this point?
   bool          argument_profiled_type(int bci, int i, ciKlass*& type, bool& maybe_null);
@@ -299,6 +350,7 @@ class ciMethod : public ciMetadata {
   MethodCounters* ensure_method_counters();
   int instructions_size();
   int scale_count(int count, float prof_factor = 1.);  // make MDO count commensurate with IIC
+  int db_scale_count(int count, float prof_factor = 1.);  // make MDO count commensurate with IIC using information from aos db
 
   // Stack walking support
   bool is_ignored_by_security_stack_walk() const;

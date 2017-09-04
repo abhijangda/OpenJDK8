@@ -58,22 +58,59 @@
 #include "oops/method.hpp"
 #endif
 
+#include "compiler/compileBroker.hpp"
+#include "aosdb/aosDBAPI.h"
+#include <iostream>
+#include <pthread.h>
+
+pthread_mutex_t __mutex =    PTHREAD_MUTEX_INITIALIZER;
+
+BciWithProfileInfo ciMethod::bciWithProfileInfo;
 // ciMethod
 //
 // This class represents a Method* in the HotSpot virtual
 // machine.
 
 
+void ciMethod::insertInBciWithProfileInfo (ciMethod* method, int bci)
+{
+  if (method == NULL)
+  {
+    std::cout << "Method is   NULL " << std::endl;
+    return;
+  }
+  
+  pthread_mutex_lock (&__mutex); //TODO: Change this mutex to a light weight implementation of HotSpot maybe
+  BciWithProfileInfo::iterator it = bciWithProfileInfo.find (method->get_Method ());
+  
+  if (it == bciWithProfileInfo.end ())
+  {
+    std::vector<int> v;
+    v.push_back (bci);
+    bciWithProfileInfo[method->get_Method ()] = v;
+  }
+  else
+  {
+    it->second.push_back (bci);
+  }
+  pthread_mutex_unlock (&__mutex);
+}
+  
 // ------------------------------------------------------------------
 // ciMethod::ciMethod
 //
 // Loaded method.
 ciMethod::ciMethod(methodHandle h_m, ciInstanceKlass* holder) :
-  ciMetadata(h_m()),
+  ciMetadata(h_m()), _db_data_loaded(false),
   _holder(holder)
 {
   assert(h_m() != NULL, "no null method");
-
+  
+  _db_interpreter_invocation_count = -1;
+  _db_interpreter_throwout_count = -1;
+  _db_invocation_count = -1;
+  _db_backedge_count = -1;
+  
   if (LogTouchedMethods) {
     h_m()->log_touched(Thread::current());
   }
@@ -172,7 +209,8 @@ ciMethod::ciMethod(ciInstanceKlass* holder,
   _liveness(               NULL),
   _can_be_statically_bound(false),
   _method_blocks(          NULL),
-  _method_data(            NULL)
+  _method_data(            NULL),
+  _db_data_loaded(false)
 #if defined(COMPILER2) || defined(SHARK)
   ,
   _flow(                   NULL),
@@ -183,6 +221,11 @@ ciMethod::ciMethod(ciInstanceKlass* holder,
   // Usually holder and accessor are the same type but in some cases
   // the holder has the wrong class loader (e.g. invokedynamic call
   // sites) so we pass the accessor.
+  _db_interpreter_invocation_count = -1;
+  _db_interpreter_throwout_count = -1;
+  _db_invocation_count = -1;
+  _db_backedge_count = -1;
+  
   _signature = new (CURRENT_ENV->arena()) ciSignature(accessor, constantPoolHandle(), signature);
 }
 
@@ -867,6 +910,35 @@ int ciMethod::interpreter_call_site_count(int bci) {
   return -1;  // unknown
 }
 
+void ciMethod::load_aosdb_data (bool reload)
+{
+  
+  /*TODO: Also load aosdb data before using it in db_ methods*/
+  if (!reload and _db_data_loaded)
+    return;
+    
+  if (_metadata == NULL)
+    return;
+  
+  std::string m_name = getMethodName (this->get_Method ());
+
+  aosDBFindHotDataForMethod (m_name, _db_interpreter_invocation_count, 
+                             _db_interpreter_throwout_count, _db_invocation_count,
+                             _db_backedge_count);
+}
+
+/*TODO: Try to load all data before hand in load_aosdb_data
+ */
+int ciMethod::db_interpreter_call_site_count(int bci) {
+  int count = 0;
+  std::string m_name = getMethodName (this->get_Method ());
+  
+  if (aosDBFindMethodCountProfile (m_name, bci, count))
+      return scale_count(count);
+      
+  return -1;  // unknown
+}
+
 // ------------------------------------------------------------------
 // ciMethod::get_field_at_bci
 ciField* ciMethod::get_field_at_bci(int bci, bool &will_link) {
@@ -885,6 +957,36 @@ ciMethod* ciMethod::get_method_at_bci(int bci, bool &will_link, ciSignature* *de
   return iter.get_method(will_link, declared_signature);
 }
 
+// Adjust a CounterData count to be commensurate with
+// interpreter_invocation_count.  If the MDO exists for
+// only 25% of the time the method exists, then the
+// counts in the MDO should be scaled by 4X, so that
+// they can be usefully and stably compared against the
+// invocation counts in methods.
+int ciMethod::db_scale_count(int count, float prof_factor) {
+  assert (UseAOSDBHotData and TieredCompilation);
+  if (count > 0 && method_data() != NULL) {
+    int counter_life;
+    int method_life = db_interpreter_invocation_count();
+    if (TieredCompilation and UseAOSDBHotData) {
+      // In tiered the MDO's life is measured directly, so just use the snapshotted counters
+      counter_life = MAX2(db_invocation_count(), db_backedge_count());
+    } else {
+      assert (false, "db_scale_count should be called only when TieredCompilation and\
+              UseAOSDBHotData are enabled");
+    }
+
+    // counter_life due to backedge_counter could be > method_life
+    if (counter_life > method_life)
+      counter_life = method_life;
+    if (0 < counter_life && counter_life <= method_life) {
+      count = (int)((double)count * prof_factor * method_life / counter_life + 0.5);
+      count = (count > 0) ? count : 1;
+    }
+  }
+  return count;
+}
+
 // ------------------------------------------------------------------
 // Adjust a CounterData count to be commensurate with
 // interpreter_invocation_count.  If the MDO exists for
@@ -893,6 +995,9 @@ ciMethod* ciMethod::get_method_at_bci(int bci, bool &will_link, ciSignature* *de
 // they can be usefully and stably compared against the
 // invocation counts in methods.
 int ciMethod::scale_count(int count, float prof_factor) {
+  assert (!UseAOSDBHotData, 
+          "scale_count should never be called with UseAOSDBHotData enabled, \
+          instead use db_scale_count");
   if (count > 0 && method_data() != NULL) {
     int counter_life;
     int method_life = interpreter_invocation_count();

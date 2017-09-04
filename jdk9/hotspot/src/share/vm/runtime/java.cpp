@@ -91,6 +91,12 @@
 #include "opto/indexSet.hpp"
 #include "opto/runtime.hpp"
 #endif
+#include "oops/method.hpp"
+#include "compiler/compileBroker.hpp"
+#include "ci/ciMethod.hpp"
+
+#include <set>
+#include <map>
 
 GrowableArray<Method*>* collected_profiled_methods;
 
@@ -535,24 +541,105 @@ void before_exit(JavaThread* thread) {
   #undef BEFORE_EXIT_DONE
 }
 
+GrowableArray<Method*>* aosdb_collected_profiled_methods;
+void aosdb_collect_profiled_methods(Method* m) {
+  Thread* thread = Thread::current();
+  // This HandleMark prevents a huge amount of handles from being added
+  // to the metadata_handles() array on the thread.
+  HandleMark hm(thread);
+  methodHandle mh(thread, m);
+  if (m->method_data() != NULL){
+    aosdb_collected_profiled_methods->push(m);
+  }
+}
+
+void aosdb_get_method_profiling_data() {
+  ResourceMark rm;
+  HandleMark hm;
+  
+  aosdb_collected_profiled_methods = new GrowableArray<Method*>(1024);
+  ClassLoaderDataGraph::methods_do(aosdb_collect_profiled_methods);
+  aosdb_collected_profiled_methods->sort(&compare_methods);
+
+  int count = aosdb_collected_profiled_methods->length();
+  int total_size = 0;
+  for (int index = 0; index < count; index++) {
+    Method* m = aosdb_collected_profiled_methods->at(index);
+    std::string m_name = getMethodName(m);
+    if (UseAOSDBVerbose)
+      std::cout << "Adding HotData for " << m_name << " IntInvokeCount " << 
+        m->interpreter_invocation_count() << " IntThrowCount " << 
+        m->interpreter_throwout_count () << " InvokeCount " << 
+        m->invocation_count () << " BackedgeCount " << m->backedge_count ();
+    aosDBAddHotDataForMethod (m_name, m->interpreter_invocation_count(), 
+                              m->interpreter_throwout_count (),
+                              m->invocation_count (),
+                              m->backedge_count ());
+    BciWithProfileInfo::iterator it = ciMethod::bciWithProfileInfo.find (m);
+    if (it != ciMethod::bciWithProfileInfo.end())
+    {
+      /*if (UseAOSDBVerbose)
+      {
+        std::cout << "BciWithProfileInfo for method " << m_name << std::endl;
+        std::cout << "[" << std::endl;
+        for (std::vector<int>::iterator it2 = it->second.begin (); 
+          it2 != it->second.end (); it2++)
+        {
+          std::cout << *it2 << ", ";
+        }
+        std::cout << "]" << std::endl;
+      }*/
+      
+      if (UseAOSDBRecordHotDataVerbose)
+      {
+        std::cout << "BciWithProfileInfo for   method " << m_name << std::endl;
+        std::cout << "[ " << std::endl;
+      }
+      for (std::vector<int>::iterator it2 = it->second.begin();
+           it2 != it->second.end (); it2++)
+      {
+        ProfileData* data = m->method_data()->bci_to_data(*it2);
+        if (data != NULL && data->is_CounterData())
+        {
+          aosDBAddMethodCountProfileForBci (m_name, *it2, 
+                                            data->as_CounterData()->count());
+          if (UseAOSDBRecordHotDataVerbose)
+          {
+            std::cout << " bci:     " << *it2 << " count: " << data->as_CounterData()->count() << ", ";
+          }
+        }
+      }
+      if (UseAOSDBRecordHotDataVerbose)
+      {
+        std::cout << "]" << std::endl;
+      }
+    }
+  }
+}
+
 void vm_exit(int code) {
   std::cout << "vm_exit "<< std::endl;
   if (aosDBIsInit ())
   {
-      if (UseAOSDBStatistics)
-      {
-          std::cout << "=== AOS DB Statistics === " << std::endl;
-          int n_found = aosDBGetMethodsFoundInDB ();
-          int n_not_found = aosDBGetMethodsNotFoundInDB ();
-          std::cout << "Total Methods Searched in AOS DB " << n_found + n_not_found << std::endl;
-          std::cout << "Methods Found in AOS DB " << n_found << std::endl;
-          for (int i = 0; i < NUM_OPT_LEVELS; i++)
-          {
-              std::cout << "Methods Found at Opt Level " << i << " are: " << aosDBGetMethodsFoundAtOptLevelInDB (i) << std::endl;
-          }
+    std::cout << "UseAOSDBRecordHotData is enabled " << std::endl;
+    
+    if (UseAOSDBRecordHotData)
+      aosdb_get_method_profiling_data ();
+      
+    if (UseAOSDBStatistics)
+    {
+        std::cout << "=== AOS DB Statistics === " << std::endl;
+        int n_found = aosDBGetMethodsFoundInDB ();
+        int n_not_found = aosDBGetMethodsNotFoundInDB ();
+        std::cout << "Total Methods Searched in AOS DB " << n_found + n_not_found << std::endl;
+        std::cout << "Methods Found in AOS DB " << n_found << std::endl;
+        for (int i = 0; i < NUM_OPT_LEVELS; i++)
+        {
+            std::cout << "Methods Found at Opt Level " << i << " are: " << aosDBGetMethodsFoundAtOptLevelInDB (i) << std::endl;
+        }
 
-          std::cout << "Methods Not Found in AOS DB " << n_not_found  << std::endl;
-      }
+        std::cout << "Methods Not Found in AOS DB " << n_not_found  << std::endl;
+    }
     
     if (UseAOSDBRecord)
     {
@@ -576,6 +663,14 @@ void vm_exit(int code) {
           std::cout << "Cannot initialize aosDB" << std::endl;
       }
   }
+
+  /*std::cout << "All saved methods" << std::endl;
+  
+  for (std::set<Method*>::iterator it = Method::allMethodsSet.begin(); 
+       it != Method::allMethodsSet.end(); ++it)
+  {
+    std::cout << getMethodName (*it) << std::endl;
+  }*/
   
   Thread* thread =
       ThreadLocalStorage::is_initialized() ? Thread::current_or_null() : NULL;

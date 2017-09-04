@@ -135,10 +135,11 @@ bool InlineTree::should_inline(ciMethod* callee_method, ciMethod* caller_method,
 #endif
 
   int size = callee_method->code_size_for_inlining();
-
+  
   // Check for too many throws (and not too huge)
-  if(callee_method->interpreter_throwout_count() > InlineThrowCount &&
-     size < InlineThrowMaxSize ) {
+  int throwout_count = (UseAOSDBHotData) ? callee_method->db_interpreter_throwout_count() :
+                                          callee_method->interpreter_throwout_count();
+  if(throwout_count > InlineThrowCount && size < InlineThrowMaxSize ) {
     wci_result->set_profit(wci_result->profit() * 100);
     if (C->print_inlining() && Verbose) {
       CompileTask::print_inline_indent(inline_level());
@@ -151,9 +152,20 @@ bool InlineTree::should_inline(ciMethod* callee_method, ciMethod* caller_method,
   int default_max_inline_size = C->max_inline_size();
   int inline_small_code_size  = InlineSmallCode / 4;
   int max_inline_size         = default_max_inline_size;
-
-  int call_site_count  = method()->scale_count(profile.count());
-  int invoke_count     = method()->interpreter_invocation_count();
+  
+  int call_site_count;
+  int invoke_count;
+  
+  if (UseAOSDBHotData)
+  {
+    call_site_count  = method()->db_scale_count(profile.count());
+    invoke_count     = method()->db_interpreter_invocation_count();
+  }
+  else
+  {
+    call_site_count  = method()->scale_count(profile.count());
+    invoke_count     = method()->interpreter_invocation_count();
+  }
 
   assert(invoke_count != 0, "require invocation count greater than zero");
   int freq = call_site_count / invoke_count;
@@ -606,14 +618,33 @@ WarmCallInfo* InlineTree::ok_to_inline(ciMethod* callee_method, JVMState* jvms, 
 
 //------------------------------compute_callee_frequency-----------------------
 float InlineTree::compute_callee_frequency( int caller_bci ) const {
-  int count  = method()->interpreter_call_site_count(caller_bci);
-  int invcnt = method()->interpreter_invocation_count();
-  float freq = (float)count/(float)invcnt;
-  // Call-site count / interpreter invocation count, scaled recursively.
-  // Always between 0.0 and 1.0.  Represents the percentage of the method's
-  // total execution time used at this call site.
-
-  return freq;
+  if (UseAOSDBHotData)
+  {
+    assert(false, "InlineTree::compute_callee_frequency: To Implement interpreter_call_site_count");
+    
+    int count  = method()->db_interpreter_call_site_count(caller_bci);
+    int invcnt = method()->db_interpreter_invocation_count();
+    float freq = (float)count/(float)invcnt;
+    // Call-site count / interpreter invocation count, scaled recursively.
+    // Always between 0.0 and 1.0.  Represents the percentage of the method's
+    // total execution time used at this call site.
+  
+    return freq;
+  }
+  else
+  {
+    int count  = method()->interpreter_call_site_count(caller_bci);
+    int invcnt = method()->interpreter_invocation_count();
+    float freq = (float)count/(float)invcnt;
+    // Call-site count / interpreter invocation count, scaled recursively.
+    // Always between 0.0 and 1.0.  Represents the percentage of the method's
+    // total execution time used at this call site.
+  
+    return freq;
+  }
+  
+  assert (false, "Control can't reach here in InlineTree::compute_callee_frequency");
+  return -1;
 }
 
 //------------------------------build_inline_tree_for_callee-------------------

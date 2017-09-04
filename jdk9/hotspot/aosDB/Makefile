@@ -13,6 +13,6 @@ testAOSDB:  aosDB.cpp
 	g++ $(CPPFLAGS) -D__TEST_AOSDB__ $< -o $@
 
 clean:
+	rm -rf *.h.gch
 	rm aosDBAPI.o
-	rm testAPI
 	rm testAOSDB

@@ -33,12 +33,14 @@
 // This class is used to determine the frequently called method
 // at some call site
 class ciCallProfile : StackObj {
+public:
+  enum { MorphismLimit = 2 }; // Max call site's morphism we care about
+
 private:
-  // Fields are initialized directly by ciMethod::call_profile_at_bci.
+  // Fields are initialized directly by ciMethod::call_profile_at_bci and by CallGenerator
   friend class ciMethod;
   friend class ciMethodHandle;
-
-  enum { MorphismLimit = 2 }; // Max call site's morphism we care about
+  
   int  _limit;                // number of receivers have been determined
   int  _morphism;             // determined call site's morphism
   int  _count;                // # times has this call been executed
@@ -46,6 +48,11 @@ private:
   ciMethod* _method[MorphismLimit + 1];    // receivers methods
   ciKlass*  _receiver[MorphismLimit + 1];  // receivers (exact)
 
+  
+
+  void add_receiver(ciKlass* receiver, int receiver_count);
+  
+public:
   ciCallProfile() {
     _limit = 0;
     _morphism    = 0;
@@ -54,14 +61,18 @@ private:
     _method[0]   = NULL;
     _receiver[0] = NULL;
   }
-
-  void add_receiver(ciKlass* receiver, int receiver_count);
-
-public:
+  ciCallProfile (int limit, int morphism, int count, int recv_count[MorphismLimit+1]):
+    _limit(limit), _morphism(morphism), _count(count)
+  {
+    for (int i = 0; i < MorphismLimit +1; i++)
+      _receiver_count [i] = recv_count[i];
+  }
+  
   // Note:  The following predicates return false for invalid profiles:
   bool      has_receiver(int i) const { return _limit > i; }
   int       morphism() const          { return _morphism; }
-
+  
+  int       limit() const             { return _limit; }
   int       count() const             { return _count; }
   int       receiver_count(int i)  {
     assert(i < _limit, "out of Call Profile MorphismLimit");

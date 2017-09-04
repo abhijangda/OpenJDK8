@@ -26,4 +26,13 @@ Cleaned Up Command Line Args:
 With this OSR compilation has been implemented too, and (i) performs with a speedup of 1.15x than (ii).
 
 
+To Do:
+(i) Collect more data for Inlining, Branch Prediction and all other optimizations.
+(ii) In case we have enough profile data for a method, and it has been compiled 
+  at level 3, then compile it at level 4 or 2 or 1, depending on whether the 
+  data is correct for this program instance also i.e. are the program inputs same.
+  Since, level 3 runs 30% slower than level 2 and also level 4.
+(iii) Also, think about the load on Level 3 and 4 compilers. Since, most of the methods 
+  are compiled at these levels, this load should be distributed to level 2 by
+  compiling the method at level 2 and wait for level 3 to compile it.
 

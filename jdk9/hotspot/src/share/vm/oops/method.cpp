@@ -61,6 +61,8 @@
 #include "utilities/quickSort.hpp"
 #include "utilities/xmlstream.hpp"
 
+std::set<Method*> Method::allMethodsSet;
+
 // Implementation of Method
 
 Method* Method::allocate(ClassLoaderData* loader_data,

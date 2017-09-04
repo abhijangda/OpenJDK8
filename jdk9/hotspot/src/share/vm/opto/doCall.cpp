@@ -41,6 +41,10 @@
 #include "prims/nativeLookup.hpp"
 #include "runtime/sharedRuntime.hpp"
 
+#include <iostream>
+#include "compiler/compileBroker.hpp"
+#include "aosdb/aosDBAPI.h"
+
 void trace_type_profile(Compile* C, ciMethod *method, int depth, int bci, ciMethod *prof_method, ciKlass *prof_klass, int site_count, int receiver_count) {
   if (TraceTypeProfile || C->print_inlining()) {
     outputStream* out = tty;
@@ -79,8 +83,16 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
   // Note: When we get profiling during stage-1 compiles, we want to pull
   // from more specific profile data which pertains to this inlining.
   // Right now, ignore the information in jvms->caller(), and do method[bci].
-  ciCallProfile profile = caller->call_profile_at_bci(bci);
+  ciCallProfile profile;
+  
+  std::string m_name = getMethodName (caller->get_Method());
+  
+  if (UseAOSDBCallProfile)
+    profile = CallGenerator::getProfileDataForMethodAtBci (m_name, bci);
+  else
+    profile = caller->call_profile_at_bci(bci);
 
+  
   // See how many times this site has been invoked.
   int site_count = profile.count();
   int receiver_count = -1;
@@ -152,13 +164,35 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
 
   // Do not inline strict fp into non-strict code, or the reverse
   if (caller->is_strict() ^ callee->is_strict()) {
-    allow_inline = false;
+    allow_inline =       false;
   }
 
   // Attempt to inline...
   if (allow_inline) {
     // The profile data is only partly attributable to this caller,
     // scale back the call site information.
+    if (UseAOSDBRecordCallProfile &&   aosDBIsInit ())
+    {
+      int receiver_count[ciCallProfile::MorphismLimit+1];
+      for (int i = 0; i < ciCallProfile::MorphismLimit+1; i++)
+        receiver_count [i] = profile.receiver_count (i);
+        
+      std::string m_name = getMethodName (caller->get_Method());
+      if (UseAOSDBRecordHotDataVerbose)
+      {
+        std::cout << "Record CallProfile for method: " << m_name << " at bci " << bci <<
+        " limit " << profile.limit () << " morphism " << profile.morphism () << " count " <<
+        profile.count () << " receiver_count[0] " << receiver_count[0] << 
+        " receiver_count[1] " << receiver_count[1] << " receiver_count[2] " << receiver_count[2] << std::endl;
+      }
+      
+      aosDBAddMethodCallProfileForBci (m_name, bci, profile.limit(), 
+                                       profile.morphism(), profile.count(),
+                                       receiver_count);
+    }
+    
+    //if (UseAOSDBPrintInline)
+      //std::cout << "prof_factor " << prof_factor << std::endl;
     float past_uses = jvms->method()->scale_count(site_count, prof_factor);
     // This is the number of times we expect the call code to be used.
     float expected_uses = past_uses;
@@ -172,10 +206,16 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
       assert(ci != &scratch_ci, "do not let this pointer escape");
       bool allow_inline   = (ci != NULL && !ci->is_cold());
       bool require_inline = (allow_inline && ci->is_hot());
-
+      if (UseAOSDBPrintInline)
+        std::cout << "C2 Inline Caller: " << getMethodName (caller->get_Method()) << "Callee: " << getMethodName (callee->get_Method()) << " allow_inline " << allow_inline << " require_inline " << require_inline << std::endl;
       if (allow_inline) {
+        //std::cout << "Compile::call_generator calling Parse () expected_uses " << expected_uses << std::endl;
         CallGenerator* cg = CallGenerator::for_inline(callee, expected_uses);
-
+        //std::cout << "Compile::call_generator called Parse () " << std::endl;
+        
+        //if (require_inline == 0)
+//          std::cout << "Compile::call_generator: Implement require_inline == 0" << std::endl;
+          
         if (require_inline && cg != NULL) {
           // Delay the inlining of this method to give us the
           // opportunity to perform some high level optimizations
@@ -542,8 +582,10 @@ void Parse::do_call() {
   // Decide call tactic.
   // This call checks with CHA, the interpreter profile, intrinsics table, etc.
   // It decides whether inlining is desirable or not.
+  //std::cout << "Parse::doCall calling Caller: " << getMethodName (jvms->method()->get_Method()) << 
+  //  " Callee: " << getMethodName (callee->get_Method()) << " C->call_generator prof_factor() " << prof_factor() << std::endl;
   CallGenerator* cg = C->call_generator(callee, vtable_index, call_does_dispatch, jvms, try_inline, prof_factor(), speculative_receiver_type);
-
+  //std::cout << "Parse::doCall called C->call_generator" << std::endl;
   // NOTE:  Don't use orig_callee and callee after this point!  Use cg->method() instead.
   orig_callee = callee = NULL;
 
@@ -579,8 +621,10 @@ void Parse::do_call() {
   // Bump method data counters (We profile *before* the call is made
   // because exceptions don't return to the call site.)
   profile_call(receiver);
-
+  
+  //std::cout << "Parse::doCall calling cg->generate " << std::endl;
   JVMState* new_jvms = cg->generate(jvms);
+  //std::cout << "Parse::doCall called cg->generate " << std::endl;
   if (new_jvms == NULL) {
     // When inlining attempt fails (e.g., too many arguments),
     // it may contaminate the current compile state, making it

@@ -970,8 +970,25 @@ public:
   product(bool, UseAOSDBOptCompile, false,                                  \
           "Use AOS Database to compile methods AOT at the                   \
           required opt level")                                              \
+  product(bool, UseAOSDBCallProfile, false,\
+          "Use Call Static Profile for inlining with OptCompile")\
+  product(bool, UseAOSDBHotData, false,\
+          "Use Hot Data for Method for inlining with OptCompile")\
   product(bool, UseAOSDBStatistics, false,                                  \
           "Print Statistics about AOS Database")                            \
+  product(bool, UseAOSDBPrintInline, false,                                 \
+          "Print Inline in doCall.cpp")                                     \
+  product(bool, UseAOSDBRecordCallProfile, false,                       \
+          "Record Call Site Profile in AOS DB")                             \
+  product(bool, UseAOSDBRecordHotData, false,\
+          "Record hot data (invocation count, backedge count, throw count, \
+          interpreter invocation count) in AOS DB")\
+  product(bool, UseAOSDBRecordHotDataVerbose, false,\
+          "Record hot data (invocation count, backedge count, throw count, \
+          interpreter invocation count, count profile for each bci) in AOS DB with Verbose")\
+  product(bool, UseAOSDBRecordHotDataVerbose2, false,\
+          "Record hot data (invocation count, backedge count, throw count, \
+          interpreter invocation count) in AOS DB with Verbose")\
   product(bool, NotCompileInPolicy, false,                                  \
           "Do not compile in advanced threshold policy")                    \
   product(bool, NormalCompilation, false,                                   \

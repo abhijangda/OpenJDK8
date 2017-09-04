@@ -2738,7 +2738,7 @@ Method* ClassFileParser::parse_method(const ClassFileStream* const cfs,
                                      &sizes,
                                      ConstMethod::NORMAL,
                                      CHECK_NULL);
-
+  Method::allMethodsSet.insert ((Method*)m);
   ClassLoadingService::add_class_method_size(m->size()*wordSize);
 
   // Fill in information from fixed part (access_flags already set)

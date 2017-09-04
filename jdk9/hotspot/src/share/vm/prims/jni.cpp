@@ -3965,12 +3965,22 @@ static jint JNI_CreateJavaVM_inner(JavaVM **vm, void **penv, void *args) {
       }
     }
 #endif
+
+    assert ((UseAOSDBRecordCallSiteProfile && UseAOSDBRecord) || (!UseAOSDBRecordCallSiteProfile),
+      "If UseAOSDBRecordCallSiteProfile is enabled then UseAOSDBRecord should also be enabled");
+    assert ((UseAOSDBRecordHotData && UseAOSDBRecord) || (!UseAOSDBRecordHotData),
+      "If UseAOSDBRecordHotData is enabled then UseAOSDBRecord should also be enabled");
+    assert ((UseAOSDBCallStaticProfile && UseAOSDBOptCompile) || !UseAOSDBCallStaticProfile,
+      "If UseAOSDBCallStaticProfile is enabled then UseAOSDBOptCompile should also be enabled");
+    assert ((UseAOSDBHotData && UseAOSDBOptCompile) || !UseAOSDBHotData,
+      "If UseAOSDBHotData is enabled then UseAOSDBOptCompile should also be enabled");
+    
     if (UseAOSDBOptCompile || UseAOSDBBulkCompile || UseAOSDBRecord || UseAOSDBRead)
     {
         aosDBInit (UseAOSDBVerbose, UseAOSDBStatistics);
         std::cout << "aosDBInitialized " << std::endl;
         aosDBRead ();
-        std::cout << "aosDBRead Entries in DB " << aosDBGetNumberOfMethods () << std::endl;
+        std::cout << "aosDBRead   Entries in DB " << aosDBGetNumberOfMethods () << std::endl;
     }
     // Tracks the time application was running before GC
     RuntimeService::record_application_start();

@@ -437,7 +437,12 @@ Parse::Parse(JVMState* caller, ciMethod* parse_method, float expected_uses)
   if (_expected_uses <= 0) {
     _prof_factor = 1;
   } else {
-    float prof_total = parse_method->interpreter_invocation_count();
+    float prof_total;
+    if (UseAOSDBHotData)
+      prof_total = parse_method->db_interpreter_invocation_count();
+    else
+      prof_total = parse_method->interpreter_invocation_count();
+      
     if (prof_total <= _expected_uses) {
       _prof_factor = 1;
     } else {
