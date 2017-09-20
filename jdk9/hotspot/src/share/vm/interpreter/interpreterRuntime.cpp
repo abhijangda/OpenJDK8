@@ -1141,8 +1141,8 @@ IRT_ENTRY(void, InterpreterRuntime::aosdb_find_method(JavaThread* thread))
                     if (OSRInLoopEvent && osr_bci != -1)
                         method->set_aosdb_data_retrieved (false);
                         
-                    if ((NotCompileOSRMethodsInAOSDB && osr_bci == -1) || 
-                        (!NotCompileOSRMethodsInAOSDB && from_loop_event))
+                    if (level != -1 &&  ((NotCompileOSRMethodsInAOSDB && osr_bci == -1) || 
+                        (!NotCompileOSRMethodsInAOSDB && from_loop_event)))
                     {//TODO: Correct, remove option NotCompileOSRMethodsInAOSDB
                         method->set_from_aosdb (true);
                         if (osr_bci == -1)

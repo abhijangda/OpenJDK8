@@ -74,6 +74,8 @@
 #include <iostream>
 #include <string>
 
+#define __DEBUG__ 0
+
 #ifdef DTRACE_ENABLED
 
 // Only bother with this argument setup if dtrace is available
@@ -1133,7 +1135,8 @@ nmethod* CompileBroker::compile_method(const methodHandle& method, int osr_bci,
                                          DirectiveSet* directive,
                                          Thread* THREAD) {
 
-  std::cout << "CompileBroker::compile_method line 1136" << std::endl;
+  if (__DEBUG__) 
+    std::cout << "CompileBroker::compile_method line 1136" << std::endl;
   // make sure arguments make sense
   assert(method->method_holder()->is_instance_klass(), "not an instance method");
   assert(osr_bci == InvocationEntryBci || (0 <= osr_bci && osr_bci < method->code_size()), "bci out of range");
@@ -1147,12 +1150,14 @@ nmethod* CompileBroker::compile_method(const methodHandle& method, int osr_bci,
   // lock, make sure that the compilation
   // isn't prohibited in a straightforward way.
   AbstractCompiler *comp = CompileBroker::compiler(comp_level);
-  std::cout << "CompileBroker::compile_method line 1150 comp is "<< comp << std::endl;
+  if (__DEBUG__) 
+    std::cout << "CompileBroker::compile_method line 1150 comp is "<< comp << " comp_level is " << comp_level << " method is " << getMethodName(method ()) << std::endl;
   if (!comp->can_compile_method(method) ||
       compilation_is_prohibited(method, osr_bci, comp_level, directive->ExcludeOption)) {
     return NULL;
   }
-  std::cout << "CompileBroker::compile_method line 1153" << std::endl;
+  if (__DEBUG__) 
+    std::cout << "CompileBroker::compile_method line 1153" << std::endl;
 #if INCLUDE_JVMCI
   if (comp->is_jvmci() && !JVMCIRuntime::can_initialize_JVMCI()) {
     return NULL;
@@ -1182,7 +1187,8 @@ nmethod* CompileBroker::compile_method(const methodHandle& method, int osr_bci,
     if (nm != NULL) return nm;
     if (method->is_not_osr_compilable(comp_level)) return NULL;
   }
-std::cout << "CompileBroker::compile_method line 1183" << std::endl;
+  if (__DEBUG__) 
+    std::cout << "CompileBroker::compile_method line 1183" << std::endl;
   assert(!HAS_PENDING_EXCEPTION, "No exception should be present");
   // some prerequisites that are compiler specific
   if (comp->is_c2() || comp->is_shark()) {
@@ -1198,7 +1204,8 @@ std::cout << "CompileBroker::compile_method line 1183" << std::endl;
   //
   // Note: A native method implies non-osr compilation which is
   //       checked with an assertion at the entry of this method.
-  std::cout << "CompileBroker::compile_method line 1199" << std::endl;
+  if (__DEBUG__) 
+    std::cout << "CompileBroker::compile_method line 1199" << std::endl;
   if (method->is_native() && !method->is_method_handle_intrinsic()) {
     bool in_base_library;
     address adr = NativeLookup::lookup(method, in_base_library, THREAD);
@@ -1222,7 +1229,8 @@ std::cout << "CompileBroker::compile_method line 1183" << std::endl;
   if (JvmtiExport::should_post_compiled_method_load()) {
     method->jmethod_id();
   }
-std::cout << "CompileBroker::compile_method line 1223" << std::endl;
+  if (__DEBUG__) 
+    std::cout << "CompileBroker::compile_method line 1223" << std::endl;
   // do the compilation
   if (method->is_native()) {
     if (!PreferInterpreterNativeStubs || method->is_method_handle_intrinsic()) {
@@ -1267,7 +1275,8 @@ std::cout << "CompileBroker::compile_method line 1223" << std::endl;
     bool is_blocking = !directive->BackgroundCompilationOption || CompileTheWorld || ReplayCompiles;
     compile_method_base(method, osr_bci, comp_level, hot_method, hot_count, compile_reason, is_blocking, THREAD);
   }
-std::cout << "CompileBroker::compile_method line 1268" << std::endl;
+  if (__DEBUG__) 
+    std::cout << "CompileBroker::compile_method line 1268" << std::endl;
   // return requested nmethod
   // We accept a higher level osr method
   if (osr_bci == InvocationEntryBci) {
@@ -1278,7 +1287,8 @@ std::cout << "CompileBroker::compile_method line 1268" << std::endl;
       return code->as_nmethod_or_null();
     }
   }
-  std::cout << "CompileBroker::compile_method line 1278" << std::endl;
+  if (__DEBUG__) 
+    std::cout << "CompileBroker::compile_method line 1278" << std::endl;
   return method->lookup_osr_nmethod_for(osr_bci, comp_level, false);
 }
 

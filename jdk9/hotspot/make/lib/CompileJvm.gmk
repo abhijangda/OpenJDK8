@@ -224,7 +224,7 @@ $(eval $(call SetupNativeCompilation, BUILD_LIBJVM, \
     DISABLED_WARNINGS_xlc := 1540-0216 1540-0198 1540-1090 1540-1639 \
         1540-1088 1500-010, \
     ASFLAGS := $(JVM_ASFLAGS), \
-    LDFLAGS := $(JVM_LDFLAGS) /home/abhi/glasgow/OpenJDK8/jdk9/hotspot/aosDB/aosDBAPI.o /home/abhi/glasgow/OpenJDK8/jdk9/hotspot/aosDB/aosDB.o, \
+    LDFLAGS := $(JVM_LDFLAGS) /home/ubuntu/OpenJDK8/jdk9/hotspot/aosDB/aosDBAPI.o /home/ubuntu/OpenJDK8/jdk9/hotspot/aosDB/aosDB.o, \
     LIBS := $(JVM_LIBS), \
     OPTIMIZATION := $(JVM_OPTIMIZATION), \
     OBJECT_DIR := $(JVM_OUTPUTDIR)/objs, \
