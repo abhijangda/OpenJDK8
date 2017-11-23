@@ -25,8 +25,25 @@ Cleaned Up Command Line Args:
 
 With this OSR compilation has been implemented too, and (i) performs with a speedup of 1.15x than (ii).
 
+Inlining:
+
+To record data use:
+./java -XX:-C1ProfileInlinedCalls -XX:+UseAOSDBRecordHotData -XX:+UseAOSDBRecordCallProfile -XX:+UseAOSDBRecord -jar dacapo.jar avrora
+
+Command Line Args:
+(iii) ./java -XX:-UseAOSDBPrintInline -XX:+InlineOnlyIfInlinedInDB -XX:-UseAOSDBStatistics -XX:-TurnOffInlining -XX:+UseAOSDBHotData -XX:+UseAOSDBCallProfile -XX:+OSRInLoopEvent -XX:+NotCompileOSRMethodsInAOSDB -XX:-NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:-C1UpdateMethodData -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintNMethods -XX:-PrintInlining -jar dacapo.jar avrora
+
+(iv) ./java -XX:-UseAOSDBPrintInline -XX:-InlineOnlyIfInlinedInDB -XX:-UseAOSDBStatistics -XX:-TurnOffInlining -XX:+UseAOSDBHotData -XX:+UseAOSDBCallProfile -XX:+OSRInLoopEvent -XX:+NotCompileOSRMethodsInAOSDB -XX:-NotCompileInPolicy -XX:-ProfileInterpreter -XX:-BackgroundCompilation -XX:+UseAOSDBOptCompile -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:-C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:-C1UpdateMethodData -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintNMethods -XX:-PrintInlining -jar dacapo.jar avrora
+
+(v) ./java -XX:-UseAOSDBPrintInline -XX:-TurnOffInlining -XX:+ProfileInterpreter -XX:-NotCompileOSRMethodsInAOSDB -XX:+UseAOSDBRead -XX:-BackgroundCompilation -XX:-UseOnlyInlinedBimorphic -XX:-TimeLinearScan -XX:-UseTypeProfile -XX:-C1ProfileVirtualCalls -XX:-UseInlineCaches -XX:+C1ProfileInlinedCalls -XX:-UseTypeSpeculation -XX:-C1ProfileBranches -XX:-C1ProfileCalls -XX:-C1ProfileCheckcasts -XX:-C1OptimizeVirtualCallProfiling -XX:+C1UpdateMethodData -XX:-PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:-PrintNMethods -XX:-PrintInlining -XX:-LogCompilation -jar dacapo.jar avrora
+
+UseAOSDBHotData and UseAOSDBCallProfile enables the use of Inlining in C2 compiler. InlineOnlyIfInlinedInDB inlines only if the callee has been inlined in the caller in DB, i.e., in the DB training run. The baseline here is (iii). -XX:+ProfileInterpreter is required for inlining in (v) but is not needed in others. 
+While recording data it is required to have -XX:-C1ProfileInlinedCalls because otherwise the number of inlinings recorded will be too many and both (iii) and (iv) will show some overhead over (i). On the other hand, InlineOnlyIfInlinedInDB should be enabled to make sure that number of inlinings are not too many, hence, the overhead is not so much. In (v) all options through which inlining profile data can be collected are enabled. 
+Finally (iii) perform at a speedup of 1.08x over (v). and (iii) shows a little bit of overhead over (i). 
+InlineOnlyIfInlinedInDB can also be used to search through a file containing callees inlined into callers. This file can be obtained by dumping all data using -XX:+UseAOSDBPrintInlining. Performance is almost same as (iii).
 
 To Do:
+Immediate Next Step is to add inlining in C1 compiler.
 (i) Collect more data for Inlining, Branch Prediction and all other optimizations.
 (ii) In case we have enough profile data for a method, and it has been compiled 
   at level 3, then compile it at level 4 or 2 or 1, depending on whether the 

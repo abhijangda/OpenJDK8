@@ -104,7 +104,7 @@ public:
     int getLimit () const {return limit;}
     int getMorphism () const {return morphism;}
     int getCount() const {return count;}
-    int getReceiverCountAtIndex (int i) const {return receiver_count[i];}
+    int getReceiverCountAtIndex (int i) const {assert (i <= MorphismLimit && i >= 0); return receiver_count[i];}
     void getReceiverCount (int* _receiver_count)
     {
         for (int i = 0; i < MorphismLimit+1; i++)
@@ -134,6 +134,7 @@ public:
         for (i = 0; i < MorphismLimit + 1; i++)
         {
             os << e.getReceiverCountAtIndex (i) << " "; 
+            //os << -1 << " ";
         }
     }
 };
@@ -160,7 +161,7 @@ private:
     //v[profileType] is particular AOSDBProfile. For example,
     //v[0] is CallProfile, v[1] is CounterProfile
     std::unordered_map <int, std::vector<AOSDatabaseElementProfile*> > bciToProfile;
-    //TODO: bci to counter data
+    std::unordered_map <int, bool> bciToIsInlined;
     
     AOSDatabaseElement ()
     {
@@ -171,13 +172,11 @@ private:
                                                  ProfileType type)
     {
         auto it = bciToProfile.find (bci);
-        if (it == bciToProfile.end ())
-            return NULL;
-        
+        if (it == bciToProfile.end ()){
+            return NULL;}
         if (it->second[(int)type] == nullptr || 
-            it->second[(int)type]->getProfileType () == ProfileType::Invalid)
-            return NULL;
-            
+            it->second[(int)type]->getProfileType () == ProfileType::Invalid){
+            return NULL;}
         return it->second [(int)type];
     }
 
@@ -226,6 +225,17 @@ public:
     int getInterpreterThrowoutCount () {return interpreterThrowoutCount;}
     int getInvocationCount () {return invocationCount;}
     int getBackedgeCount () {return backedgeCount;}
+    bool getIsInlinedAtBci (int bci, bool& inlined) const
+    {
+        auto it = bciToIsInlined.find (bci);
+        
+        if (it == bciToIsInlined.end ())
+            return false;
+        
+        inlined = it->second;
+        
+        return true;
+    }
     
     void setHighestOptLevel (int l){highestOptLevel=l;}
     void setCounts (int c){counts = c;}
@@ -236,6 +246,7 @@ public:
     void setInterpreterThrowoutCount (int count) {interpreterThrowoutCount = count;}
     void setInvocationCount (int count) {invocationCount = count;}
     void setBackedgeCount (int b) {backedgeCount = b;}
+    void setIsInlinedAtBci (int bci, bool v) {bciToIsInlined[bci] = v;}
     
     std::string getClassName ()
     {
@@ -254,9 +265,9 @@ public:
     {
         AOSDatabaseElementProfile* prof = getProfileForBci (bci, 
                                                             ProfileType::CallProfile);
-        if (prof->getProfileType () != ProfileType::CallProfile)
-            return NULL;
-
+        if (prof == nullptr || 
+            prof->getProfileType () != ProfileType::CallProfile){
+            return NULL;}
         return (AOSDatabaseElementCallProfile*)(prof);
     }
     
@@ -264,7 +275,8 @@ public:
     {
         AOSDatabaseElementProfile* prof = getProfileForBci (bci, 
                                                             ProfileType::CountProfile);
-        if (prof->getProfileType () != ProfileType::CountProfile)
+        if (prof == nullptr || 
+            prof->getProfileType () != ProfileType::CountProfile)
             return NULL;
 
         return (AOSDatabaseElementCountProfile*)(prof);
@@ -335,6 +347,7 @@ public:
         interpreterThrowoutCount = a.interpreterThrowoutCount;
         invocationCount = a.invocationCount;
         backedgeCount = a.backedgeCount;
+        bciToIsInlined = a.bciToIsInlined;
     }
     
     friend std::ostream &operator<< (std::ostream &os, const AOSDatabaseElement& e) { 
@@ -355,7 +368,6 @@ public:
              int i = 0;
              for (auto profile : it.second)
              {
-                 //std::cout << "Profile at i " << i << " is " << profile << std::endl;
                  i++;
                  
                 if (profile == nullptr)
@@ -371,7 +383,11 @@ public:
                     os << *(AOSDatabaseElementCallProfile*) profile;
                 }
              }
-             
+             bool b;
+             if (e.getIsInlinedAtBci (it.first, b))
+                os << b << " ";
+             else
+                os << false << " ";
              os << "} ";
          }
          
@@ -438,6 +454,7 @@ public:
                  }
              }
              
+             is >> e.bciToIsInlined [_bci];
              is >> c;
          }
          
@@ -449,7 +466,8 @@ public:
 
 class AOSDatabase
 {
-private:   
+private: 
+    static pthread_mutex_t _mutex;  
     std::string dbFilePath;
     std::unordered_map <std::string, AOSDatabaseElement> methToElement;
     bool verbose;
@@ -564,21 +582,21 @@ public:
         }
         else
         {
-            if (_interpreterInvocationCount != -1)
+            if (_interpreterInvocationCount > 0)
                 it->second.setInterpreterInvocationCount (_interpreterInvocationCount);
                 
-            if (_throwoutCount != -1)
+            if (_throwoutCount > 0)
                 it->second.setInterpreterThrowoutCount (_throwoutCount);
             
-            if (_invocationCount != -1)
+            if (_invocationCount > 0)
                 it->second.setInvocationCount (_invocationCount);
             
-            if (_backedgeCount != -1)
+            if (_backedgeCount > 0)
                 it->second.setBackedgeCount (_backedgeCount);
                 
             if (verbose)
             {
-                std::cout << "Inserted Method " << it->second << std::endl;
+                std::cout << "Updated Method " << it->second << std::endl;
             }
         }
     }
@@ -622,6 +640,40 @@ public:
         }
     }
     
+    void insertIsInlinedForMethod (std::string& methodFullDesc, int bci, 
+                                   bool inlined)
+    {
+        pthread_mutex_lock (&_mutex);
+        auto it = methToElement.find (methodFullDesc);
+        
+        if (it == methToElement.end ())
+        {
+            AOSDatabaseElement elem (methodFullDesc, -1, -1, -1, -1);
+            methToElement.emplace (methodFullDesc, elem);
+            elem.setIsInlinedAtBci (bci, inlined);
+        }
+        else
+        {
+            it->second.setIsInlinedAtBci (bci, inlined);
+        }
+        pthread_mutex_unlock (&_mutex);
+    }
+    
+    bool findIsInlinedForMethod (std::string& methodFullDesc, int bci, 
+                                 bool& inlined)
+    {
+        auto it = methToElement.find (methodFullDesc);
+        
+        if (it == methToElement.end ())
+        {
+            return false;
+        }
+        else
+        {
+            return it->second.getIsInlinedAtBci (bci, inlined);
+        }
+    }
+    
     bool findHotDataForMethod (const std::string& methodFullDesc, 
                                int& interpreterInvocationCount, int& throwoutCount,
                                int& invocationCount, int& backedgeCount)
@@ -648,7 +700,6 @@ public:
                                          int* _receiver_count)
     {
         auto it = methToElement.find (methodFullDesc);
-        
         if (it == methToElement.end ())
         {
             return false;

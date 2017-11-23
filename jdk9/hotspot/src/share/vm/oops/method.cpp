@@ -61,6 +61,8 @@
 #include "utilities/quickSort.hpp"
 #include "utilities/xmlstream.hpp"
 
+#include <iostream>
+
 std::set<Method*> Method::allMethodsSet;
 
 // Implementation of Method

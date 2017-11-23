@@ -44,7 +44,9 @@
 #include <iostream>
 #include "compiler/compileBroker.hpp"
 #include "aosdb/aosDBAPI.h"
-
+#include <fstream>
+#include <string>
+#include <sstream>
 void trace_type_profile(Compile* C, ciMethod *method, int depth, int bci, ciMethod *prof_method, ciKlass *prof_klass, int site_count, int receiver_count) {
   if (TraceTypeProfile || C->print_inlining()) {
     outputStream* out = tty;
@@ -66,6 +68,13 @@ void trace_type_profile(Compile* C, ciMethod *method, int depth, int bci, ciMeth
   }
 }
 
+std::string to_string (int i)
+{
+  std::ostringstream convert;
+  convert << i;
+  return convert.str();
+}
+
 CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool call_does_dispatch,
                                        JVMState* jvms, bool allow_inline,
                                        float prof_factor, ciKlass* speculative_receiver_type,
@@ -85,16 +94,19 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
   // Right now, ignore the information in jvms->caller(), and do method[bci].
   ciCallProfile profile;
   
-  std::string m_name = getMethodName (caller->get_Method());
-  
-  if (UseAOSDBCallProfile)
-    profile = CallGenerator::getProfileDataForMethodAtBci (m_name, bci);
+  if (UseAOSDBCallProfile and aosDBIsInit ())
+  {
+    std::string m_name = getMethodName (caller->get_Method());
+    if (!CallGenerator::getProfileDataForMethodAtBci (m_name, bci, profile))
+      profile = caller->call_profile_at_bci(bci);
+  }
   else
     profile = caller->call_profile_at_bci(bci);
 
   
   // See how many times this site has been invoked.
   int site_count = profile.count();
+  
   int receiver_count = -1;
   if (call_does_dispatch && UseTypeProfile && profile.has_receiver(0)) {
     // Receivers in the profile structure are ordered by call counts
@@ -167,11 +179,87 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
     allow_inline =       false;
   }
 
+  int callee_comp_level = -1;
+  if (callee->get_Method () -> code ())
+    callee_comp_level = callee->get_Method () -> code ()->comp_level ();
+  
+  
+  bool allow_require_inline = true;
+  if (InlineOnlyIfInlinedInDB && UseAOSDBCallProfile && aosDBIsInit ())
+  {
+    std::string caller_name = getMethodName (caller->get_Method());
+#if 1
+    static std::string inlineFileString = "";
+    if (inlineFileString == "")
+    {
+      std::ifstream file;
+      
+      file.open ("/home/abhi/glasgow/OpenJDK8/jdk9/build/linux-x86_64-normal-server-release/jdk/bin/inlineBaselineAvrora.txt");
+      if (!file)
+      {
+        std::cout << "Failed to Open inlineFile" << std::endl;
+        abort ();
+      }
+      
+      file.seekg (0, std::ios_base::end);
+      size_t size = file.tellg ();
+      char buf [size];
+      file.seekg (0);
+      int i = 0;
+      while (!file.eof ())
+      {
+        buf[i] = file.get() ;
+        i++;
+      }
+      buf[i] = '\0';
+      file.close ();
+      inlineFileString = buf;
+      std::cout << "inlineFile read into inlineFileString of length " << inlineFileString.length () << std::endl;
+    }
+    
+    if (inlineFileString == "")
+    {
+      std::cout << "inlineFileString is empty" << std::endl;
+      abort ();
+    }
+    
+    std::string callee_name = getMethodName (callee->get_Method());
+    
+    std::string to_search = "Caller = " + caller_name + " Callee = " + callee_name;// + " Callee OptLevel " + to_string (callee_comp_level); 
+    //std::cout << "To Search " << to_search << " returned " << inlineFileString.find (to_search) << std::endl;
+    
+    if (inlineFileString.find (to_search) != std::string::npos)
+    {
+      //std::cout << "True Found" << std::endl;
+      allow_require_inline = true;
+#else
+    if (aosDBFindIsInlinedForMethod (caller_name, bci, allow_require_inline))
+    {
+#endif
+      allow_inline = allow_require_inline;
+    }
+    else
+    {
+      //std::cout << "Not Found" << std::endl;
+      allow_inline = false;
+    }
+  }
+  
+  if (TurnOffInlining)
+    allow_inline = false;
+    
+  bool caller_right = getMethodName (caller->get_Method ()) == "avrora.sim.radio.Medium$BasicArbitrator.getNoise(I)I";
+  
+  if (caller_right)
+  {
+    std::cout << "caller_right callee " << getMethodName (callee->get_Method ()) << " bci " << bci << std::endl;
+  }
+      
   // Attempt to inline...
   if (allow_inline) {
     // The profile data is only partly attributable to this caller,
     // scale back the call site information.
-    if (UseAOSDBRecordCallProfile &&   aosDBIsInit ())
+    if (UseAOSDBRecordCallProfile && aosDBIsInit ())
     {
       int receiver_count[ciCallProfile::MorphismLimit+1];
       for (int i = 0; i < ciCallProfile::MorphismLimit+1; i++)
@@ -193,10 +281,28 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
     
     //if (UseAOSDBPrintInline)
       //std::cout << "prof_factor " << prof_factor << std::endl;
-    float past_uses = jvms->method()->scale_count(site_count, prof_factor);
+      
+    float past_uses;
+    if (UseAOSDBCallProfile && aosDBIsInit ())
+    {
+      past_uses = jvms->method()->db_scale_count(site_count, prof_factor);
+    }
+    else
+    {
+      past_uses = jvms->method()->scale_count(site_count, prof_factor);
+    }
+    
+    bool caller_callee_right = getMethodName (caller->get_Method ()) == "avrora.sim.radio.Medium$BasicArbitrator.getNoise(I)I" 
+        and getMethodName (callee->get_Method()) == "avrora.sim.radio.Medium.access$400()I";
+        
+    if (caller_callee_right)
+    {
+      std::cout << "allow_inline " << allow_inline << " past_uses " << past_uses << " bci: " << bci << std::endl;
+      std::cout << "site_count " << site_count << " prof_factor " << prof_factor << " callee_comp_level " << callee_comp_level << std::endl;
+    }
+    
     // This is the number of times we expect the call code to be used.
     float expected_uses = past_uses;
-
     // Try inlining a bytecoded method:
     if (!call_does_dispatch) {
       InlineTree* ilt = InlineTree::find_subtree_from_root(this->ilt(), jvms->caller(), jvms->method());
@@ -206,8 +312,16 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
       assert(ci != &scratch_ci, "do not let this pointer escape");
       bool allow_inline   = (ci != NULL && !ci->is_cold());
       bool require_inline = (allow_inline && ci->is_hot());
-      if (UseAOSDBPrintInline)
-        std::cout << "C2 Inline Caller: " << getMethodName (caller->get_Method()) << "Callee: " << getMethodName (callee->get_Method()) << " allow_inline " << allow_inline << " require_inline " << require_inline << std::endl;
+      
+      if (caller_callee_right)
+      {
+        std::cout << "allow_inline " << allow_inline << " require_inline " << require_inline << " ci " << ci;
+        if (ci != NULL)
+          std::cout << " ci->is_cold " << ci->is_cold() << " ci->is_hot " << ci->is_hot () << std::endl;
+        else
+          std::cout << std::endl;
+      }
+      
       if (allow_inline) {
         //std::cout << "Compile::call_generator calling Parse () expected_uses " << expected_uses << std::endl;
         CallGenerator* cg = CallGenerator::for_inline(callee, expected_uses);
@@ -215,11 +329,24 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
         
         //if (require_inline == 0)
 //          std::cout << "Compile::call_generator: Implement require_inline == 0" << std::endl;
+        if (UseAOSDBPrintInline)
+        {
           
+          std::cout << "C2Inline: Caller = "<< getMethodName (caller->get_Method ()) << " Callee = " << getMethodName (callee->get_Method()) << " Callee OptLevel " << callee_comp_level << " ";
+          if (require_inline && cg != NULL)
+            std::cout << "Inlined" << std::endl;
+          else
+            std::cout << "Not Inlined" << std::endl;
+        }
         if (require_inline && cg != NULL) {
           // Delay the inlining of this method to give us the
           // opportunity to perform some high level optimizations
           // first.
+          if (UseAOSDBRecordCallProfile && aosDBIsInit ())
+          {
+            std::string m_name = getMethodName (caller->get_Method());
+            aosDBAddIsInlinedForMethod (m_name, bci, true);
+          }
           if (should_delay_string_inlining(callee, jvms)) {
             assert(!delayed_forbidden, "strange");
             return CallGenerator::for_string_late_inline(callee, cg);
@@ -254,8 +381,10 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
           // the call. We do that before looking at the profiling at
           // this invoke because it may lead to bimorphic inlining which
           // a speculative type should help us avoid.
+          //std::cout << "doCall.cpp:283 about to call resolve_invoke" << std::endl;
           receiver_method = callee->resolve_invoke(jvms->method()->holder(),
                                                    speculative_receiver_type);
+          //std::cout << "doCall.cpp:286 resolve_invoke CALLED" << std::endl;
           if (receiver_method == NULL) {
             speculative_receiver_type = NULL;
           } else {
@@ -275,7 +404,7 @@ CallGenerator* Compile::call_generator(ciMethod* callee, int vtable_index, bool 
         receiver_method = callee->resolve_invoke(jvms->method()->holder(),
                                                       profile.receiver(0));
       }
-      if (receiver_method != NULL) {
+      if  (receiver_method != NULL) {
         // The single majority receiver sufficiently outweighs the minority.
         CallGenerator* hit_cg = this->call_generator(receiver_method,
               vtable_index, !call_does_dispatch, jvms, allow_inline, prof_factor);
@@ -527,6 +656,7 @@ void Parse::do_call() {
   int       vtable_index       = Method::invalid_vtable_index;
   bool      call_does_dispatch = false;
 
+  //TODO: Speculative Type of the Receiver
   // Speculative type of the receiver if any
   ciKlass* speculative_receiver_type = NULL;
   if (is_virtual_or_interface) {

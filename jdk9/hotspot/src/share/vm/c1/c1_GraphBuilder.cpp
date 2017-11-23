@@ -3407,7 +3407,7 @@ bool GraphBuilder::try_inline(ciMethod* callee, bool holder_known, bool ignore_r
   if (callee->intrinsic_id() != vmIntrinsics::_none &&
       (CheckIntrinsics ? callee->intrinsic_candidate() : true)) {
     if (try_inline_intrinsics(callee, ignore_return)) {
-      print_inlining(callee, "intrinsic");
+      print_inlining(callee,   "intrinsic");
       if (callee->has_reserved_stack_access()) {
         compilation()->set_has_reserved_stack_access(true);
       }
@@ -3744,7 +3744,7 @@ bool GraphBuilder::try_inline_full(ciMethod* callee, bool holder_known, bool ign
 //    std::cout << "try_inline_full: C1 Inline Caller: " << getMethodName (method()->get_Method()) << " Callee: " << getMethodName (callee->get_Method()) << std::endl;
 
 
-  if (CompilationPolicy::policy()->should_not_inline(compilation()->env(), callee)) {
+  if (true and CompilationPolicy::policy()->should_not_inline(compilation()->env(), callee)) {
     INLINE_BAILOUT("inlining prohibited by policy");
   }
   // first perform tests of things it's not possible to inline

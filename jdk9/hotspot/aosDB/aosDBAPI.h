@@ -44,6 +44,8 @@ bool aosDBFindMethodCountProfile (std::string& methodFullDesc, int& bci, int& co
 bool aosDBFindHotDataForMethod (std::string& methodFullDesc,
                                 int& interpreterInvocationCount, int& throwoutCount,
                                 int& invocationCount, int& backedgeCount);
+void aosDBAddIsInlinedForMethod (std::string& methodFullDesc, int bci, bool inlined);
+bool aosDBFindIsInlinedForMethod (std::string& methodFullDesc, int bci, bool& inlined);
 int aosDBGetMethodsFoundInDB ();
 int aosDBGetMethodsNotFoundInDB ();
 int aosDBGetMethodsFoundAtOptLevelInDB (int l);

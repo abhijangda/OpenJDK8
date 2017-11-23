@@ -51,7 +51,7 @@ class CallGenerator : public ResourceObj {
 
  public:
  
-  static ciCallProfile getProfileDataForMethodAtBci (std::string& methodDesc, int bci);
+  static bool getProfileDataForMethodAtBci (std::string& methodDesc, int bci, ciCallProfile& profile);
   
   // Accessors
   ciMethod*          method() const             { return _method; }

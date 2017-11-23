@@ -42,6 +42,8 @@
 #include "runtime/sharedRuntime.hpp"
 #include "utilities/copy.hpp"
 
+#include "aosdb/aosDBAPI.h"
+
 // Static array so we can figure out which bytecodes stop us from compiling
 // the most. Some of the non-static variables are needed in bytecodeInfo.cpp
 // and eventually should be encapsulated in a proper class (gri 8/18/98).
@@ -438,8 +440,10 @@ Parse::Parse(JVMState* caller, ciMethod* parse_method, float expected_uses)
     _prof_factor = 1;
   } else {
     float prof_total;
-    if (UseAOSDBHotData)
+    if (UseAOSDBHotData and aosDBIsInit ())
+    {
       prof_total = parse_method->db_interpreter_invocation_count();
+    }
     else
       prof_total = parse_method->interpreter_invocation_count();
       
@@ -483,9 +487,10 @@ Parse::Parse(JVMState* caller, ciMethod* parse_method, float expected_uses)
     }
   }
   // Accumulate total sum of decompilations, also.
+  //TODO: Decompilation Count is here
   C->set_decompile_count(C->decompile_count() + md->decompile_count());
-
-  _count_invocations = C->do_count_invocations();
+  
+  _count_invocations = C->do_count_invocations(); //Boolean to see if we generate code to count invocations
   _method_data_update = C->do_method_data_update();
 
   if (log != NULL && method()->has_exception_handlers()) {

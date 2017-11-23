@@ -241,9 +241,10 @@ std::string getMethodName (methodHandle& meth)
 std::string getMethodName (Method* meth)
 {
 #if 1
-  stringStream _strStream;
-  meth->print_short_name (&_strStream);
-  return stripString (std::string (_strStream.as_string ()));
+  //stringStream _strStream;
+  //meth->print_short_name (&_strStream);
+  //return stripString (std::string (_strStream.as_string ()));
+  return std::string (meth->name_and_sig_as_C_string ());
 #else
   int i = 0;
   char buf[2048];

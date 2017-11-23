@@ -989,6 +989,10 @@ public:
   product(bool, UseAOSDBRecordHotDataVerbose2, false,\
           "Record hot data (invocation count, backedge count, throw count, \
           interpreter invocation count) in AOS DB with Verbose")\
+  product (bool, TurnOffInlining, false,\
+           "Turn Off Inlining")\
+  product (bool, InlineOnlyIfInlinedInDB, false,\
+           "Inline Only if the method at bci has been inlined in AOSDB")\
   product(bool, NotCompileInPolicy, false,                                  \
           "Do not compile in advanced threshold policy")                    \
   product(bool, NormalCompilation, false,                                   \

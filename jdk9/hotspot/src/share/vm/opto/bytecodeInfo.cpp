@@ -35,6 +35,9 @@
 #include "runtime/handles.inline.hpp"
 #include "utilities/events.hpp"
 
+#include "aosdb/aosDBAPI.h"
+#include <iostream>
+
 //=============================================================================
 //------------------------------InlineTree-------------------------------------
 InlineTree::InlineTree(Compile* c,
@@ -118,7 +121,7 @@ bool InlineTree::should_inline(ciMethod* callee_method, ciMethod* caller_method,
     _forced_inline = true;
     return true;
   }
-
+  
   if (callee_method->force_inline()) {
       set_msg("force inline by annotation");
       _forced_inline = true;
@@ -137,7 +140,7 @@ bool InlineTree::should_inline(ciMethod* callee_method, ciMethod* caller_method,
   int size = callee_method->code_size_for_inlining();
   
   // Check for too many throws (and not too huge)
-  int throwout_count = (UseAOSDBHotData) ? callee_method->db_interpreter_throwout_count() :
+  int throwout_count = (UseAOSDBHotData and aosDBIsInit ()) ? callee_method->db_interpreter_throwout_count() :
                                           callee_method->interpreter_throwout_count();
   if(throwout_count > InlineThrowCount && size < InlineThrowMaxSize ) {
     wci_result->set_profit(wci_result->profit() * 100);
@@ -155,8 +158,7 @@ bool InlineTree::should_inline(ciMethod* callee_method, ciMethod* caller_method,
   
   int call_site_count;
   int invoke_count;
-  
-  if (UseAOSDBHotData)
+  if (UseAOSDBHotData and aosDBIsInit ())
   {
     call_site_count  = method()->db_scale_count(profile.count());
     invoke_count     = method()->db_interpreter_invocation_count();
@@ -166,7 +168,6 @@ bool InlineTree::should_inline(ciMethod* callee_method, ciMethod* caller_method,
     call_site_count  = method()->scale_count(profile.count());
     invoke_count     = method()->interpreter_invocation_count();
   }
-
   assert(invoke_count != 0, "require invocation count greater than zero");
   int freq = call_site_count / invoke_count;
 
@@ -275,6 +276,7 @@ bool InlineTree::should_not_inline(ciMethod *callee_method,
     return false;
   }
 
+  //if (getMethodName (callee_method->get_Method()) != "avrora.arch.legacy.LegacyInterpreter.invokeInterrupt(J)V" &&
   if (callee_method->has_compiled_code() &&
       callee_method->instructions_size() > InlineSmallCode) {
     set_msg("already compiled into a big method");
@@ -302,10 +304,24 @@ bool InlineTree::should_not_inline(ciMethod *callee_method,
   // don't use counts with -Xcomp or CTW
   if (UseInterpreter && !CompileTheWorld) {
 
-    if (!callee_method->has_compiled_code() &&
-        !callee_method->was_executed_more_than(0)) {
-      set_msg("never executed");
-      return true;
+    if (UseAOSDBHotData and aosDBIsInit ())
+    {
+      if (!callee_method->db_was_executed_more_than (0))
+      {
+        if (!callee_method->has_compiled_code() &&
+            !callee_method->was_executed_more_than(0)) {
+            set_msg("db_never_executed");
+            return true;
+        }
+      }
+    }
+    else
+    {
+      if (!callee_method->has_compiled_code() &&
+          !callee_method->was_executed_more_than(0)) {
+        set_msg("never executed");
+        return true;
+      }
     }
 
     if (is_init_with_ea(callee_method, caller_method, C)) {
@@ -320,9 +336,21 @@ bool InlineTree::should_not_inline(ciMethod *callee_method,
       } else {
         counter_high_value = CompileThreshold / 2;
       }
-      if (!callee_method->was_executed_more_than(MIN2(MinInliningThreshold, counter_high_value))) {
-        set_msg("executed < MinInliningThreshold times");
-        return true;
+      if (UseAOSDBHotData and aosDBIsInit ())
+      {
+        if (!callee_method->db_was_executed_more_than(MIN2(MinInliningThreshold, counter_high_value))) {
+          if (!callee_method->was_executed_more_than(MIN2(MinInliningThreshold, counter_high_value))) {
+            set_msg("db_executed < MinInliningThreshold times");
+            return true;
+          }
+        }
+      }
+      else
+      { 
+        if (!callee_method->was_executed_more_than(MIN2(MinInliningThreshold, counter_high_value))) {
+          set_msg("executed < MinInliningThreshold times");
+          return true;
+        }
       }
     }
   }
@@ -337,6 +365,8 @@ bool InlineTree::try_to_inline(ciMethod* callee_method, ciMethod* caller_method,
                                int caller_bci, JVMState* jvms, ciCallProfile& profile,
                                WarmCallInfo* wci_result, bool& should_delay) {
 
+  //std::cout << "InlineTree::try_to_inline callee_method " << callee_method << " caller_method " << caller_method <<
+  //" jvms " << jvms << " wci_result " << wci_result << std::endl;
   if (ClipInlining && (int)count_inline_bcs() >= DesiredMethodLimit) {
     if (!callee_method->force_inline() || !IncrementalInline) {
       set_msg("size > DesiredMethodLimit");
@@ -351,6 +381,7 @@ bool InlineTree::try_to_inline(ciMethod* callee_method, ciMethod* caller_method,
                      wci_result)) {
     return false;
   }
+
   if (should_not_inline(callee_method, caller_method, jvms, wci_result)) {
     return false;
   }
@@ -451,7 +482,6 @@ bool InlineTree::try_to_inline(ciMethod* callee_method, ciMethod* caller_method,
       should_delay = true;
     }
   }
-
   // ok, inline this method
   return true;
 }
@@ -618,7 +648,7 @@ WarmCallInfo* InlineTree::ok_to_inline(ciMethod* callee_method, JVMState* jvms, 
 
 //------------------------------compute_callee_frequency-----------------------
 float InlineTree::compute_callee_frequency( int caller_bci ) const {
-  if (UseAOSDBHotData)
+  if (UseAOSDBHotData and aosDBIsInit ())
   {
     assert(false, "InlineTree::compute_callee_frequency: To Implement interpreter_call_site_count");
     
@@ -649,6 +679,7 @@ float InlineTree::compute_callee_frequency( int caller_bci ) const {
 
 //------------------------------build_inline_tree_for_callee-------------------
 InlineTree *InlineTree::build_inline_tree_for_callee( ciMethod* callee_method, JVMState* caller_jvms, int caller_bci) {
+  //TODO: See where does this site_invoke_ration comes from
   float recur_frequency = _site_invoke_ratio * compute_callee_frequency(caller_bci);
   // Attempt inlining.
   InlineTree* old_ilt = callee_at(caller_bci, callee_method);

@@ -229,7 +229,65 @@ ciMethod::ciMethod(ciInstanceKlass* holder,
   _signature = new (CURRENT_ENV->arena()) ciSignature(accessor, constantPoolHandle(), signature);
 }
 
+int ciMethod::db_interpreter_invocation_count () {
+  assert (_db_interpreter_invocation_count != -1, "_db_interpreter_invocation_count shall not be -1");
+  load_aosdb_data (false);
+  assert (_db_data_loaded);
+  if (_db_interpreter_invocation_count == -1)
+    _db_interpreter_invocation_count = 1;
+  if (_db_interpreter_invocation_count == -1)
+  {
+    printf ("_db_interpreter_invocation_count should not be -1 aosDBIsInit %d\n", aosDBIsInit ());
+    std::cout <<"method is " << getMethodName (this->get_Method ()) << std::endl;
+  }
+  return _db_interpreter_invocation_count;
+}
 
+int ciMethod::db_interpreter_throwout_count () {
+  assert (_db_interpreter_throwout_count != -1, "_db_interpreter_throwout_count shall not be -1");
+  load_aosdb_data (false);
+  assert (_db_data_loaded);
+  if (_db_interpreter_throwout_count == -1)
+    _db_interpreter_throwout_count = 0;
+  if (_db_interpreter_throwout_count == -1)
+  {
+    printf ("_db_interpreter_throwout_count should not be -1 aosDBIsInit %d\n", aosDBIsInit ());
+    std::cout <<"method is " << getMethodName (this->get_Method ()) << std::endl;
+  }
+  return _db_interpreter_throwout_count;
+}
+
+int ciMethod::db_invocation_count () {
+  assert (_db_invocation_count != -1, "_db_invocation_count shall not be -1");
+  load_aosdb_data (false);
+  assert (_db_data_loaded);
+  if (_db_invocation_count == -1)
+    _db_invocation_count = 0;
+  if (_db_invocation_count == -1)
+  {
+    printf ("_db_invocation_count should not be -1 aosDBIsInit %d\n", aosDBIsInit ());
+    std::cout <<"method is " << getMethodName (this->get_Method ()) << std::endl;
+  }
+  return _db_invocation_count;
+}
+
+int ciMethod::db_backedge_count () {
+  assert (_db_backedge_count != -1, "_db_backedge_count shall not be -1");
+  load_aosdb_data (false);
+  assert (_db_data_loaded);
+  if (_db_backedge_count == -1)
+  {
+    _db_backedge_count = 0;
+  }
+  
+  if (_db_backedge_count == -1)
+  {
+    printf ("_db_backedge_count should not be -1 aosDBIsInit %d\n", aosDBIsInit ());
+    std::cout <<"method is " << getMethodName (this->get_Method ()) << std::endl;
+  }
+  return _db_backedge_count;
+}
+  
 // ------------------------------------------------------------------
 // ciMethod::load_code
 //
@@ -912,7 +970,6 @@ int ciMethod::interpreter_call_site_count(int bci) {
 
 void ciMethod::load_aosdb_data (bool reload)
 {
-  
   /*TODO: Also load aosdb data before using it in db_ methods*/
   if (!reload and _db_data_loaded)
     return;
@@ -934,7 +991,7 @@ int ciMethod::db_interpreter_call_site_count(int bci) {
   std::string m_name = getMethodName (this->get_Method ());
   
   if (aosDBFindMethodCountProfile (m_name, bci, count))
-      return scale_count(count);
+      return db_scale_count(count);
       
   return -1;  // unknown
 }
@@ -1302,6 +1359,30 @@ bool ciMethod::was_executed_more_than(int times) {
   return get_Method()->was_executed_more_than(times);
 }
 
+bool ciMethod::db_was_executed_more_than(int times) {
+  VM_ENTRY_MARK;
+  // Invocation counter is reset when the Method* is compiled.
+  // If the method has compiled code we therefore assume it has
+  // be excuted more than n times.
+  if (get_Method ()->is_accessor() || get_Method ()->is_empty_method() || 
+      (get_Method ()->code() != NULL)) {
+    // interpreter doesn't bump invocation counter of trivial methods
+    // compiler does not bump invocation counter of compiled methods
+    return true;
+  }
+  else if ((get_Method ()->method_counters() != NULL &&
+            get_Method ()->method_counters()->invocation_counter()->carry()) ||
+           (get_Method ()->method_data() != NULL &&
+            get_Method ()->method_data()->invocation_counter()->carry())) {
+    // The carry bit is set when the counter overflows and causes
+    // a compilation to occur.  We don't know how many times
+    // the counter has been reset, so we simply assume it has
+    // been executed more than n times.
+    return true;
+  } else {
+    return db_invocation_count() > times;
+  }
+}
 // ------------------------------------------------------------------
 // ciMethod::has_unloaded_classes_in_signature
 bool ciMethod::has_unloaded_classes_in_signature() {

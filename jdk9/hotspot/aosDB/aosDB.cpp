@@ -4,6 +4,7 @@
 #include <assert.h>
 
 pthread_mutex_t AOSDatabaseElement::_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t AOSDatabase::_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 /*
   The serialization format is <method desc> <optLevel> <counts>

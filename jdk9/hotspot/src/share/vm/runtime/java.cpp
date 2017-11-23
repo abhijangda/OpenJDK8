@@ -566,15 +566,22 @@ void aosdb_get_method_profiling_data() {
   for (int index = 0; index < count; index++) {
     Method* m = aosdb_collected_profiled_methods->at(index);
     std::string m_name = getMethodName(m);
+    int comp_level = -1;
+    if (m->code ())
+      comp_level = m->code ()->comp_level ();
     if (UseAOSDBVerbose)
-      std::cout << "Adding HotData for " << m_name << " IntInvokeCount " << 
-        m->interpreter_invocation_count() << " IntThrowCount " << 
+      std::cout << "Adding HotData for  " << m_name <<  " full name " << m->name_and_sig_as_C_string () <<" IntInvokeCount " << 
+        m->interpreter_invocation_count() << " compiled at " << comp_level << " IntThrowCount " << 
         m->interpreter_throwout_count () << " InvokeCount " << 
         m->invocation_count () << " BackedgeCount " << m->backedge_count ();
-    aosDBAddHotDataForMethod (m_name, m->interpreter_invocation_count(), 
+    if (m->interpreter_invocation_count() == m->invocation_count ())
+    {
+      //std::cout << "Invocations counts same for " << m_name << " opt level " << comp_level << std::endl;
+    }
+    
+    aosDBAddHotDataForMethod (m_name, m->interpreter_invocation_count(),
                               m->interpreter_throwout_count (),
-                              m->invocation_count (),
-                              m->backedge_count ());
+                              m->invocation_count (), m->backedge_count ());
     BciWithProfileInfo::iterator it = ciMethod::bciWithProfileInfo.find (m);
     if (it != ciMethod::bciWithProfileInfo.end())
     {
@@ -605,7 +612,7 @@ void aosdb_get_method_profiling_data() {
                                             data->as_CounterData()->count());
           if (UseAOSDBRecordHotDataVerbose)
           {
-            std::cout << " bci:     " << *it2 << " count: " << data->as_CounterData()->count() << ", ";
+            std::cout << " bci:       " << *it2 << " count: " << data->as_CounterData()->count() << ", ";
           }
         }
       }
@@ -616,8 +623,10 @@ void aosdb_get_method_profiling_data() {
     }
   }
 }
+extern double _compile_time;
 
 void vm_exit(int code) {
+  std::cout << "_compile_time " << _compile_time << std::endl;
   std::cout << "vm_exit "<< std::endl;
   if (aosDBIsInit ())
   {

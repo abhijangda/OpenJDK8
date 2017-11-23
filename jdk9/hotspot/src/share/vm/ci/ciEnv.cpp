@@ -335,7 +335,7 @@ ciInstance* ciEnv::the_min_jint_string() {
 // ciEnv::get_method_from_handle
 ciMethod* ciEnv::get_method_from_handle(Method* method) {
   VM_ENTRY_MARK;
-  return get_metadata(method)->as_method();
+  return get_metadata(method)->as_method ();
 }
 
 // ------------------------------------------------------------------

@@ -130,6 +130,16 @@ void aosDBAddHotDataForMethod (std::string& methodFullDesc,
                                    backedgeCount);
 }
 
+void aosDBAddIsInlinedForMethod (std::string& methodFullDesc, int bci, bool inlined)
+{
+    aosdb->insertIsInlinedForMethod (methodFullDesc, bci, inlined);
+}
+
+bool aosDBFindIsInlinedForMethod (std::string& methodFullDesc, int bci, bool& inlined)
+{
+    return aosdb->findIsInlinedForMethod (methodFullDesc, bci, inlined);
+}
+
 void aosDBVisitBegin ()
 {
     currentIter = new AOSDatabase::iterator (aosdb->begin());

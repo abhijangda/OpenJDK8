@@ -86,7 +86,7 @@ $(eval $(call SetupNativeCompilation, BUILD_GTEST_LIBJVM, \
     DISABLED_WARNINGS_clang := undef switch format-nonliteral \
         tautological-undefined-compare $(BUILD_LIBJVM_DISABLED_WARNINGS_clang), \
     DISABLED_WARNINGS_solstudio := identexpected, \
-    LDFLAGS := $(JVM_LDFLAGS) /home/ubuntu/OpenJDK8/jdk9/hotspot/aosDB/aosDBAPI.o /home/ubuntu/OpenJDK8/jdk9/hotspot/aosDB/aosDB.o, \
+    LDFLAGS := $(JVM_LDFLAGS) /home/abhi/glasgow/OpenJDK8/jdk9/hotspot/aosDB/aosDBAPI.o /home/abhi/glasgow/OpenJDK8/jdk9/hotspot/aosDB/aosDB.o, \
     LDFLAGS_solaris := -library=stlport4 $(call SET_SHARED_LIBRARY_ORIGIN), \
     LDFLAGS_aix := -bbigtoc, \
     LIBS := $(JVM_LIBS), \
@@ -114,7 +114,7 @@ $(eval $(call SetupNativeCompilation, BUILD_GTEST_LAUNCHER, \
         -I$(GTEST_FRAMEWORK_SRC)/include, \
     CFLAGS_DEBUG_SYMBOLS := $(JVM_CFLAGS_SYMBOLS), \
     CXXFLAGS_DEBUG_SYMBOLS := $(JVM_CFLAGS_SYMBOLS), \
-    LDFLAGS := $(LDFLAGS_JDKEXE) /home/ubuntu/OpenJDK8/jdk9/hotspot/aosDB/aosDBAPI.o /home/ubuntu/OpenJDK8/jdk9/hotspot/aosDB/aosDB.o, \
+    LDFLAGS := $(LDFLAGS_JDKEXE) /home/abhi/glasgow/OpenJDK8/jdk9/hotspot/aosDB/aosDBAPI.o /home/abhi/glasgow/OpenJDK8/jdk9/hotspot/aosDB/aosDB.o, \
     LDFLAGS_unix := -L$(JVM_OUTPUTDIR)/gtest $(call SET_SHARED_LIBRARY_ORIGIN), \
     LDFLAGS_solaris := -library=stlport4, \
     LIBS_linux := $(LIBCXX), \

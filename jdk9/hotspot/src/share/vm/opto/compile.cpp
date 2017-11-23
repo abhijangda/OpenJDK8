@@ -616,6 +616,7 @@ debug_only( int Compile::_debug_idx = 100000; )
 // Compile a method.  entry_bci is -1 for normal compilations and indicates
 // the continuation bci for on stack replacement.
 
+double _compile_time = 0;
 
 Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr_bci,
                   bool subsume_loads, bool do_escape_analysis, bool eliminate_boxing, DirectiveSet* directive)
@@ -675,6 +676,8 @@ Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr
                   _interpreter_frame_size(0),
                   _max_node_limit(MaxNodeLimit),
                   _has_reserved_stack_access(target->has_reserved_stack_access()) {
+  struct timeval _t1, _t2;  
+  gettimeofday(&_t1, NULL);
   C = this;
 #ifndef PRODUCT
   if (_printer != NULL) {
@@ -781,20 +784,22 @@ Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr
         float past_uses;
         int _intInvocationCount, _throwcount, _invocationCount, _backedgeCount;
         
-        if (UseAOSDBHotData)
+        if (UseAOSDBHotData and aosDBIsInit ())
         {
           std::string m_name = getMethodName (method ()->get_Method());
           aosDBFindHotDataForMethod (m_name, _intInvocationCount, _throwcount, 
                                      _invocationCount, _backedgeCount);
-          method()->set_db_interpreter_invocation_count (_intInvocationCount);
+          method()->set_db_interpreter_invocation_count (_invocationCount);
           method()->set_db_interpreter_throwout_count (_throwcount);
           method()->set_db_invocation_count (_invocationCount);
           method()->set_db_backedge_count (_backedgeCount);
           past_uses = _intInvocationCount;
+          //TODO: should past uses be total invocation counts? Because these are
+          //the actual number of usage of a method, right?
         }
         else
           past_uses = method()->interpreter_invocation_count();
-          
+        
         float expected_uses = past_uses;
         cg = CallGenerator::for_inline(method(), expected_uses);
       }
@@ -952,6 +957,10 @@ Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr
     if (log() != NULL) // Print code cache state into compiler log
       log()->code_cache_state();
   }
+  
+  gettimeofday(&_t2, NULL);  
+  _compile_time += (_t2.tv_sec - _t1.tv_sec)*1000;
+  _compile_time += (_t2.tv_usec - _t1.tv_usec)/1000;
 }
 
 //------------------------------Compile----------------------------------------
@@ -1015,6 +1024,9 @@ Compile::Compile( ciEnv* ci_env,
     _allowed_reasons(0),
     _interpreter_frame_size(0),
     _max_node_limit(MaxNodeLimit) {
+  
+  struct timeval _t1, _t2;  
+  gettimeofday(&_t1, NULL);
   C = this;
 
   TraceTime t1(NULL, &_t_totalCompilation, CITime, false);
@@ -1071,6 +1083,10 @@ Compile::Compile( ciEnv* ci_env,
       _stub_entry_point = rs->entry_point();
     }
   }
+  
+  gettimeofday(&_t2, NULL);  
+  _compile_time += (_t2.tv_sec - _t1.tv_sec)*1000;
+  _compile_time += (_t2.tv_usec - _t1.tv_usec)/1000;
 }
 
 //------------------------------Init-------------------------------------------
@@ -1907,8 +1923,10 @@ WarmCallInfo* Compile::pop_warm_call() {
 
 //----------------------------Inline_Warm--------------------------------------
 int Compile::Inline_Warm() {
+  //TODO: Implement Here
   // If there is room, try to inline some more warm call sites.
   // %%% Do a graph index compaction pass when we think we're out of space?
+  //std::cout << "Compile::Inline_Warm To Implement" << std::endl;
   if (!InlineWarmCalls)  return 0;
 
   int calls_made_hot = 0;

@@ -75,7 +75,7 @@ public:
   int       limit() const             { return _limit; }
   int       count() const             { return _count; }
   int       receiver_count(int i)  {
-    assert(i < _limit, "out of Call Profile MorphismLimit");
+    assert(i < _limit,   "out of Call Profile MorphismLimit");
     return _receiver_count[i];
   }
   float     receiver_prob(int i)  {

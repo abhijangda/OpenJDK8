@@ -134,33 +134,13 @@ class ciMethod  : public ciMetadata {
   static BciWithProfileInfo bciWithProfileInfo;
   static void insertInBciWithProfileInfo (ciMethod* method, int bci);
   
-  int db_interpreter_invocation_count () {
-    assert (_db_interpreter_invocation_count != -1, "_db_interpreter_invocation_count shall not be -1");
-    load_aosdb_data (false);
-    assert (_db_data_loaded);
-    return _db_interpreter_invocation_count;
-  }
+  int db_interpreter_invocation_count () ;
   
-  int db_interpreter_throwout_count () {
-    assert (_db_interpreter_throwout_count != -1, "_db_interpreter_throwout_count shall not be -1");
-    load_aosdb_data (false);
-    assert (_db_data_loaded);
-    return _db_interpreter_throwout_count;
-  }
+  int db_interpreter_throwout_count ()  ;
   
-  int db_invocation_count () {
-    assert (_db_invocation_count != -1, "_db_invocation_count shall not be -1");
-    load_aosdb_data (false);
-    assert (_db_data_loaded);
-    return _db_invocation_count;
-  }
+  int db_invocation_count () ;
   
-  int db_backedge_count () {
-    assert (_db_backedge_count != -1, "_db_backedge_count shall not be -1");
-    load_aosdb_data (false);
-    assert (_db_data_loaded);
-    return _db_backedge_count;
-  }
+  int db_backedge_count () ;
   
   void load_aosdb_data (bool reload);
   void set_db_interpreter_invocation_count (int c) {_db_interpreter_invocation_count = c;}
@@ -343,6 +323,7 @@ class ciMethod  : public ciMetadata {
   void log_nmethod_identity(xmlStream* log);
   bool is_not_reached(int bci);
   bool was_executed_more_than(int times);
+  bool db_was_executed_more_than(int times);
   bool has_unloaded_classes_in_signature();
   bool is_klass_loaded(int refinfo_index, bool must_be_resolved) const;
   bool check_call(int refinfo_index, bool is_static) const;

@@ -50,16 +50,16 @@ const TypeFunc* CallGenerator::tf() const {
   return TypeFunc::make(method());
 }
 
-ciCallProfile CallGenerator::getProfileDataForMethodAtBci (std::string& methodDesc, int bci)
+bool CallGenerator::getProfileDataForMethodAtBci (std::string& methodDesc, int bci, ciCallProfile& prof)
 {
   int limit = -1, count = -1, morphism = -1;
   int recv_cnt[ciCallProfile::MorphismLimit+1] ={ -1, -1, -1};
 
-  if (!aosDBFindMethodCallProfile (methodDesc, bci, limit, morphism, 
-                                   count, recv_cnt))
-    return ciCallProfile(-1, -1, -1, recv_cnt);
+  if (!aosDBFindMethodCallProfile (methodDesc, bci, limit, count, morphism, recv_cnt))
+    return false;
     
-  return ciCallProfile (limit, morphism, count, recv_cnt);
+  prof = ciCallProfile (limit, morphism, count, recv_cnt);
+  return true;
 }
 
 bool CallGenerator::is_inlined_method_handle_intrinsic(JVMState* jvms, ciMethod* callee) {
@@ -80,7 +80,7 @@ public:
   {
     _is_osr        = is_osr;
     _expected_uses = expected_uses;
-    assert(InlineTree::check_can_parse(method) == NULL, "parse must be possible");
+    assert(InlineTree::check_can_parse(method) == NULL, "parse    must be possible");
   }
 
   virtual bool      is_parse() const           { return true; }
@@ -287,6 +287,7 @@ CallGenerator* CallGenerator::for_inline(ciMethod* m, float expected_uses) {
 // of the caller.  Thus, this CallGenerator cannot be mixed with others!
 CallGenerator* CallGenerator::for_osr(ciMethod* m, int osr_bci) {
   if (InlineTree::check_can_parse(m) != NULL)  return NULL;
+  //TODO: For OSR change here too
   float past_uses = m->interpreter_invocation_count();
   float expected_uses = past_uses;
   return new ParseGenerator(m, expected_uses, true);
@@ -814,8 +815,24 @@ CallGenerator* CallGenerator::for_method_handle_call(JVMState* jvms, ciMethod* c
     }
   }
   int bci = jvms->bci();
-  ciCallProfile profile = caller->call_profile_at_bci(bci);
-  int call_site_count = caller->scale_count(profile.count());
+  ciCallProfile profile;
+  int call_site_count;
+  if (UseAOSDBCallProfile and aosDBIsInit ())
+  {
+    std::string m_name = getMethodName (caller->get_Method());
+    if (CallGenerator::getProfileDataForMethodAtBci (m_name, bci, profile))
+      call_site_count = caller->db_scale_count(profile.count());
+    else
+    {
+      profile = caller->call_profile_at_bci(bci);
+      call_site_count = caller->scale_count(profile.count());
+    }
+  }
+  else
+  {
+    profile = caller->call_profile_at_bci(bci);
+    call_site_count = caller->scale_count(profile.count());
+  }
 
   if (IncrementalInline && call_site_count > 0 &&
       (input_not_const || !C->inlining_incrementally() || C->over_inlining_cutoff())) {
